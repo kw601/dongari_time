@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "apps.landing",
     "apps.community",
-    "apps.chat"
+    "apps.chat",
 ]
 
 AUTH_USER_MODEL = "landing.User"

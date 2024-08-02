@@ -3,6 +3,4 @@ from .views import *
 
 app_name = "community"
 
-urlpatterns = [
-
-]
+urlpatterns = []
