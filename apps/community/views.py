@@ -28,7 +28,7 @@ def post_detail(request, board_id, post_id):
 
     return render(request, 'community/post_detail.html', {'board': board, 'post':post, 'comments':comments, 'form':form})
 
-@login_required
+#@login_required
 def create_post(request, board_id):
     board = get_object_or_404(Board, pk=board_id)
 
