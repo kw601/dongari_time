@@ -1,0 +1,34 @@
+<!-- 게시글 상세 페이지 (경로 : 게시판 페이지에서 게시글 클릭 시) -->
+<!DOCTYPE html>
+<html>
+<head>
+<!--<title>{{ post.title }}</title>-->
+</head>
+<body>
+    <h1>{{ board.board_name }}</h1>
+    <p>작성자: {{ post.user_id.username if post.user_id and not post.anonymous else '익명' }} | 작성일시: {{ post.created_time }}</p>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p>댓글: {{ comments.count }}</p>
+    {% if post.user_id %}
+        <a href="{% url 'chat:chat' post.user_id.id %}">채팅 보내기</a>
+    {% endif %}
+    <hr>
+    <h3>댓글</h3>
+    {% for comment in comments %}
+        <p>작성자: {{ comment.user_id.username if comment.user_id and not comment.anonymous else '익명' }} | 작성일시: {{ comment.created_time }}</p>
+        <p>{{ comment.content }}</p>
+        {% if comment.user_id %}
+            <a href="{% url 'chat:chat' comment.user_id.id %}">채팅 보내기</a>
+        {% endif %}
+        <hr>
+    {% endfor %}
+    <h3>댓글 작성</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">댓글 작성</button>
+    </form>
+    <a href="{% url 'community:board_list' %}">게시판 목록으로</a>
+</body>
+</html>
