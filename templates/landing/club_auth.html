@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <form action="{% url 'landing:club_auth' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>동아리 인증 페이지</h2>
+        <input type="text">
+        <button type="submit">인증하기</button>
+    </form>
+</div>
+{% endblock %}
