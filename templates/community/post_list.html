@@ -1,0 +1,16 @@
+<!-- post_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ board.board_name }}</h1>
+<a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a>
+<ul>
+    {% for post in posts %}
+    <li>
+        <h2><a href="{% url 'community:post_detail' board.id post.id %}">{{ post.title }}</a></h2>
+        <p>{{ post.content|truncatewords:20 }}</p>
+        <p><small>{{ post.created_at }}</small></p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
