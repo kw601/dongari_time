@@ -11,23 +11,18 @@ def post_list(request, board_id):
     return render(request, "community/post_list.html", {"board": board, "posts": posts})
 
 def post_detail(request, board_id, post_id):
-    board = get_object_or_404(Board, pk=board_id)
-    post = get_object_or_404(Post, pk=post_id)
-    comments = post.comment_set.all()
+    board = get_object_or_404(Board, id=board_id)
+    post = get_object_or_404(Post, id=post_id)
+    comments = Comment.objects.filter(post_id=post_id)
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post
-            if form.cleaned_data['anonymous']:
-                comment.user = None
-                comment.anonymous = True
-            else:
-                comment.user = request.user
-                comment.anonymous = False
+            comment.post_id = post
+            comment.user_id = request.user
             comment.save()
-            return redirect('post_detail', board_id=board_id, post_id=post_id)
+            return redirect('community:post_detail', board_id=board.id, post_id=post.id)
     else:
         form = CommentForm()
 

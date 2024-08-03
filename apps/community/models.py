@@ -33,3 +33,4 @@ class Comment(models.Model):  # 댓글
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField("댓글 내용")
     anonymous = models.BooleanField("익명 여부", default=True)
+    created_time = models.DateTimeField(auto_now_add=True)
