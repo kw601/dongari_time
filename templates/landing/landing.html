@@ -10,12 +10,10 @@
     <div id="if_admin">
         <div>당신은 동아리 관리자인가요, 회원인가요?</div>
         <div id="select__container">
+            <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
             {% comment %}
-            <button id="admin_btn"><a href="{% url 'landing:make_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
             <button id="member_btn"><a href="{% url 'landing:authentication' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
             {% endcomment %}
-            <button id="admin_btn"><a href=""><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
-            <button id="member_btn"><a href=""><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
         </div>
     </div>
     {% endif %}
