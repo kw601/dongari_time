@@ -44,7 +44,7 @@ def create_post(request, board_id):
             #if 'image' in request.FILES:
                 #pass
             
-            return redirect('community/board_detail', board_id=board.id)
+            return redirect('community:post_list', board_id=board.id)
     else:
         form = PostForm(initial={'anonymous': True})
 
