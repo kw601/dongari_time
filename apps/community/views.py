@@ -26,7 +26,7 @@ def post_detail(request, board_id, post_id):
     else:
         form = CommentForm()
 
-    return render(request, 'community/post_detail.html', {'board': board, 'post':post, 'comments':comments, 'form':form})
+    return render(request, 'community/post_detail.html', {'board': board, 'post': post, 'comments':comments, 'form':form})
 
 #@login_required
 def create_post(request, board_id):
