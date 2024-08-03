@@ -25,7 +25,8 @@ def club_auth(request):  # 동아리 인증 페이지
                 return render(request, "landing/club_auth.html")
 
             # 해당 동아리의 club_num(동아리 인증 코드)과 비교하면 됨
-            club = Club.objects.filter(club_name=name)
+            # club = Club.objects.filter(club_name = name)
+            club = Club.objects.get(club_name=name)  # 하나만 가져올 땐 get이레오
             club_code = club.club_num
 
             if code == club_code:  # 코드가 일치하면

@@ -6,7 +6,13 @@
     <form action="{% url 'landing:club_auth' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <h2>동아리 인증 페이지</h2>
-        <input type="text">
+        <!-- 이건 내가 테스트하려고 일단 냅다 넣었어요 나중에 없애든 selector로 바꾸든 해야할듯-->
+        <label for="club_name">동아리명:</label>
+        <input type="text" id="club_name" name="club_name" required>
+
+        <label for="auth_code">인증 코드:</label>
+        <!-- label for-input id 연결, name으로 데이터 서버로 보낼 때 어느 데이턴지 구분 -->
+        <input type="text" id="auth_code" name="auth_code" required>
         <button type="submit">인증하기</button>
     </form>
 </div>

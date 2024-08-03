@@ -5,6 +5,10 @@ from apps.landing.models import User
 
 
 # Create your views here.
+def main(request):
+    return render(request, "community/main.html")
+
+
 def create_club(request):
     if request.user.is_authenticated:
         if request.method == "GET":
