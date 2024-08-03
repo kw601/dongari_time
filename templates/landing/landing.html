@@ -14,6 +14,11 @@
             <button id="member_btn"><a href="{% url 'landing:club_auth' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
         </div>
     </div>
+    {% else %}
+    <div id="select__container">
+        <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
+        <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
+    </div>
     {% endif %}
 
     {% comment %}
