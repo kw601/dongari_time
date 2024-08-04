@@ -9,7 +9,7 @@
     {% endcomment %} 
     {% if user.is_authenticated %}
 
-    <h3>안녕하세요 {{ user }}님</h3>
+    <h3>안녕하세요 {{ user.nickname }}님</h3>
     {% block head %} {% endblock %} {% endif %}
   </head>
   <body>
