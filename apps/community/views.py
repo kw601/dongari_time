@@ -1,6 +1,7 @@
 # Create your views here.
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Board, Post
+from .forms import BoardForm
 
 
 def post_list(request, board_id):
@@ -18,3 +19,19 @@ def post_detail(request, board_id, post_id):
 def create_post(request, board_id):
     # 구현
     return
+
+
+def create_board(request):
+    if request.method == "POST":
+        form = BoardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("community:board_list")
+    else:
+        form = BoardForm()
+    return render(request, "community/create_board.html", {"form": form})
+
+
+def board_list(request):
+    boards = Board.objects.all()
+    return render(request, "community/board_list.html", {"boards": boards})
