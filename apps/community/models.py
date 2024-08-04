@@ -9,6 +9,10 @@ class Club(models.Model):  # 동아리
         "동아리 인증 번호", max_length=255, unique=True, null=False
     )
 
+    # 동아리 이름 표시용
+    def __str__(self):
+        return self.club_name
+
 
 class Board(models.Model):  # 게시판
     club_id = models.ForeignKey(Club, on_delete=models.CASCADE)

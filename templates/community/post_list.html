@@ -4,6 +4,10 @@
 {% block content %}
 <h1>{{ board.board_name }}</h1>
 <a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a>
+<form method="post" action="{% url 'community:delete_board' board.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">게시판 삭제(관리자만 가능하게)</button>
+</form>
 <ul>
     {% for post in posts %}
     <li>
@@ -13,4 +17,5 @@
     </li>
     {% endfor %}
 </ul>
+
 {% endblock %}

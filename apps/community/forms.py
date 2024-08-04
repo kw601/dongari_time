@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Post
+from .models import Comment, Post, Board
 
 class CommentForm(forms.ModelForm):
     anonymous = forms.BooleanField(required=False, initial=True, label='익명으로 댓글 작성')
@@ -20,3 +20,13 @@ class PostForm(forms.ModelForm):
         }
 
     #image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
+
+
+class BoardForm(forms.ModelForm):
+    class Meta:
+        model = Board
+        fields = ("club_id", "board_name")
+        labels = {
+            "club_id": "동아리 선택",
+            "board_name": "게시판 이름",
+        }

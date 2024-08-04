@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Board, Post, Comment
 from django.contrib.auth.decorators import login_required
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, BoardForm
 
 # Create your views here.
 
@@ -49,3 +49,26 @@ def create_post(request, board_id):
         form = PostForm(initial={'anonymous': True})
 
     return render(request, 'community/create_post.html', {'form': form, 'board': board})
+
+def create_board(request):
+    if request.method == "POST":
+        form = BoardForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("community:board_list")
+    else:
+        form = BoardForm()
+    return render(request, "community/create_board.html", {"form": form})
+
+
+def board_list(request):
+    boards = Board.objects.all()
+    return render(request, "community/board_list.html", {"boards": boards})
+
+
+def delete_board(request, board_id):
+    board = get_object_or_404(Board, id=board_id)
+    if request.method == "POST":
+        board.delete()
+        return redirect("community:board_list")
+    return render(request, "community/delete_board.html", {"board": board})
