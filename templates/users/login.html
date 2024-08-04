@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>로그인</h2>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post" action="{% url 'landing:login' %}">
+        {% csrf_token %}
+        ID : 
+      <input name="username" type="text" value="">
+      <br>
+      <br>
+      PW :
+      <input name="password" type="password" value="">
+      <br>
+      <br>
+      <input type="submit" value="로그인">
+{% endblock %}
