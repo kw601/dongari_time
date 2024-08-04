@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>main(게시판 리스트만 구현..)</h1>
+<a href="{% url 'community:create_board' %}" class="btn btn-primary">새 게시판 만들기(관리자만 가능하게 변경해야함)</a>
+<ul>
+    {% for board in boards %}
+
+    <li>
+        <h2><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
