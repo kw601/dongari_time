@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>회원가입</h1>
+{% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+{% endif %}
+<div class = container_signup>
+  <form method="POST" action ="{% url 'landing:signup' %}">
+    {% csrf_token %}
+      <label for = "username">ID</label>
+      {{ form.username.errors }}
+      <input type="text" name = "username" id ="username" 
+      minlength=4byte,
+      maxlength=15byte,
+      placeholder="4~15글자 입력",
+      value ="{{ form.username.value|default_if_none:''}}">
+      <br>
+      <br>
+
+      <label for = "password1">비밀번호</label>
+      <input type="password" name = "password1" id ="password1" 
+      minlength=8byte
+      placeholder="8글자 이상 입력"
+      value ="{{ form.password1.value|default_if_none:''}}">
+      <br>
+      <br>
+
+      <label for = "password1">비밀번호 확인</label>
+      <input type="password" name = "password2" id ="password2" 
+      minlength=8byte
+      placeholder="8글자 이상 입력"
+      value ="{{ form.password2.value|default_if_none:''}}">
+      <br>
+      <br>
+
+      <label for = "name">사용자 이름</label>
+      <input type="text" name = "name" id ="name" 
+      placeholder="실명으로 입력해주세요." value ="{{ form.name.value|default_if_none:''}}">
+      <br>
+      <br>
+
+      <label for = "nickname">닉네임</label>
+      <input type="text" name = "nickname" id ="nickname" value ="{{ form.nickname.value|default_if_none:''}}">
+      <br>
+      <br>
+
+      <label for = "phone_num">전화번호</label>
+      <input type="tel" name = "phone_num" id ="phone_num" pattern="[0-1]{3}-[0-9]{4}-[0-9]{4}" 
+      placeholder="010-0000-0000"
+      value ="{{ form.phone_num.value|default_if_none:''}}">
+      <br>
+      <br>
+      
+    <input type="submit" value="회원가입"></input>
+</div>
+</form>
+<a href ="{% url 'landing:main'%}">돌아가기</a>
+
+{% endblock %}
