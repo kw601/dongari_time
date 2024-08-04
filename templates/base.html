@@ -6,9 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% comment %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    {% endcomment %} {% block head %} {% endblock %}
+    {% endcomment %} 
+    {% if user.is_authenticated %}
+
+    <h3>안녕하세요 {{ user }}님</h3>
+    {% block head %} {% endblock %} {% endif %}
   </head>
   <body>
+    {% if user.is_authenticated and user.id %}
+    <form action="{% url 'landing:delete' user.id %}" method ='POST'>
+      {% csrf_token %}
+      <input type="submit" value='회원탈퇴'>
+    </form>
+    <form action="{% url 'landing:logout' %}" method ='POST'>
+      {% csrf_token %}
+      <input type="submit" value='로그아웃'>
+    </form>
+
+    {% else %}
+    <div id="nav_menu">
+      <a href='{% url "landing:login" %}'>로그인</a>
+      <a href='{% url "landing:signup" %}'>회원가입</a>
+    </div>
+  {% endif %}
+
+
     {% block content %}{% endblock%}
   </body>
 </html>
