@@ -35,3 +35,11 @@ def create_board(request):
 def board_list(request):
     boards = Board.objects.all()
     return render(request, "community/board_list.html", {"boards": boards})
+
+
+def delete_board(request, board_id):
+    board = get_object_or_404(Board, id=board_id)
+    if request.method == "POST":
+        board.delete()
+        return redirect("community:board_list")
+    return render(request, "community/delete_board.html", {"board": board})
