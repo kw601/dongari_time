@@ -10,16 +10,6 @@
     <div id="if_admin">
         <div>당신은 동아리 관리자인가요, 회원인가요?</div>
         <div id="select__container">
-
-            {% comment %}
-            <button id="admin_btn"><a href="{% url 'landing:make_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
-            <button id="member_btn"><a href="{% url 'landing:authentication' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
-            {% endcomment %}
-            <button id="admin_btn"><a href=""><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
-            <button id="member_btn"><a href=""><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
-        </div>
-    </div>
-
             <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
             <button id="member_btn"><a href="{% url 'landing:club_auth' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
         </div>
@@ -29,7 +19,6 @@
         <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
         <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
     </div>
-
     {% endif %}
 
     {% comment %}
@@ -39,7 +28,7 @@
     <!-- 만약 동아리 한 개 이상이면 동아리 선택 창 보여주기? 그 때 쓰면 될듯 -->
     {% endif %}
     {% endcomment %}
-
+    
 
 
 {% else %}
@@ -50,6 +39,8 @@
         <button id="login_btn"><a href="{% url 'landing:login' %}">로그인</a></button>
         <button id="signup_btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
         {% endcomment %}
+        <button id="login_btn"><a href="">로그인</a></button>
+        <button id="signup_btn"><a href="">회원가입</a></button>
     </div>
 {% endif %}
 </div>
