@@ -6,7 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% comment %}
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    {% endcomment %} {% block head %} {% endblock %}
+    {% endcomment %} 
+    {% if user.is_authenticated %}
+    <div id="nav_menu">
+      <a href='{% url "landing:logout" %}'>로그아웃</a>
+    </div>
+    {% else %}
+    <div id="nav_menu">
+      <a href='{% url "landing:login" %}'>로그인</a>
+      <a href='{% url "landing:signup" %}'>회원가입</a>
+    </div>
+  {% endif %}
+
+
+    {% block head %} {% endblock %}
   </head>
   <body>
     {% block content %}{% endblock%}
