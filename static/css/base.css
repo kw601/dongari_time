@@ -1,34 +1,39 @@
-body{
+body {
     margin: 0px;
 }
-.base-frame{
+
+.base-frame {
     background-color: #4A55A2;
     height: 15vh;
     display: flex;
     justify-content: space-between;
 }
+
 .base-name {
     display: flex;
     align-items: center;
     margin-left: 10rem;
 }
-.base-name > h3 {
+
+.base-name>h3 {
     color: white;
     font-weight: bold;
     font-size: 1.5rem;
 }
-.base-btn{
+
+.base-btn {
     display: flex;
     align-items: center;
     gap: 4rem;
     margin-right: 4rem;
 }
-.base-btn > form > input{
+
+.base-btn>form>input {
     background-color: transparent;
-    border: 1px solid white; 
+    border: 1px solid white;
     border-radius: 5px;
     color: white;
-    padding: 10px 30px; 
+    padding: 10px 30px;
     text-align: center;
     text-decoration: none;
     font-size: 1rem;
@@ -36,7 +41,29 @@ body{
     font-weight: bold;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-.base-btn > form > input:hover {
-    background-color: #ffffff; /* Background color on hover */
-    color: #4A55A2; /* Text color on hover */
+
+.base-btn>form>input:hover {
+    background-color: #ffffff;
+    /* Background color on hover */
+    color: #4A55A2;
+    /* Text color on hover */
+}
+
+.feedback {
+    background-color: #4A55A2;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+    align-items: center;
+
+}
+
+.feedback>a {
+    text-decoration: none;
+}
+
+.google-form-button {
+    color: #ffffff;
+    padding-top: 80px;
+    font-weight: bold;
 }
