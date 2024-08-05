@@ -11,10 +11,12 @@
     <div id="board__container">
         <div id="new_post"><a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a></div>
         {% if user.is_authenticated and user.is_admin %}
-        <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">게시판 삭제</button>
-        </form>
+        <div id="delete">
+            <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">게시판 삭제</button>
+            </form>
+        </div>
         {% endif %}
         <ul id="post__ul">
             {% for post in posts %}
