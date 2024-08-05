@@ -1,22 +1,37 @@
-{% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
-<h2>로그인</h2>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <form method="post" action="{% url 'landing:login' %}">
-        {% csrf_token %}
-        ID : 
-      <input name="username" type="text" value="">
-      <br>
-      <br>
-      PW :
-      <input name="password" type="password" value="">
-      <br>
-      <br>
-      <input type="submit" value="로그인">
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/users/user_login.css' %}">
+</head>
+<body>
+    <div id="login-container">
+        <h2>로그인</h2>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post" action="{% url 'landing:login' %}">
+            {% csrf_token %}
+            <label for="username">아이디 :</label>
+            <input id="username" name="username" type="text" placeholder="아이디">
+            <label for="password">비밀번호 :</label>
+            <input id="password" name="password" type="password" placeholder="비밀번호">
+            <input type="submit" value="Login">
+        </form>
+        <div id="loginpage_promotion">
+            <h1>with.PIROGRAMING</h1>
+            <img src="/static/image/promotion_piro.png" alt="Promotion Image">
+        </div>
+    </div>
+</body>
+</html>
 {% endblock %}

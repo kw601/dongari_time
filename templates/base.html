@@ -4,29 +4,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/landing/club_auth.css' %}" />
-    {% if user.is_authenticated %}
-
-    <h3>안녕하세요 {{ user.nickname }}님</h3>
-    {% block head %} {% endblock %} {% endif %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
   </head>
   <body>
-    {% if user.is_authenticated and user.id %}
-    <form action="{% url 'landing:delete' user.id %}" method ='POST'>
-      {% csrf_token %}
-      <input type="submit" value='회원탈퇴'>
-    </form>
-    <form action="{% url 'landing:logout' %}" method ='POST'>
-      {% csrf_token %}
-      <input type="submit" value='로그아웃'>
-    </form>
+    <div class="base-frame">
+      <div class="base-name">
+        {% if user.is_authenticated %}
+        <h3>안녕하세요 {{ user.nickname }}님</h3>
+        {% block head %} {% endblock %} {% endif %}
+      </div>  
+      <div class="base-btn">
+        {% if user.is_authenticated and user.id %}
+        <form action="{% url 'landing:delete' user.id %}" method ='POST'>
+          {% csrf_token %}
+          <input type="submit" value='회원탈퇴'>
+        </form>
+        <form action="{% url 'landing:logout' %}" method ='POST'>
+          {% csrf_token %}
+          <input type="submit" value='로그아웃'>
+        </form>
 
-    {% else %}
-    <div id="nav_menu">
-      <a href='{% url "landing:login" %}'>로그인</a>
-      <a href='{% url "landing:signup" %}'>회원가입</a>
+        {% else %}
+        <div id="nav_menu">
+          <a href='{% url "landing:login" %}'>로그인</a>
+          <a href='{% url "landing:signup" %}'>회원가입</a>
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 
 
     {% block content %}{% endblock%}

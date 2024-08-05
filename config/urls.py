@@ -17,6 +17,8 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -24,3 +26,6 @@ urlpatterns = [
     path("community/", include("apps.community.urls")),  # 메인 페이지 ~ 모든 기능
     path("chat/", include("apps.chat.urls")),  # 채팅방 리스트, 채팅방
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

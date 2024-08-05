@@ -10,19 +10,25 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["content", "anonymous"]
+        labels = {
+            "content": "",
+            "anonymous": "",
+        }
 
 
 class PostForm(forms.ModelForm):
+    image = forms.ImageField(
+        required=False, widget=forms.FileInput(attrs={"class": "form-control"})
+    )
+
     class Meta:
         model = Post
-        fields = ["title", "content", "anonymous"]
+        fields = ["title", "content", "anonymous", "image"]
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "content": forms.Textarea(attrs={"class": "form-control"}),
             "anonymous": forms.CheckboxInput(attrs={"class": "form-check-input"}),
         }
-
-    # image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control'}))
 
 
 class BoardForm(forms.ModelForm):
