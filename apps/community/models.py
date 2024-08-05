@@ -26,7 +26,7 @@ class Post(models.Model):  # 게시글
     content = models.TextField("게시글 내용")
     anonymous = models.BooleanField("익명 여부", default=True)
     created_time = models.DateTimeField("작성 시각", auto_now_add=True)
-    #image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
 
     def __str__(self):
         return self.title
