@@ -105,13 +105,13 @@ def club_auth(request):  # 동아리 인증 페이지
         if request.method == "GET":
             form = ClubAuthForm()
             return render(request, "landing/club_auth.html", {"form": form})
-    
+
         if request.method == "POST":
             form = ClubAuthForm(request.POST)
             if form.is_valid():
                 name = form.cleaned_data["club_name"]  # 폼에서 클럽 이름 가져오기
                 code = form.cleaned_data["auth_code"]  # 폼에서 인증 코드 가져오기
-    
+
                 try:
                     club = Club.objects.get(
                         club_name=name
@@ -130,9 +130,7 @@ def club_auth(request):  # 동아리 인증 페이지
                     form.add_error(
                         None, "해당 이름의 동아리가 존재하지 않습니다."
                     )  # 폼에 에러 추가
-    
+
             return render(request, "landing/club_auth.html", {"form": form})
-    
-    
-     else:
-           return redirect("landing:login")  # 로그인 화면으로 이동
+    else:
+        return redirect("landing:login")  # 로그인 화면으로 이동
