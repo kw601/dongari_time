@@ -4,9 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% comment %}
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
-    {% endcomment %} 
+    <link rel="stylesheet" href="{% static 'css/landing/club_auth.css' %}" />
     {% if user.is_authenticated %}
 
     <h3>안녕하세요 {{ user.nickname }}님</h3>
