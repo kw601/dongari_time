@@ -7,6 +7,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['content', 'anonymous']
+        labels = {
+            'content': '',
+            'anonymous': '',
+        }
 
 
 class PostForm(forms.ModelForm):
