@@ -1,47 +1,57 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-
-<div id="landing__container">
-<!-- 로그인 여부 -->
-{% if user.is_authenticated %}
-    <!-- 인증 받은 동아리 없는 경우: club_id가 없는 경우 -->
-    {% if user.club_id is None %}
-    <div id="if_admin">
-        <div>당신은 동아리 관리자인가요, 회원인가요?</div>
-        <div id="select__container">
-            <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
-            <button id="member_btn"><a href="{% url 'landing:club_auth' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/landing/landing_page.css' %}" />
+    </head>
+    <div id="landing__container_login">
+    <!-- 로그인 여부 -->
+    {% if user.is_authenticated %}
+        <!-- 인증 받은 동아리  없는 경우: club_id가 없는 경우 -->
+        {% if user.club_id is None %}
+        <div id="no_club">
+            <div id="landing_text">당신은 동아리 관리자인가요, 회원인가요?</div>
+            <div id="select__container">
+                <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
+                <button id="member_btn"><a href="{% url 'landing:club_auth' %}"><div id="select__box"><div id="icon__box">👥</div>회원</div></a></button>
+            </div>
         </div>
-    </div>
-    {% else %}
-    <div id="select__container">
-        <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>관리자</div></a></button>
-        <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
-    </div>
-    {% endif %}
+        {% else %}
+        <div id="have_club">
+            <div id="landing_text">당신의 동아리로 이동하세요!</div>
+            <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>새 동아리</div></a></button>
+            <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
+        </div>
+        {% endif %}
 
-    {% comment %}
-    {% else %}
-    <!-- 지금 당장은, 로그인 하면 동아리 main로 render라 안해도 될듯 -->
-    <!-- 회원가입 했고, 동아리 있는 경우 -> 동아리 main으로 이동 -->
-    <!-- 만약 동아리 한 개 이상이면 동아리 선택 창 보여주기? 그 때 쓰면 될듯 -->
-    {% endif %}
-    {% endcomment %}
-    
-
-
-{% else %}
-    <div>동아리타임에 오신 걸 환영합니다.</div>
-    <div>동아리타임에선 어쩌고 저쩌고 자유로운 소통 어쩌고</div>
-    <div id="button__container">
         {% comment %}
-        <button id="login_btn"><a href="{% url 'landing:login' %}">로그인</a></button>
-        <button id="signup_btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
+        {% else %}
+        <!-- 지금 당장은, 로그인 하면 동아리 main로 render라 안해도 될듯 -->
+        <!-- 회원가입 했고, 동아리 있는 경우 -> 동아리 main으로 이동 -->
+        <!-- 만약 동아리 한 개 이상이면 동아리 선택 창 보여주기? 그 때 쓰면 될듯 -->
+        {% endif %}
         {% endcomment %}
-        <button id="login_btn"><a href="">로그인</a></button>
-        <button id="signup_btn"><a href="">회원가입</a></button>
+        
+
     </div>
-{% endif %}
-</div>
-{% endblock content %}
+    {% else %}
+    <div id="landing__container_logout">
+        <div id="landing_left">
+            <div id="landing_text">동아리의 모든 소통을 한곳에, 동아리타임</div>
+            <div id="landing_text_additional">동아리타임에서 안전하고 자유롭게 소통해요!</div>
+            <div id="select__container">
+                <button id="login_btn"><a href="{% url 'landing:login' %}">로그인</a></button>
+                <button id="signup_btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
+            </div>
+        </div>
+        {% comment %}
+        <div id="landing_right">
+            <div>도동타 동타 동타</div>
+        </div>
+        {% endcomment %}
+    {% endif %}
+    </div>
+</html>
