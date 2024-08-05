@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
 from .models import Board, Post, Comment, Club
 from apps.landing.models import User
 from django.contrib.auth.decorators import login_required
@@ -28,6 +29,9 @@ def post_list(request, board_id):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, id=board_id)
         posts = Post.objects.filter(board_id=board)
+        for post in posts:
+            if post.image:
+                post.image_url = settings.MEDIA_URL + str(post.image)
         return render(
             request, "community/post_list.html", {"board": board, "posts": posts}
         )

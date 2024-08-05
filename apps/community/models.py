@@ -18,6 +18,8 @@ class Board(models.Model):  # 게시판
     club_id = models.ForeignKey(Club, on_delete=models.CASCADE)
     board_name = models.CharField("게시판 이름", max_length=255, unique=True)
 
+def user_directory_path(instance, filename):
+    return f'post_images/user_{instance.user_id.id}/{filename}'
 
 class Post(models.Model):  # 게시글
     user_id = models.ForeignKey("landing.User", on_delete=models.CASCADE)
@@ -26,7 +28,8 @@ class Post(models.Model):  # 게시글
     content = models.TextField("게시글 내용")
     anonymous = models.BooleanField("익명 여부", default=True)
     created_time = models.DateTimeField("작성 시각", auto_now_add=True)
-    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+    #image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+    image = models.ImageField(upload_to=user_directory_path, null=True, blank=True)
 
     def __str__(self):
         return self.title
