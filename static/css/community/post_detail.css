@@ -33,6 +33,11 @@
 }
 
 /* */
+.board_name_box {
+    background-color: #C5DFF8;
+    display: flex;
+    justify-content: center;
+}
 
 .p_d_p {
     line-height: 1.6;
@@ -110,10 +115,4 @@ a:hover {
 .p_d_comment-author {
     font-weight: bold;
     color: #333;
-}
-
-.board_name_box {
-    background-color: #C5DFF8;
-    display: flex;
-    justify-content: center;
 }

@@ -10,6 +10,9 @@
     </div>
     <hr class="hr_2px">
     <h2 class="p_d_h2">{{ post.title }}</h2>
+    {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Post Image">
+    {% endif %}
     <p class="comment-author p_d_p">작성자: 
         {% if post.user_id and not post.anonymous %}
             {{ post.user_id.username }}

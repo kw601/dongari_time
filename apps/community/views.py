@@ -71,16 +71,16 @@ def create_post(request, board_id):
         board = get_object_or_404(Board, pk=board_id)
 
         if request.method == "POST":
-            form = PostForm(request.POST)
-            # form = PostForm(request.POST, request.FILES)
+            form = PostForm(request.POST, request.FILES)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user_id = request.user
                 post.board_id = board
                 post.save()
 
-                # if 'image' in request.FILES:
-                # pass
+                if 'image' in request.FILES:
+                    post.image = request.FILES['image']
+                    post.save()
 
                 return redirect("community:post_list", board_id=board.id)
         else:
