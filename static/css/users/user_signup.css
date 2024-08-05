@@ -23,11 +23,23 @@ body {
     flex-direction: column;
     align-items: center;
 }
+#header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
 
+#back-button {
+    margin-right: 10px;
+}
+
+#back-button a img {
+    width: 24px;  /* Adjust the size as needed */
+    height: 24px; /* Adjust the size as needed */
+}
 #container_signup h1 {
     text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
+    width: 80%;
     color: #4A55A2;
     font-size: 24px;
 }
@@ -94,4 +106,20 @@ body {
     color: red;
     font-size: 14px;
     margin-bottom: 5px;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure it spans the full width */
+}
+
+#back-button {
+    margin-right: 10px;
+}
+
+#back-button a img {
+    width: 24px;  /* Adjust the size as needed */
+    height: 24px; /* Adjust the size as needed */
 }

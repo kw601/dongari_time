@@ -7,11 +7,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3a115195d8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/users/user_login.css' %}">
 </head>
 <body>
     <div id="login-container">
-        <h2>로그인</h2>
+        <div id="header">
+            <div id="back-button">
+                <a href="{% url 'landing:main' %}">
+                    <img src="{% static 'image/arrow_back.png' %}" alt="Back">
+                </a>
+            </div>
+            <h2>로그인</h2>
+        </div>
         {% if messages %}
             <ul>
                 {% for message in messages %}
@@ -29,7 +37,7 @@
         </form>
         <div id="loginpage_promotion">
             <h1>with.PIROGRAMING</h1>
-            <img src="/static/image/promotion_piro.png" alt="Promotion Image">
+            <img src="{% static 'image/promotion_piro.png' %}" alt="Promotion Image">
         </div>
     </div>
 </body>

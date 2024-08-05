@@ -11,7 +11,14 @@
 <body>
     {% block content %}
     <div id="container_signup">
-        <h1>회원가입</h1>
+        <div id="header">
+            <div id="back-button">
+                <a href="{% url 'landing:main' %}">
+                    <img src="{% static 'image/arrow_back.png' %}" alt="Back">
+                </a>
+            </div>
+            <h1>회원가입</h1>
+        </div>
         {% if messages %}
             <ul>
                 {% for message in messages %}
@@ -42,7 +49,6 @@
             
             <input type="submit" value="회원가입">
         </form>
-        <a href="{% url 'landing:main' %}">돌아가기</a>
     </div>
     {% endblock %}
 </body>

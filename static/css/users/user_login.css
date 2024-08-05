@@ -7,20 +7,35 @@ html, body {
     font-family: Arial, sans-serif;
 }
 #login-container {
-    width: 400px;
-    margin: 50px auto;
-    padding: 40px;
-    border: 1px solid #eee;
-    border-radius: 10px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    position: relative;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#back-button {
+    margin-right: 10px;
+}
+
+#back-button a img {
+    width: 24px;  /* Adjust the size as needed */
+    height: 24px; /* Adjust the size as needed */
 }
 
 #login-container h2 {
     color: #4A55A2;
     margin-bottom: 30px;
     font-size: 24px;
+    padding-left: 90px;
+
 }
 
 #login-container ul {
