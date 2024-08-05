@@ -39,14 +39,16 @@
     padding: 0px 10px;
 }
 .auth-btn{
+    font-weight: bold;
     margin-top: 10px;
     background-color: #7895CB;
     border: none;
     border-radius: 10px;
     padding: 10px 70px;
     border: 1px solid #4A55A2;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 .auth-btn:hover{
     background-color: #4A55A2;
+    color: white;
 }

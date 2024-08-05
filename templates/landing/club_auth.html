@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<hr>
+<link rel="stylesheet" href="{% static 'css/landing/club_auth.css' %}" />
 <div class="auth">
     <form action="{% url 'landing:club_auth' %}" method="POST" enctype="multipart/form-data" class="auth-form">
         {% csrf_token %}
