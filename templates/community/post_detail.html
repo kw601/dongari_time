@@ -22,10 +22,10 @@
     <p class="p_d_p">댓글: {{ comments.count }}</p>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>
-    <div class="comment-section">
+    <div class="p_d_comment-section">
         {% for comment in comments %}
-            <div class="comment">
-                <p class="comment-author p_d_p">작성자: 
+            <div class="p_d_comment">
+                <p class="p_d_comment-author p_d_p">작성자: 
                     {% if comment.user_id and not comment.anonymous %}
                         {{ comment.user_id.username }}
                     {% else %}
@@ -35,11 +35,11 @@
                 </p>
                 <p class="p_d_p">{{ comment.content }}</p>
             </div>
-            <hr>
+            <hr class="hr_1px">
         {% endfor %}
     </div>
     <h3 class="p_d_h3_comment">댓글 작성</h3>
-    <form method="post">
+    <form class="p_d_comment_form" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">댓글 작성</button>
