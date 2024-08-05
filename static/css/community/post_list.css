@@ -15,6 +15,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 10px;
+    position: relative;
 }
 #new_post, #post__ul li {
     border: 1px solid #C5DFF8;
@@ -56,4 +58,18 @@
 }
 #post__created, #post__user{
     font-size: .6rem;
+}
+
+#to_main {
+    background-color: #C5DFF8;
+    border: none;
+    padding: .5rem 1.6rem;
+    border-radius: .3rem;
+    position: absolute;
+    right: 0;
+    bottom: -3rem;
+}
+#to_main a {
+    text-decoration: none;
+    color: black;
 }

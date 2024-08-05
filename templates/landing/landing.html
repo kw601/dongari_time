@@ -21,10 +21,12 @@
                 </div>
             </div>
             {% else %}
-            <div id="have_club">
+            <div id="no_club">
                 <div id="landing_text">당신의 동아리로 이동하세요!</div>
-                <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>새 동아리</div></a></button>
-                <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
+                <div id="select__container">
+                    <button id="admin_btn"><a href="{% url 'community:create_club' %}"><div id="select__box"><div id="icon__box">👑</div>새 동아리</div></a></button>
+                    <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button>
+                </div>
             </div>
             {% endif %}
             {% comment %}
