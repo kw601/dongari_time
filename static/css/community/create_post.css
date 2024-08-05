@@ -1,7 +1,7 @@
 /* create_post.css */
 
 /* 기본적인 폼 스타일 */
-form {
+.c_p_form {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -11,7 +11,7 @@ form {
 }
 
 /* 제목 정렬 및 스타일 */
-h1 {
+.c_p_h1 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
@@ -19,11 +19,11 @@ h1 {
 }
 
 /* 라벨과 입력 필드 정렬 */
-.postHtml {
+.c_p_Html {
     margin-bottom: 15px;
 }
 
-.form-label {
+.c_p_form-label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
@@ -39,14 +39,14 @@ input[type="text"], textarea {
     font-size: 16px;
 }
 
-/* 이미지 업로드 필드 스타일 */
+/* 이미지 업로드 필드 스타일
 input[type="file"] {
     display: block;
     margin-top: 5px;
-}
+} */
 
 /* 익명 체크박스 스타일 */
-.form-anony {
+.c_p_form-anony {
     display: flex;
     align-items: center;
 }

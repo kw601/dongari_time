@@ -1,33 +1,35 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/community/create_post.css' %}" />
 
-<h1> {{ board.board_name }} </h1>
+<h1 class="c_p_h1"> {{ board.board_name }} </h1>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" class="c_p_form" enctype="multipart/form-data">
     {% csrf_token %}
 
-    <div class="postHtml">
-        <label for="{{ form.title.id_for_label }}" class="form-label">제목</label>
+    <div class="c_p_Html">
+        <label for="{{ form.title.id_for_label }}" class="c_p_form-label">제목</label>
         {{ form.title }}
     </div>
 
-    <div class="postHtml">
-        <label for="{{ form.content.id_for_label }}" class="form-label">내용</label>
+    <div class="c_p_Html">
+        <label for="{{ form.content.id_for_label }}" class="c_p_form-label">내용</label>
         {{ form.content }}
     </div>
 
-    <div class="postHtml">
-        <label for="{{ form.image.id_for_label }}" class="form-label">이미지 업로드</label>
+    <div class="c_p_Html">
+        <label for="{{ form.image.id_for_label }}" class="c_p_form-label">이미지 업로드</label>
         {{ form.image }}
     </div>
 
-    <div class="postHtml form-anony">
+    <div class="c_p_Html c_p_form-anony">
         {{ form.anonymous }}
         <label class="form-anony-label" for="{{ form.anonymous.id_for_label }}">익명</label>
     </div>
 
-    <button type="submit" class="btn btn-create">게시글 업로드</button>
+    <button type="submit" class="btn-create">게시글 업로드</button>
 </form>
 
 {% endblock content %}
