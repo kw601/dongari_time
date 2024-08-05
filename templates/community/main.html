@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %} 
+<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community/main.css' %}" />
+{% endblock %}
 {% block content %}
-<h1>main(게시판 리스트만 구현..)</h1>
-<a href="{% url 'community:create_board' %}" class="btn btn-primary">새 게시판 만들기(관리자만 가능하게 변경해야함)</a>
-<ul>
-    {% for board in boards %}
-    <li>
-        <h2><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
-    </li>
-    {% endfor %}
-</ul>
+<div id="main__container">
+    <div id="boards__container">
+        <ul id="boards__ul">
+            {% for board in boards %}
+            <li>
+                <h2 id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="button__container"><button id="main_btn"><a href="{% url 'community:create_board' %}"><div id="select__box"><div id="icon__box">➕</div>게시판 추가</div></a></button></div>
+    </div>
+    
+    <!-- 특정 게시판의 최근 글 5개 보이게 -->
+    <div id="board__content">
+        <div>개발 중...</div>
+        {% comment %}
+        {% for post in 게시판번호|slice:":5" %}
+        {% endcomment %}
+    </div>
+    
+</div>
 {% endblock %}
