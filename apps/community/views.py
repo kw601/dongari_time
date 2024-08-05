@@ -18,6 +18,15 @@ def create_club(request):
             form = ClubForm(request.POST)
             if form.is_valid():
                 club = form.save()
+                request.user.club_id = club
+                request.user.is_admin = True
+                request.user.save()
+
+                # 기본 게시판 객체 생성
+                default_boards = ["공지게시판", "자유게시판", "질문게시판"]
+                for board_name in default_boards:
+                    Board.objects.create(club_id=club, board_name=board_name)
+
                 return redirect("community:main")
             else:
                 return render(request, "community/create_club.html", {"form": form})
@@ -102,6 +111,8 @@ def create_board(request):
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
+                board = form.save(commit=False)
+                board.club_id = request.user.club_id
                 form.save()
                 return redirect("community:main")
         else:
@@ -113,7 +124,7 @@ def create_board(request):
 
 def main(request):
     if request.user.is_authenticated:
-        boards = Board.objects.all()
+        boards = Board.objects.filter(club_id=request.user.club_id)
         return render(request, "community/main.html", {"boards": boards})
     else:
         return redirect("landing:login")
@@ -125,6 +136,5 @@ def delete_board(request, board_id):
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
-        return render(request, "community/delete_board.html", {"board": board})
     else:
         return redirect("landing:login")

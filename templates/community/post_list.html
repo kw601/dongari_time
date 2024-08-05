@@ -1,7 +1,7 @@
 <!-- post_list.html -->
 {% extends 'base.html' %}
 {% load static %}
-{% block head %} 
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 <link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
 {% endblock %}
@@ -10,12 +10,12 @@
     <h1 id="board__title">{{ board.board_name }}</h1>
     <div id="board__container">
         <div id="new_post"><a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a></div>
-        {% comment %}
-        <form method="post" action="{% url 'community:delete_board' board.id %}">
+        {% if user.is_authenticated and user.is_admin %}
+        <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger">게시판 삭제(관리자만 가능하게)</button>
+            <button type="submit" class="btn btn-danger">게시판 삭제</button>
         </form>
-        {% endcomment %}
+        {% endif %}
         <ul id="post__ul">
             {% for post in posts %}
             <a href="{% url 'community:post_detail' board.id post.id %}">
@@ -25,9 +25,9 @@
                     <div id="post__description">
                         <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
                         {% if post.anonymous is True %}
-                            <p id="post__user">익명</p>
+                        <p id="post__user">익명</p>
                         {% else %}
-                            <p id="post__user">{{ post.user_id.username }}</p>
+                        <p id="post__user">{{ post.user_id.username }}</p>
                         {% endif %}
                     </div>
                 </li>

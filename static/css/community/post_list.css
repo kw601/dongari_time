@@ -1,6 +1,7 @@
 #post_list {
     padding: 0px 2rem;
 }
+
 #board__title {
     margin-top: 3rem;
     margin-bottom: 1rem;
@@ -11,6 +12,7 @@
     color: white;
     background-color: #4A55A2;
 }
+
 #board__container {
     display: flex;
     flex-direction: column;
@@ -18,7 +20,9 @@
     margin-bottom: 10px;
     position: relative;
 }
-#new_post, #post__ul li {
+
+#new_post,
+#post__ul li {
     border: 1px solid #C5DFF8;
     border-radius: 0.5rem;
     padding: 1.1rem 1rem;
@@ -47,7 +51,7 @@
     gap: .5rem;
 }
 
-#post__title{
+#post__title {
     font-size: 1.2rem;
     font-weight: 600;
 }
@@ -56,7 +60,9 @@
     display: flex;
     gap: 2rem;
 }
-#post__created, #post__user{
+
+#post__created,
+#post__user {
     font-size: .6rem;
 }
 
@@ -69,6 +75,7 @@
     right: 0;
     bottom: -3rem;
 }
+
 #to_main a {
     text-decoration: none;
     color: black;
