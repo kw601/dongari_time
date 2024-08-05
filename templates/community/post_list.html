@@ -4,10 +4,12 @@
 {% block content %}
 <h1>{{ board.board_name }}</h1>
 <a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a>
-<form method="post" action="{% url 'community:delete_board' board.id %}">
+{% if user.is_authenticated and user.is_admin %}
+<form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
     {% csrf_token %}
-    <button type="submit" class="btn btn-danger">게시판 삭제(관리자만 가능하게)</button>
+    <button type="submit" class="btn btn-danger">게시판 삭제 (관리자만 가능)</button>
 </form>
+{% endif %}
 <ul>
     {% for post in posts %}
     <li>
