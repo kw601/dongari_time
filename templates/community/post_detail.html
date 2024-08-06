@@ -11,13 +11,13 @@
     <hr class="hr_2px">
     <h2 class="p_d_h2">{{ post.title }}</h2>
     {% if post.image %}
-        <img src="{{ post.image.url }}" alt="Post Image">
+    <img src="{{ post.image.url }}" alt="Post Image" class="p_d_image">
     {% endif %}
-    <p class="comment-author p_d_p">작성자: 
+    <p class="comment-author p_d_p">작성자:
         {% if post.user_id and not post.anonymous %}
-            {{ post.user_id.username }}
+        {{ post.user_id.username }}
         {% else %}
-            익명
+        익명
         {% endif %}
         | 작성일시: {{ post.created_time }}
     </p>
@@ -27,18 +27,18 @@
     <h3 class="p_d_h3">댓글</h3>
     <div class="p_d_comment-section">
         {% for comment in comments %}
-            <div class="p_d_comment">
-                <p class="p_d_comment-author p_d_p">작성자: 
-                    {% if comment.user_id and not comment.anonymous %}
-                        {{ comment.user_id.username }}
-                    {% else %}
-                        익명
-                    {% endif %}
-                    | 작성일시: {{ comment.created_time }}
-                </p>
-                <p class="p_d_p">{{ comment.content }}</p>
-            </div>
-            <hr class="hr_1px">
+        <div class="p_d_comment">
+            <p class="p_d_comment-author p_d_p">작성자:
+                {% if comment.user_id and not comment.anonymous %}
+                {{ comment.user_id.username }}
+                {% else %}
+                익명
+                {% endif %}
+                | 작성일시: {{ comment.created_time }}
+            </p>
+            <p class="p_d_p">{{ comment.content }}</p>
+        </div>
+        <hr class="hr_1px">
         {% endfor %}
     </div>
     <h3 class="p_d_h3_comment">댓글 작성</h3>
