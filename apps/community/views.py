@@ -36,7 +36,7 @@ def create_club(request):
 def post_list(request, board_id):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, id=board_id)
-        posts = Post.objects.filter(board_id=board)
+        posts = Post.objects.filter(board_id=board).order_by("-created_time")
         return render(
             request, "community/post_list.html", {"board": board, "posts": posts}
         )
@@ -87,8 +87,8 @@ def create_post(request, board_id):
                 post.board_id = board
                 post.save()
 
-                if 'image' in request.FILES:
-                    post.image = request.FILES['image']
+                if "image" in request.FILES:
+                    post.image = request.FILES["image"]
                     post.save()
 
                 return redirect("community:post_list", board_id=board.id)
