@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Club(models.Model):  # 동아리
-    club_name = models.CharField("동아리명", max_length=255, unique=True)
+    club_name = models.CharField("동아리명", max_length=255)
     club_intro = models.CharField("동아리 소개", max_length=255)
     club_num = models.CharField(
         "동아리 인증 번호", max_length=255, unique=True, null=False
@@ -26,7 +26,7 @@ class Post(models.Model):  # 게시글
     content = models.TextField("게시글 내용")
     anonymous = models.BooleanField("익명 여부", default=True)
     created_time = models.DateTimeField("작성 시각", auto_now_add=True)
-    image = models.ImageField(upload_to='post_images/', null=True, blank=True)
+    image = models.ImageField(upload_to="post_images/", null=True, blank=True)
 
     def __str__(self):
         return self.title
