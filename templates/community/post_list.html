@@ -29,7 +29,7 @@
                         {% if post.anonymous is True %}
                         <p id="post__user">익명</p>
                         {% else %}
-                        <p id="post__user">{{ post.user_id.username }}</p>
+                        <p id="post__user">{{ post.user_id.nickname }}</p>
                         {% endif %}
                     </div>
                 </li>

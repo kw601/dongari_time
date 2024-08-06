@@ -15,7 +15,7 @@
     {% endif %}
     <p class="comment-author p_d_p">작성자:
         {% if post.user_id and not post.anonymous %}
-        {{ post.user_id.username }}
+        {{ post.user_id.nickname }}
         {% else %}
         익명
         {% endif %}
@@ -30,7 +30,7 @@
         <div class="p_d_comment">
             <p class="p_d_comment-author p_d_p">작성자:
                 {% if comment.user_id and not comment.anonymous %}
-                {{ comment.user_id.username }}
+                {{ comment.user_id.nickname }}
                 {% else %}
                 익명
                 {% endif %}
