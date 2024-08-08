@@ -51,5 +51,20 @@
         </form>
     </div>
     {% endblock %}
+
+    <script>
+        document.getElementById('phone_num').addEventListener('input', function(e) {
+            var value = e.target.value.replace(/[^0-9]/g, '');
+            var formattedValue = '';
+            if (value.length > 3 && value.length <= 7) {
+                formattedValue = value.substr(0, 3) + '-' + value.substr(3);
+            } else if (value.length > 7) {
+                formattedValue = value.substr(0, 3) + '-' + value.substr(3, 4) + '-' + value.substr(7);
+            } else {
+                formattedValue = value;
+            }
+            e.target.value = formattedValue;
+        });
+    </script>
 </body>
 </html>

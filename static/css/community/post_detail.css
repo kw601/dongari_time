@@ -116,3 +116,12 @@ a:hover {
     font-weight: bold;
     color: #333;
 }
+
+.p_d_image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    max-height: 500px;
+}
