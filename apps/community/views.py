@@ -12,20 +12,11 @@ def create_club(request):
         if request.method == "GET":
             form = ClubForm()
             return render(request, "community/create_club.html", {"form": form})
-
         if request.method == "POST":
             form = ClubForm(request.POST)
             if form.is_valid():
                 club = form.save()
-                request.user.club_id = club
-                request.user.is_admin = True
-                request.user.save()
-
-                # 기본 게시판 객체 생성
-                default_boards = ["공지게시판", "자유게시판", "질문게시판"]
-                for board_name in default_boards:
-                    Board.objects.create(club_id=club, board_name=board_name)
-
+                request.session['club_id'] = club.pk # 세션에 동아리 고유번호 저장
                 return redirect("community:main")
             else:
                 return render(request, "community/create_club.html", {"form": form})
@@ -35,8 +26,9 @@ def create_club(request):
 
 def post_list(request, board_id):
     if request.user.is_authenticated:
-        board = get_object_or_404(Board, id=board_id)
-        posts = Post.objects.filter(board_id=board).order_by("-created_time")
+        club_id = request.session.get('club_id')
+        board = get_object_or_404(Board, id=board_id, club_id=club_id)
+        posts = Post.objects.filter(board_id=board, club_id=club_id)
         return render(
             request, "community/post_list.html", {"board": board, "posts": posts}
         )
@@ -80,16 +72,17 @@ def create_post(request, board_id):
         board = get_object_or_404(Board, pk=board_id)
 
         if request.method == "POST":
-            form = PostForm(request.POST, request.FILES)
+            form = PostForm(request.POST)
+            # form = PostForm(request.POST, request.FILES)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user_id = request.user
+                post.club_id = request.session.get("club_id")
                 post.board_id = board
                 post.save()
 
-                if "image" in request.FILES:
-                    post.image = request.FILES["image"]
-                    post.save()
+                # if 'image' in request.FILES:
+                # pass
 
                 return redirect("community:post_list", board_id=board.id)
         else:
@@ -107,8 +100,6 @@ def create_board(request):
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
-                board = form.save(commit=False)
-                board.club_id = request.user.club_id
                 form.save()
                 return redirect("community:main")
         else:
@@ -120,7 +111,7 @@ def create_board(request):
 
 def main(request):
     if request.user.is_authenticated:
-        boards = Board.objects.filter(club_id=request.user.club_id)
+        boards = Board.objects.all()
         return render(request, "community/main.html", {"boards": boards})
     else:
         return redirect("landing:login")
@@ -132,5 +123,6 @@ def delete_board(request, board_id):
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
+        return render(request, "community/delete_board.html", {"board": board})
     else:
         return redirect("landing:login")
