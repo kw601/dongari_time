@@ -19,6 +19,3 @@ class Auth_Club(models.Model):
 
     def __str__(self) -> Any:
         return f'"{self.club_id}" 회원 : {self.user_id}'
-
-    class Meta:
-        unique_together = ("user_id", "club_id")
