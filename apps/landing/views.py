@@ -93,6 +93,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
+    request.session.clear() # 세션에 저장된 값 삭제
     return redirect("landing:main")
 
 
@@ -121,6 +122,7 @@ def club_auth(request):  # 동아리 인증 페이지
                             club  # 해당 유저의 가입된 동아리 정보에 동아리 pk값 입력
                         )
                         request.user.save()
+                        request.session['club_id'] = club.pk # 세션에 동아리 고유번호 저장
                         return redirect("community:main")  # 메인 페이지로 이동
                     else:
                         form.add_error(

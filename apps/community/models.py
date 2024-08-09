@@ -25,6 +25,7 @@ class Board(models.Model):  # 게시판
 
 class Post(models.Model):  # 게시글
     user_id = models.ForeignKey("landing.User", on_delete=models.CASCADE)
+    club_id = models.ForeignKey(Club, on_delete=models.CASCADE)
     board_id = models.ForeignKey(Board, on_delete=models.CASCADE)
     title = models.CharField("게시글 제목", max_length=255)
     content = models.TextField("게시글 내용")
@@ -32,7 +33,7 @@ class Post(models.Model):  # 게시글
     created_time = models.DateTimeField("작성 시각", auto_now_add=True)
     image = models.ImageField(upload_to="post_images/", null=True, blank=True)
     pinned = models.BooleanField("게시글 고정 여부", default=False)
-    liked = models.IntegerField("좋아요 개수", default = 0)
+    liked = models.IntegerField("좋아요 개수", default=0)
 
     # 게시글 제목 표시용
     def __str__(self):
@@ -45,10 +46,12 @@ class Comment(models.Model):  # 댓글
     content = models.TextField("댓글 내용")
     anonymous = models.BooleanField("익명 여부", default=True)
     created_time = models.DateTimeField(auto_now_add=True)
-    parent_id = models.ForeignKey("community.Comment", null = True, on_delete=models.CASCADE)
-    depth = models.IntegerField("댓글 깊이", default = 0)
-    liked = models.IntegerField("좋아요 개수", default = 0)
-    
-    # 댓글 내용 표시용 
+    parent_id = models.ForeignKey(
+        "community.Comment", null=True, on_delete=models.CASCADE
+    )
+    depth = models.IntegerField("댓글 깊이", default=0)
+    liked = models.IntegerField("좋아요 개수", default=0)
+
+    # 댓글 내용 표시용
     def __str__(self):
         return self.content
