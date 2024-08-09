@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "apps.landing",
     "apps.community",
     "apps.chat",
-    "apps.mypage"
+    "apps.mypage",
 ]
 
 AUTH_USER_MODEL = "landing.User"
