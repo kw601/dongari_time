@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block head %} 
+{% block head %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 <link rel="stylesheet" href="{% static 'css/community/main.css' %}" />
 {% endblock %}
 {% block content %}
 <div id="main__container">
+    <br>
+    <h3>현재 동아리 : {{ club_name }}</h3>
+    <br>
+    <div>
+        <a href="{% url 'community:select_club' %}">동아리 변경</a>
+        <a href="{% url 'landing:club_auth' %}">동아리 추가 인증</a>
+    </div>
+    <br>
+    <div>
+        <a href="{% url 'mypage:myposts' %}">내가 쓴 글</a>
+        <a href="{% url 'mypage:mycomments' %}">내가 댓글 단 글</a>
+    </div>
     <div id="boards__container">
         <ul id="boards__ul">
             {% for board in boards %}
@@ -14,9 +26,13 @@
             </li>
             {% endfor %}
         </ul>
-        <div id="button__container"><button id="main_btn"><a href="{% url 'community:create_board' %}"><div id="select__box"><div id="icon__box">➕</div>게시판 추가</div></a></button></div>
+        <div id="button__container"><button id="main_btn"><a href="{% url 'community:create_board' %}">
+                    <div id="select__box">
+                        <div id="icon__box">➕</div>게시판 추가
+                    </div>
+                </a></button></div>
     </div>
-    
+
     <!-- 특정 게시판의 최근 글 5개 보이게 -->
     <div id="board__content">
         <div>개발 중...</div>
@@ -24,6 +40,6 @@
         {% for post in 게시판번호|slice:":5" %}
         {% endcomment %}
     </div>
-    
+
 </div>
 {% endblock %}

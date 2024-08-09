@@ -14,4 +14,5 @@ urlpatterns = [
     path("", main, name="main"),
     path("<int:board_id>/delete/", delete_board, name="delete_board"),
     path("create_club/", create_club, name="create_club"),
+    path("select_club/", select_club, name="select_club"),
 ]
