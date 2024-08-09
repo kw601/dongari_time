@@ -70,14 +70,15 @@ def create_post(request, board_id):
     if request.user.is_authenticated:
 
         board = get_object_or_404(Board, pk=board_id)
-
+        club_id = request.session.get("club_id")
+        club = Club.objects.get(id=club_id)
         if request.method == "POST":
             form = PostForm(request.POST)
             # form = PostForm(request.POST, request.FILES)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user_id = request.user
-                post.club_id = request.session.get("club_id")
+                post.club_id = club
                 post.board_id = board
                 post.save()
 

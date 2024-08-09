@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>내가 작성한 게시글</h2>
+  <h2>내가 스크랩한 게시글</h2>
   {% if posts %}
     <ul>
         {% for post in posts %}
@@ -13,6 +13,6 @@
         {% endfor %}
     </ul>
   {% else %}
-    <p>작성한 게시글이 없습니다.</p>
+    <p>스크랩한 게시글이 없습니다.</p>
   {% endif %}
 {% endblock %}
