@@ -93,6 +93,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
+    request.session.clear() # 세션에 저장된 값 삭제
     return redirect("landing:main")
 
 
