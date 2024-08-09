@@ -5,4 +5,6 @@ app_name = "mypage"
 
 urlpatterns = [
     path("myposts/", myposts, name="myposts"),
+    path("mycomments/", mycomments, name="mycomments"),
+    path("myscraps/", myscraps, name="myscraps"),
 ]
