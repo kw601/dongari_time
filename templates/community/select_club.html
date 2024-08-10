@@ -1,0 +1,16 @@
+<!-- 임시 동아리 선택 페이지 -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>동아리 선택</h2>
+<form method="post">
+    {% csrf_token %}
+    <select name="club_id">
+        {% for auth_club in user_clubs %}
+        <option value="{{ auth_club.club_id.id }}">{{ auth_club.club_id.club_name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="btn btn-primary">선택하기</button>
+</form>
+{% endblock %}

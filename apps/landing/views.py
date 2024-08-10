@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from apps.landing.forms import SignupForm
 from apps.community.forms import ClubAuthForm
-from .models import User
+from .models import User, Auth_Club
 from apps.community.models import Club
 
 
@@ -93,7 +93,7 @@ def login(request):
 # 로그아웃
 def logout(request):
     auth_logout(request)
-    request.session.clear() # 세션에 저장된 값 삭제
+    request.session.clear()  # 세션에 저장된 값 삭제
     return redirect("landing:main")
 
 
@@ -121,8 +121,21 @@ def club_auth(request):  # 동아리 인증 페이지
                         request.user.club_id = (
                             club  # 해당 유저의 가입된 동아리 정보에 동아리 pk값 입력
                         )
+
+                        # 중복 가입 방지
+                        if Auth_Club.objects.filter(user_id=request.user, club_id=club):
+                            form.add_error(None, "이미 가입된 동아리입니다.")
+                            return render(
+                                request, "landing/club_auth.html", {"form": form}
+                            )
+
+                        # Auth_Club 모델에 유저와 동아리 정보 저장
+                        Auth_Club.objects.create(user_id=request.user, club_id=club)
+
                         request.user.save()
-                        request.session['club_id'] = club.pk # 세션에 동아리 고유번호 저장
+                        request.session["club_id"] = (
+                            club.pk
+                        )  # 세션에 동아리 고유번호 저장
                         return redirect("community:main")  # 메인 페이지로 이동
                     else:
                         form.add_error(

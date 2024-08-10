@@ -1,3 +1,4 @@
+from typing import Any
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -15,3 +16,6 @@ class User(AbstractUser):
 class Auth_Club(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     club_id = models.ForeignKey("community.Club", on_delete=models.CASCADE)
+
+    def __str__(self) -> Any:
+        return f'"{self.club_id}" 회원 : {self.user_id}'

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from .models import Board, Post, Comment, Club
-from apps.landing.models import User
+from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 
@@ -17,7 +17,18 @@ def create_club(request):
             form = ClubForm(request.POST)
             if form.is_valid():
                 club = form.save()
-                request.session['club_id'] = club.pk # 세션에 동아리 고유번호 저장
+                request.session["club_id"] = club.pk  # 세션에 동아리 고유번호 저장
+                request.user.is_admin = True
+                request.user.save()
+
+                # Auth_Club 모델에 유저와 동아리 정보 저장
+                Auth_Club.objects.create(user_id=request.user, club_id=club)
+
+                # 기본 게시판 객체 생성
+                default_boards = ["공지게시판", "자유게시판", "질문게시판"]
+                for board_name in default_boards:
+                    Board.objects.create(club_id=club, board_name=board_name)
+
                 return redirect("community:main")
             else:
                 return render(request, "community/create_club.html", {"form": form})
@@ -25,11 +36,29 @@ def create_club(request):
         return redirect("landing:login")
 
 
+def select_club(request):
+    if request.user.is_authenticated:
+        # 사용자가 가입한 동아리 리스트 가져오기
+        user_clubs = Auth_Club.objects.filter(user_id=request.user)
+
+        if request.method == "POST":
+            selected_club_id = request.POST.get("club_id")
+            if selected_club_id:
+                request.session["club_id"] = selected_club_id
+                return redirect("community:main")
+
+        return render(request, "community/select_club.html", {"user_clubs": user_clubs})
+    else:
+        return redirect("landing:login")
+
+
 def post_list(request, board_id):
     if request.user.is_authenticated:
-        club_id = request.session.get('club_id')
+        club_id = request.session.get("club_id")
         board = get_object_or_404(Board, id=board_id, club_id=club_id)
-        posts = Post.objects.filter(board_id=board, club_id=club_id)
+        posts = Post.objects.filter(board_id=board, club_id=club_id).order_by(
+            "-created_time"
+        )
         return render(
             request, "community/post_list.html", {"board": board, "posts": posts}
         )
@@ -97,13 +126,15 @@ def create_post(request, board_id):
         return redirect("landing:login")
 
 
-
 def create_board(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
-                form.save()
+                board = form.save(commit=False)
+                club_id = request.session.get("club_id")
+                board.club_id = Club.objects.get(id=club_id)
+                board.save()
                 return redirect("community:main")
         else:
             form = BoardForm()
@@ -114,8 +145,14 @@ def create_board(request):
 
 def main(request):
     if request.user.is_authenticated:
-        boards = Board.objects.all()
-        return render(request, "community/main.html", {"boards": boards})
+        club_id = request.session.get("club_id")
+        club = Club.objects.get(id=club_id)
+        boards = Board.objects.filter(club_id=club_id)
+        return render(
+            request,
+            "community/main.html",
+            {"boards": boards, "club_name": club},
+        )
     else:
         return redirect("landing:login")
 

@@ -16,11 +16,12 @@ class Club(models.Model):  # 동아리
 
 class Board(models.Model):  # 게시판
     club_id = models.ForeignKey(Club, on_delete=models.CASCADE)
-    board_name = models.CharField("게시판 이름", max_length=255, unique=True)
+    # 게시판 이름 같아도 이제 club_id field 있으니 구분 가능함, 동아리가 달라도 게시판 이름은 같을 수 있으니 unique 불가
+    board_name = models.CharField("게시판 이름", max_length=255, unique=False)
 
     # 게시판 이름 표시용
     def __str__(self):
-        return self.board_name
+        return f"{self.board_name} ({self.club_id} 동아리)"
 
 
 class Post(models.Model):  # 게시글
