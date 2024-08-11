@@ -19,7 +19,17 @@ from django.db import IntegrityError
 
 # Create your views here.
 def main(request):
-    return render(request, "landing/landing.html")
+    # 로그인 한 유저의 경우
+    if request.user.is_authenticated:
+        # 동아리 있으면
+        if Auth_Club.objects.filter(user_id=request.user).exists():
+            return render(request, "landing/main.html")
+        # 동아리 없으면
+        else:
+            return render(request, "landing/main.html")
+    # 로그인 하기 전
+    else:
+        return render(request, "landing/landing.html")
 
 
 # 회원가입

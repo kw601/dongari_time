@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
 from .models import Board, Post, Comment, Club
+from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -163,5 +166,37 @@ def delete_board(request, board_id):
             board.delete()
             return redirect("community:main")
         return render(request, "community/delete_board.html", {"board": board})
+    else:
+        return redirect("landing:login")
+
+def scrap_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        scrap, created = Scrap.objects.get_or_create(user_id=request.user, post_id=post)
+        
+        if not created:
+            scrap.delete()
+            is_scraped = False
+        else:
+            is_scraped = True
+        
+        scrap_count = post.scraps.count()
+        return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count})
+    else:
+        return redirect("landing:login")
+    
+def like_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        user = request.user
+        is_liked = False
+        if user in post.liked_by.all():
+            post.liked_by.remove(user)
+        else:
+            post.liked_by.add(user)
+            is_liked = True
+        post.liked = post.liked_by.count()
+        post.save()
+        return JsonResponse({'likes': post.liked, 'is_liked': is_liked})
     else:
         return redirect("landing:login")
