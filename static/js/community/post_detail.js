@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const scrapBtn = document.getElementById('scrap-btn');
     const likeBtn = document.getElementById('like-btn');
-    const scrapCount = document.getElementById('scrap-count');
+    //const scrapCount = document.getElementById('scrap-count');
     const likeCount = document.getElementById('like-count');
 
     scrapBtn.addEventListener('click', function() {
@@ -34,15 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            likeCount.textContent = data.likes;  // 이 부분이 중요합니다
-            if (data.is_liked) {
-                likeBtn.textContent = '좋아요 취소';
-            } else {
-                likeBtn.textContent = '좋아요';
-            }
-            likeBtn.textContent += ` (${data.likes})`;  // 좋아요 수를 버튼 텍스트에 추가
+            likeCount.textContent = data.likes;
         });
     });
+
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
