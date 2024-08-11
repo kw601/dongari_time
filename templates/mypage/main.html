@@ -1,4 +1,4 @@
-{% extends base.html %}
+{% extends 'base.html' %}
 {% load static %}
 {% block head%}
 <link rel="stylesheet" href="reset.css">
@@ -24,6 +24,24 @@
             <div class="func__title">동아리 관리</div>
             <div class="func__description">동아리 관리</div>
         </div>
+        <a href="{% url 'mypage:myposts' %}">
+            <div class="function__container">
+                <div class="func__title">내가 쓴 글</div>
+                <div class="func__description">동아리 관리</div>
+            </div>
+        </a>
+        <a href="{% url 'mypage:mycomments' %}">
+            <div class="function__container">
+                <div class="func__title">내 댓글</div>
+                <div class="func__description">내 댓글</div>
+            </div>
+        </a>
+        <a href="{% url 'mypage:myscraps' %}">
+            <div class="function__container">
+                <div class="func__title">스크랩</div>
+                <div class="func__description">스크랩</div>
+            </div>
+        </a>
     </div>
 </div>
 {% endblock %}
