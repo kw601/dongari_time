@@ -26,7 +26,7 @@ def main(request):
             return render(request, "landing/main.html")
         # 동아리 없으면
         else:
-            return render(request, "landing/main.html")
+            return render(request, "landing/main_first.html")
     # 로그인 하기 전
     else:
         return render(request, "landing/landing.html")
