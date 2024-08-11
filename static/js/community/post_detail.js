@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 scrapBtn.textContent = '스크랩';
             }
-        });
+        })
+        .catch(error => console.error('Error:', error));
     });
 
     likeBtn.addEventListener('click', function() {

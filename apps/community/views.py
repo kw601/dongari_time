@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
-from .models import Board, Post, Comment, Club, Scrap
+from .models import Board, Post, Comment, Club
+from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
@@ -171,14 +172,14 @@ def delete_board(request, board_id):
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)
-        scrap, created = Scrap.objects.get_or_create(user=request.user, post=post)
-    
+        scrap, created = Scrap.objects.get_or_create(user_id=request.user, post_id=post)
+        
         if not created:
             scrap.delete()
             is_scraped = False
         else:
             is_scraped = True
-    
+        
         scrap_count = post.scraps.count()
         return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count})
     else:

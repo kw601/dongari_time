@@ -35,18 +35,10 @@ class Post(models.Model):  # 게시글
     image = models.ImageField(upload_to="post_images/", null=True, blank=True)
     pinned = models.BooleanField("게시글 고정 여부", default=False)
     liked_by = models.ManyToManyField(get_user_model(), related_name='liked_posts', blank=True)
+    scraped_by = models.ManyToManyField(get_user_model(), through='mypage.Scrap', related_name='scraped_posts')
 
-    # 게시글 제목 표시용
     def __str__(self):
         return self.title
-    
-class Scrap(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='scraps')
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='scraps')
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'post')
 
 
 class Comment(models.Model):  # 댓글
