@@ -1,21 +1,42 @@
 <!-- post_list.html -->
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
+{% endblock %}
 {% block content %}
-<h1>{{ board.board_name }}</h1>
-<a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a>
-<form method="post" action="{% url 'community:delete_board' board.id %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger">게시판 삭제(관리자만 가능하게)</button>
-</form>
-<ul>
-    {% for post in posts %}
-    <li>
-        <h2><a href="{% url 'community:post_detail' board.id post.id %}">{{ post.title }}</a></h2>
-        <p>{{ post.content|truncatewords:20 }}</p>
-        <p><small>{{ post.created_at }}</small></p>
-    </li>
-    {% endfor %}
-</ul>
-
+<div id="post_list">
+    <h1 id="board__title">{{ board.board_name }}</h1>
+    <div id="board__container">
+        <div id="new_post"><a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a></div>
+        {% if user.is_authenticated and user.is_admin %}
+        <div id="delete">
+            <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">게시판 삭제</button>
+            </form>
+        </div>
+        {% endif %}
+        <ul id="post__ul">
+            {% for post in posts %}
+            <a href="{% url 'community:post_detail' board.id post.id %}">
+                <li>
+                    <h2 id="post__title">{{ post.title }}</h2>
+                    <p id="post__content">{{ post.content|truncatewords:20 }}</p>
+                    <div id="post__description">
+                        <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
+                        {% if post.anonymous is True %}
+                        <p id="post__user">익명</p>
+                        {% else %}
+                        <p id="post__user">{{ post.user_id.nickname }}</p>
+                        {% endif %}
+                    </div>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+        <button id="to_main"><a href="{% url 'community:main' %}">동아리 메인</a></button>
+    </div>
+</div>
 {% endblock %}

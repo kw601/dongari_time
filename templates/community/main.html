@@ -1,14 +1,45 @@
 {% extends 'base.html' %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community/main.css' %}" />
+{% endblock %}
 {% block content %}
-<h1>main(게시판 리스트만 구현..)</h1>
-<a href="{% url 'community:create_board' %}" class="btn btn-primary">새 게시판 만들기(관리자만 가능하게 변경해야함)</a>
-<ul>
-    {% for board in boards %}
+<div id="main__container">
+    <br>
+    <h3>현재 동아리 : {{ club_name }}</h3>
+    <br>
+    <div>
+        <a href="{% url 'community:select_club' %}">동아리 변경</a>
+        <a href="{% url 'landing:club_auth' %}">동아리 추가 인증</a>
+    </div>
+    <br>
+    <div>
+        <a href="{% url 'mypage:myposts' %}">내가 쓴 글</a>
+        <a href="{% url 'mypage:mycomments' %}">내가 댓글 단 글</a>
+    </div>
+    <div id="boards__container">
+        <ul id="boards__ul">
+            {% for board in boards %}
+            <li>
+                <h2 id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
+            </li>
+            {% endfor %}
+        </ul>
+        <div id="button__container"><button id="main_btn"><a href="{% url 'community:create_board' %}">
+                    <div id="select__box">
+                        <div id="icon__box">➕</div>게시판 추가
+                    </div>
+                </a></button></div>
+    </div>
 
-    <li>
-        <h2><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
-    </li>
-    {% endfor %}
-</ul>
+    <!-- 특정 게시판의 최근 글 5개 보이게 -->
+    <div id="board__content">
+        <div>개발 중...</div>
+        {% comment %}
+        {% for post in 게시판번호|slice:":5" %}
+        {% endcomment %}
+    </div>
+
+</div>
 {% endblock %}

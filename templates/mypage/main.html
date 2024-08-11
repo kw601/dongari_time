@@ -1,0 +1,29 @@
+{% extends base.html %}
+{% load static %}
+{% block head%}
+<link rel="stylesheet" href="reset.css">
+<link rel="stylesheet" href="mypage/main.css">
+{% endblock %}
+{%block content%}
+<div class="mypage__container">
+    <div class="page__title">마이페이지</div>
+    <div class="decoration__box">
+        <div class="icon__container"></div>
+        <div class="deco_text">아래의 기능들이 ~</div>
+    </div>
+    <div class="content__container">
+        <div class="function__container">
+            <div class="func__title">닉네임 변경</div>
+            <div class="func__description">닉네임 변경</div>
+        </div>
+        <div class="function__container">
+            <div class="func__title">비밀번호 변경</div>
+            <div class="func__description">비밀번호 변경</div>
+        </div>
+        <div class="function__container">
+            <div class="func__title">동아리 관리</div>
+            <div class="func__description">동아리 관리</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

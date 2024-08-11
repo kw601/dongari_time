@@ -1,0 +1,12 @@
+:root {
+    --padding-lr: 8rem;
+    --color-line: #A7A7A7;
+    --color-yellow-1: #FFCF33;
+    --colro-yellow-2: #FFD95C;
+    --colro-yellow-3: #FFECAD;
+    --colro-yellow-4: #FEF9DF;
+}
+
+.mypage__container {
+    padding: 0 var(--padding-lr);
+}

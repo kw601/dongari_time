@@ -1,0 +1,54 @@
+.auth{
+    display: flex;
+    justify-content: center;
+    height: 60vh;
+}
+.auth-form{
+    background-color: #C5DFF8;
+    width: 45%;
+    height: 60vh;
+    margin: 3rem;
+    border-radius: 20px;
+    border: 2px solid #a0bfe0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.auth_frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.auth_title > h2{
+    margin: 0px;
+    margin-bottom: 2rem;
+}
+.auth_main > div {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+.auth_main > div > label {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+.createClub-input {
+    width: 95%;
+    height: 30px;
+    border-radius: 10px;
+    padding: 0px 10px;
+}
+.auth-btn{
+    font-weight: bold;
+    margin-top: 10px;
+    background-color: #7895CB;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 70px;
+    border: 1px solid #4A55A2;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.auth-btn:hover{
+    background-color: #4A55A2;
+    color: white;
+}
