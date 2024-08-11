@@ -1,0 +1,57 @@
+:root {
+    --padding-lr: 8rem;
+    --color-line: #A7A7A7;
+    --color-yellow-1: #FFCF33;
+    --color-yellow-2: #FFD95C;
+    --color-yellow-3: #FFECAD;
+    --color-yellow-4: #FEF9DF;
+}
+
+.landing__container {
+    padding: 8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;   
+}
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.description {
+    text-align: center;
+    font-size: 1.3rem;
+    color: var(--color-line);
+}
+
+.function__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.description__left, .description__right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.function__description {
+    padding: 0 5px;
+}
+.function__img {
+    padding: 0 5px;
+}
+
+.service__content {
+    /* 이렇게 해서 얜 반응형으로 꾸며야하나? flex로 바꿀까... */
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px 0;
+}

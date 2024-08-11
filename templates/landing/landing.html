@@ -6,79 +6,116 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/landing/landing_page.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/landing/landing.css' %}" />
+
 </head>
 
 <body>
-    <div id="landing__container_login">
-        <!-- 로그인 여부 -->
-        {% if user.is_authenticated %}
-        <!-- 인증 받은 동아리  없는 경우: club_id가 없는 경우 -->
-        {% if user.club_id is None %}
-        <div id="no_club">
-            <div id="landing_text">당신은 동아리 관리자인가요, 회원인가요?</div>
-            <div id="select__container">
-                <button id="admin_btn"><a href="{% url 'community:create_club' %}">
-                        <div id="select__box">
-                            <div id="icon__box">👑</div>관리자
-                        </div>
-                    </a></button>
-                <button id="member_btn"><a href="{% url 'landing:club_auth' %}">
-                        <div id="select__box">
-                            <div id="icon__box">👥</div>회원
-                        </div>
-                    </a></button>
+    <div class="landing__container">
+        <div class="introducion">
+            <div class="title">동아리타임</div>
+            <div class="description">
+                <p>누구보다도 편하고 안전한 소통</p>
+                <p>단체 방의 혼잡함에서 벗어나 누리는 자유</p>
             </div>
         </div>
-        {% else %}
-        <div id="no_club">
-            <div id="landing_text">당신의 동아리로 이동하세요!</div>
-            <div id="select__container">
-                <button id="admin_btn"><a href="{% url 'community:create_club' %}">
-                        <div id="select__box">
-                            <div id="icon__box">👑</div>새 동아리
-                        </div>
-                    </a></button>
-                <button id="member_btn"><a href="{% url 'landing:club_auth' %}">
-                        <div id="select__box">
-                            <div id="icon__box">👥</div>동아리 추가 인증
-                        </div>
-                    </a></button>
-                <!-- <button id="member_btn"><a href="{% url 'community:main' %}"><div id="select__box"><div id="icon__box">👥</div>동아리로 이동</div></a></button> -->
-                <button id="member_btn"><a href="{% url 'community:select_club' %}">
-                        <div id="select__box">
-                            <div id="icon__box">👥</div>동아리 리스트로 이동
-                        </div>
-                    </a></button>
-            </div>
+        <div id="select__container">
+            <button id="btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
+            <button id="btn"><a href="{% url 'landing:login' %}">로그인</a></button>
         </div>
-        {% endif %}
-        {% comment %}
-        {% else %}
-        <!-- 지금 당장은, 로그인 하면 동아리 main로 render라 안해도 될듯 -->
-        <!-- 회원가입 했고, 동아리 있는 경우 -> 동아리 main으로 이동 -->
-        <!-- 만약 동아리 한 개 이상이면 동아리 선택 창 보여주기? 그 때 쓰면 될듯 -->
-        {% endif %}
-        {% endcomment %}
+        <div>
+            여기에 그 아이콘 넣기
+        </div>
 
-    </div>
-    {% else %}
-    <div id="landing__container_logout">
-        <div id="landing_left">
-            <div id="landing_text">동아리의 모든 소통을 한곳에, 동아리타임</div>
-            <div id="landing_text_additional">동아리타임에서 안전하고 자유롭게 소통해요!</div>
-            <div id="select__container">
-                <button id="login_btn"><a href="{% url 'landing:login' %}">로그인</a></button>
-                <button id="signup_btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
+       <div class="function__container">
+            <div class="description__left">
+                <div class="function__description">
+                    <div class="function__icon">
+                        icon
+                    </div>
+                    <div class="function__name">동아리원 인증</div>
+                    <div class="funcion__detail">인증받은 동아리원만 접근 가능한 안전한 웹사이트를 제공해요</div>
+                </div>
+                <div class="function__img">여기에 사진</div>
             </div>
-        </div>
-        {% comment %}
-        <div id="landing_right">
-            <div>도동타 동타 동타</div>
-        </div>
-        {% endcomment %}
-        {% endif %}
-    </div>
+            
+            <div class="description__right">
+                <div class="function__img">여기에 사진</div>
+                <div class="function__description">
+                    <div class="function__icon">
+                        icon
+                    </div>
+                    <div class="function__name">올인원 - 페이지</div>
+                    <div class="funcion__detail">여러 개의 채팅 방 대신 하나의 페이지에서 동아리원과 소통해요</div>
+                </div>
+            </div>
+            <div class="description__left">
+                <div class="function__description">
+                    <div class="function__icon">
+                        icon
+                    </div>
+                    <div class="function__name">동아리원 인증</div>
+                    <div class="funcion__detail">인증받은 동아리원만 접근 가능한 안전한 웹사이트를 제공해요</div>
+                </div>
+                <div class="function__img">여기에 사진</div>
+            </div>
+            
+            <div class="description__right">
+                <div class="function__img">여기에 사진</div>
+                <div class="function__description">
+                    <div class="function__icon">
+                        icon
+                    </div>
+                    <div class="function__name">올인원 - 페이지</div>
+                    <div class="funcion__detail">여러 개의 채팅 방 대신 하나의 페이지에서 동아리원과 소통해요</div>
+                </div>
+            </div>
+
+
+
+
+            <div class="service__container">
+                <div class="title">서비스</div>
+                <div class="description">일부 기능은 구현 중입니다.</div>
+                <div class="service__content">
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">동아리 생성</div>
+                        <div class="service__detail">동아리원과 소통할 수 있는 사이트를 개설할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">동아리 인증</div>
+                        <div class="service__detail">인증받은 동아리원만 동아리 사이트에 접속할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">게시판 생성</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">게시판 생성</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">게시판 생성</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">게시판 생성</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">아이콘</div>
+                        <div class="service__name">게시판 생성</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                    </div>
+                </div>
+            </div>
+       </div> 
 </body>
 
 </html>
