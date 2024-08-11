@@ -23,6 +23,17 @@
     </p>
     <p class="p_d_p">{{ post.content }}</p>
     <p class="p_d_p">댓글: {{ comments.count }}</p>
+    <div class="post-actions">
+        <button id="scrap-btn" data-post-id="{{ post.id }}">스크랩</button>
+        <button id="like-btn" data-post-id="{{ post.id }}">
+            {% if user in post.liked_by.all %}
+                좋아요 취소
+            {% else %}
+                좋아요
+            {% endif %}
+            (<span id="like-count">{{ post.liked }}</span>)
+        </button>
+    </div>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>
     <div class="p_d_comment-section">
@@ -49,5 +60,7 @@
     </form>
     <a href="{% url 'community:post_list' board.id %}">게시판 목록</a>
 </div>
+
+<script src="{% static 'js/community/post_detail.js' %}"></script>
 
 {% endblock content %}
