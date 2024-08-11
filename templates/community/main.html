@@ -18,6 +18,9 @@
         <a href="{% url 'mypage:myposts' %}">내가 쓴 글</a>
         <a href="{% url 'mypage:mycomments' %}">내가 댓글 단 글</a>
     </div>
+    <div>
+        <a href="{% url 'mypage:main' %}">마이페이지</a>
+    </div>
     <div id="boards__container">
         <ul id="boards__ul">
             {% for board in boards %}
