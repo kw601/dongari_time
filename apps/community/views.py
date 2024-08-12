@@ -70,10 +70,11 @@ def post_list(request, board_id):
 
 def post_detail(request, board_id, post_id):
     if request.user.is_authenticated:
-
         board = get_object_or_404(Board, id=board_id)
         post = get_object_or_404(Post, id=post_id)
         comments = Comment.objects.filter(post_id=post_id)
+
+        is_liked = request.user in post.liked_by.all()
 
         if request.method == "POST":
             form = CommentForm(request.POST)
@@ -91,13 +92,12 @@ def post_detail(request, board_id, post_id):
         return render(
             request,
             "community/post_detail.html",
-            {"board": board, "post": post, "comments": comments, "form": form},
+            {"board": board, "post": post, "comments": comments, "form": form, "is_liked": is_liked, "likes_count": post.liked_by.count()},
         )
     else:
         return redirect("landing:login")
 
 
-# @login_required
 def create_post(request, board_id):
     if request.user.is_authenticated:
 
@@ -180,8 +180,9 @@ def scrap_post(request, post_id):
         else:
             is_scraped = True
         
-        scrap_count = post.scraps.count()
-        return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count})
+        #scrap_count = post.scraps.count()
+        return JsonResponse({'is_scraped': is_scraped})
+        #return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
     else:
         return redirect("landing:login")
     

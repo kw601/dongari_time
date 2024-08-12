@@ -24,11 +24,12 @@
     <p class="p_d_p">{{ post.content }}</p>
     <p class="p_d_p">댓글: {{ comments.count }}</p>
     <div class="post-actions">
-        <button id="scrap-btn" data-post-id="{{ post.id }}">
+        <button id="scrap-btn" data-post-id="{{ post.id }}" data-is-scraped="{{ is_scraped|lower }}">
             {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
         </button>
-        <button id="like-btn" data-post-id="{{ post.id }}">
-            좋아요 <span id="like-count">{{ post.liked }}</span>
+        <button id="like-btn" data-post-id="{{ post.id }}" data-is-liked="{{ is_liked|lower }}">
+            {% if is_liked %}좋아요 취소{% else %}좋아요{% endif %}
+            <span id="like-count">{{ likes_count }}</span>
         </button>
     </div>
     <hr class="hr_2px">
