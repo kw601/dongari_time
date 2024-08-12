@@ -170,24 +170,30 @@ def delete_board(request, board_id):
         return redirect("landing:login")
     
 def delete_comment(request, comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
-    if request.user == comment.user_id:
-        post = comment.post_id
-        comment.delete()
-        return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+    if request.user.is_authenticated:
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user == comment.user_id:
+            post = comment.post_id
+            comment.delete()
+            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+        else:
+            # 작성자가 아닌 경우 처리
+            return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
     else:
-        # 권한이 없는 경우 처리
-        return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
+        return redirect("landing:login")
     
 def delete_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    if request.user == post.user_id:
-        board_id = post.board_id.id
-        post.delete()
-        return redirect('community:post_list', board_id=board_id)
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        if request.user == post.user_id:
+            board_id = post.board_id.id
+            post.delete()
+            return redirect('community:post_list', board_id=board_id)
+        else:
+            # 작성자가 아닌 경우 처리
+            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
     else:
-        # 권한이 없는 경우 처리
-        return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+        return redirect("landing:login")
 
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
