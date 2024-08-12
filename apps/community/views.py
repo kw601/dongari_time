@@ -106,7 +106,9 @@ def post_detail(request, board_id, post_id):
                     "body": f"{comment.content[:10]}",
                 }
 
+                # 디버그용
                 print(notification_users)
+
                 for user in notification_users:
                     if user != request.user:  # 자신에게는 알림을 보내지 않음
                         send_user_notification(user=user, payload=payload, ttl=1000)
