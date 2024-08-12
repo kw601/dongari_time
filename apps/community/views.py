@@ -6,7 +6,9 @@ from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
+from webpush import send_group_notification
 from webpush import send_user_notification
+
 # Create your views here.
 
 
@@ -82,28 +84,42 @@ def post_detail(request, board_id, post_id):
                 comment.user_id = request.user
                 comment.save()
 
-                users_to_notify = set()  # 알림 받을 사용자들을 저장할 집합
-                # 게시글 작성자 추가
-                users_to_notify.add(post.user_id)
+                # 알림을 보낼 사용자 목록
+                notification_users = set()
 
-                # 대댓글이 달린 경우
+                # 게시글 작성자에게 알림
+                notification_users.add(post.user_id)
+
+                # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
                 if comment.parent_id:
-                    parent_comment = comment.parent_id
+                    notification_users.add(comment.parent_id.user_id)
 
-                    # 부모 댓글 작성자를 그룹에 추가
-                    users_to_notify.add(parent_comment.user_id)
+                    # 부모 댓글에 달린 자식 댓글의 작성자도 알림 대상에 추가
+                    child_comments = Comment.objects.filter(parent_id=comment.parent_id)
+                    for child_comment in child_comments:
+                        notification_users.add(child_comment.user_id)
 
-                    # 같은 부모 댓글을 가진 모든 대댓글 작성자들을 그룹에 추가
-                    sibling_replies = Comment.objects.filter(parent_id=parent_comment.id)
-                    for reply in sibling_replies:
-                        users_to_notify.add(reply.user_id)
+                # 알림 보내기
+                payload = {
+                    "head": f"게시글 {post.title}에 새로운 댓글이 달렸습니다.",
+                    "body": f"{comment.content[:10]}",
+                }
 
-                # 각 사용자에게 웹 푸시 알림 보내기
-                payload = {"head": "새로운 알림", "body": "게시글에 새로운 댓글이 달렸습니다."}
-                for user in users_to_notify:
-                    send_user_notification(user=user, payload=payload, ttl=1000)
+                # 디버그용
+                print(notification_users)
 
-                return redirect("community:post_detail", board_id=board.id, post_id=post.id)
+                for user in notification_users:
+                    if user != request.user:  # 자신에게는 알림을 보내지 않음
+                        send_user_notification(user=user, payload=payload, ttl=1000)
+
+                # 그룹 알림 필요할때 사용
+                # send_group_notification(
+                #     group_name=notification_users, payload=payload, ttl=1000
+                # )
+
+                return redirect(
+                    "community:post_detail", board_id=board.id, post_id=post.id
+                )
         else:
             form = CommentForm()
 
@@ -153,9 +169,16 @@ def create_board(request):
             if form.is_valid():
                 board = form.save(commit=False)
                 club_id = request.session.get("club_id")
-                board.club_id = Club.objects.get(id=club_id)
-                board.save()
-                return redirect("community:main")
+                # 같은 동아리 내에서 게시판 이름 중복 방지
+                if Board.objects.filter(board_name=board.board_name, club_id=club_id):
+                    form.add_error(None, "이미 존재하는 게시판 이름입니다.")
+                    return render(
+                        request, "community/create_board.html", {"form": form}
+                    )
+                else:
+                    board.club_id = Club.objects.get(id=club_id)
+                    board.save()
+                    return redirect("community:main")
         else:
             form = BoardForm()
         return render(request, "community/create_board.html", {"form": form})
@@ -187,22 +210,24 @@ def delete_board(request, board_id):
     else:
         return redirect("landing:login")
 
+
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)
         scrap, created = Scrap.objects.get_or_create(user_id=request.user, post_id=post)
-        
+
         if not created:
             scrap.delete()
             is_scraped = False
         else:
             is_scraped = True
-        
+
         scrap_count = post.scraps.count()
-        return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count})
+        return JsonResponse({"is_scraped": is_scraped, "scrap_count": scrap_count})
     else:
         return redirect("landing:login")
-    
+
+
 def like_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)
@@ -215,6 +240,6 @@ def like_post(request, post_id):
             is_liked = True
         post.liked = post.liked_by.count()
         post.save()
-        return JsonResponse({'likes': post.liked, 'is_liked': is_liked})
+        return JsonResponse({"likes": post.liked, "is_liked": is_liked})
     else:
         return redirect("landing:login")

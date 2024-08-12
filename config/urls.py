@@ -26,7 +26,7 @@ urlpatterns = [
     path("community/", include("apps.community.urls")),  # 메인 페이지 ~ 모든 기능
     path("chat/", include("apps.chat.urls")),  # 채팅방 리스트, 채팅방
     path("mypage/", include("apps.mypage.urls")),  # 마이페이지 내 모든 기능
-    path('webpush/', include('webpush.urls')), # 웹푸시
+    path("webpush/", include("webpush.urls")),
 ]
 
 if settings.DEBUG:

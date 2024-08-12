@@ -91,12 +91,13 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-        #"ENGINE": "django.db.backends.mysql",
-        #"NAME": env("DB_NAME"),
-        #"USER": env("DB_USER"),
-        #"PASSWORD": env("DB_PASSWORD"),
-        #"HOST": env("DB_HOST"),
-        #"PORT": "3306",
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": env("DB_NAME"),
+        # "USER": env("DB_USER"),
+        # "PASSWORD": env("DB_PASSWORD"),
+        # "HOST": env("DB_HOST"),
+        # "PORT": "3306",
+
     }
 }
 
@@ -119,6 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": env("VAPID_PUBLIC_KEY"),
+    "VAPID_PRIVATE_KEY": env("VAPID_PRIVATE_KEY"),
+    "VAPID_ADMIN_EMAIL": env("VAPID_ADMIN_EMAIL"),
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

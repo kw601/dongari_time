@@ -1,5 +1,6 @@
 {% load static %}
 {% load webpush_notifications %}
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -7,12 +8,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-  # For django templating engine
+  <title>동아리타임!</title>
+  <!-- # For django templating engine -->
   {% webpush_header %}
 </head>
 
 <body>
-  # For django templating engine
+  <!-- # For django templating engine -->
   {% webpush_button %}
   <div class="base-frame">
     <div class="base-name">
@@ -48,4 +50,5 @@
     <a href="https://forms.gle/CEdJuTm1UVKh2w3BA" target="_blank" class="google-form-button">피드백 설문조사</a>
   </div>
 </footer>
+
 </html>
