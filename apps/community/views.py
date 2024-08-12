@@ -6,6 +6,8 @@ from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
+from webpush import send_group_notification
+from webpush import send_user_notification
 
 # Create your views here.
 
@@ -82,6 +84,38 @@ def post_detail(request, board_id, post_id):
                 comment.post_id = post
                 comment.user_id = request.user
                 comment.save()
+
+                # 알림을 보낼 사용자 목록
+                notification_users = set()
+
+                # 게시글 작성자에게 알림
+                notification_users.add(post.user_id)
+
+                # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
+                if comment.parent_id:
+                    notification_users.add(comment.parent_id.user_id)
+
+                    # 부모 댓글에 달린 자식 댓글의 작성자도 알림 대상에 추가
+                    child_comments = Comment.objects.filter(parent_id=comment.parent_id)
+                    for child_comment in child_comments:
+                        notification_users.add(child_comment.user_id)
+
+                # 알림 보내기
+                payload = {
+                    "head": f"게시글 {post.title}에 새로운 댓글이 달렸습니다.",
+                    "body": f"{comment.content[:10]}",
+                }
+
+                print(notification_users)
+                for user in notification_users:
+                    if user != request.user:  # 자신에게는 알림을 보내지 않음
+                        send_user_notification(user=user, payload=payload, ttl=1000)
+
+                # 그룹 알림 필요할때 사용
+                # send_group_notification(
+                #     group_name=notification_users, payload=payload, ttl=1000
+                # )
+
                 return redirect(
                     "community:post_detail", board_id=board.id, post_id=post.id
                 )
