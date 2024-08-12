@@ -31,6 +31,12 @@
             {% if is_liked %}좋아요 취소{% else %}좋아요{% endif %}
             <span id="like-count">{{ likes_count }}</span>
         </button>
+        {% if user == post.user_id %}
+        <form action="{% url 'community:delete_post' post.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">게시글 삭제</button>
+        </form>
+        {% endif %}
     </div>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>

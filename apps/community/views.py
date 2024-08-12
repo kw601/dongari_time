@@ -178,6 +178,16 @@ def delete_comment(request, comment_id):
     else:
         # 권한이 없는 경우 처리
         return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
+    
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.user == post.user_id:
+        board_id = post.board_id.id
+        post.delete()
+        return redirect('community:post_list', board_id=board_id)
+    else:
+        # 권한이 없는 경우 처리
+        return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
 
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
