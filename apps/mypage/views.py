@@ -37,14 +37,10 @@ def mycomments(request):  # 내가 작성한 댓글
         return redirect("landing:login")
 
 
-def myscraps(request):  # 내가 스크랩 한 게시글
+def myscraps(request):
     if request.user.is_authenticated:
-        id = request.user.id
         club_id = request.session.get("club_id")  # 현재 접속한 동아리 pk
-        all_scraps = Scrap.objects.filter(user_id=id)  # 사용자가 스크랩한 모든 게시글
-        posts = Post.objects.filter(
-            id__in=all_scraps.values_list("post_id", flat=True), club_id=club_id
-        )
-        return render(request, "mypage/myscraps.html", {"posts": posts})
+        scrapped_posts = Post.objects.filter(scraped_by=request.user, club_id=club_id)
+        return render(request, "mypage/myscraps.html", {"posts": scrapped_posts})
     else:
         return redirect("landing:login")

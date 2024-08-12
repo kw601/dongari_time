@@ -15,4 +15,6 @@ urlpatterns = [
     path("<int:board_id>/delete/", delete_board, name="delete_board"),
     path("create_club/", create_club, name="create_club"),
     path("select_club/", select_club, name="select_club"),
+    path('post/<int:post_id>/scrap/', scrap_post, name='scrap_post'),
+    path('post/<int:post_id>/like/', like_post, name='like_post'),
 ]
