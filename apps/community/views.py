@@ -135,9 +135,16 @@ def create_board(request):
             if form.is_valid():
                 board = form.save(commit=False)
                 club_id = request.session.get("club_id")
-                board.club_id = Club.objects.get(id=club_id)
-                board.save()
-                return redirect("community:main")
+                # 같은 동아리 내에서 게시판 이름 중복 방지
+                if Board.objects.filter(board_name=board.board_name, club_id=club_id):
+                    form.add_error(None, "이미 존재하는 게시판 이름입니다.")
+                    return render(
+                        request, "community/create_board.html", {"form": form}
+                    )
+                else:
+                    board.club_id = Club.objects.get(id=club_id)
+                    board.save()
+                    return redirect("community:main")
         else:
             form = BoardForm()
         return render(request, "community/create_board.html", {"form": form})
@@ -169,22 +176,24 @@ def delete_board(request, board_id):
     else:
         return redirect("landing:login")
 
+
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)
         scrap, created = Scrap.objects.get_or_create(user_id=request.user, post_id=post)
-        
+
         if not created:
             scrap.delete()
             is_scraped = False
         else:
             is_scraped = True
-        
+
         scrap_count = post.scraps.count()
-        return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count})
+        return JsonResponse({"is_scraped": is_scraped, "scrap_count": scrap_count})
     else:
         return redirect("landing:login")
-    
+
+
 def like_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)
@@ -197,6 +206,6 @@ def like_post(request, post_id):
             is_liked = True
         post.liked = post.liked_by.count()
         post.save()
-        return JsonResponse({'likes': post.liked, 'is_liked': is_liked})
+        return JsonResponse({"likes": post.liked, "is_liked": is_liked})
     else:
         return redirect("landing:login")
