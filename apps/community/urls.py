@@ -17,4 +17,5 @@ urlpatterns = [
     path("select_club/", select_club, name="select_club"),
     path('post/<int:post_id>/scrap/', scrap_post, name='scrap_post'),
     path('post/<int:post_id>/like/', like_post, name='like_post'),
+    path('comment/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
 ]

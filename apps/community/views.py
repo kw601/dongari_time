@@ -168,6 +168,16 @@ def delete_board(request, board_id):
         return render(request, "community/delete_board.html", {"board": board})
     else:
         return redirect("landing:login")
+    
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.user == comment.user_id:
+        post = comment.post_id
+        comment.delete()
+        return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+    else:
+        # 권한이 없는 경우 처리
+        return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
 
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
