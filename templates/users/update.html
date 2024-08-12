@@ -1,0 +1,13 @@
+{% load static %}
+
+{% block content %}
+    <h1>회원정보 수정</h1>
+    <form action "{% url 'landing:update' %}" method="POST">
+
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <input type="submit" value="수정하기">
+    </form>
+    <a href="{% url 'mypage:main' %}">메인화면</a>
+{% endblock content%}
