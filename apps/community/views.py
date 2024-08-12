@@ -6,7 +6,7 @@ from apps.landing.models import User, Auth_Club
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
-
+from webpush import send_user_notification
 # Create your views here.
 
 
@@ -70,7 +70,6 @@ def post_list(request, board_id):
 
 def post_detail(request, board_id, post_id):
     if request.user.is_authenticated:
-
         board = get_object_or_404(Board, id=board_id)
         post = get_object_or_404(Post, id=post_id)
         comments = Comment.objects.filter(post_id=post_id)
@@ -82,9 +81,29 @@ def post_detail(request, board_id, post_id):
                 comment.post_id = post
                 comment.user_id = request.user
                 comment.save()
-                return redirect(
-                    "community:post_detail", board_id=board.id, post_id=post.id
-                )
+
+                users_to_notify = set()  # 알림 받을 사용자들을 저장할 집합
+                # 게시글 작성자 추가
+                users_to_notify.add(post.user_id)
+
+                # 대댓글이 달린 경우
+                if comment.parent_id:
+                    parent_comment = comment.parent_id
+
+                    # 부모 댓글 작성자를 그룹에 추가
+                    users_to_notify.add(parent_comment.user_id)
+
+                    # 같은 부모 댓글을 가진 모든 대댓글 작성자들을 그룹에 추가
+                    sibling_replies = Comment.objects.filter(parent_id=parent_comment.id)
+                    for reply in sibling_replies:
+                        users_to_notify.add(reply.user_id)
+
+                # 각 사용자에게 웹 푸시 알림 보내기
+                payload = {"head": "새로운 알림", "body": "게시글에 새로운 댓글이 달렸습니다."}
+                for user in users_to_notify:
+                    send_user_notification(user=user, payload=payload, ttl=1000)
+
+                return redirect("community:post_detail", board_id=board.id, post_id=post.id)
         else:
             form = CommentForm()
 
@@ -95,8 +114,7 @@ def post_detail(request, board_id, post_id):
         )
     else:
         return redirect("landing:login")
-
-
+    
 # @login_required
 def create_post(request, board_id):
     if request.user.is_authenticated:
