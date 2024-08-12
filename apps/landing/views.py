@@ -1,17 +1,16 @@
-from django.shortcuts import render, redirect
+# Create your views here.
 from apps.landing.forms import SignupForm
 from apps.community.forms import ClubAuthForm
 from .models import User, Auth_Club
 from apps.community.models import Club
-
-
-# Create your views here.
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.contrib.auth import (
+    login as auth_login,
+    logout as auth_logout,
+    get_user_model,
+)
 from django.contrib import auth, messages
-from django.contrib.auth import get_user_model
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
