@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "apps.community",
     "apps.chat",
     "apps.mypage",
+    "webpush",
 ]
 
 AUTH_USER_MODEL = "landing.User"
@@ -87,15 +88,18 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     # "ENGINE": "django.db.backends.mysql",
+    #     # "NAME": env("DB_NAME"),
+    #     # "USER": env("DB_USER"),
+    #     # "PASSWORD": env("DB_PASSWORD"),
+    #     # "HOST": env("DB_HOST"),
+    #     # "PORT": "3306",
+    # }
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-        #"ENGINE": "django.db.backends.mysql",
-        #"NAME": env("DB_NAME"),
-        #"USER": env("DB_USER"),
-        #"PASSWORD": env("DB_PASSWORD"),
-        #"HOST": env("DB_HOST"),
-        #"PORT": "3306",
     }
 }
 
@@ -118,6 +122,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": "BFOAjDvx1vlEVqfqMEYraX3zanohV1EM0X8m1-H7uesW7X0_Vu92ZqEWSaeDp4PU7xi4PLlMfd6yg9rON6XoXyw",
+    "VAPID_PRIVATE_KEY": "_9TzqDAAmFd73N5gux85UEpGoqnV5ES6-lNN-rI-nWo",
+    "VAPID_ADMIN_EMAIL": "admin@example.com",
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/

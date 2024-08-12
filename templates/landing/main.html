@@ -34,6 +34,14 @@
             </a></button>
         </div>
     </div>
+    <script>        
+        document.addEventListener('DOMContentLoaded', function() {
+            if (Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+            console.log(Notification.permission);
+        });
+    </script>
 </body>
 
 </html>
