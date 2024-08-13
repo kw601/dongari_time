@@ -39,11 +39,25 @@
                     <p id="post__content">{{ post.content|truncatewords:20 }}</p>
                     <div id="post__description">
                         <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
-                        {% if post.anonymous is True %}
+                        <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+                        {% if post.board_id.board_name == "공지게시판" %}
+                        <p id="post__user">{{ post.user_id.name }}</p>
+                        {% elif post.anonymous is True %}
                         <p id="post__user">익명</p>
                         {% else %}
                         <p id="post__user">{{ post.user_id.nickname }}</p>
                         {% endif %}
+                        <div id="post__stats">
+                            {% if post.comment_set.count %}
+                            <p>댓글 수: {{ post.comment_set.count }}</p>
+                            {% endif %}
+                            {% if post.liked_by.count %}
+                            <p>좋아요 수: {{ post.liked_by.count }}</p>
+                            {% endif %}
+                            {% if post.scraped_by.count %}
+                            <p>스크랩 수: {{ post.scraped_by.count }}</p>
+                            {% endif %}
+                        </div>
                     </div>
                 </li>
             </a>
