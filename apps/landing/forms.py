@@ -1,7 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from .models import User
-
+from django.contrib.auth import get_user_model
 
 class SignupForm(UserCreationForm):
     username = forms.CharField(
@@ -23,7 +23,10 @@ class SignupForm(UserCreationForm):
     phone_num = forms.CharField(
         label="전화번호", widget=forms.TextInput(attrs={"class": "signup-input"})
     )
-
+    email = forms.EmailField(
+            label="이메일", widget=forms.EmailInput(attrs={"class": "signup-input"})
+        )
+    
     class Meta:
         model = User
         fields = [
@@ -33,4 +36,17 @@ class SignupForm(UserCreationForm):
             "name",
             "nickname",
             "phone_num",
+            "email",
+        ]
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta(UserChangeForm.Meta):
+        model = get_user_model()
+        fields = [
+            "username",
+            "name",
+            "nickname",
+            "phone_num",
+            "email",
         ]
