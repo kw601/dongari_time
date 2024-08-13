@@ -3,7 +3,6 @@ from django.conf import settings
 from .models import Board, Post, Comment, Club
 from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
-from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
 
