@@ -133,7 +133,6 @@ def post_detail(request, board_id, post_id):
     else:
         return redirect("landing:login")
     
-# @login_required
 def create_post(request, board_id):
     if request.user.is_authenticated:
 
