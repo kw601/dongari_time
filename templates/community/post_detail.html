@@ -39,9 +39,16 @@
         <button id="scrap-btn" data-post-id="{{ post.id }}">
             {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
         </button>
-        <button id="like-btn" data-post-id="{{ post.id }}">
-            좋아요 <span id="like-count">{{ post.liked }}</span>
+        <button id="like-btn" data-post-id="{{ post.id }}" data-is-liked="{{ is_liked|lower }}">
+            {% if is_liked %}좋아요 취소{% else %}좋아요{% endif %}
+            <span id="like-count">{{ likes_count }}</span>
         </button>
+        {% if user == post.user_id %}
+        <form action="{% url 'community:delete_post' post.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">게시글 삭제</button>
+        </form>
+        {% endif %}
     </div>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>
@@ -58,6 +65,12 @@
                     | 작성일시: {{ comment.created_time }}
                 </p>
                 <p>{{ comment.content }}</p>
+                {% if user == comment.user_id %}
+                <form action="{% url 'community:delete_comment' comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+                </form>
+                {% endif %}
                 <div class="p_d_reply_section">
                     <!-- 대댓글 작성 폼 -->
                     <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
