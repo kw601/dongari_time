@@ -60,10 +60,14 @@ def post_list(request, board_id):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
         board = get_object_or_404(Board, id=board_id, club_id=club_id)
-        posts = Post.objects.filter(board_id=board, club_id=club_id).order_by("-created_time")
+        posts = Post.objects.filter(board_id=board, club_id=club_id).order_by(
+            "-pinned", "-created_time"
+        )
         form = PostForm(initial={"anonymous": True})
         return render(
-            request, "community/post_list.html", {"board": board, "posts": posts, "form": form}
+            request,
+            "community/post_list.html",
+            {"board": board, "posts": posts, "form": form},
         )
     else:
         return redirect("landing:login")
@@ -102,7 +106,7 @@ def post_detail(request, board_id, post_id):
 
                 # 알림 보내기
                 payload = {
-                    "head": f"\"{post.title}\"에 새로운 댓글이 달렸습니다.",
+                    "head": f'"{post.title}"에 새로운 댓글이 달렸습니다.',
                     "body": f"{comment.content[:10]}",
                 }
 
@@ -127,12 +131,20 @@ def post_detail(request, board_id, post_id):
         return render(
             request,
             "community/post_detail.html",
-            {"board": board, "post": post, "comments": comments, "form": form, "is_liked": is_liked, "likes_count": post.liked_by.count()},
+            {
+                "board": board,
+                "post": post,
+                "comments": comments,
+                "form": form,
+                "is_liked": is_liked,
+                "likes_count": post.liked_by.count(),
+            },
         )
     else:
         return redirect("landing:login")
-    
-'''
+
+
+"""
 def create_post(request, board_id):
     if request.user.is_authenticated:
 
@@ -161,8 +173,9 @@ def create_post(request, board_id):
         )
     else:
         return redirect("landing:login")
-'''
-    
+"""
+
+
 def create_post(request, board_id):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, pk=board_id)
@@ -175,17 +188,52 @@ def create_post(request, board_id):
             post.club_id = club
             post.board_id = board
             post.save()
-            return JsonResponse({
-                'status': 'success',
-                'post_id': post.id,
-                'title': post.title,
-                'content': post.content[:100] + '...' if len(post.content) > 100 else post.content,
-                'created_time': post.created_time.strftime('%Y/%m/%d'),
-                'user': post.user_id.nickname if not post.anonymous else '익명',
-                'anonymous': post.anonymous,
-            })
+
+            # 공지게시판에 글 작성시 공지게시판의 동아리원 전부에게 알림 전송
+            if board.board_name == "공지게시판":
+                # 알림을 보낼 사용자 목록
+                notification_users = set()
+
+                # Auth_Club 모델에서 글을 작성하는 공지 게시판 동아리의 소속 동아리원들을 가져옴
+                club_members = Auth_Club.objects.filter(club_id=club_id)
+                for club_member in club_members:
+                    notification_users.add(club_member.user_id)
+
+                # 알림 보내기
+                payload = {
+                    "head": f"{club.club_name} 동아리에 새로운 공지사항이 등록되었습니다.",
+                    "body": f"{post.title}",
+                }
+
+                # 디버그용
+                print(notification_users)
+
+                for user in notification_users:
+                    if user != request.user:  # 자신에게는 알림을 보내지 않음
+                        send_user_notification(user=user, payload=payload, ttl=1000)
+
+                # 그룹 알림 필요할때 사용
+                # send_group_notification(
+                #     group_name=notification_users, payload=payload, ttl=1000
+                # )
+
+            return JsonResponse(
+                {
+                    "status": "success",
+                    "post_id": post.id,
+                    "title": post.title,
+                    "content": (
+                        post.content[:100] + "..."
+                        if len(post.content) > 100
+                        else post.content
+                    ),
+                    "created_time": post.created_time.strftime("%Y/%m/%d"),
+                    "user": post.user_id.nickname if not post.anonymous else "익명",
+                    "anonymous": post.anonymous,
+                }
+            )
         else:
-            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+            return JsonResponse({"status": "error", "errors": form.errors}, status=400)
     else:
         return redirect("landing:login")
 
@@ -213,6 +261,7 @@ def create_board(request):
     else:
         return redirect("landing:login")
 
+
 def main(request):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
@@ -222,17 +271,22 @@ def main(request):
         # 각 게시판에 대해 상위 5개의 게시글을 가져오기
         board_posts = {}
         for board in boards:
-            posts = Post.objects.filter(club_id=club.id, board_id=board.id).order_by('-id')[:5]
-            board_posts[board.id] = posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
+            posts = Post.objects.filter(club_id=club.id, board_id=board.id).order_by(
+                "-id"
+            )[:5]
+            board_posts[board.id] = (
+                posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
+            )
             print(f"{board_posts}")
 
         return render(
             request,
             "community/main.html",
-            {"boards": boards, "club_name": club, "board_posts":board_posts},
+            {"boards": boards, "club_name": club, "board_posts": board_posts},
         )
     else:
         return redirect("landing:login")
+
 
 def delete_board(request, board_id):
     if request.user.is_authenticated:
@@ -256,9 +310,9 @@ def scrap_post(request, post_id):
         else:
             is_scraped = True
 
-        #scrap_count = post.scraps.count()
-        return JsonResponse({'is_scraped': is_scraped})
-        #return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
+        # scrap_count = post.scraps.count()
+        return JsonResponse({"is_scraped": is_scraped})
+        # return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
     else:
         return redirect("landing:login")
 
@@ -279,18 +333,26 @@ def like_post(request, post_id):
     else:
         return redirect("landing:login")
 
+
 def delete_comment(request, comment_id):
     if request.user.is_authenticated:
         comment = get_object_or_404(Comment, id=comment_id)
         if request.user == comment.user_id:
             post = comment.post_id
             comment.delete()
-            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+            return redirect(
+                "community:post_detail", board_id=post.board_id.id, post_id=post.id
+            )
         else:
             # 작성자가 아닌 경우 처리
-            return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
+            return redirect(
+                "community:post_detail",
+                board_id=comment.post_id.board_id.id,
+                post_id=comment.post_id.id,
+            )
     else:
         return redirect("landing:login")
+
 
 def delete_post(request, post_id):
     if request.user.is_authenticated:
@@ -298,13 +360,16 @@ def delete_post(request, post_id):
         if request.user == post.user_id:
             board_id = post.board_id.id
             post.delete()
-            return redirect('community:post_list', board_id=board_id)
+            return redirect("community:post_list", board_id=board_id)
         else:
             # 작성자가 아닌 경우 처리
-            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+            return redirect(
+                "community:post_detail", board_id=post.board_id.id, post_id=post.id
+            )
     else:
         return redirect("landing:login")
-    
+
+
 def create_comment(request, board_id, post_id):
     if request.method == "POST":
         post = get_object_or_404(Post, id=post_id)
@@ -315,6 +380,40 @@ def create_comment(request, board_id, post_id):
             comment.user_id = request.user
             comment.post_id = post
             comment.save()
+
+            # 알림을 보낼 사용자 목록
+            notification_users = set()
+
+            # 게시글 작성자에게 알림 위해 목록에 추가
+            notification_users.add(post.user_id)
+
+            # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
+            if comment.parent_id:
+                notification_users.add(comment.parent_id.user_id)
+
+                # 부모 댓글에 달린 자식 댓글의 작성자도 알림 대상에 추가
+                child_comments = Comment.objects.filter(parent_id=comment.parent_id)
+                for child_comment in child_comments:
+                    notification_users.add(child_comment.user_id)
+
+            # 알림 보내기
+            payload = {
+                "head": f'"{post.title}"에 새로운 댓글이 달렸습니다.',
+                "body": f"{comment.content[:10]}",
+            }
+
+            # 디버그용
+            print(notification_users)
+
+            for user in notification_users:
+                if user != request.user:  # 자신에게는 알림을 보내지 않음
+                    send_user_notification(user=user, payload=payload, ttl=1000)
+
+            # 그룹 알림 필요할때 사용
+            # send_group_notification(
+            #     group_name=notification_users, payload=payload, ttl=1000
+            # )
+
             return redirect("community:post_detail", board_id=board_id, post_id=post.id)
         else:
             return JsonResponse({"error": "Form invalid"}, status=400)
