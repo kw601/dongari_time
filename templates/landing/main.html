@@ -1,4 +1,5 @@
 {% load static %}
+{% load webpush_notifications %}
 {% comment %}
 <!-- {% extends 'header.html'%} -->
  {% endcomment %}
@@ -9,10 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/landing/first.css' %}" />
-
+    # For django templating engine
+    {% webpush_header %}
 </head>
 
 <body>
+    # For django templating engine
+    {% webpush_button %}
     <div class="main__container">
         <div class="logo">로고</div>
         <div class="description">당신의 동아리로 이동하세요!</div>
