@@ -15,6 +15,18 @@ urlpatterns = [
     path("<int:board_id>/delete/", delete_board, name="delete_board"),
     path("create_club/", create_club, name="create_club"),
     path("select_club/", select_club, name="select_club"),
-    path('post/<int:post_id>/scrap/', scrap_post, name='scrap_post'),
-    path('post/<int:post_id>/like/', like_post, name='like_post'),
+    path("post/<int:post_id>/scrap/", scrap_post, name="scrap_post"),
+    path("post/<int:post_id>/like/", like_post, name="like_post"),
+    path(
+        "<int:board_id>/post/<int:post_id>/create_comment/",
+        create_comment,
+        name="create_comment",
+    ),
+    path(
+        "<int:board_id>/post/<int:post_id>/toggle_pinned/",
+        toggle_pinned,
+        name="toggle_pinned",
+    ),
+    path('comment/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
+    path('post/<int:post_id>/delete/', delete_post, name='delete_post'),
 ]

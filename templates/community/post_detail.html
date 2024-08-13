@@ -24,30 +24,85 @@
     <p class="p_d_p">{{ post.content }}</p>
     <p class="p_d_p">댓글: {{ comments.count }}</p>
     <div class="post-actions">
+
+        {% if user.is_authenticated and user.is_admin %}
+        <form method="post" action="{% url 'community:toggle_pinned' board.id post.id %}">
+            {% csrf_token %}
+            {% if post.pinned %}
+            <button type="submit">게시글 고정 해제</button>
+            {% else %}
+            <button type="submit">게시글 고정</button>
+            {% endif %}
+        </form>
+        {% endif %}
+
         <button id="scrap-btn" data-post-id="{{ post.id }}">
             {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
         </button>
-        <button id="like-btn" data-post-id="{{ post.id }}">
-            좋아요 <span id="like-count">{{ post.liked }}</span>
+        <button id="like-btn" data-post-id="{{ post.id }}" data-is-liked="{{ is_liked|lower }}">
+            {% if is_liked %}좋아요 취소{% else %}좋아요{% endif %}
+            <span id="like-count">{{ likes_count }}</span>
         </button>
+        {% if user == post.user_id %}
+        <form action="{% url 'community:delete_post' post.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">게시글 삭제</button>
+        </form>
+        {% endif %}
     </div>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>
-    <div class="p_d_comment-section">
+    <div class="p_d_comment_section">
         {% for comment in comments %}
-        <div class="p_d_comment">
-            <p class="p_d_comment-author p_d_p">작성자:
-                {% if comment.user_id and not comment.anonymous %}
-                {{ comment.user_id.nickname }}
-                {% else %}
-                익명
+        {% if not comment.parent_id %}
+            <div class="p_d_comment">
+                <p class="p_d_comment_author">작성자:
+                    {% if comment.user_id and not comment.anonymous %}
+                    {{ comment.user_id.nickname }}
+                    {% else %}
+                    익명
+                    {% endif %}
+                    | 작성일시: {{ comment.created_time }}
+                </p>
+                <p>{{ comment.content }}</p>
+                {% if user == comment.user_id %}
+                <form action="{% url 'community:delete_comment' comment.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+                </form>
                 {% endif %}
-                | 작성일시: {{ comment.created_time }}
-            </p>
-            <p class="p_d_p">{{ comment.content }}</p>
-        </div>
-        <hr class="hr_1px">
+                <div class="p_d_reply_section">
+                    <!-- 대댓글 작성 폼 -->
+                    <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
+                        {% csrf_token %}
+                        <textarea name="content" required></textarea>
+                        <input type="checkbox" name="anonymous"> 익명
+                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        <button type="submit">대댓글 작성</button>
+                    </form>
+                    
+                    {% for reply in comments %}
+                        {% if reply.parent_id == comment %}
+                        <div class="p_d_comment_reply">
+                            <p class="p_d_comment_author">작성자:
+                                {% if reply.user_id and not reply.anonymous %}
+                                {{ reply.user_id.nickname }}
+                                {% else %}
+                                익명
+                                {% endif %}
+                                | 작성일시: {{ reply.created_time }}
+                            </p>
+                            <p>{{ reply.content }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+            {% endif %}
         {% endfor %}
+    </div>
+        <hr class="hr_1px">
     </div>
     <h3 class="p_d_h3_comment">댓글 작성</h3>
     <form class="p_d_comment_form" method="post">
@@ -59,5 +114,5 @@
 </div>
 
 <script src="{% static 'js/community/post_detail.js' %}"></script>
-
+    
 {% endblock content %}

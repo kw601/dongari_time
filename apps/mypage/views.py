@@ -4,6 +4,7 @@ from apps.community.models import Club, Comment, Post
 from apps.landing.models import User
 
 
+
 # Create your views here.
 def main(request):  # 메인
     if request.user.is_authenticated:
@@ -44,3 +45,4 @@ def myscraps(request):
         return render(request, "mypage/myscraps.html", {"posts": scrapped_posts})
     else:
         return redirect("landing:login")
+

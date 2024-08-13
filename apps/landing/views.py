@@ -15,6 +15,13 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 
+from .forms import CustomUserChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
+
+from django.contrib.auth.views import PasswordResetView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def main(request):
@@ -43,25 +50,28 @@ def signup(request):
         name = request.POST.get("name")
         nickname = request.POST.get("nickname")
         phone_num = request.POST.get("phone_num")
-
+        email = request.POST.get("email")
         if password1 == password2:
-            try:
-                user = User.objects.create_user(
-                    username=username,
-                    password=password1,
-                    name=name,
-                    nickname=nickname,
-                    phone_num=phone_num,
-                )
-                user.save()
-                messages.success(request, "회원가입이 완료되었습니다. 로그인하세요.")
-                return redirect("landing:login")
-            except IntegrityError as e:
-                # Handle specific database errors (e.g., unique constraint violations)
-                messages.error(request, f"입력칸을 다시 한번 확인해주세요")
-            except Exception as e:
-                # Handle general exceptions
-                messages.error(request, f"알 수 없는 오류가 발생했습니다.")
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "이미 사용 중인 이메일입니다.")
+            else:
+                try:
+                    user = User.objects.create_user(
+                        username=username,
+                        password=password1,
+                        name=name,
+                        nickname=nickname,
+                        phone_num=phone_num,
+                    )
+                    user.save()
+                    messages.success(request, "회원가입이 완료되었습니다. 로그인하세요.")
+                    return redirect("landing:login")
+                except IntegrityError as e:
+                    # Handle specific database errors (e.g., unique constraint violations)
+                    messages.error(request, f"입력칸을 다시 한번 확인해주세요")
+                except Exception as e:
+                    # Handle general exceptions
+                    messages.error(request, f"알 수 없는 오류가 발생했습니다.")
         else:
             messages.error(request, "비밀번호가 일치하지 않습니다.")
 
@@ -105,6 +115,33 @@ def logout(request):
     request.session.clear()  # 세션에 저장된 값 삭제
     return redirect("landing:main")
 
+#회원정보 수정
+@login_required
+def update(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('landing:main')
+    else:
+        form=CustomUserChangeForm(instance=request.user)
+    context = {'form':form}
+    return render(request, 'users/update.html',context)
+
+#비밀번호 변경
+def change_password(request):
+  if request.method == "POST":
+    form = PasswordChangeForm(request.user, request.POST)
+    if form.is_valid():
+      user = form.save()
+      update_session_auth_hash(request, user)
+      messages.success(request, 'Password successfully changed')
+      return redirect('landing:login')
+    else:
+      messages.error(request, 'Password not changed')
+  else:
+    form = PasswordChangeForm(request.user)
+  return render(request, 'users/change_password.html',{"form": form})
 
 def landing(request):
     return render(request, "landing/landing.html")

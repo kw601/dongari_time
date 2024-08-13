@@ -76,6 +76,8 @@ def post_detail(request, board_id, post_id):
         post = get_object_or_404(Post, id=post_id)
         comments = Comment.objects.filter(post_id=post_id)
 
+        is_liked = request.user in post.liked_by.all()
+
         if request.method == "POST":
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -126,7 +128,7 @@ def post_detail(request, board_id, post_id):
         return render(
             request,
             "community/post_detail.html",
-            {"board": board, "post": post, "comments": comments, "form": form},
+            {"board": board, "post": post, "comments": comments, "form": form, "is_liked": is_liked, "likes_count": post.liked_by.count()},
         )
     else:
         return redirect("landing:login")
