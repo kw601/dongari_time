@@ -247,6 +247,26 @@ def like_post(request, post_id):
         return redirect("landing:login")
 
 
+from django.http import HttpResponse
+
+
+def create_comment(request, board_id, post_id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=post_id)
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user_id = request.user
+            comment.post_id = post
+            comment.save()
+            return redirect("community:post_detail", board_id=board_id, post_id=post.id)
+        else:
+            return JsonResponse({"error": "Form invalid"}, status=400)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
 def toggle_pinned(request, board_id, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)

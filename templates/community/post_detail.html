@@ -45,21 +45,51 @@
     </div>
     <hr class="hr_2px">
     <h3 class="p_d_h3">댓글</h3>
-    <div class="p_d_comment-section">
+    <div class="p_d_comment_section">
         {% for comment in comments %}
-        <div class="p_d_comment">
-            <p class="p_d_comment-author p_d_p">작성자:
-                {% if comment.user_id and not comment.anonymous %}
-                {{ comment.user_id.nickname }}
-                {% else %}
-                익명
-                {% endif %}
-                | 작성일시: {{ comment.created_time }}
-            </p>
-            <p class="p_d_p">{{ comment.content }}</p>
-        </div>
-        <hr class="hr_1px">
+        {% if not comment.parent_id %}
+            <div class="p_d_comment">
+                <p class="p_d_comment_author">작성자:
+                    {% if comment.user_id and not comment.anonymous %}
+                    {{ comment.user_id.nickname }}
+                    {% else %}
+                    익명
+                    {% endif %}
+                    | 작성일시: {{ comment.created_time }}
+                </p>
+                <p>{{ comment.content }}</p>
+                <div class="p_d_reply_section">
+                    <!-- 대댓글 작성 폼 -->
+                    <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
+                        {% csrf_token %}
+                        <textarea name="content" required></textarea>
+                        <input type="checkbox" name="anonymous"> 익명
+                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        <button type="submit">대댓글 작성</button>
+                    </form>
+                    
+                    {% for reply in comments %}
+                        {% if reply.parent_id == comment %}
+                        <div class="p_d_comment_reply">
+                            <p class="p_d_comment_author">작성자:
+                                {% if reply.user_id and not reply.anonymous %}
+                                {{ reply.user_id.nickname }}
+                                {% else %}
+                                익명
+                                {% endif %}
+                                | 작성일시: {{ reply.created_time }}
+                            </p>
+                            <p>{{ reply.content }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+            {% endif %}
         {% endfor %}
+    </div>
+        <hr class="hr_1px">
     </div>
     <h3 class="p_d_h3_comment">댓글 작성</h3>
     <form class="p_d_comment_form" method="post">
@@ -71,5 +101,5 @@
 </div>
 
 <script src="{% static 'js/community/post_detail.js' %}"></script>
-
+    
 {% endblock content %}
