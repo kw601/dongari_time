@@ -187,20 +187,26 @@ def create_board(request):
     else:
         return redirect("landing:login")
 
-
 def main(request):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
         club = Club.objects.get(id=club_id)
         boards = Board.objects.filter(club_id=club_id)
+
+        # 각 게시판에 대해 상위 5개의 게시글을 가져오기
+        board_posts = {}
+        for board in boards:
+            posts = Post.objects.filter(club_id=club.id, board_id=board.id).order_by('-id')[:5]
+            board_posts[board.id] = posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
+            print(f"{board_posts}")
+
         return render(
             request,
             "community/main.html",
-            {"boards": boards, "club_name": club},
+            {"boards": boards, "club_name": club, "board_posts":board_posts},
         )
     else:
         return redirect("landing:login")
-
 
 def delete_board(request, board_id):
     if request.user.is_authenticated:
@@ -224,8 +230,9 @@ def scrap_post(request, post_id):
         else:
             is_scraped = True
 
-        scrap_count = post.scraps.count()
-        return JsonResponse({"is_scraped": is_scraped, "scrap_count": scrap_count})
+        #scrap_count = post.scraps.count()
+        return JsonResponse({'is_scraped': is_scraped})
+        #return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
     else:
         return redirect("landing:login")
 
@@ -243,5 +250,58 @@ def like_post(request, post_id):
         post.liked = post.liked_by.count()
         post.save()
         return JsonResponse({"likes": post.liked, "is_liked": is_liked})
+    else:
+        return redirect("landing:login")
+
+def delete_comment(request, comment_id):
+    if request.user.is_authenticated:
+        comment = get_object_or_404(Comment, id=comment_id)
+        if request.user == comment.user_id:
+            post = comment.post_id
+            comment.delete()
+            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+        else:
+            # 작성자가 아닌 경우 처리
+            return redirect('community:post_detail', board_id=comment.post_id.board_id.id, post_id=comment.post_id.id)
+    else:
+        return redirect("landing:login")
+
+def delete_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        if request.user == post.user_id:
+            board_id = post.board_id.id
+            post.delete()
+            return redirect('community:post_list', board_id=board_id)
+        else:
+            # 작성자가 아닌 경우 처리
+            return redirect('community:post_detail', board_id=post.board_id.id, post_id=post.id)
+    else:
+        return redirect("landing:login")
+    
+def create_comment(request, board_id, post_id):
+    if request.method == "POST":
+        post = get_object_or_404(Post, id=post_id)
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user_id = request.user
+            comment.post_id = post
+            comment.save()
+            return redirect("community:post_detail", board_id=board_id, post_id=post.id)
+        else:
+            return JsonResponse({"error": "Form invalid"}, status=400)
+
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+def toggle_pinned(request, board_id, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        if request.method == "POST":
+            post.pinned = not post.pinned
+            post.save()
+            return redirect("community:post_detail", board_id=board_id, post_id=post_id)
     else:
         return redirect("landing:login")
