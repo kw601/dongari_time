@@ -27,36 +27,16 @@ urlpatterns = [
     path("community/", include("apps.community.urls")),  # 메인 페이지 ~ 모든 기능
     path("chat/", include("apps.chat.urls")),  # 채팅방 리스트, 채팅방
     path("mypage/", include("apps.mypage.urls")),  # 마이페이지 내 모든 기능
+<<<<<<<<< Temporary merge branch 1
+
+    path('', include('django.contrib.auth.urls')),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset_form'),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+=========
     path("webpush/", include("webpush.urls")),
-    path("", include("django.contrib.auth.urls")),
-    path(
-        "password_reset/",
-        auth_views.PasswordResetView.as_view(
-            template_name="registration/password_reset_form.html"
-        ),
-        name="password_reset_form",
-    ),
-    path(
-        "password_reset_done/",
-        auth_views.PasswordResetDoneView.as_view(
-            template_name="registration/password_reset_done.html"
-        ),
-        name="password_reset_done",
-    ),
-    path(
-        "password_reset_confirm/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
-            template_name="registration/password_reset_confirm.html"
-        ),
-        name="password_reset_confirm",
-    ),
-    path(
-        "password_reset_complete/",
-        auth_views.PasswordResetCompleteView.as_view(
-            template_name="registration/password_reset_complete.html"
-        ),
-        name="password_reset_complete",
-    ),
+>>>>>>>>> Temporary merge branch 2
 ]
 
 

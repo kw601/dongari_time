@@ -46,10 +46,15 @@ INSTALLED_APPS = [
     "apps.chat",
     "apps.mypage",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "webpush",
 =======
 
 >>>>>>> bc4b3f7b0aa7bc9ea03519070347f99b91e19af9
+=======
+    "webpush",
+
+>>>>>>> 8e79adce4d3f64970707f4982d26c62e831157f9
 ]
 
 AUTH_USER_MODEL = "landing.User"
@@ -93,14 +98,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        # "NAME": BASE_DIR / "db.sqlite3",
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": env("DB_NAME"),
+        # "USER": env("DB_USER"),
+        # "PASSWORD": env("DB_PASSWORD"),
+        # "HOST": env("DB_HOST"),
+        # "PORT": "3306",
+
     }
 }
 

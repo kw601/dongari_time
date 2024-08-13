@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Club(models.Model):  # 동아리
-    club_name = models.CharField("동아리명", max_length=255)
+    club_name = models.CharField("동아리명", max_length=255, unique=True)
     club_intro = models.CharField("동아리 소개", max_length=255)
     club_num = models.CharField(
         "동아리 인증 번호", max_length=255, unique=True, null=False

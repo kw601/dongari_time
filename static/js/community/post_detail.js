@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.scrapped) {
+            if (data.is_scraped) {
                 scrapBtn.textContent = '스크랩 취소';
             } else {
                 scrapBtn.textContent = '스크랩';
@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error:', error));
     });
+
+    updateLikeButtonState();
 
     likeBtn.addEventListener('click', function() {
         const postId = this.dataset.postId;
@@ -36,8 +38,19 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             likeCount.textContent = data.likes;
+            this.dataset.isLiked = data.is_liked.toString();
+            updateLikeButtonState();
         });
     });
+
+    function updateLikeButtonState() {
+        if (likeBtn.dataset.isLiked === 'true') {
+            likeBtn.textContent = '좋아요 취소 ';
+        } else {
+            likeBtn.textContent = '좋아요 ';
+        }
+        likeBtn.appendChild(likeCount);
+    }
 
     function getCookie(name) {
         let cookieValue = null;
