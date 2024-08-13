@@ -12,26 +12,13 @@
   <!-- # For django templating engine -->
   {% webpush_header %}
 </head>
-
 <body>
+  {% include 'header.html'%}
   <!-- # For django templating engine -->
   {% webpush_button %}
   <div class="base-frame">
     <div class="base-name">
       {% if user.is_authenticated %}
-      <h3>안녕하세요 {{ user.nickname }}님</h3>
-      {% block head %} {% endblock %} {% endif %}
-    </div>
-    <div class="base-btn">
-      {% if user.is_authenticated and user.id %}
-      <form action="{% url 'landing:delete' user.id %}" method='POST'>
-        {% csrf_token %}
-        <input type="submit" value='회원탈퇴'>
-      </form>
-      <form action="{% url 'landing:logout' %}" method='POST'>
-        {% csrf_token %}
-        <input type="submit" value='로그아웃'>
-      </form>
 
       {% else %}
       <div id="nav_menu">
@@ -41,14 +28,7 @@
       {% endif %}
     </div>
   </div>
-
-
   {% block content %}{% endblock%}
+  {% include 'footer.html'%}
 </body>
-<footer>
-  <div class="feedback">
-    <a href="https://forms.gle/CEdJuTm1UVKh2w3BA" target="_blank" class="google-form-button">피드백 설문조사</a>
-  </div>
-</footer>
-
 </html>
