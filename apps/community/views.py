@@ -61,7 +61,7 @@ def post_list(request, board_id):
         club_id = request.session.get("club_id")
         board = get_object_or_404(Board, id=board_id, club_id=club_id)
         posts = Post.objects.filter(board_id=board, club_id=club_id).order_by(
-            "-created_time"
+            "-pinned", "-created_time"
         )
         return render(
             request, "community/post_list.html", {"board": board, "posts": posts}
@@ -265,3 +265,14 @@ def create_comment(request, board_id, post_id):
             return JsonResponse({"error": "Form invalid"}, status=400)
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+def toggle_pinned(request, board_id, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        if request.method == "POST":
+            post.pinned = not post.pinned
+            post.save()
+            return redirect("community:post_detail", board_id=board_id, post_id=post_id)
+    else:
+        return redirect("landing:login")

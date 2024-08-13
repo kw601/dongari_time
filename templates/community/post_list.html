@@ -22,7 +22,11 @@
             {% for post in posts %}
             <a href="{% url 'community:post_detail' board.id post.id %}">
                 <li>
+                    {% if post.pinned %}
+                    <h2 id="post__title">(고정) &#9758 {{ post.title }} &#9756</h2>
+                    {% else %}
                     <h2 id="post__title">{{ post.title }}</h2>
+                    {% endif %}
                     <p id="post__content">{{ post.content|truncatewords:20 }}</p>
                     <div id="post__description">
                         <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>

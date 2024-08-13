@@ -22,4 +22,9 @@ urlpatterns = [
         create_comment,
         name="create_comment",
     ),
+    path(
+        "<int:board_id>/post/<int:post_id>/toggle_pinned/",
+        toggle_pinned,
+        name="toggle_pinned",
+    ),
 ]

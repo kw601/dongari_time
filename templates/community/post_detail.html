@@ -24,6 +24,18 @@
     <p class="p_d_p">{{ post.content }}</p>
     <p class="p_d_p">댓글: {{ comments.count }}</p>
     <div class="post-actions">
+
+        {% if user.is_authenticated and user.is_admin %}
+        <form method="post" action="{% url 'community:toggle_pinned' board.id post.id %}">
+            {% csrf_token %}
+            {% if post.pinned %}
+            <button type="submit">게시글 고정 해제</button>
+            {% else %}
+            <button type="submit">게시글 고정</button>
+            {% endif %}
+        </form>
+        {% endif %}
+
         <button id="scrap-btn" data-post-id="{{ post.id }}">
             {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
         </button>
