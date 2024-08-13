@@ -101,7 +101,7 @@ def post_detail(request, board_id, post_id):
 
                 # 알림 보내기
                 payload = {
-                    "head": f"게시글 {post.title}에 새로운 댓글이 달렸습니다.",
+                    "head": f"\"{post.title}\"에 새로운 댓글이 달렸습니다.",
                     "body": f"{comment.content[:10]}",
                 }
 
