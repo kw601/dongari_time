@@ -1,4 +1,3 @@
-<!-- post_list.html -->
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
@@ -9,7 +8,17 @@
 <div id="post_list">
     <h1 id="board__title">{{ board.board_name }}</h1>
     <div id="board__container">
-        <div id="new_post"><a href="{% url 'community:create_post' board.id %}" class="btn btn-primary">게시글 작성</a></div>
+        <div id="new_post">
+            <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
+        </div>
+        <div id="post-form-container" style="display: none;">
+            <form id="post-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-success">저장</button>
+                <button type="button" id="cancel-post" class="btn btn-secondary">취소</button>
+            </form>
+        </div>
         {% if user.is_authenticated and user.is_admin %}
         <div id="delete">
             <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
@@ -43,4 +52,5 @@
         <button id="to_main"><a href="{% url 'community:main' %}">동아리 메인</a></button>
     </div>
 </div>
+<script src="{% static 'js/community/post_list.js' %}"></script>
 {% endblock %}

@@ -60,11 +60,10 @@ def post_list(request, board_id):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
         board = get_object_or_404(Board, id=board_id, club_id=club_id)
-        posts = Post.objects.filter(board_id=board, club_id=club_id).order_by(
-            "-created_time"
-        )
+        posts = Post.objects.filter(board_id=board, club_id=club_id).order_by("-created_time")
+        form = PostForm(initial={"anonymous": True})
         return render(
-            request, "community/post_list.html", {"board": board, "posts": posts}
+            request, "community/post_list.html", {"board": board, "posts": posts, "form": form}
         )
     else:
         return redirect("landing:login")
@@ -133,6 +132,7 @@ def post_detail(request, board_id, post_id):
     else:
         return redirect("landing:login")
     
+'''
 def create_post(request, board_id):
     if request.user.is_authenticated:
 
@@ -159,6 +159,33 @@ def create_post(request, board_id):
         return render(
             request, "community/create_post.html", {"form": form, "board": board}
         )
+    else:
+        return redirect("landing:login")
+'''
+    
+def create_post(request, board_id):
+    if request.user.is_authenticated:
+        board = get_object_or_404(Board, pk=board_id)
+        club_id = request.session.get("club_id")
+        club = Club.objects.get(id=club_id)
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user_id = request.user
+            post.club_id = club
+            post.board_id = board
+            post.save()
+            return JsonResponse({
+                'status': 'success',
+                'post_id': post.id,
+                'title': post.title,
+                'content': post.content[:100] + '...' if len(post.content) > 100 else post.content,
+                'created_time': post.created_time.strftime('%Y/%m/%d'),
+                'user': post.user_id.nickname if not post.anonymous else '익명',
+                'anonymous': post.anonymous,
+            })
+        else:
+            return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
     else:
         return redirect("landing:login")
 
