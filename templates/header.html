@@ -1,0 +1,47 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+</head>
+<header>
+    <div class="header__container">
+        {% if user.is_authenticated %}
+            {% if request.session.club_id %}
+                <div class="left__container__session">
+                    <div class="app__icon">여기에 로고</div>
+                    <div class="app__title">동아리타임</div>
+                </div>
+                <div class="right__container__session">
+                    <div class="search__bar">검색창</div>
+                    <button id="mypage_btn"><a href="{% url 'mypage:main' %}">마이페이지</a></button>
+                    <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
+                </div>
+            {% else %}            
+                <div class="left__container__login">
+                    <button id="prev_btn" onclick="prev()">←</button>
+                </div>
+                <div class="center__container__login">
+                    <div class="app__icon">여기에 로고</div>
+                    <div class="app__title">동아리타임</div>
+                </div>
+                <div class="right__container__login">
+                    <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
+                </div>
+            {% endif %}
+                    
+        {% else %}
+            <div class="left__container__logout">
+                <button id="prev_btn" onclick="prev()">←</button>
+            </div>
+            <div class="center__container__logout">
+                <div class="app__icon">여기에 로고</div>
+                <div class="app__title">동아리타임</div>
+            </div>
+            <div class="right__container__logout"></div>
+        {% endif %}
+    </div>
+</header>
+<script>
+    const prev = () => {
+        window.history.back();
+    }
+</script>
