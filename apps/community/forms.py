@@ -6,10 +6,13 @@ class CommentForm(forms.ModelForm):
     anonymous = forms.BooleanField(
         required=False, initial=True, label="익명으로 댓글 작성"
     )
+    parent_id = forms.ModelChoiceField(
+        queryset=Comment.objects.all(), required=False, widget=forms.HiddenInput()
+    )
 
     class Meta:
         model = Comment
-        fields = ["content", "anonymous"]
+        fields = ["content", "anonymous", "parent_id"]
         labels = {
             "content": "",
             "anonymous": "",
