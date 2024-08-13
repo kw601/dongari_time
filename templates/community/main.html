@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 <link rel="stylesheet" href="{% static 'css/community/main.css' %}" />
@@ -26,6 +27,15 @@
             {% for board in boards %}
             <li>
                 <h2 id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
+                <ul id="posts__ul">
+                {% with board_posts|get_item:board.id as posts %}
+                    {% for post in posts %}
+                        <li>
+                            <h2 id="post__name"><a href="{% url 'community:post_detail' board.id post.id %}">{{ post.title }}</a></h2>
+                        </li>
+                    {% endfor %}
+                {% endwith %}
+                </ul>
             </li>
             {% endfor %}
         </ul>
