@@ -317,8 +317,10 @@ def scrap_post(request, post_id):
         if not created:
             scrap.delete()
             is_scraped = False
+            post.scrap_cnt -= 1
         else:
             is_scraped = True
+            post.scrap_cnt += 1
 
         # scrap_count = post.scraps.count()
         return JsonResponse({"is_scraped": is_scraped})
@@ -334,9 +336,12 @@ def like_post(request, post_id):
         is_liked = False
         if user in post.liked_by.all():
             post.liked_by.remove(user)
+            post.liked_cnt -= 1
         else:
             post.liked_by.add(user)
             is_liked = True
+            post.liked_cnt += 1
+
         post.liked = post.liked_by.count()
         post.save()
         return JsonResponse({"likes": post.liked, "is_liked": is_liked})
