@@ -12,7 +12,13 @@
                         <div class="app__title">동아리타임</div>
                     </div>
                     <div class="right__container__session">
-                        <div class="search__bar">검색창</div>
+                        <div class="search__bar">
+                            <form class="search" method="POST" action="{% url 'community:search' %}">
+                                {% csrf_token %}        
+                                <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
+                                <button class="search-btn" type="submit"> 검색 </button>
+                            </form>
+                        </div>
                         <button id="mypage_btn"><a href="{% url 'mypage:main' %}">마이페이지</a></button>
                         <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
                     </div>

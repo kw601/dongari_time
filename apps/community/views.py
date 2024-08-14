@@ -440,3 +440,18 @@ def toggle_pinned(request, board_id, post_id):
             return redirect("community:post_detail", board_id=board_id, post_id=post_id)
     else:
         return redirect("landing:login")
+
+def search(request):
+    if request.method=='POST':
+        searched = request.POST['searched'] # 검색한 단어
+        club_id = request.session.get("club_id")
+        if request.POST.get('board_id'): # 게시판 내부일 때
+            board_id = request.POST.get('board_id') 
+            board = Board.objects.get(id=board_id) # 게시판 정보
+            posts = Post.objects.filter(club_id=club_id, board_id = board_id, title__contains = searched) # 게시판에서 검색한 단어가 포함되는 게시글을 가져옴
+            return render(request, "community/post_list.html", {"posts":posts, "board":board})
+        else: # 메인 화면일 때(헤더바에서 검색했을 때)
+            posts = Post.objects.filter(club_id=club_id, title__contains = searched) # 전체 게시글에서 검색한 단어가 포함되는 게시글만 가져옴
+            return render(request, "community/search_list.html", {"posts":posts, "searched":searched})
+
+

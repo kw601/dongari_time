@@ -6,42 +6,11 @@
 {% endblock %}
 {% block content %}
 <div id="post_list">
-    <h1 id="board__title">
-        <a href="{% url 'community:post_list' board.id %}">
-            {{ board.board_name }}
-        </a>
-    </h1>
-    <div class="search__bar">
-        <form class="search" method="POST" action="{% url 'community:search' %}">
-            {% csrf_token %}
-            <input type="hidden" name="board_id" value="{{ board.id }}">         
-            <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
-            <button class="search-btn" type="submit"> 검색 </button>
-        </form>
-    </div>
+    <h1 id="board__title">'{{ searched }}' 검색 결과</h1>
     <div id="board__container">
-        <div id="new_post">
-            <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
-        </div>
-        <div id="post-form-container" style="display: none;">
-            <form id="post-form" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success">저장</button>
-                <button type="button" id="cancel-post" class="btn btn-secondary">취소</button>
-            </form>
-        </div>
-        {% if user.is_authenticated and user.is_admin %}
-        <div id="delete">
-            <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">게시판 삭제</button>
-            </form>
-        </div>
-        {% endif %}
         <ul id="post__ul">
             {% for post in posts %}
-            <a href="{% url 'community:post_detail' board.id post.id %}">
+            <a href="{% url 'community:post_detail' post.board_id.pk post.id %}">
                 <li>
                     {% if post.pinned %}
                     <h2 id="post__title">(고정) &#9758 {{ post.title }} &#9756</h2>
