@@ -287,7 +287,6 @@ def main(request):
             board_posts[board.id] = (
                 posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
             )
-            print(f"{board_posts}")
 
         return render(
             request,
