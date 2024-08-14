@@ -64,10 +64,11 @@ def post_list(request, board_id):
             "-pinned", "-created_time"
         )
         form = PostForm(initial={"anonymous": True})
+        boards = Board.objects.filter(club_id=club_id)
         return render(
             request,
             "community/post_list.html",
-            {"board": board, "posts": posts, "form": form},
+            {"board": board, "posts": posts, "form": form, "boards": boards},
         )
     else:
         return redirect("landing:login")
@@ -78,6 +79,8 @@ def post_detail(request, board_id, post_id):
         board = get_object_or_404(Board, id=board_id)
         post = get_object_or_404(Post, id=post_id)
         comments = Comment.objects.filter(post_id=post_id)
+        club_id = request.session.get("club_id")
+        boards = Board.objects.filter(club_id=club_id)
 
         is_liked = request.user in post.liked_by.all()
 
@@ -138,6 +141,7 @@ def post_detail(request, board_id, post_id):
                 "form": form,
                 "is_liked": is_liked,
                 "likes_count": post.liked_by.count(),
+                "boards": boards,
             },
         )
     else:
@@ -240,6 +244,8 @@ def create_post(request, board_id):
 
 def create_board(request):
     if request.user.is_authenticated:
+        club_id = request.session.get("clud_id")
+        boards = Board.objects.filter(club_id=club_id)
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
@@ -249,7 +255,9 @@ def create_board(request):
                 if Board.objects.filter(board_name=board.board_name, club_id=club_id):
                     form.add_error(None, "이미 존재하는 게시판 이름입니다.")
                     return render(
-                        request, "community/create_board.html", {"form": form}
+                        request,
+                        "community/create_board.html",
+                        {"form": form, "boards": boards},
                     )
                 else:
                     board.club_id = Club.objects.get(id=club_id)
@@ -257,7 +265,9 @@ def create_board(request):
                     return redirect("community:main")
         else:
             form = BoardForm()
-        return render(request, "community/create_board.html", {"form": form})
+        return render(
+            request, "community/create_board.html", {"form": form, "boards": boards}
+        )
     else:
         return redirect("landing:login")
 
