@@ -9,6 +9,17 @@
     --padding-value: 8rem;
 }
 
+
+.select__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.description {
+    text-align: center;
+}
+
 #admin_btn, #auth_btn {
     border: 2px solid var(--color-yellow-1);
     background-color: var(--color-yellow-1);
@@ -33,4 +44,26 @@
     padding: 0 var(--padding-value);
     justify-content: center;
     align-items: center;
+    box-sizing:border-box;
+}
+
+
+@media (max-width: 767px) {
+    body {
+        box-sizing:border-box;
+    }
+    .main__container {
+        box-sizing:border-box; 
+        padding: 3rem;
+
+    }
+    .select__container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+
 }

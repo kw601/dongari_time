@@ -1,0 +1,7 @@
+<div class="borad__header">
+    <div class="board__container">
+        {% for board in boards %}
+        <div id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
+        {% endfor %}
+    </div>
+</div>
