@@ -16,7 +16,10 @@
     <img src="{{ post.image.url }}" alt="Post Image" class="p_d_image">
     {% endif %}
     <p class="comment-author p_d_p">작성자:
-        {% if post.user_id and not post.anonymous %}
+        <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+        {% if post.board_id.board_name == "공지게시판" %}
+        {{ post.user_id.name }}
+        {% elif post.user_id and not post.anonymous %}
         {{ post.user_id.nickname }}
         {% else %}
         익명
@@ -57,70 +60,88 @@
     <div class="p_d_comment_section">
         {% for comment in comments %}
         {% if not comment.parent_id %}
-            <div class="p_d_comment">
-                <p class="p_d_comment_author">작성자:
-                    {% if comment.user_id and not comment.anonymous %}
-                    {{ comment.user_id.nickname }}
-                    {% else %}
-                    익명
-                    {% endif %}
-                    | 작성일시: {{ comment.created_time }}
-                </p>
-                <p>{{ comment.content }}</p>
-                {% if user == comment.user_id %}
-                <form action="{% url 'community:delete_comment' comment.id %}" method="post">
-                    {% csrf_token %}
-                    <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
-                </form>
+        <div class="p_d_comment">
+            <p class="p_d_comment_author">작성자:
+                <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+                {% if post.board_id.board_name == "공지게시판" %}
+                {{ comment.user_id.name }}
+                {% elif comment.user_id and not comment.anonymous %}
+                {{ comment.user_id.nickname }}
+                {% else %}
+                익명
                 {% endif %}
-                <div class="p_d_reply_section">
-                    <!-- 대댓글 작성 폼 -->
-                    <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
-                        {% csrf_token %}
-                        <textarea name="content" required></textarea>
-                        <input type="checkbox" name="anonymous"> 익명
-                        <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                        <button type="submit">대댓글 작성</button>
-                    </form>
-                    
-                    {% for reply in comments %}
-                        {% if reply.parent_id == comment %}
-                        <div class="p_d_comment_reply">
-                            <p class="p_d_comment_author">작성자:
-                                {% if reply.user_id and not reply.anonymous %}
-                                {{ reply.user_id.nickname }}
-                                {% else %}
-                                익명
-                                {% endif %}
-                                | 작성일시: {{ reply.created_time }}
-                            </p>
-                            <p>{{ reply.content }}</p>
-                            {% if user == reply.user_id %}
-                            <form action="{% url 'community:delete_comment' reply.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
-                            </form>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-            <hr>
+                | 작성일시: {{ comment.created_time }}
+            </p>
+            <p>{{ comment.content }}</p>
+            {% if user == comment.user_id %}
+            <form action="{% url 'community:delete_comment' comment.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+            </form>
             {% endif %}
+            <div class="p_d_reply_section">
+                <!-- 대댓글 작성 폼 -->
+                <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
+                    {% csrf_token %}
+                    <textarea name="content" required></textarea>
+                    <input type="checkbox" name="anonymous"> 익명
+                    <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                    <button type="submit">대댓글 작성</button>
+                </form>
+
+                {% for reply in comments %}
+                {% if reply.parent_id == comment %}
+                <div class="p_d_comment_reply">
+                    <p class="p_d_comment_author">작성자:
+                        <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+                        {% if post.board_id.board_name == "공지게시판" %}
+                        {{ reply.user_id.name }}
+                        {% elif reply.user_id and not reply.anonymous %}
+                        {{ reply.user_id.nickname }}
+                        {% else %}
+                        익명
+                        {% endif %}
+                        | 작성일시: {{ reply.created_time }}
+                    </p>
+                    <p>{{ reply.content }}</p>
+                    {% if user == reply.user_id %}
+                    <form action="{% url 'community:delete_comment' reply.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+        {% endif %}
         {% endfor %}
     </div>
-        <hr class="hr_1px">
-    </div>
-    <h3 class="p_d_h3_comment">댓글 작성</h3>
-    <form class="p_d_comment_form" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">댓글 작성</button>
-    </form>
-    <a href="{% url 'community:post_list' board.id %}">게시판 목록</a>
+    <hr class="hr_1px">
+</div>
+<h3 class="p_d_h3_comment">댓글 작성</h3>
+<form class="p_d_comment_form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">댓글 작성</button>
+</form>
+<a href="{% url 'community:post_list' board.id %}">게시판 목록</a>
+</div>
+
+<div class="best__container">
+    <ul class="best__ul">
+        {% for post in posts_best %}
+        {% if post.liked_cnt >= 5 %}
+            <li class="best__li">
+                <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
+            </li>
+                {% endif %}
+        {% endfor %}
+    </ul>
 </div>
 
 <script src="{% static 'js/community/post_detail.js' %}"></script>
-    
+
 {% endblock content %}
