@@ -9,6 +9,13 @@
     --padding-value: 8rem;
 }
 
+
+.select__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
 #admin_btn, #auth_btn {
     border: 2px solid var(--color-yellow-1);
     background-color: var(--color-yellow-1);
