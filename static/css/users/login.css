@@ -6,7 +6,7 @@ body {
 
 }
 
-#auth-container{
+#login-container{
     display: flex;
     flex-direction: column;
     width: 805px;
@@ -21,7 +21,8 @@ h3 {
     color: #333;
     border-bottom:1px solid #000000;
 }
-.auth-form{
+
+.login-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,7 +32,25 @@ h3 {
     justify-content: center;
 }
 
-#message-container{
+.find-container{
+    display: flex;
+    width: 805px;
+}
+
+.find-form{
+    padding: 20px 60px;
+    width: 687px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.find-form a{
+    font-size: 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.message-container{
     display: flex;
     width: 805px;
     padding: 20px 60px;
@@ -39,7 +58,12 @@ h3 {
     display: flex;
     justify-content: space-around;
     color: red;
+    text-decoration: none;
 }
 
-
-
+#button-container{
+    padding: 20px;
+    width: 805px;
+    display: flex;
+    justify-content: space-around;
+}

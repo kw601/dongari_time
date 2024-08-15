@@ -1,0 +1,23 @@
+body {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+#update-container {
+    display: flex;
+    flex-direction: column;
+    width: 805px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.update-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 60px 0px 60px;
+    width: 685px;
+    justify-content: center;
+}
