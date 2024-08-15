@@ -22,14 +22,16 @@
             <div class="func__title">비밀번호 변경</div>
             <div class="func__description">비밀번호 변경</div>
         </div>
-        <div class="function__container">
-            <div class="func__title">동아리 관리</div>
-            <div class="func__description">동아리 관리</div>
-        </div>
+        <a href="{% url 'mypage:manage_clubs' %}">
+            <div class="function__container">
+                <div class="func__title">동아리 관리</div>
+                <div class="func__description">동아리 관리</div>
+            </div>
+        </a>
         <a href="{% url 'mypage:myposts' %}">
             <div class="function__container">
                 <div class="func__title">내가 쓴 글</div>
-                <div class="func__description">동아리 관리</div>
+                <div class="func__description">내가 쓴 글</div>
             </div>
         </a>
         <a href="{% url 'mypage:mycomments' %}">

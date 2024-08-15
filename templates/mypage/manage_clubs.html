@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>동아리 관리</h1>
+<ul id="club-list">
+    {% for auth_club in user_clubs %}
+    <li>
+        {{ auth_club.club_id.club_name }}
+        <button class="delete-club" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
+    </li>
+    {% endfor %}
+</ul>
+<div id="message"></div>
+
+{% csrf_token %}
+<script src="{% static 'js/mypage/manage_clubs.js' %}"></script>
+{% endblock %}
