@@ -24,13 +24,7 @@
                         <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
                     </div>
                 </div>
-                <div class="borad__header">
-                    <div class="board__container">
-                        {% for board in boards %}
-                        <div id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
-                        {% endfor %}
-                    </div>
-                </div>
+                
             {% else %}            
                 <div class="left__container__login">
                     <button id="prev_btn" onclick="prev()">←</button>
