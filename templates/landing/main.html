@@ -9,33 +9,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/landing/first.css' %}" />
-    # For django templating engine
+    <link rel="stylesheet" href="{% static 'css/landing/main.css' %}" />
     {% webpush_header %}
 </head>
 
 <body>
-    # For django templating engine
-    {% webpush_button %}
     <div class="main__container">
         <div class="logo">로고</div>
         <div class="description">당신의 동아리로 이동하세요!</div>
         <div id="select__container">
-            <button id="admin_btn"><a href="{% url 'community:create_club' %}">
-                <div id="select__box">
-                    <div id="icon__box">👑</div>새 동아리
-                </div>
-            </a></button>
-        <button id="member_btn"><a href="{% url 'landing:club_auth' %}">
-                <div id="select__box">
-                    <div id="icon__box">👥</div>동아리 추가 인증
-                </div>
-            </a></button>
-        <button id="member_btn"><a href="{% url 'community:select_club' %}">
-                <div id="select__box">
-                    <div id="icon__box">👥</div>동아리 리스트로 이동
-                </div>
-            </a></button>
+            <button id="admin_btn"><a href="{% url 'community:create_club' %}">동아리 생성</a></button>
+            <button id="auth_btn"><a href="{% url 'landing:club_auth' %}">동아리 인증</a></button>
+            <button id="select_btn"><a href="{% url 'community:select_club' %}">동아리 생성</a></button>
         </div>
     </div>
     <script>        
