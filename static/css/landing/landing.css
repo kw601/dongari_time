@@ -1,6 +1,8 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 :root {
     --padding-lr: 8rem;
-    --color-line: #A7A7A7;
+    --color-line: #C2C2C2;
     --color-yellow-1: #FFCF33;
     --color-yellow-2: #FFD95C;
     --color-yellow-3: #FFECAD;
@@ -27,12 +29,14 @@
 }
 
 .title {
+    font-family: "Pretendard", sans-serif;
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: 900;
 }
 
 .description p {
     text-align: center;
+    font-family: "Pretendard", sans-serif;
 }
 
 .select__container {
@@ -61,6 +65,8 @@
     color: black;
     font-size: 1rem;
     font-weight: 400;
+    font-family: "Pretendard", sans-serif;
+
 }
 
 .main__img__container {
@@ -119,11 +125,13 @@
     object-fit: contain;
 }
 .function__name, .service__title {
+    font-family: "Pretendard", sans-serif;
     font-size: 2rem;
     font-weight: 800;
 }
 
 .function__detail {
+    font-family: "Pretendard", sans-serif;
     font-size: 1rem;
     color: var(--color-yellow-1);
 }
@@ -136,6 +144,7 @@
 }
 .service__title {
     text-align: center;
+    font-family: "Pretendard", sans-serif;
 }
 
 /* 반응형 필요한 부분 */
@@ -176,11 +185,13 @@
 }
 
 .service__name {
+    font-family: "Pretendard", sans-serif;
     font-size: 1.7rem;
     font-weight: 800;
     text-align: center;
 }
 .service__detail {
+    font-family: "Pretendard", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     text-align: center;
@@ -231,6 +242,7 @@
     }
     .function__name, .function__detail {
         text-align: center;
+
     }
     .function__name, .service__title {
         font-size: 1.5rem;
@@ -249,7 +261,6 @@
 
 .service__name {
     font-size: 1.3rem;
-
 }
 .service__detail {
     font-size: 0.9rem;
