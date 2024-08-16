@@ -55,7 +55,11 @@ def select_club(request):
                 request.session["club_name"] = club.club_name
                 return redirect("community:main")
 
-        return render(request, "community/select_club.html", {"user_clubs": user_clubs, "boards":boards})
+        return render(
+            request,
+            "community/select_club.html",
+            {"user_clubs": user_clubs, "boards": boards},
+        )
     else:
         return redirect("landing:login")
 
@@ -281,7 +285,9 @@ def create_board(request):
                     return redirect("community:main")
         else:
             form = BoardForm()
-        return render(request, "community/create_board.html", {"form": form, "boards": boards})
+        return render(
+            request, "community/create_board.html", {"form": form, "boards": boards}
+        )
     else:
         return redirect("landing:login")
 
@@ -472,6 +478,7 @@ def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]  # 검색한 단어
         club_id = request.session.get("club_id")
+        boards = Board.objects.filter(club_id=club_id)
         if request.POST.get("board_id"):  # 게시판 내부일 때
             board_id = request.POST.get("board_id")
             board = Board.objects.get(id=board_id)  # 게시판 정보
@@ -479,7 +486,9 @@ def search(request):
                 club_id=club_id, board_id=board_id, title__contains=searched
             )  # 게시판에서 검색한 단어가 포함되는 게시글을 가져옴
             return render(
-                request, "community/post_list.html", {"posts": posts, "board": board}
+                request,
+                "community/post_list.html",
+                {"posts": posts, "board": board, "boards": boards},
             )
         else:  # 메인 화면일 때(헤더바에서 검색했을 때)
             posts = Post.objects.filter(
@@ -488,5 +497,5 @@ def search(request):
             return render(
                 request,
                 "community/search_list.html",
-                {"posts": posts, "searched": searched},
+                {"posts": posts, "searched": searched, "boards": boards},
             )
