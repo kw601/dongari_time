@@ -244,6 +244,7 @@ def create_post(request, board_id):
                 {
                     "status": "success",
                     "post_id": post.id,
+                    "board_name": board.board_name,
                     "title": post.title,
                     "content": (
                         post.content[:100] + "..."
@@ -251,8 +252,12 @@ def create_post(request, board_id):
                         else post.content
                     ),
                     "created_time": post.created_time.strftime("%Y/%m/%d"),
+                    "user_name": post.user_id.name,
                     "user": post.user_id.nickname if not post.anonymous else "익명",
                     "anonymous": post.anonymous,
+                    "comments_count": post.comment_set.count(),  # 댓글 수 추가
+                    "likes_count": post.liked_by.count(),  # 좋아요 수 추가
+                    "scraps_count": post.scraped_by.count(),  # 스크랩 수 추가
                 }
             )
         else:
