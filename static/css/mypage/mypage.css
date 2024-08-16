@@ -1,0 +1,82 @@
+:root {
+    --padding-lr: 8rem;
+    --color-line: #A7A7A7;
+    --color-yellow-1: #FFCF33;
+    --color-yellow-2: #FFD95C;
+    --color-yellow-3: #FFECAD;
+    --color-yellow-4: #FEF9DF;
+    --gap-value: 20px;
+    --padding-value: 8rem;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.mypage__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--padding-value);
+}
+
+.page__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.decoration__box {
+    background-color: var(--color-yellow-4);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.icon__container {
+    width: 40px;
+    height: 40px;
+    background-image: url('path_to_your_emoji_image.png');
+    background-size: contain;
+    margin-right: 15px;
+}
+
+.icon__container__text {
+    font-size: 16px;
+}
+
+.content__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap-value);
+}
+
+.function__container {
+    background-color: var(--color-yellow-3);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    /*transition: background-color 0.3s;*/
+}
+
+.function__container:hover {
+    background-color: var(--color-yellow-2);
+}
+
+.func__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.func__description {
+    font-size: 14px;
+    color: #555;
+}
+
+/*a {
+    text-decoration: none;
+    color: inherit;
+}*/
