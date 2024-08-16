@@ -8,34 +8,6 @@
     --gap-value: 20px;
     --padding-value: 8rem;
 }
-
-
-.select__container {
-    display: flex;
-    justify-content: space-between;
-    gap: 3rem;
-}
-
-.description {
-    text-align: center;
-}
-
-#admin_btn, #auth_btn {
-    border: 2px solid var(--color-yellow-1);
-    background-color: var(--color-yellow-1);
-    border-radius: 1.2rem;
-    width: 7rem;
-    height: 3.2rem;
-}
-
-#admin_btn > a, #auth_btn > a {
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
 .main__container {
     height: 100vh;
     display: flex;
@@ -47,6 +19,33 @@
     box-sizing:border-box;
 }
 
+.description {
+    text-align: center;
+}
+
+.select__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+#admin_btn, #auth_btn, #select_btn {
+    border: 2px solid var(--color-yellow-1);
+    background-color: var(--color-yellow-1);
+    border-radius: 1.2rem;
+    width: 7rem;
+    height: 3.2rem;
+}
+
+#admin_btn > a, #auth_btn > a, #select_btn > a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
 
 @media (max-width: 767px) {
     body {
@@ -55,7 +54,6 @@
     .main__container {
         box-sizing:border-box; 
         padding: 3rem;
-
     }
     .select__container {
         display: flex;

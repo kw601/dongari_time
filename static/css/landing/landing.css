@@ -5,53 +5,255 @@
     --color-yellow-2: #FFD95C;
     --color-yellow-3: #FFECAD;
     --color-yellow-4: #FEF9DF;
+    --gap-value: 20px;
+    --padding-value: 8rem;
 }
 
 .landing__container {
-    padding: 8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;   
+    gap: var(--gap-value);
+    margin: var(--padding-value);
+}
+
+.introducion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .title {
-    text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 800;
 }
 
-.description {
+.description p {
     text-align: center;
-    font-size: 1.3rem;
-    color: var(--color-line);
 }
 
+.select__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+#signup_btn, #login_btn {
+    border: 2px solid var(--color-yellow-1);
+    border-radius: 1.2rem;
+    width: 7rem;
+    height: 3.2rem;
+}
+
+#signup_btn {
+    background-color: var(--color-yellow-1);
+}
+#login_btn {
+    background-color: white;
+}
+
+#signup_btn > a, #login_btn > a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.main__img__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main__img__container > img {
+    object-fit: contain;
+    overflow: hidden;
+}
+
+/* 반응형 필요한 부분 */
 .function__container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
+    gap: var(--gap-value);
+    width: 100%;
 }
 
 .description__left, .description__right {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
 }
 
 .function__description {
-    padding: 0 5px;
-}
-.function__img {
-    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-value);
 }
 
+.function__icon {
+}
+
+.function__img__left, .function__img__right {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.function__img__left {
+    justify-content: flex-start;
+}
+
+.function__img__right {
+    justify-content: flex-end;
+}
+
+.function__img__right > img, .function__img__left > img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+.function__name, .service__title {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.function__detail {
+    font-size: 1rem;
+    color: var(--color-yellow-1);
+}
+
+.service__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: var(--gap-value);    
+}
+.service__title {
+    text-align: center;
+}
+
+/* 반응형 필요한 부분 */
 .service__content {
-    /* 이렇게 해서 얜 반응형으로 꾸며야하나? flex로 바꿀까... */
+    padding-top: var(--gap-value);
     display: grid;
-    grid-template-rows: auto;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px 0;
+    gap: 20px;
+    justify-items: center;
+    grid-auto-flow: dense;
+}
+
+.services {
+    display: flex;
+    flex-direction: column;
+    /* gap: var(--gap-value); */
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.service__icon {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.service__icon > img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+.service__name {
+    font-size: 1.7rem;
+    font-weight: 800;
+    text-align: center;
+}
+.service__detail {
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    height: 60px;
+}
+
+
+@media (max-width: 767px) {
+    .landing__container {
+        margin: 3rem;
+    }
+    .function__container {
+        display: flex;
+        gap: var(--gap-value);
+    }
+    .main__img__container, .function__img__right, .function__img__left {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .function__img__right, .function__img__left {
+        width: 50%;
+        height: 50%;
+    }
+    .main__img__container > img, .function__img__right > img, .function__img__left > img {
+        object-fit: cover;
+        overflow: hidden;
+    }
+
+    .description__left, .description__right {
+        display: flex;
+        gap: var(--gap-value);
+        align-items: center;
+        justify-content: center;
+    }
+    .description__left {
+        flex-wrap: wrap-reverse;
+    }
+    .description__right {
+        flex-wrap: wrap;
+    }
+    .function__icon {
+        display: none;
+        /* 아이콘이나 실제 사진 중 하나만 보이게 하는게 나을듯 */
+    }
+    .function__name, .function__detail {
+        text-align: center;
+    }
+    .function__name, .service__title {
+        font-size: 1.5rem;
+    }
+    .function__detail, .description {
+        font-size: 0.9rem;
+    }
+    .service__content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+.service__icon, .service__icon > img {
+    width: 60px;
+    height: 60px;
+}
+
+.service__name {
+    font-size: 1.3rem;
+
+}
+.service__detail {
+    font-size: 0.9rem;
+    height: 50px;
+}
+
 }

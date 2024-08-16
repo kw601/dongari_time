@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "apps.chat",
     "apps.mypage",
     "webpush",
-
 ]
 
 AUTH_USER_MODEL = "landing.User"
@@ -90,14 +89,14 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        # "NAME": BASE_DIR / "db.sqlite3",
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASSWORD"),
-        "HOST": env("DB_HOST"),
-        "PORT": "3306",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": env("DB_NAME"),
+        # "USER": env("DB_USER"),
+        # "PASSWORD": env("DB_PASSWORD"),
+        # "HOST": env("DB_HOST"),
+        # "PORT": "3306",
     }
 }
 
@@ -162,11 +161,11 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
 ]
 
-#비밀번호 초기화 메일 전송 관련 설정 (SMTP)
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# 비밀번호 초기화 메일 전송 관련 설정 (SMTP)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'dongaritime@gmail.com'
-EMAIL_HOST_PASSWORD = 'btla micd ileu yauz'
+EMAIL_HOST_USER = "dongaritime@gmail.com"
+EMAIL_HOST_PASSWORD = "btla micd ileu yauz"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True

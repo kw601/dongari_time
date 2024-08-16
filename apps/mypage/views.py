@@ -4,14 +4,12 @@ from apps.community.models import Club, Comment, Post
 from apps.landing.models import User
 
 
-
 # Create your views here.
 def main(request):  # 메인
     if request.user.is_authenticated:
         return render(request, "mypage/main.html")
     else:
         return redirect("landing:login")
-
 
 def myposts(request):  # 내가 작성한 글
     if request.user.is_authenticated:
@@ -23,7 +21,6 @@ def myposts(request):  # 내가 작성한 글
         return render(request, "mypage/myposts.html", {"posts": posts})
     else:
         return redirect("landing:login")
-
 
 def mycomments(request):  # 내가 작성한 댓글
     if request.user.is_authenticated:
@@ -37,7 +34,6 @@ def mycomments(request):  # 내가 작성한 댓글
     else:
         return redirect("landing:login")
 
-
 def myscraps(request):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")  # 현재 접속한 동아리 pk
@@ -45,4 +41,3 @@ def myscraps(request):
         return render(request, "mypage/myscraps.html", {"posts": scrapped_posts})
     else:
         return redirect("landing:login")
-
