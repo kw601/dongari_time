@@ -7,27 +7,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+  <script src="https://kit.fontawesome.com/ff7a5a86fb.js" crossorigin="anonymous"></script>
   <title>동아리타임!</title>
   <!-- # For django templating engine -->
   {% webpush_header %}
 </head>
 <body>
   {% include 'header.html'%}
-  <!-- # For django templating engine -->
-  {% webpush_button %}
-  <div class="base-frame">
-    <div class="base-name">
-      {% if user.is_authenticated %}
-
-      {% else %}
-      <div id="nav_menu">
-        <a href='{% url "landing:login" %}'>로그인</a>
-        <a href='{% url "landing:signup" %}'>회원가입</a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
   {% block content %}{% endblock%}
   {% include 'footer.html'%}
 </body>
