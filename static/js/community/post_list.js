@@ -50,13 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     newPost.href = `/community/${boardId}/post/${data.post_id}/`;
                     newPost.innerHTML = `
                     <li>
-                        <h2 id="post__title">${data.title}</h2>
-                        <p id="post__content">${data.content}</p>
-                        <div id="post__description">
-                            <p id="post__created">${data.created_time}</p>
-                            <p id="post__user">${data.anonymous ? '익명' : data.user}</p>
-                        </div>
-                    </li>
+            <h2 id="post__title">${data.title}</h2>
+            <p id="post__content">${data.content}</p>
+            <div id="post__description">
+                <p id="post__created">${data.created_time}</p>
+                <p id="post__user">${data.board_name === '공지게시판' ? data.user_name : data.user}</p>
+                <div id="post__stats">
+                <p>댓글 수: ${data.comments_count}</p>
+                <p>좋아요 수: ${data.likes_count}</p>
+                <p>스크랩 수: ${data.scraps_count}</p>
+                </div>
+            </div>
+            </li>
                 `;
 
                     // 새 게시글을 목록의 맨 위에 추가
