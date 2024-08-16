@@ -1,0 +1,40 @@
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#findusername-container {
+    display: flex;
+    flex-direction: column;
+    width: 805px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.findusername-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 60px 0px 60px;
+    width: 685px;
+    height: 160px;
+    justify-content: center;
+}
+.message-container{
+    display: flex;
+    width: 805px;
+    padding: 20px 60px;
+    width: 687px;
+    display: flex;
+    justify-content: space-around;
+    color: red;
+    text-decoration: none;
+}
+
+.message-container p{
+    color: red;
+
+}

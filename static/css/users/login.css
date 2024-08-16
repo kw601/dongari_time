@@ -1,0 +1,69 @@
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#login-container{
+    display: flex;
+    flex-direction: column;
+    width: 805px;
+    padding: 20px;
+    background-color: #fff;
+}
+h3 {
+    font-size: 32px;
+    padding: 14px 0px 14px 0px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    border-bottom:1px solid #000000;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 60px 0px 60px;
+    width: 685px;
+    height: 250px;
+    justify-content: center;
+}
+
+.find-container{
+    display: flex;
+    width: 805px;
+}
+
+.find-form{
+    padding: 20px 60px;
+    width: 687px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.find-form a{
+    font-size: 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+.message-container{
+    display: flex;
+    width: 805px;
+    padding: 20px 60px;
+    width: 687px;
+    display: flex;
+    justify-content: space-around;
+    color: red;
+    text-decoration: none;
+}
+
+#button-container{
+    padding: 20px;
+    width: 805px;
+    display: flex;
+    justify-content: space-around;
+}

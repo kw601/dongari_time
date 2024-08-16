@@ -22,6 +22,7 @@ def create_club(request):
             if form.is_valid():
                 club = form.save()
                 request.session["club_id"] = club.pk  # 세션에 동아리 고유번호 저장
+                request.session["club_name"] = club.club_name # 세션에 동아리 이름 저장
                 request.user.is_admin = True
                 request.user.save()
 
@@ -47,8 +48,10 @@ def select_club(request):
 
         if request.method == "POST":
             selected_club_id = request.POST.get("club_id")
+            club = Club.objects.get(id=selected_club_id)
             if selected_club_id:
                 request.session["club_id"] = selected_club_id
+                request.session["club_name"] = club.club_name
                 return redirect("community:main")
 
         return render(request, "community/select_club.html", {"user_clubs": user_clubs})
@@ -65,10 +68,18 @@ def post_list(request, board_id):
         )
         form = PostForm(initial={"anonymous": True})
         boards = Board.objects.filter(club_id=club_id)
+        posts_best = Post.objects.filter(club_id=club_id)
+
         return render(
             request,
             "community/post_list.html",
-            {"board": board, "posts": posts, "form": form, "boards": boards},
+            {
+                "board": board,
+                "posts": posts,
+                "form": form,
+                "boards": boards,
+                "posts_best": posts_best,
+            },
         )
     else:
         return redirect("landing:login")
@@ -81,6 +92,7 @@ def post_detail(request, board_id, post_id):
         comments = Comment.objects.filter(post_id=post_id)
         club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
+        posts_best = Post.objects.filter(club_id=club_id)
 
         is_liked = request.user in post.liked_by.all()
 
@@ -142,6 +154,7 @@ def post_detail(request, board_id, post_id):
                 "is_liked": is_liked,
                 "likes_count": post.liked_by.count(),
                 "boards": boards,
+                "posts_best": posts_best,
             },
         )
     else:
@@ -288,10 +301,17 @@ def main(request):
                 posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
             )
 
+        posts_best = Post.objects.filter(club_id=club)
+
         return render(
             request,
             "community/main.html",
-            {"boards": boards, "club_name": club, "board_posts": board_posts},
+            {
+                "boards": boards,
+                "club_name": club,
+                "board_posts": board_posts,
+                "posts_best": posts_best,
+            },
         )
     else:
         return redirect("landing:login")
@@ -316,8 +336,10 @@ def scrap_post(request, post_id):
         if not created:
             scrap.delete()
             is_scraped = False
+            post.scrap_cnt -= 1
         else:
             is_scraped = True
+            post.scrap_cnt += 1
 
         # scrap_count = post.scraps.count()
         return JsonResponse({"is_scraped": is_scraped})
@@ -333,9 +355,12 @@ def like_post(request, post_id):
         is_liked = False
         if user in post.liked_by.all():
             post.liked_by.remove(user)
+            post.liked_cnt -= 1
         else:
             post.liked_by.add(user)
             is_liked = True
+            post.liked_cnt += 1
+
         post.liked = post.liked_by.count()
         post.save()
         return JsonResponse({"likes": post.liked, "is_liked": is_liked})
@@ -440,17 +465,26 @@ def toggle_pinned(request, board_id, post_id):
     else:
         return redirect("landing:login")
 
+
 def search(request):
-    if request.method=='POST':
-        searched = request.POST['searched'] # 검색한 단어
+    if request.method == "POST":
+        searched = request.POST["searched"]  # 검색한 단어
         club_id = request.session.get("club_id")
-        if request.POST.get('board_id'): # 게시판 내부일 때
-            board_id = request.POST.get('board_id') 
-            board = Board.objects.get(id=board_id) # 게시판 정보
-            posts = Post.objects.filter(club_id=club_id, board_id = board_id, title__contains = searched) # 게시판에서 검색한 단어가 포함되는 게시글을 가져옴
-            return render(request, "community/post_list.html", {"posts":posts, "board":board})
-        else: # 메인 화면일 때(헤더바에서 검색했을 때)
-            posts = Post.objects.filter(club_id=club_id, title__contains = searched) # 전체 게시글에서 검색한 단어가 포함되는 게시글만 가져옴
-            return render(request, "community/search_list.html", {"posts":posts, "searched":searched})
-
-
+        if request.POST.get("board_id"):  # 게시판 내부일 때
+            board_id = request.POST.get("board_id")
+            board = Board.objects.get(id=board_id)  # 게시판 정보
+            posts = Post.objects.filter(
+                club_id=club_id, board_id=board_id, title__contains=searched
+            )  # 게시판에서 검색한 단어가 포함되는 게시글을 가져옴
+            return render(
+                request, "community/post_list.html", {"posts": posts, "board": board}
+            )
+        else:  # 메인 화면일 때(헤더바에서 검색했을 때)
+            posts = Post.objects.filter(
+                club_id=club_id, title__contains=searched
+            )  # 전체 게시글에서 검색한 단어가 포함되는 게시글만 가져옴
+            return render(
+                request,
+                "community/search_list.html",
+                {"posts": posts, "searched": searched},
+            )
