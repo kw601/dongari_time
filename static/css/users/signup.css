@@ -1,0 +1,87 @@
+body {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#signup-container {
+    display: flex;
+    flex-direction: column;
+    width: 805px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+h3 {
+    font-size: 32px;
+    padding: 14px 0px 14px 0px;
+    font-weight: bold;
+    text-align: left;
+    color: #333;
+    border-bottom:1px solid #000000;
+}
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 60px 0px 60px;
+    width: 685px;
+    height: 700px;
+    justify-content: center;
+
+}
+
+.form-group {
+    width: 685px;
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:10px 0px 10px 0px;
+}
+
+.form-group label {
+    width: 685px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
+}
+
+.form-group input {
+    width: 685px;
+    height: 50px;
+    padding: 10px 0px 10px 0px;
+    font-size: 14px;
+    border: currentColor;
+    border-radius: 5px;
+    background-color: #FEF9DF; /* Light yellow input fields */
+}
+
+.button-container{
+    width: 685px;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+}
+.button {
+    width: 200px;
+    height: 70px;
+    background-color: #FFCF33; /* Yellow button */
+    color: #000000;
+    font-size: 25px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #f7b324;
+}

@@ -50,3 +50,10 @@ class CustomUserChangeForm(UserChangeForm):
             "phone_num",
             "email",
         ]
+
+
+#아이디찾기
+from django import forms
+
+class FindUsernameForm(forms.Form):
+    name = forms.CharField(label='이름', max_length=20, required=True)

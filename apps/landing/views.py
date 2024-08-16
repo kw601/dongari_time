@@ -1,5 +1,4 @@
 # Create your views here.
-from apps.landing.forms import SignupForm
 from apps.community.forms import ClubAuthForm
 from .models import User, Auth_Club
 from apps.community.models import Club
@@ -20,8 +19,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
-from django.contrib.auth.views import PasswordResetView
-from django.urls import reverse_lazy
+from .forms import FindUsernameForm
+
 
 # Create your views here.
 def main(request):
@@ -62,6 +61,7 @@ def signup(request):
                         name=name,
                         nickname=nickname,
                         phone_num=phone_num,
+                        email=email,
                     )
                     user.save()
                     messages.success(request, "회원가입이 완료되었습니다. 로그인하세요.")
@@ -193,3 +193,21 @@ def club_auth(request):  # 동아리 인증 페이지
                 )
     else:
         return redirect("landing:login")  # 로그인 화면으로 이동
+
+#아이디찾기
+
+def find_username(request):
+    username = None
+    if request.method == 'POST':
+        form = FindUsernameForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            try:
+                user = User.objects.get(name=name)
+                username = user.username
+            except User.DoesNotExist:
+                form.add_error(None, '해당 이름의 사용자를 찾을 수 없습니다.')
+    else:
+        form = FindUsernameForm()
+
+    return render(request, 'users/find_username.html', {'form': form, 'username': username})

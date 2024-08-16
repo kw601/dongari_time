@@ -6,22 +6,15 @@ body {
 
 }
 
-#auth-container{
+#createclub-container {
     display: flex;
     flex-direction: column;
     width: 805px;
     padding: 20px;
     background-color: #fff;
 }
-h3 {
-    font-size: 32px;
-    padding: 14px 0px 14px 0px;
-    font-weight: bold;
-    text-align: left;
-    color: #333;
-    border-bottom:1px solid #000000;
-}
-.auth-form{
+
+.createclub-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,17 +22,5 @@ h3 {
     width: 685px;
     height: 250px;
     justify-content: center;
+
 }
-
-#message-container{
-    display: flex;
-    width: 805px;
-    padding: 20px 60px;
-    width: 687px;
-    display: flex;
-    justify-content: space-around;
-    color: red;
-}
-
-
-

@@ -10,7 +10,7 @@ class User(AbstractUser):
     name = models.CharField("이름", max_length=20, null=False)
     nickname = models.CharField("닉네임", max_length=20, null=False)
     phone_num = models.CharField("전화번호", max_length=20, null=False)
-    email = models.CharField("이메일", max_length=20, null=False)
+    email = models.EmailField("이메일", max_length=50, null=False)
     is_admin = models.BooleanField("동아리장여부", default=False)
 
 
