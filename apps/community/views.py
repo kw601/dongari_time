@@ -45,7 +45,8 @@ def select_club(request):
     if request.user.is_authenticated:
         # 사용자가 가입한 동아리 리스트 가져오기
         user_clubs = Auth_Club.objects.filter(user_id=request.user)
-
+        club_id = request.session.get("club_id")
+        boards = Board.objects.filter(club_id=club_id)
         if request.method == "POST":
             selected_club_id = request.POST.get("club_id")
             club = Club.objects.get(id=selected_club_id)
@@ -54,7 +55,7 @@ def select_club(request):
                 request.session["club_name"] = club.club_name
                 return redirect("community:main")
 
-        return render(request, "community/select_club.html", {"user_clubs": user_clubs})
+        return render(request, "community/select_club.html", {"user_clubs": user_clubs, "boards":boards})
     else:
         return redirect("landing:login")
 
@@ -257,8 +258,9 @@ def create_post(request, board_id):
 
 def create_board(request):
     if request.user.is_authenticated:
-        club_id = request.session.get("clud_id")
+        club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
+        print(f"{boards}")
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
@@ -278,9 +280,7 @@ def create_board(request):
                     return redirect("community:main")
         else:
             form = BoardForm()
-        return render(
-            request, "community/create_board.html", {"form": form, "boards": boards}
-        )
+        return render(request, "community/create_board.html", {"form": form, "boards": boards})
     else:
         return redirect("landing:login")
 
