@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Scrap
 from apps.community.models import Club, Comment, Post
-from apps.landing.models import User
+from apps.landing.models import User, Auth_Club
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -39,5 +40,39 @@ def myscraps(request):
         club_id = request.session.get("club_id")  # 현재 접속한 동아리 pk
         scrapped_posts = Post.objects.filter(scraped_by=request.user, club_id=club_id)
         return render(request, "mypage/myscraps.html", {"posts": scrapped_posts})
+    else:
+        return redirect("landing:login")
+
+def manage_clubs(request):
+    if request.user.is_authenticated:
+        user_clubs = Auth_Club.objects.filter(user_id=request.user)
+        current_club_id = request.session.get('club_id')
+        
+        return render(request, 'mypage/manage_clubs.html', {
+            'user_clubs': user_clubs,
+            'current_club_id': current_club_id
+        })
+    else:
+        return redirect("landing:login")
+
+def delete_club(request):
+    if request.user.is_authenticated:
+        club_id = request.POST.get("club_id")
+        current_club_id = request.session.get('club_id')
+        
+        if club_id == current_club_id:
+            return JsonResponse({
+                'success': False,
+                'message': '현재 접속한 동아리의 삭제는 불가능합니다. 다른 동아리로 이동 후 삭제해주세요.'
+            })
+        
+        if club_id:
+            try:
+                Auth_Club.objects.filter(user_id=request.user, club_id=club_id).delete()
+                return JsonResponse({'success': True})
+            except Exception as e:
+                return JsonResponse({'success': False, 'message': str(e)})
+        
+        return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
     else:
         return redirect("landing:login")
