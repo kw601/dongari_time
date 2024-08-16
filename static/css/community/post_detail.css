@@ -1,127 +1,92 @@
-/* 전체 */
-.p_d_container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+:root {
+    --padding-lr: 8rem;
+    --color-line: #C2C2C2;
+    --color-yellow-1: #FFCF33;
+    --color-yellow-2: #FFD95C;
+    --color-yellow-3: #FFECAD;
+    --color-yellow-4: #FEF9DF;
+    --gap-value: 20px;
+    --padding-value: 8rem;
 }
 
-/* h태그 */
-.p_d_h1 {
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-}
-
-.p_d_h2 {
-    margin: 20px 0 10px 0;
-    color: #333;
-    text-align: center;
-}
-
-.p_d_h3 {
-    margin-top: 20px;
-    color: #333;
-}
-
-.p_d_h3_comment {
-    margin-top: 20px;
-    color: #333;
-    text-align: center;
-}
-
-/* */
-.board_name_box {
-    background-color: #C5DFF8;
-    display: flex;
-    justify-content: center;
-}
-
-.p_d_p {
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-/* hr */
-.hr_1px {
-    margin: 20px 0;
-    border: none;
-    border-top: 1px solid #C5DFF8;
+body {
+    font-family: "Pretendard", sans-serif;
 }
 
 .hr_2px {
-    margin: 20px 0;
-    border: none;
-    border-top: 2px solid #C5DFF8;
+    color: var(--color-line);
+    background-color: var(--color-line);
 }
 
-/* 폼 */
-.p_d_comment_form {
-    margin: 20px 0;
-    display: flex;
-    flex-direction: column;
+a, a > div {
+    text-decoration: none;
+    color: black;
+    font-family: "Pretendard", sans-serif;
+}
+.board_name_box {
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+.detail__container {
+    padding: 4rem 8rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto;
+    gap: var(--gap-value);
     align-items: center;
 }
 
-.p_d_comment_form p {
-    margin-bottom: 10px;
+.state__container{
     display: flex;
+    gap: var(--gap-value);
+}
+
+.state__content{
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
-
-.p_d_comment_form button {
-    display: block;
-    width: 10%;
-    padding: 10px;
-    background-color: #C5DFF8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.like__container, .comment__container, .scrap__container {
+    margin-right: .4rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.like__container > img, .comment__container > img, .scrap__container > img {
+    object-fit: cover;
+    overflow: hidden;
+}
+.icon__description {
+    font-family: "Pretendard", sans-serif;
+}
+.like__description {
+    color: #F24E1E;
+}
+.scrap__description {
+    color: var(--color-yellow-1);
+}
+.comment__description {
+    color: #699BF7;
+}
+/* 포스팅 버튼 컨테이너 */
+.post-actions {
+    display: flex;
 }
 
-.p_d_comment_form button:hover {
-    background-color: #A0BFE0;
-}
 
-/* a 태그 (link) */
-a {
-    display: inline-block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #4A55A2;
-}
+@media (max-width: 767px) {
+    .detail__container {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: var(--gap-value);
+        align-items: flex-start;
+    }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* 댓글 섹션 */
-.p_d_comment-section {
-    margin: 20px 0;
-}
-
-.p_d_comment {
-    margin-bottom: 20px;
-}
-
-.p_d_comment p {
-    margin: 5px 0;
-}
-
-.p_d_comment-author {
-    font-weight: bold;
-    color: #333;
-}
-
-.p_d_image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-    max-height: 500px;
 }

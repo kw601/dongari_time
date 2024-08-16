@@ -22,7 +22,7 @@ def create_club(request):
             if form.is_valid():
                 club = form.save()
                 request.session["club_id"] = club.pk  # 세션에 동아리 고유번호 저장
-                request.session["club_name"] = club.club_name # 세션에 동아리 이름 저장
+                request.session["club_name"] = club.club_name  # 세션에 동아리 이름 저장
                 request.user.is_admin = True
                 request.user.save()
 
@@ -155,6 +155,7 @@ def post_detail(request, board_id, post_id):
                 "likes_count": post.liked_by.count(),
                 "boards": boards,
                 "posts_best": posts_best,
+                "scrap_count": post.scraped_by.count(),
             },
         )
     else:
@@ -341,9 +342,10 @@ def scrap_post(request, post_id):
             is_scraped = True
             post.scrap_cnt += 1
 
-        # scrap_count = post.scraps.count()
-        return JsonResponse({"is_scraped": is_scraped})
-        # return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
+        scrap_count = post.scraps.count()
+        # return JsonResponse({"is_scraped": is_scraped})
+        return JsonResponse({"is_scraped": is_scraped, "scrap_count": scrap_count})
+    # 스크랩 수 만약에 구현하게 되면
     else:
         return redirect("landing:login")
 
