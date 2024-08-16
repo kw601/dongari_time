@@ -1,3 +1,4 @@
 .header__container, .left__container__session, .right__container__session, .center__container__login, .center__container__logout {
     display: flex;
+    background: #ffd95c;
 }

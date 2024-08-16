@@ -11,10 +11,15 @@
 <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
 
 <div class="mypage__container">
-    <h1 class="page__title">마이페이지</h1>
+    <div class="title__container">
+        <h1 class="page__title">마이페이지</h1>
+        <hr class="page__title_hr">
+    </div>
     <div class="decoration__box">
-        <div class="icon__container"></div>
-        <p class="icon__container__text">아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄거예요!</p>
+        <div class="icon__container">😆</div>
+        <div class="icon__container__text">
+            <p>아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄거예요!</p>
+        </div>
     </div>
     <div class="content__container">
         <a href="{% url 'landing:update' %}" class="function__container">
