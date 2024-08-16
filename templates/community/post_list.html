@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-<link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
+
 {% endblock %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
 <div id="post_list">
-    <h1 id="board__title">
-        <a href="{% url 'community:post_list' board.id %}">
-            {{ board.board_name }}
-        </a>
-    </h1>
+    <div class="board-header">
+        <h1 id="board__title">
+            <a href="{% url 'community:post_list' board.id %}">
+                {{ board.board_name }}
+            </a>
+        </h1>
+        {% if user.is_authenticated and user.is_admin %}
+        <div id="delete">
+            <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">게시판 삭제</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
     <div class="search__bar">
         <form class="search" method="POST" action="{% url 'community:search' %}">
             {% csrf_token %}
-            <input type="hidden" name="board_id" value="{{ board.id }}">         
+            <input type="hidden" name="board_id" value="{{ board.id }}">
             <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
             <button class="search-btn" type="submit"> 검색 </button>
         </form>
@@ -26,19 +37,32 @@
         <div id="post-form-container" style="display: none;">
             <form id="post-form" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-success">저장</button>
-                <button type="button" id="cancel-post" class="btn btn-secondary">취소</button>
+
+                <!-- form 수동 설정 -->
+                <div class="form-group">
+                    <label for="id_title">게시글 제목</label>
+                    {{ form.title }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_content">게시글 내용</label>
+                    {{ form.content }}
+                </div>
+
+                <div class="form-group-inline">
+                    {{ form.anonymous }} <label for="id_anonymous">익명</label>
+                </div>
+
+                <div class="form-group-inline">
+                    <label for="id_image">Image</label> {{ form.image }}
+                </div>
+
+                <div class="form-buttons" style="text-align: right;">
+                    <button type="submit" class="btn btn-success">저장</button>
+                    <button type="button" id="cancel-post" class="btn btn-secondary">취소</button>
+                </div>
             </form>
         </div>
-        {% if user.is_authenticated and user.is_admin %}
-        <div id="delete">
-            <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">게시판 삭제</button>
-            </form>
-        </div>
-        {% endif %}
         <ul id="post__ul">
             {% for post in posts %}
             <a href="{% url 'community:post_detail' board.id post.id %}">
@@ -52,7 +76,7 @@
                     <div id="post__description">
                         <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
                         <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
-                        {% if post.board_id.board_name == "공지게시판" %}
+                        {% if board.board_name == "공지게시판" %}
                         <p id="post__user">{{ post.user_id.name }}</p>
                         {% elif post.anonymous is True %}
                         <p id="post__user">익명</p>
@@ -60,15 +84,9 @@
                         <p id="post__user">{{ post.user_id.nickname }}</p>
                         {% endif %}
                         <div id="post__stats">
-                            {% if post.comment_set.count %}
                             <p>댓글 수: {{ post.comment_set.count }}</p>
-                            {% endif %}
-                            {% if post.liked_by.count %}
                             <p>좋아요 수: {{ post.liked_by.count }}</p>
-                            {% endif %}
-                            {% if post.scraped_by.count %}
                             <p>스크랩 수: {{ post.scraped_by.count }}</p>
-                            {% endif %}
                         </div>
                     </div>
                 </li>
@@ -82,10 +100,11 @@
     <ul class="best__ul">
         {% for post in posts_best %}
         {% if post.liked_cnt >= 5 %}
-            <li class="best__li">
-                <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
-            </li>
-                {% endif %}
+        <li class="best__li">
+            <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title
+                    }}</a></div>
+        </li>
+        {% endif %}
         {% endfor %}
     </ul>
 </div>

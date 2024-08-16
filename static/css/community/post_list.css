@@ -3,30 +3,97 @@
 }
 
 #board__title {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    padding: 1rem .5rem;
-    font-size: 1.3rem;
-    border-radius: 0.5rem;
+    padding: .8rem .5rem;
+    margin-top: .5rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: white;
-    background-color: #4A55A2;
+    color: black;
+    background-color: white;
+    text-decoration: none;
 }
 
-#board__container {
+#board__title a {
+    color: black;
+    /* 게시판 제목 색상 */
+    text-decoration: none;
+}
+
+.board-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #c2c2c2;
+    margin-bottom: 0.5rem;
+}
+
+#delete {
+    margin-top: 10px;
+}
+
+#delete button {
+    background-color: #FFCF33;
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 1.6rem;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#delete button:hover {
+    background-color: #ffc400;
+}
+
+.search__bar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
-    position: relative;
+    margin-bottom: 0.5rem;
+    flex-direction: row-reverse;
+}
+
+.search__bar input[type="search"] {
+    flex-grow: 1;
+    border: 1px solid #E0E0E0;
+    border-radius: .5rem;
+    padding: .5rem;
+    background-color: #ffecad;
+}
+
+.search__bar button {
+    background-color: #FFCF33;
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 1.6rem;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search__bar button:hover {
+    background-color: #ffc400;
 }
 
 #new_post,
 #post__ul li {
-    border: 1px solid #C5DFF8;
+    border: 1px solid #E0E0E0;
     border-radius: 0.5rem;
-    padding: 1.1rem 1rem;
+    padding: 1rem;
+    background-color: #F7F7F7;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
 
+#new_post:hover,
+#post__ul li:hover {
+    transform: translateY(-3px);
+}
+
+#new_post {
+    margin: 0.5rem 0;
 }
 
 #new_post a {
@@ -38,6 +105,8 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    list-style: none;
+    padding-left: 0;
 }
 
 #post__ul a {
@@ -49,31 +118,228 @@
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    border-bottom: 1px solid #E0E0E0;
+    padding-bottom: 10px;
 }
 
 #post__title {
     font-size: 1.2rem;
     font-weight: 600;
+    color: #333333;
 }
 
 #post__description {
     display: flex;
-    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #666666;
+}
+
+#post__description p {
+    margin: 0;
+}
+
+#post__description span {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 #post__created,
 #post__user {
-    font-size: .6rem;
+    font-size: 0.75rem;
+    color: #666666;
+}
+
+#post__stats {
+    display: flex;
+    gap: 10px;
+}
+
+#post__stats p {
+    font-size: 0.75rem;
+    color: #333333;
 }
 
 #to_main {
-    background-color: #C5DFF8;
+    background-color: #FFCF33;
     border: none;
     padding: .5rem 1.6rem;
     border-radius: .3rem;
+    margin: 0.5rem 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 #to_main a {
     text-decoration: none;
     color: black;
+    font-weight: 600;
+}
+
+#to_main:hover {
+    background-color: #ffc400;
+}
+
+#post__ul a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form Container */
+#post-form-container {
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    background-color: #F7F7F7;
+    padding: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+#form-button {
+    text-align: right;
+}
+
+/* Form Fields */
+#post-form input[type="text"],
+#post-form textarea,
+#post-form input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    background-color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+#post-form .btn {
+    background-color: #FFCF33;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+#post-form .btn-success:hover,
+#post-form .btn-secondary:hover {
+    background-color: #ffc400;
+}
+
+/* Align Buttons */
+#post-form button {
+    margin-top: 0.5rem;
+}
+
+#post-form label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+/* Form Fields */
+#post-form-container .form-group,
+#post-form-container .form-group-inline {
+    margin-bottom: 1rem;
+}
+
+#post-form-container .form-group-inline {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+#post-form-container label {
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+#post-form-container .form-group-inline label {
+    margin-right: 0;
+}
+
+#post-form-container input[type="text"],
+#post-form-container textarea,
+#post-form-container input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+/* 스타일링된 파일 선택 버튼 */
+#post-form input[type="file"] {
+    padding: 0.5rem 1rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    color: black;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#post-form input[type="file"]::-webkit-file-upload-button {
+    /* background-color: #FFCF33; */
+    color: black;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#post-form input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #FFCF33;
+}
+
+/* New Post Container */
+#new_post {
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #F7F7F7;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#new_post:hover {
+    transform: translateY(-3px);
+    background-color: #FFCF33;
+}
+
+/* New Post Button */
+#new_post .btn {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    padding: 0;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
