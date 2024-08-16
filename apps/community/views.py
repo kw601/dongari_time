@@ -22,6 +22,7 @@ def create_club(request):
             if form.is_valid():
                 club = form.save()
                 request.session["club_id"] = club.pk  # 세션에 동아리 고유번호 저장
+                request.session["club_name"] = club.club_name # 세션에 동아리 이름 저장
                 request.user.is_admin = True
                 request.user.save()
 
@@ -47,8 +48,10 @@ def select_club(request):
 
         if request.method == "POST":
             selected_club_id = request.POST.get("club_id")
+            club = Club.objects.get(id=selected_club_id)
             if selected_club_id:
                 request.session["club_id"] = selected_club_id
+                request.session["club_name"] = club.club_name
                 return redirect("community:main")
 
         return render(request, "community/select_club.html", {"user_clubs": user_clubs})
@@ -297,7 +300,6 @@ def main(request):
             board_posts[board.id] = (
                 posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
             )
-            print(f"{board_posts}")
 
         posts_best = Post.objects.filter(club_id=club)
 
