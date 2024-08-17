@@ -9,10 +9,6 @@
     --padding-value: 8rem;
 }
 
-/*body {
-    font-family: Arial, sans-serif;
-}*/
-
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 body {
@@ -47,7 +43,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-    margin: 3rem var(--padding-value);
+    margin: 1.5rem 8rem 2rem 8rem;
     justify-content: center;
     flex-direction: column;
     /* margin: 1rem;*/
@@ -78,16 +74,21 @@ body {
 .content__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--gap-value);
+    /*gap: var(--gap-value);*/
+    gap: 2rem;
 }
 
 .function__container {
     background-color: var(--color-yellow-3);
+    display: flex;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    /*transition: background-color 0.3s;*/
+    /* transition: background-color 0.3s; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .function__container:hover {
@@ -96,16 +97,17 @@ body {
 
 .func__title {
     font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 900;
+    margin: 15px;
 }
 
 .func__description {
     font-size: 14px;
     color: #555;
+    margin-bottom: 15px;
 }
 
-/*a {
+a {
     text-decoration: none;
     color: inherit;
-}*/
+}
