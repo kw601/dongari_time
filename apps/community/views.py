@@ -22,6 +22,7 @@ def create_club(request):
             if form.is_valid():
                 club = form.save()
                 request.session["club_id"] = club.pk  # 세션에 동아리 고유번호 저장
+                request.session["club_name"] = club.club_name  # 세션에 동아리 이름 저장
                 request.user.is_admin = True
                 request.user.save()
 
@@ -44,14 +45,21 @@ def select_club(request):
     if request.user.is_authenticated:
         # 사용자가 가입한 동아리 리스트 가져오기
         user_clubs = Auth_Club.objects.filter(user_id=request.user)
-
+        club_id = request.session.get("club_id")
+        boards = Board.objects.filter(club_id=club_id)
         if request.method == "POST":
             selected_club_id = request.POST.get("club_id")
+            club = Club.objects.get(id=selected_club_id)
             if selected_club_id:
                 request.session["club_id"] = selected_club_id
+                request.session["club_name"] = club.club_name
                 return redirect("community:main")
 
-        return render(request, "community/select_club.html", {"user_clubs": user_clubs})
+        return render(
+            request,
+            "community/select_club.html",
+            {"user_clubs": user_clubs, "boards": boards},
+        )
     else:
         return redirect("landing:login")
 
@@ -152,6 +160,7 @@ def post_detail(request, board_id, post_id):
                 "likes_count": post.liked_by.count(),
                 "boards": boards,
                 "posts_best": posts_best,
+                "scrap_count": post.scraped_by.count(),
             },
         )
     else:
@@ -235,6 +244,7 @@ def create_post(request, board_id):
                 {
                     "status": "success",
                     "post_id": post.id,
+                    "board_name": board.board_name,
                     "title": post.title,
                     "content": (
                         post.content[:100] + "..."
@@ -242,8 +252,12 @@ def create_post(request, board_id):
                         else post.content
                     ),
                     "created_time": post.created_time.strftime("%Y/%m/%d"),
+                    "user_name": post.user_id.name,
                     "user": post.user_id.nickname if not post.anonymous else "익명",
                     "anonymous": post.anonymous,
+                    "comments_count": post.comment_set.count(),  # 댓글 수 추가
+                    "likes_count": post.liked_by.count(),  # 좋아요 수 추가
+                    "scraps_count": post.scraped_by.count(),  # 스크랩 수 추가
                 }
             )
         else:
@@ -254,7 +268,7 @@ def create_post(request, board_id):
 
 def create_board(request):
     if request.user.is_authenticated:
-        club_id = request.session.get("clud_id")
+        club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
         if request.method == "POST":
             form = BoardForm(request.POST)
@@ -297,7 +311,6 @@ def main(request):
             board_posts[board.id] = (
                 posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
             )
-            print(f"{board_posts}")
 
         posts_best = Post.objects.filter(club_id=club)
 
@@ -339,9 +352,10 @@ def scrap_post(request, post_id):
             is_scraped = True
             post.scrap_cnt += 1
 
-        # scrap_count = post.scraps.count()
-        return JsonResponse({"is_scraped": is_scraped})
-        # return JsonResponse({'is_scraped': is_scraped, 'scrap_count': scrap_count}) 스크랩 수 만약에 구현하게 되면
+        scrap_count = post.scraps.count()
+        # return JsonResponse({"is_scraped": is_scraped})
+        return JsonResponse({"is_scraped": is_scraped, "scrap_count": scrap_count})
+    # 스크랩 수 만약에 구현하게 되면
     else:
         return redirect("landing:login")
 
@@ -468,6 +482,7 @@ def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]  # 검색한 단어
         club_id = request.session.get("club_id")
+        boards = Board.objects.filter(club_id=club_id)
         if request.POST.get("board_id"):  # 게시판 내부일 때
             board_id = request.POST.get("board_id")
             board = Board.objects.get(id=board_id)  # 게시판 정보
@@ -475,7 +490,9 @@ def search(request):
                 club_id=club_id, board_id=board_id, title__contains=searched
             )  # 게시판에서 검색한 단어가 포함되는 게시글을 가져옴
             return render(
-                request, "community/post_list.html", {"posts": posts, "board": board}
+                request,
+                "community/post_list.html",
+                {"posts": posts, "board": board, "boards": boards},
             )
         else:  # 메인 화면일 때(헤더바에서 검색했을 때)
             posts = Post.objects.filter(
@@ -484,5 +501,5 @@ def search(request):
             return render(
                 request,
                 "community/search_list.html",
-                {"posts": posts, "searched": searched},
+                {"posts": posts, "searched": searched, "boards": boards},
             )
