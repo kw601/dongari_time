@@ -270,7 +270,6 @@ def create_board(request):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
-        print(f"{boards}")
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
