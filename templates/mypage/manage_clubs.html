@@ -3,10 +3,20 @@
 
 {% block content %}
 <h1>동아리 관리</h1>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <ul id="club-list">
     {% for auth_club in user_clubs %}
     <li>
         {{ auth_club.club_id.club_name }}
+        <a href="{% url 'mypage:switch_club' auth_club.club_id.id %}">이동</a>
         <button class="delete-club" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
     </li>
     {% endfor %}

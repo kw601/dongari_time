@@ -38,7 +38,6 @@
                 <li class="best__li">
                     <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
                 </li>
-                    {% endif %}
             {% endfor %}
         </ul>
     </div>
