@@ -91,7 +91,7 @@ def switch_club(request, club_id):
             club = Club.objects.get(id=club_id)
             request.session["club_id"] = club_id
             request.session["club_name"] = club.club_name
-            messages.success(request, f'{club.club_name}으로 이동했습니다.')
+            #messages.success(request, f'{club.club_name}으로 이동했습니다.')
             return redirect("community:main")
         else:
             messages.error(request, '해당 동아리에 속해있지 않습니다.')

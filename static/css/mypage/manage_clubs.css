@@ -1,0 +1,66 @@
+#club-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#club-list li {
+    background-color: var(--color-gray-bg);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#club-list li .club-name {
+    font-weight: bold;
+}
+
+#club-list li .button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.switch-club, .delete-club {
+    background-color: var(--color-yellow-1);
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.switch-club:hover, .delete-club:hover {
+    background-color: var(--color-yellow-2);
+}
+
+#message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--color-yellow-4);
+    border-radius: 4px;
+}
+
+.messages {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 1rem;
+}
+
+.messages li {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.messages .success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+}

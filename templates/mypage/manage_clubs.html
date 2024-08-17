@@ -1,27 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>동아리 관리</h1>
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
+<link rel="stylesheet" href="{% static 'css/mypage/manage_clubs.css' %}">
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+<div class="manage_clubs__body">
+    <div class="title__container">
+        <h1 class="page__title">동아리 관리</h1>
+        <hr class="page__title_hr">
+    </div>
 
-<ul id="club-list">
-    {% for auth_club in user_clubs %}
-    <li>
-        {{ auth_club.club_id.club_name }}
-        <a href="{% url 'mypage:switch_club' auth_club.club_id.id %}">이동</a>
-        <button class="delete-club" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
-    </li>
-    {% endfor %}
-</ul>
-<div id="message"></div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <ul id="club-list">
+        {% for auth_club in user_clubs %}
+        <li>
+            <span class="club-name">{{ auth_club.club_id.club_name }}</span>
+            <div class="button-container">
+                <a href="{% url 'mypage:switch_club' auth_club.club_id.id %}" class="switch-club">이동</a>
+                <button class="delete-club" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div id="message"></div>
+</div>
 
 {% csrf_token %}
 <script src="{% static 'js/mypage/manage_clubs.js' %}"></script>
