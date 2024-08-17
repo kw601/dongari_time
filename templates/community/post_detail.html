@@ -9,26 +9,28 @@
     <div class="detail__main">
         <div class="p_d_container">
             <div class="board_name_box">
-                <a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a>
+                <a class="board__name" href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a>
             </div>
-            <hr class="hr_2px">
+            <!-- <hr class="hr_2px"> -->
             <div class="content__container">
-                <div class="comment-author p_d_p">
-                    <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
-                    {% if post.board_id.board_name == "공지게시판" %}
-                    {{ post.user_id.name }}
-                    {% elif post.user_id and not post.anonymous %}
-                    {{ post.user_id.nickname }}
-                    {% else %}
-                    익명
-                    {% endif %}
+                <div class="title__container">
+                    <div class="comment-author p_d_p">
+                        <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+                        {% if post.board_id.board_name == "공지게시판" %}
+                        <div>{{ post.user_id.name }}</div>
+                        {% elif post.user_id and not post.anonymous %}
+                        <div>{{ post.user_id.nickname }}</div>
+                        {% else %}
+                        <div>익명</div>
+                        {% endif %}
+                    </div>
+                    <div class="time__container">{{ post.created_time|date:"Y/m/d h:i" }}</div>
                 </div>
-                <div>{{ post.created_time }}</div>
                 <h2 class="content__title">{{ post.title }}</h2>
+                <p class="p_d_p">{{ post.content }}</p>
                 {% if post.image %}
                 <div class="img__container"><img src="{{ post.image.surl }}" alt="Post Image" class="p_d_image"></div>
                 {% endif %}
-                <p class="p_d_p">{{ post.content }}</p>
                 <div class="state__container">
                     <div class="state__content">
                         <div class="like__container">
@@ -50,119 +52,168 @@
                     </div>
                 </div>
                 <div class="post-actions">
-                    <button id="scrap-btn" data-post-id="{{ post.id }}">
-                        {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
-                    </button>
                     <button id="like-btn" data-post-id="{{ post.id }}" data-is-liked="{{ is_liked|lower }}">
                         {% if is_liked %}좋아요 취소{% else %}좋아요{% endif %}
                         <p id="like-count"></p>
                     </button>
-                    {% if user == post.user_id %}
-                    <form action="{% url 'community:delete_post' post.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">게시글 삭제</button>
-                    </form>
-                    {% endif %}
+                    <button id="scrap-btn" data-post-id="{{ post.id }}">
+                        {% if user in post.scraps.all %}스크랩 취소{% else %}스크랩{% endif %}
+                    </button>
                     {% if user.is_authenticated and user.is_admin %}
                     <form method="post" action="{% url 'community:toggle_pinned' board.id post.id %}">
                         {% csrf_token %}
                         {% if post.pinned %}
-                        <button type="submit">게시글 고정 해제</button>
+                        <button type="submit">고정 해제</button>
                         {% else %}
-                        <button type="submit">게시글 고정</button>
+                        <button type="submit">상단 고정</button>
                         {% endif %}
                     </form>
                     {% endif %}
                 </div>
             </div>
-            <hr class="hr_2px">
-            <h3 class="p_d_h3">댓글</h3>
+            <!-- <hr class="hr_2px"> -->
+            <!-- <h3 class="p_d_h3">댓글</h3> -->
             <div class="p_d_comment_section">
+                <form class="p_d_comment_form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <div class="button__container"><button type="submit" class="submit__button"></button></div>
+                </form>
                 {% for comment in comments %}
                 {% if not comment.parent_id %}
                 <div class="p_d_comment">
-                    <p class="p_d_comment_author">작성자:
+                    <div class="comment__title">
                         <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
                         {% if post.board_id.board_name == "공지게시판" %}
-                        {{ comment.user_id.name }}
+                        <div>{{ comment.user_id.name }}</div>
                         {% elif comment.user_id and not comment.anonymous %}
-                        {{ comment.user_id.nickname }}
+                        <div>{{ comment.user_id.nickname }}</div>
+                        {% elif comment.user_id == post.user_id and comment.anonymous %}
+                        <div>익명(글쓴이)</div>
                         {% else %}
-                        익명
+                        <div>익명</div>
                         {% endif %}
-                        | 작성일시: {{ comment.created_time }}
-                    </p>
+                        <div class="title__buttons">
+                    
+                            <button class="reply__btn" onclick="toggleReplyForm({{ comment.id }})">대댓글</button>
+                            <form action="{% url 'community:delete_comment' comment.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete__btn" type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+                            </form>
+                        </div>
+                    </div>
                     <p>{{ comment.content }}</p>
-                    {% if user == comment.user_id %}
-                    <form action="{% url 'community:delete_comment' comment.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
-                    </form>
-                    {% endif %}
+                    <div class="time__container">{{ comment.created_time|date:"Y/m/d H:i" }}</div>
                     <div class="p_d_reply_section">
-                        <!-- 대댓글 작성 폼 -->
-                        <form class="reply-form" method="post" action="{% url 'community:create_comment' board.id post.id %}">
-                            {% csrf_token %}
-                            <textarea name="content" required></textarea>
-                            <input type="checkbox" name="anonymous"> 익명
-                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                            <button type="submit">대댓글 작성</button>
-                        </form>
         
                         {% for reply in comments %}
                         {% if reply.parent_id == comment %}
                         <div class="p_d_comment_reply">
-                            <p class="p_d_comment_author">작성자:
-                                <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
+                            <div class="comment__title">
+                                    <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
                                 {% if post.board_id.board_name == "공지게시판" %}
-                                {{ reply.user_id.name }}
+                                <div>{{ reply.user_id.name }}</div>
                                 {% elif reply.user_id and not reply.anonymous %}
-                                {{ reply.user_id.nickname }}
+                                <div>{{ reply.user_id.nickname }}</div>
+                                {% elif post.user_id == reply.user_id and reply.anonymous %}
+                                <div>익명(글쓴이)</div>
                                 {% else %}
-                                익명
-                                {% endif %}
-                                | 작성일시: {{ reply.created_time }}
-                            </p>
+                                <div>익명</div>                                    {% endif %}
+                                <div class="title__buttons">
+                                    {% if user == reply.user_id %}
+                                    <form action="{% url 'community:delete_comment' reply.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button class="delete__btn" type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
                             <p>{{ reply.content }}</p>
-                            {% if user == reply.user_id %}
-                            <form action="{% url 'community:delete_comment' reply.id %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
-                            </form>
-                            {% endif %}
+                            <div class="time__container__com">{{ reply.created_time|date:"Y/m/d H:i" }}</div>
                         </div>
                         {% endif %}
                         {% endfor %}
+                        <form class="reply-form" id="reply-form-{{ comment.id }}" method="post" action="{% url 'community:create_comment' board.id post.id %}">
+                            {% csrf_token %}
+                            <div><input class="reply__input" name="content" required /></div>
+                            <div class="anony__div">익명:<input class="anony" type="checkbox" name="anonymous"></div>
+                            <div><input class="hidden__type" type="hidden" name="parent_id" value="{{ comment.id }}"></div>
+                            <button type="submit" class="submit__button"></button>
+                        </form>
                     </div>
                 </div>
-                <hr>
                 {% endif %}
                 {% endfor %}
             </div>
-            <hr class="hr_1px">
         </div>
-        <h3 class="p_d_h3_comment">댓글 작성</h3>
-        <form class="p_d_comment_form" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">댓글 작성</button>
-        </form>
-        <a href="{% url 'community:post_list' board.id %}">게시판 목록</a>
         </div>
-    <div class="best__container">
-        <div class="board__title">베스트 게시글</div>
-            <ul class="best__ul">
-                {% for post in posts_best %}
-                {% if post.liked_cnt >= 5 %}
+    <div class="side__container">
+        <div class="best__container">
+            <div class="board__title">공간이 너무 남아~</div>
+                <ul class="best__ul">
+                    {% for post in posts_best %}
                     <li class="best__li">
-                        <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
+                        <div class="best__name">
+                            <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                                <div>{{ post.title }}</div>
+                                <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                            </a>
+                        </div>
                     </li>
-                        {% endif %}
-                {% endfor %}
-            </ul>
+                    {% endfor %}
+                </ul>
+        </div>
+        <div class="best__container">
+            <div class="board__title">공간 채우기 박스</div>
+                <ul class="best__ul">
+                    {% for post in posts_best %}
+                    <li class="best__li">
+                        <div class="best__name">
+                            <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                                <div>{{ post.title }}</div>
+                                <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+        </div>
+        <div class="best__container">
+            <div class="board__title">베스트 게시글</div>
+                <ul class="best__ul">
+                    {% for post in posts_best %}
+                    <li class="best__li">
+                        <div class="best__name">
+                            <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                                <div>{{ post.title }}</div>
+                                <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+        </div>
+        
     </div>
+    
+    <a class="list__btn" href="{% url 'community:post_list' board.id %}">글 목록</a>
 </div>
 
 <script src="{% static 'js/community/post_detail.js' %}"></script>
+<script>
+    function toggleReplyForm(commentId) {
+        var form = document.getElementById('reply-form-' + commentId);
+        var button = document.querySelector('.reply__btn[onclick="toggleReplyForm(' + commentId + ')"]');
+
+        // 폼의 display 속성을 토글합니다
+        if (form.classList.contains('show')) {
+            form.classList.remove('show'); 
+            button.textContent = '대댓글'; 
+        } else {
+            form.classList.add('show'); 
+            button.textContent = '취소';
+        }
+    }
+</script>
 
 {% endblock content %}
