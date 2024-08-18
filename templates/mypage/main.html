@@ -18,13 +18,13 @@
     </div>
     <div class="content__container">
         <a href="{% url 'landing:update' %}" class="function__container">
-            <h2 class="func__title">닉네임 변경</h2>
+            <h2 class="func__title">회원정보 수정</h2>
             <p class="func__description">당신의 동아리타임 닉네임을 바꿔볼까요?</p>
         </a>
-        <div class="function__container">
+        <a href="{% url 'landing:change_password' %}" class="function__container">
             <h2 class="func__title">비밀번호 변경</h2>
             <p class="func__description">첫 비밀번호는 최대한 어렵게!</p>
-        </div>
+        </a>
         <a href="{% url 'mypage:manage_clubs' %}" class="function__container">
             <h2 class="func__title">내 동아리 관리</h2>
             <p class="func__description">당신이 속한 동아리의 목록을 보고 삭제도 할 수 있어요!</p>

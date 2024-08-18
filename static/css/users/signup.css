@@ -15,12 +15,12 @@ body {
 }
 
 h3 {
-    font-size: 32px;
+    font-size: 3.2rem;
     padding: 14px 0px 14px 0px;
     font-weight: bold;
     text-align: left;
     color: #333;
-    border-bottom:1px solid #000000;
+    border-bottom:1px solid #c2c2c2;
 }
 
 .signup-form{
@@ -28,14 +28,14 @@ h3 {
     flex-direction: column;
     justify-content: center;
     padding: 0px 60px 0px 60px;
-    width: 685px;
+    width: 90%;
     height: 700px;
     justify-content: center;
 
 }
 
 .form-group {
-    width: 685px;
+    width: 90%;
     height: 70px;
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@ h3 {
 }
 
 .form-group label {
-    width: 685px;
+    width: 90%;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -53,7 +53,7 @@ h3 {
 }
 
 .form-group input {
-    width: 685px;
+    width: 90%;
     height: 50px;
     padding: 10px 0px 10px 0px;
     font-size: 14px;
@@ -62,8 +62,24 @@ h3 {
     background-color: #FEF9DF; /* Light yellow input fields */
 }
 
+.message-container{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    padding: 20px 60px;
+    width: 687px;
+    justify-content: space-around;
+    text-decoration: none;
+    text-align: center;
+
+}
+.message-container p{
+    color: blue;
+    margin-bottom: 5px;
+}
+
 .button-container{
-    width: 685px;
+    width: 90%;
     padding: 20px 60px;
     display: flex;
     justify-content: space-around;
@@ -84,4 +100,114 @@ h3 {
 
 .button:hover {
     background-color: #f7b324;
+}
+
+@media (max-width: 767px){
+    body {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+    
+    }
+    #signup-container {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background-color: #fff;
+        width: 100%;
+        align-items: center;
+    }
+    h3 {
+        width: 90%;
+        font-size: 32px;
+        padding: 1.4rem 0rem;
+        font-weight: bold;
+        text-align: left;
+        align-items: center;
+        color: #333;
+        border-bottom:0.1rem solid #c2c2c2;
+        margin-bottom: 0.5rem;
+
+    }
+    .signup-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px 60px 0px 60px;
+        width: 90%;
+        height: 60%;
+        align-items: center;
+    
+    }
+    
+    .form-group {
+        width: 90%;
+        height: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 1rem 0rem;
+    }
+    
+    .form-group label {
+        width: 95%;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #333;
+    }
+    
+    .form-group input {
+        width: 95%;
+        height: 50px;
+        padding: 10px 0px 10px 0px;
+        font-size: 14px;
+        border: currentColor;
+        border-radius: 5px;
+        background-color: #FEF9DF; /* Light yellow input fields */
+    }
+    
+    .message-container{
+        display: flex;
+        flex-direction: column;
+        width: 805px;
+        padding: 20px 60px;
+        width: 687px;
+        justify-content: space-around;
+        text-decoration: none;
+        text-align: center;
+    
+    }
+    .message-container p{
+        color: blue;
+        margin-bottom: 5px;
+    }
+    
+    .button-container{
+        width: 685px;
+        padding: 20px 60px;
+        display: flex;
+        justify-content: space-around;
+        text-decoration: none;
+    }
+    .button {
+        width: 200px;
+        height: 70px;
+        background-color: #FFCF33; /* Yellow button */
+        color: #000000;
+        font-size: 25px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    
+    .button:hover {
+        background-color: #f7b324;
+    }
+    
 }
