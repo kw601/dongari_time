@@ -313,11 +313,21 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0.5rem 1rem;
+        padding: 0 0.5rem;
         background-color: #ffecad;
+    }
+    .board__container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); /* 게시판 아이템 배치 */
+        grid-auto-flow: column;
+        grid-template-rows: repeat(3, auto); /* 최대 4개의 행 */
+        overflow-x: auto; /* 가로 스크롤 활성화 */
+        max-width: 70%; /* 최대 너비 설정 */
+        padding: 0rem 0rem;
+        height: 10rem;
     }
     #button__container {
         flex-shrink: 0; /* 버튼 컨테이너 크기 고정 */
-        margin: 3rem;
+        margin: 0 0;
     }
 }
