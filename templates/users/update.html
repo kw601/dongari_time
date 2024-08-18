@@ -1,25 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/update.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
-        <title>회원정보 수정</title>
-    </head>
-    <body>
+
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/update.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
         <div id="update-container">
-            <div id="update-top">
                 {% if user.is_authenticated and user.id %}
-                <form action="{% url 'landing:delete' user.id %}" method ='POST'>
-                    {% csrf_token %}
-                    <input type="submit" value='회원탈퇴'>
-                </form>
-            </div>
                 <h3>회원정보 수정</h3>
             <form method="post" action="{% url 'landing:update' %}">
                 {% csrf_token %}
@@ -46,8 +33,13 @@
                     </div>
                 </div>
                     <div class="button-container">
-                        <button type="submit" class="button">수정하기</button>
-                    </div>
+                        <button type="submit" class="update-button">수정하기</button>
+                        <form action="{% url 'landing:delete' user.id %}" method ='POST' class="button-container" >
+                            {% csrf_token %}
+                            <button type="submit" value='회원탈퇴' class="update-button">탈퇴하기</button>
+                        </form>
+                </div>
+
     
             </form>
         </div>

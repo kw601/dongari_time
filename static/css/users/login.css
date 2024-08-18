@@ -4,11 +4,21 @@
     flex-direction: column;
     padding: 20px;
     align-items: center;
+    width: 100%;
+    height: 700px;
+    box-sizing: border-box;
 }
-#login-container h3 {
+#login-container form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#login-container h3{
     font-size: 32px;
-    width: 805px;
-    padding: 14px 0px 14px 0px;
+    width: 100%;
+    max-width: 805px;
+    padding: 1rem 0rem;
     font-weight: bold;
     text-align: left;
     color: #333;
@@ -19,22 +29,26 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px 60px 0px 60px;
-    width: 685px;
-    justify-content: center;
+    margin:40px 20px 20px 20px;
+    width: 100%;
+    max-width: 685px;
+    box-sizing: border-box;
 }
 .find-container{
+    width: 60%;
+    padding: 30px;
     display: flex;
-    width: 805px;
+    flex-direction: row;
 }
 
 .find-form{
-    padding: 20px 60px;
-    width: 687px;
+    width: 80%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
-
+.find-form p{
+    justify-content: ceter;
+}
 .find-form a{
     font-size: 20px;
     text-decoration: none;
@@ -42,62 +56,37 @@
 }
 
 
-#button-container{
-    padding: 20px;
-    width: 805px;
-    display: flex;
-    justify-content: space-around;
-}
 
 @media (max-width: 767px){
     #login-container{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
         padding: 0px;
     }
     #login-container h3 {
-        width: 95%;
-        font-size: 2rem;
-        margin: 1rem 2rem;
-        font-weight: bold;
-        text-align: left;
-        color: #333;
-        border-bottom:1px solid #c2c2c2;
+        font-size: 24px;
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+        text-align: center;
     }
     
     .login-form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0px 60px 0px 60px;
-        height: 100%;
-        align-items: center;
+        padding: 0;
+        width: 100%;
     }
     
     .find-container{
-        display: flex;
-        width: 805px;
+        width: 100%;
     }
     
     .find-form{
-        padding: 20px 60px;
-        width: 687px;
-        display: flex;
-        justify-content: space-around;
+        width: 100%;
     }
     
     .find-form a{
-        font-size: 20px;
+        font-size: 15px;
         text-decoration: none;
         color: #000000;
     }
     
-    
-    #button-container{
-        padding: 20px;
-        width: 805px;
-        display: flex;
-        justify-content: space-around;
-    }
+
 }
