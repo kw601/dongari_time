@@ -13,7 +13,7 @@
 }
 
 .update-form-container {
-    width: 30rem;
+    width: 100%;
 }
 
 .form-group {
@@ -72,4 +72,42 @@
 
 #button:hover {
     background-color: #FFCF33;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 1024px) {
+    .update-form {
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .update-form {
+        padding: 0;
+    }
+}
+
+@media (max-width: 570px) {
+    .button-container {
+        margin-top: 0rem;
+        margin-left: 10px;
+    }
+
+    .button {
+        font-size: 10px;
+        padding: 7px 12px;
+    }
+
+    #button {
+        font-size: 10px;
+        padding: 7px 12px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
 }
