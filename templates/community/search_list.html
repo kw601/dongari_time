@@ -1,51 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
-<link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% endblock %}
+
 {% block content %}
-<div id="post_list">
-    <h1 id="board__title">'{{ searched }}' 검색 결과</h1>
-    <div id="board__container">
-        <ul id="post__ul">
-            {% for post in posts %}
-            <a href="{% url 'community:post_detail' post.board_id.pk post.id %}">
-                <li>
-                    {% if post.pinned %}
-                    <h2 id="post__title">(고정) &#9758 {{ post.title }} &#9756</h2>
-                    {% else %}
-                    <h2 id="post__title">{{ post.title }}</h2>
-                    {% endif %}
-                    <p id="post__content">{{ post.content|truncatewords:20 }}</p>
-                    <div id="post__description">
-                        <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
-                        <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
-                        {% if post.board_id.board_name == "공지게시판" %}
-                        <p id="post__user">{{ post.user_id.name }}</p>
-                        {% elif post.anonymous is True %}
-                        <p id="post__user">익명</p>
-                        {% else %}
-                        <p id="post__user">{{ post.user_id.nickname }}</p>
-                        {% endif %}
-                        <div id="post__stats">
-                            {% if post.comment_set.count %}
-                            <p>댓글 수: {{ post.comment_set.count }}</p>
-                            {% endif %}
-                            {% if post.liked_by.count %}
-                            <p>좋아요 수: {{ post.liked_by.count }}</p>
-                            {% endif %}
-                            {% if post.scraped_by.count %}
-                            <p>스크랩 수: {{ post.scraped_by.count }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                </li>
-            </a>
-            {% endfor %}
-        </ul>
-        <button id="to_main"><a href="{% url 'community:main' %}">동아리 메인</a></button>
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
+<link rel="stylesheet" href="{% static 'css/mypage/myposts.css' %}">
+
+<div class="manage_clubs__body">
+  <div class="title__container">
+    <h1 class="page__title">'{{ searched }}' 검색 결과</h1>
+    <hr class="page__title_hr">
+  </div>
+
+  {% if posts %}
+  <div class="posts_body">
+    <ul>
+      {% for post in posts %}
+      <a href="{% url 'community:post_detail' post.board_id.pk post.id %}">
+        <li>
+          <div class="post-title">{{ post.title }}</div>
+          <div class="post-date">{{ post.created_time }}</div>
+        </li>
+      </a>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% else %}
+  <div class="decoration__box">
+    <div class="icon__container">🥲</div>
+    <div class="icon__container__text">
+        <p>'{{ searched }}'에 대한 검색 결과가 없습니다</p>
     </div>
+  </div>
+  {% endif %}
 </div>
-<script src="{% static 'js/community/post_list.js' %}"></script>
 {% endblock %}

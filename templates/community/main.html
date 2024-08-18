@@ -18,7 +18,7 @@
                     <a href="{% url 'community:post_detail' board.id post.id %}">
                         <li id="posts__li">
                             <h2 id="post__name">
-                                {{ post.title }}
+                                {{ post.title|truncatechars:10 }}
                             </h2>
                             <h2 id="post__date">
                                 {{ post.created_time|date:"n/j" }}
