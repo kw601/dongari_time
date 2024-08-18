@@ -50,16 +50,6 @@ h3 {
     color: #000000;
 }
 
-.message-container{
-    display: flex;
-    width: 805px;
-    padding: 20px 60px;
-    width: 687px;
-    display: flex;
-    justify-content: space-around;
-    color: red;
-    text-decoration: none;
-}
 
 #button-container{
     padding: 20px;

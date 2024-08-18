@@ -1,8 +1,7 @@
+{% extends 'base.html' %}
 {% load static %}
-{% block content %}
 
-<!DOCTYPE html>
-<html lang="ko">
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
     <title>회원가입</title>
 </head>
-<body>
+
     <div id="signup-container">
         <h3>회원가입</h3>
         <form method="post" action="{% url 'landing:signup' %}">
@@ -18,7 +17,6 @@
             <div class = "signup-form">
                 <div class="form-group">
                     <label for="username">아이디</label>
-                    {{ form.username.errors }}
                     <input type="text" name="username" id="username" minlength="4" maxlength="15" placeholder="4~15글자 입력" value="{{ form.username.value|default_if_none:'' }}">
                 </div>
                 <div class="form-group">
@@ -46,19 +44,19 @@
                     <input type="email" name="email" id="email" placeholder="email" value="{{ form.email.value|default_if_none:'' }}">
                 </div>
             </div>
-            <div id="message-container">
-                {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+            {% if form.errors %}
+            <div class="message-container">
+                <p>다음 항목에 오류가 있습니다. 입력 정보를 확인해 주세요.</p>
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ errors|striptags }}</li>
+                        {% endfor %}
+                    </ul>
             </div>
+            {% endif %}
             <div class="button-container">
                 <button type="submit" class="button">회원가입</button>
             </div>
-
         </form>
     </div>
 
@@ -76,7 +74,4 @@
             e.target.value = formattedValue;
         });
     </script>
-</body>
-</html>
-
-{% endblock %}
+    {% endblock content %}

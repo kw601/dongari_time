@@ -13,6 +13,13 @@
     </head>
     <body>
         <div id="update-container">
+            <div id="update-top">
+                {% if user.is_authenticated and user.id %}
+                <form action="{% url 'landing:delete' user.id %}" method ='POST'>
+                    {% csrf_token %}
+                    <input type="submit" value='회원탈퇴'>
+                </form>
+            </div>
                 <h3>회원정보 수정</h3>
             <form method="post" action="{% url 'landing:update' %}">
                 {% csrf_token %}
@@ -58,7 +65,12 @@
                 e.target.value = formattedValue;
             });
         </script>
+        {% else %}
+        <p>로그인이 필요합니다.</p>
+        {% endif %}
+    </div>
+{% endblock content %}
     </body>
     </html>
-{% endblock content%}
+
 

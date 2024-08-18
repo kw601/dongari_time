@@ -19,8 +19,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
-from .forms import FindUsernameForm
-
+from .forms import FindUsernameForm,SignupForm
+from django.urls import reverse
 
 # Create your views here.
 def main(request):
@@ -42,40 +42,20 @@ User = get_user_model()
 
 
 def signup(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password1 = request.POST.get("password1")
-        password2 = request.POST.get("password2")
-        name = request.POST.get("name")
-        nickname = request.POST.get("nickname")
-        phone_num = request.POST.get("phone_num")
-        email = request.POST.get("email")
-        if password1 == password2:
-            if User.objects.filter(email=email).exists():
-                messages.error(request, "이미 사용 중인 이메일입니다.")
-            else:
-                try:
-                    user = User.objects.create_user(
-                        username=username,
-                        password=password1,
-                        name=name,
-                        nickname=nickname,
-                        phone_num=phone_num,
-                        email=email,
-                    )
-                    user.save()
-                    messages.success(request, "회원가입이 완료되었습니다. 로그인하세요.")
-                    return redirect("landing:login")
-                except IntegrityError as e:
-                    # Handle specific database errors (e.g., unique constraint violations)
-                    messages.error(request, f"입력칸을 다시 한번 확인해주세요")
-                except Exception as e:
-                    # Handle general exceptions
-                    messages.error(request, f"알 수 없는 오류가 발생했습니다.")
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            storage = messages.get_messages(request)
+            storage.used = True 
+            messages.success(request, "회원가입이 완료되었습니다. 로그인하세요.")
+            return redirect('landing:login')
         else:
-            messages.error(request, "비밀번호가 일치하지 않습니다.")
+            messages.error(request, "회원가입 중 오류가 발생했습니다. 입력 정보를 확인하세요.")
+    else:
+        form = SignupForm()
 
-    return render(request, "users/signup.html")
+    return render(request, 'users/signup.html', {'form': form})
 
 
 # 회원탈퇴
@@ -135,10 +115,17 @@ def change_password(request):
     if form.is_valid():
       user = form.save()
       update_session_auth_hash(request, user)
-      messages.success(request, 'Password successfully changed')
+      messages.success(request, '비밀번호가 성공적으로 변경되었습니다.')
       return redirect('landing:login')
     else:
-      messages.error(request, 'Password not changed')
+        for field, errors in form.errors.items():
+            for error in errors:
+                if field == 'old_password' and 'incorrect' in error.lower():
+                    messages.error(request, '기존 비밀번호가 올바르지 않습니다.')
+                elif field == 'new_password2' and 'do not match' in error.lower():
+                    messages.error(request, '새 비밀번호와 비밀번호 확인이 일치하지 않습니다.')
+                else:
+                        messages.error(request, error)
   else:
     form = PasswordChangeForm(request.user)
   return render(request, 'users/change_password.html',{"form": form})
@@ -203,12 +190,19 @@ def find_username(request):
         form = FindUsernameForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
             try:
-                user = User.objects.get(name=name)
+                user = User.objects.get(name=name, email=email)
                 username = user.username
+                return redirect(reverse('landing:find_username_result') + f'?username={username}')
             except User.DoesNotExist:
-                form.add_error(None, '해당 이름의 사용자를 찾을 수 없습니다.')
+                form.add_error(None, '해당 이름과 이메일로 사용자를 찾을 수 없습니다.')
+            except User.MultipleObjectsReturned:
+                form.add_error(None, '해당 이름과 이메일로 여러 사용자가 검색되었습니다.')
     else:
         form = FindUsernameForm()
-
     return render(request, 'users/find_username.html', {'form': form, 'username': username})
+
+def find_username_result(request):
+    username = request.GET.get('username', None)
+    return render(request, 'users/find_username_result.html', {'username': username})
