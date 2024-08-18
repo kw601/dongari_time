@@ -29,7 +29,10 @@
             </div>
             <div class="find-container">
                 <div class ="find-form">
-                    <p><a href='{% url "landing:change_password" %}'>아이디/비밀번호 찾기</a></p>
+                    <p><a href='{% url "landing:find_username" %}'>아이디 찾기</a></p>
+                </div>
+                <div class ="find-form">
+                    <p><a href='{% url "password_reset" %}'>비밀번호 찾기</a></p>
                 </div>
                 <div class ="find-form">
                     <p><a href='{% url "landing:signup" %}'>회원가입</a></p>

@@ -16,5 +16,6 @@ urlpatterns = [
     path("club_auth/", club_auth, name="club_auth"),
 
     path('find_username/', find_username, name='find_username'),
+    path('find_username_result/',find_username_result, name='find_username_result'),
 ]
 

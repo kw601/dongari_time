@@ -18,7 +18,7 @@
 
 #boards__li {
     margin-top: 10px;
-    border: 1px solid #ffecad;
+    border: 2px solid #ffecad;
     border-radius: 10px;
 }
 
@@ -37,7 +37,7 @@
     color: black;
     font-weight: bold;
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin: 5px;
 }
 
 #posts__ul {
@@ -46,8 +46,8 @@
     padding: 0px 3rem;
 }
 
-#posts__ul a {
-    border: 1px solid #ffecad;
+#posts__ul a{
+    border: 2px solid #ffecad;
     padding: 5px 5px;
     margin-bottom: 15px;
     border-radius: 10px;
@@ -58,6 +58,7 @@
 
 #posts__ul a:hover {
     background-color: #ffe285;
+
 }
 
 #posts__li {
@@ -75,4 +76,16 @@
     color: black;
     font-weight: 600;
     font-size: 0.8rem;
+}
+@media (max-width: 767px) {
+    #boards__container {
+        background-color: white;
+        margin: 0 0;
+    }
+    #boards__ul {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        margin: 0 2rem;
+    }
 }
