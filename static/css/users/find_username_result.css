@@ -5,8 +5,7 @@ body {
     align-items: center;
 
 }
-
-#passwordreset-container{
+#usernameresult-container {
     display: flex;
     flex-direction: column;
     width: 805px;
@@ -14,21 +13,23 @@ body {
     background-color: #fff;
 }
 
-#inputemail-container{
-    display: flex;
-    width: 805px;
-    padding: 20px 60px;
-    width: 687px;
-    display: flex;
-    justify-content: space-around;
-    color: blue;
-    text-decoration: none;
-}
-.passwordreset-form{
+.usernameresult-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px 60px 0px 60px;
+    padding: 0px 60px 0px 60px;
     width: 685px;
+    height: 250px;
     justify-content: center;
+}
+
+.usernameresult-form p{
+    font-size: 20px;
+    text-align: center;
+}
+
+.usernameresult-form strong{
+    font-size: 20px;
+    text-align: center;
+    color:#FFCF33;
 }

@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/find_username.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/find_username.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
     <title>아이디찾기</title>
 </head>
 <body>
@@ -19,11 +19,15 @@
             <div class="findusername-form">
                 <div class="form-group">
                     <label for="name">사용자 이름</label>
-                    <input type="text" name="name" id="name" placeholder="실명으로 입력" value="{{ form.name.value|default_if_none:'' }}">
+                    <input type="text" name="name" id="name" placeholder="실명" value="{{ form.name.value|default_if_none:'' }}">
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" name="email" id="email" placeholder="이메일" value="{{ form.email.value|default_if_none:'' }}">
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="button">아이디 찾기</button>
+                <button type="submit" class="button" a href = "{% url 'landing:find_username_result'%}">아이디 찾기</button>
             </div> 
             <div class ="message-container">
                 {% if username %}
@@ -37,4 +41,3 @@
 </html>
 
 {% endblock %}
-햐
