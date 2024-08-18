@@ -1,9 +1,7 @@
 body {
-
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 #findusername-container {
@@ -20,7 +18,7 @@ body {
     justify-content: center;
     padding: 0px 60px 0px 60px;
     width: 685px;
-    height: 160px;
+    height: 250px;
     justify-content: center;
 }
 .message-container{
