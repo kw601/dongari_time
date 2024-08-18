@@ -4,10 +4,12 @@
     min-height: 100%;
     padding-bottom: 120px;
 }
+
 #boards__container {
     background-color: white;
     margin: 1rem 130px;
 }
+
 #boards__ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -19,14 +21,17 @@
     border: 1px solid #ffecad;
     border-radius: 10px;
 }
+
 #board__name {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 #boards__ul li h2 {
     padding: 10px;
 }
+
 #boards__ul li h2 a {
     text-decoration: none;
     color: black;
@@ -34,12 +39,14 @@
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
-#posts__ul{
+
+#posts__ul {
     display: flex;
     flex-direction: column;
     padding: 0px 3rem;
 }
-#posts__ul a{
+
+#posts__ul a {
     border: 1px solid #ffecad;
     padding: 5px 5px;
     margin-bottom: 15px;
@@ -48,19 +55,23 @@
     transition: 0.3s ease;
     box-shadow: 0 1px 5px rgba(255, 255, 0, 0.3);
 }
-#posts__ul a:hover{
-    background-color: #FBFFDB;
+
+#posts__ul a:hover {
+    background-color: #ffe285;
 }
-#posts__li{
+
+#posts__li {
     display: flex;
     justify-content: space-between;
 }
-#post__name{
+
+#post__name {
     color: black;
     font-weight: 600;
     font-size: 1rem;
 }
-#post__date{
+
+#post__date {
     color: black;
     font-weight: 600;
     font-size: 0.8rem;
