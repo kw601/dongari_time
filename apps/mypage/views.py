@@ -82,8 +82,6 @@ def delete_club(request):
         return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
     else:
         return redirect("landing:login")
-    
-from django.contrib import messages
 
 def switch_club(request, club_id):
     if request.user.is_authenticated:
@@ -94,7 +92,6 @@ def switch_club(request, club_id):
             #messages.success(request, f'{club.club_name}으로 이동했습니다.')
             return redirect("community:main")
         else:
-            messages.error(request, '해당 동아리에 속해있지 않습니다.')
             return redirect("mypage:manage_clubs")
     else:
         return redirect("landing:login")
