@@ -180,8 +180,12 @@ a {
         --padding-value: 2rem;
     }
 
+    .title__container {
+        padding: 0;
+    }
+
     .decoration__box {
-        margin: 2rem 2rem;
+        margin: 2rem 0;
     }
 
     .content__container__1 {
@@ -207,7 +211,7 @@ a {
     }
 
     .mypage__body {
-        padding: 0 4rem;
+        padding: 0 8rem;
     }
 
     .page__title {
@@ -246,9 +250,9 @@ a {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 570px) {
     .mypage__body {
-        padding: 0 2rem;
+        padding: 0 6rem;
     }
 
     .page__title {

@@ -52,7 +52,11 @@ a {
     }
 
     .manage_clubs__body {
-        padding: 0 4rem;
+        padding: 0 8rem;
+    }
+
+    .posts_body {
+        padding: 0;
     }
 }
 
@@ -78,9 +82,9 @@ a {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 570px) {
     .manage_clubs__body {
-        padding: 0 4rem;
+        padding: 0 6rem;
     }
 
     .posts_body {

@@ -49,10 +49,6 @@ a {
 
 /* 반응형 스타일 */
 @media (max-width: 1200px) {
-    :root {
-        --padding-value: 4rem;
-    }
-
     
 }
 
@@ -71,16 +67,12 @@ a {
 }
 
 @media (max-width: 768px) {
-    :root {
-        --padding-value: 1rem;
-    }
-
     
 }
 
 @media (max-width: 570px) {
     .manage_clubs__body {
-        padding: 0 4rem;
+        padding: 0 6rem;
     }
 
     .page__title {
