@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/landing/landing.css' %}" />
-
 </head>
 
 <body>
@@ -19,55 +18,63 @@
                 <p>단체 방의 혼잡함에서 벗어나 누리는 자유</p>
             </div>
         </div>
-        <div id="select__container">
-            <button id="btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
-            <button id="btn"><a href="{% url 'landing:login' %}">로그인</a></button>
+        <div class="select__container">
+            <button id="signup_btn"><a href="{% url 'landing:signup' %}">회원가입</a></button>
+            <button id="login_btn"><a href="{% url 'landing:login' %}">로그인</a></button>
         </div>
-        <div>
-            여기에 그 아이콘 넣기
+        <div class="main__img__container">
+            <img src="../../static/image/temp_icon_landing.png" alt="">
         </div>
 
        <div class="function__container">
             <div class="description__left">
                 <div class="function__description">
                     <div class="function__icon">
-                        icon
+                        <img src="../../static/image/landing_icon1.png" alt="">
                     </div>
                     <div class="function__name">동아리원 인증</div>
-                    <div class="funcion__detail">인증받은 동아리원만 접근 가능한 안전한 웹사이트를 제공해요</div>
+                    <div class="function__detail">인증받은 동아리원만 접근 가능한 안전한 웹사이트를 제공해요</div>
                 </div>
-                <div class="function__img">여기에 사진</div>
+                <div class="function__img__right">
+                    <img src="../../static/image/promotion_piro.png" alt="">
+                </div>
             </div>
             
             <div class="description__right">
-                <div class="function__img">여기에 사진</div>
+                <div class="function__img__left">
+                    <img src="../../static/image/promotion_piro.png" alt="">
+                </div>
                 <div class="function__description">
                     <div class="function__icon">
-                        icon
+                        <img src="../../static/image/landing_icon2.png" alt="">
                     </div>
                     <div class="function__name">올인원 - 페이지</div>
-                    <div class="funcion__detail">여러 개의 채팅 방 대신 하나의 페이지에서 동아리원과 소통해요</div>
+                    <div class="function__detail">여러 개의 채팅 방 대신 하나의 페이지에서 동아리원과 소통해요</div>
                 </div>
             </div>
             <div class="description__left">
                 <div class="function__description">
                     <div class="function__icon">
-                        icon
+                        <img src="../../static/image/landing_icon3.png" alt="">
                     </div>
-                    <div class="function__name">동아리원 인증</div>
-                    <div class="funcion__detail">인증받은 동아리원만 접근 가능한 안전한 웹사이트를 제공해요</div>
+                    <div class="function__name">1:N 동아리 관리</div>
+                    <div class="function__detail">여러 개의 동아리 페이지를 한 번에 접속하고 관리해요</div>
                 </div>
-                <div class="function__img">여기에 사진</div>
+                <div class="function__img__right">
+                    <img src="../../static/image/promotion_piro.png" alt="">
+                </div>
             </div>
             
             <div class="description__right">
-                <div class="function__img">여기에 사진</div>
+                <div class="function__img__left">
+                    <img src="../../static/image/promotion_piro.png" alt="">
+                </div>
                 <div class="function__description">
                     <div class="function__icon">
-                        icon
+                        <img src="../../static/image/landing_icon4.png" alt="">
                     </div>
-                    <div class="function__name">올인원 - 페이지</div>
-                    <div class="funcion__detail">여러 개의 채팅 방 대신 하나의 페이지에서 동아리원과 소통해요</div>
+                    <div class="function__name">동아리만의 커뮤니티</div>
+                    <div class="function__detail">동아리의, 동아리에 의한, 동아리를 위한 커뮤니티를 즐겨요</div>
                 </div>
             </div>
 
@@ -75,43 +82,64 @@
 
 
             <div class="service__container">
-                <div class="title">서비스</div>
-                <div class="description">일부 기능은 구현 중입니다.</div>
+                <div class="service__title">서비스</div>
+                <div class="description"><p>일부 기능은 구현 중입니다.</p></div>
                 <div class="service__content">
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_1.png" alt="">
+                        </div>
                         <div class="service__name">동아리 생성</div>
                         <div class="service__detail">동아리원과 소통할 수 있는 사이트를 개설할 수 있습니다.</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_2.png" alt="">
+                        </div>
                         <div class="service__name">동아리 인증</div>
-                        <div class="service__detail">인증받은 동아리원만 동아리 사이트에 접속할 수 있습니다.</div>
+                        <div class="service__detail">인증받은 동아리원만 동아리 사이트에 접속할 수 있어요.</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_3.png" alt="">
+                        </div>                        
                         <div class="service__name">게시판 생성</div>
-                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있어요.</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
-                        <div class="service__name">게시판 생성</div>
-                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_4.png" alt="">
+                        </div>
+                        <div class="service__name">웹 알림</div>
+                        <div class="service__detail">어플을 설치하지 않아도 알림을 수신할 수 있어요.</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
-                        <div class="service__name">게시판 생성</div>
-                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_5.png" alt="">
+                        </div>
+                        <div class="service__name">베스트 게시판</div>
+                        <div class="service__detail">동아리원 사이에서 인기있는 게시글을 한 번에 모아보세요.</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
-                        <div class="service__name">게시판 생성</div>
-                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_6.png" alt="">
+                        </div>
+                        <div class="service__name">스크랩</div>
+                        <div class="service__detail">다시 보고 싶은 글을 한 곳에 모아서 관리하세요</div>
                     </div>
                     <div class="services">
-                        <div class="service__icon">아이콘</div>
-                        <div class="service__name">게시판 생성</div>
-                        <div class="service__detail">누구든 자유롭게 게시판을 생성할 수 있습니다.</div>
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_7.png" alt="">
+                        </div>
+                        <div class="service__name">일정 관리</div>
+                        <div class="service__detail">동아리의 일정을 쉽게 관리할 수 있어요.</div>
+                    </div>
+                    <div class="services">
+                        <div class="service__icon">
+                            <img src="../../static/image/landing_service_8.png" alt="">
+                        </div>
+                        <div class="service__name">익/실명 채팅</div>
+                        <div class="service__detail">동아리원끼리 익명과 실명으로 채팅을 나눌 수 있어요.</div>
                     </div>
                 </div>
             </div>

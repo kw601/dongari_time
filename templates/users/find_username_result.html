@@ -1,0 +1,27 @@
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/find_username_result.css' %}">
+    <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
+    <title>아이디찾기</title>
+</head>
+<body>
+    <div id = "usernameresult-container">
+        <h3>아이디 찾기</h3>
+            <div class="usernameresult-form">
+                {% if username %}
+                    <p>찾으신 아이디는 <strong>{{ username }}</strong> 입니다.</p>
+                {% else %}
+                    <p>아이디를 찾을 수 없습니다.</p>
+                {% endif %}
+            </div>
+    </div>
+</body>
+</html>
+{% endblock %}

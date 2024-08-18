@@ -1,10 +1,10 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 # Create your models here.
 class Club(models.Model):  # 동아리
-    club_name = models.CharField("동아리명", max_length=255)
-    club_intro = models.CharField("동아리 소개", max_length=255)
+    club_name = models.CharField("동아리명", max_length=255, unique=True)
     club_num = models.CharField(
         "동아리 인증 번호", max_length=255, unique=True, null=False
     )
@@ -34,8 +34,14 @@ class Post(models.Model):  # 게시글
     created_time = models.DateTimeField("작성 시각", auto_now_add=True)
     image = models.ImageField(upload_to="post_images/", null=True, blank=True)
     pinned = models.BooleanField("게시글 고정 여부", default=False)
-    liked_by = models.ManyToManyField(get_user_model(), related_name='liked_posts', blank=True)
-    scraped_by = models.ManyToManyField(get_user_model(), through='mypage.Scrap', related_name='scraped_posts')
+    liked_by = models.ManyToManyField(
+        get_user_model(), related_name="liked_posts", blank=True
+    )
+    liked_cnt = models.IntegerField(default=0)
+    scrap_cnt = models.IntegerField(default=0)
+    scraped_by = models.ManyToManyField(
+        get_user_model(), through="mypage.Scrap", related_name="scraped_posts"
+    )
 
     def __str__(self):
         return self.title

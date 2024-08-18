@@ -15,9 +15,7 @@ urlpatterns = [
     path('change_password/',change_password, name="change_password"),
     path("club_auth/", club_auth, name="club_auth"),
 
-    #path('password_reset/', auth_views.PasswordResetView.as_view(template_name='registration/password_reset_form.html'), name='password_reset_form'),
-    #path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'), name='password_reset_done'),
-    #path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
-    #path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+    path('find_username/', find_username, name='find_username'),
+    path('find_username_result/',find_username_result, name='find_username_result'),
 ]
 

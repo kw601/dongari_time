@@ -1,0 +1,23 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+:root {
+    --padding-lr: 8rem;
+    --color-line: #C2C2C2;
+    --color-yellow-1: #FFCF33;
+    --color-yellow-2: #FFD95C;
+    --color-yellow-3: #FFECAD;
+    --color-yellow-4: #FEF9DF;
+    --gap-value: 20px;
+    --padding-value: 8rem;
+}
+
+.footer_content {
+    height: 120px;
+    width: 100%;
+    position :relative;
+    bottom: 0;
+    background-color: #f9f9f9;
+    font-family: "Pretendard", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

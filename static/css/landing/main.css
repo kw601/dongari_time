@@ -1,0 +1,67 @@
+:root {
+    --padding-lr: 8rem;
+    --color-line: #C2C2C2;
+    --color-yellow-1: #FFCF33;
+    --color-yellow-2: #FFD95C;
+    --color-yellow-3: #FFECAD;
+    --color-yellow-4: #FEF9DF;
+    --gap-value: 20px;
+    --padding-value: 8rem;
+}
+.main__container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-value);
+    padding: 0 var(--padding-value);
+    justify-content: center;
+    align-items: center;
+    box-sizing:border-box;
+}
+
+.description {
+    text-align: center;
+}
+
+.select__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+#admin_btn, #auth_btn, #select_btn {
+    border: 2px solid var(--color-yellow-1);
+    background-color: var(--color-yellow-1);
+    border-radius: 1.2rem;
+    width: 7rem;
+    height: 3.2rem;
+}
+
+#admin_btn > a, #auth_btn > a, #select_btn > a{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
+
+@media (max-width: 767px) {
+    body {
+        box-sizing:border-box;
+    }
+    .main__container {
+        box-sizing:border-box; 
+        padding: 3rem;
+    }
+    .select__container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+}
