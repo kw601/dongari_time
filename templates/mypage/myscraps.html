@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
   <h2>내가 스크랩한 게시글</h2>
   {% if posts %}
     <ul>
