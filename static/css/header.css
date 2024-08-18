@@ -193,7 +193,7 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-width: 150px; /* 최소 너비 설정 */
 }
 #main_board__name a {
