@@ -108,7 +108,7 @@
         
                         {% for reply in comments %}
                         {% if reply.parent_id == comment %}
-                        <div class="p_d_comment_reply">
+                        <div class="p_d_comment_reply" id="p_d_comment_reply_{{ reply.id }}">
                             <div class="comment__title">
                                     <!-- 공지게시판일 경우 무조건 실명으로 표시 -->
                                 {% if post.board_id.board_name == "공지게시판" %}
@@ -138,7 +138,7 @@
                             <div><input class="reply__input" name="content" required /></div>
                             <div class="anony__div">익명:<input class="anony" type="checkbox" name="anonymous"></div>
                             <div><input class="hidden__type" type="hidden" name="parent_id" value="{{ comment.id }}"></div>
-                            <button type="submit" class="submit__button"></button>
+                            <div class="button__container"><button type="submit" class="submit__button"></button></div>
                         </form>
                     </div>
                 </div>
@@ -204,7 +204,7 @@
     function toggleReplyForm(commentId) {
         var form = document.getElementById('reply-form-' + commentId);
         var button = document.querySelector('.reply__btn[onclick="toggleReplyForm(' + commentId + ')"]');
-
+        
         // 폼의 display 속성을 토글합니다
         if (form.classList.contains('show')) {
             form.classList.remove('show'); 
