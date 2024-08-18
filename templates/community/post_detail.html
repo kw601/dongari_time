@@ -96,10 +96,12 @@
                         <div class="title__buttons">
                     
                             <button class="reply__btn" onclick="toggleReplyForm({{ comment.id }})">대댓글</button>
+                            {% if user == comment.user_id %}
                             <form action="{% url 'community:delete_comment' comment.id %}" method="post">
                                 {% csrf_token %}
                                 <button class="delete__btn" type="submit" onclick="return confirm('정말로 이 댓글을 삭제하시겠습니까?')">삭제</button>
                             </form>
+                            {% endif%}
                         </div>
                     </div>
                     <p>{{ comment.content }}</p>
