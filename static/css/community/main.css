@@ -49,7 +49,7 @@
     box-shadow: 0 1px 5px rgba(255, 255, 0, 0.3);
 }
 #posts__ul a:hover{
-    background-color: #FBFFDB;
+    background-color: #Ffe285;
 }
 #posts__li{
     display: flex;
@@ -64,4 +64,16 @@
     color: black;
     font-weight: 600;
     font-size: 0.8rem;
+}
+@media (max-width: 767px) {
+    #boards__container {
+        background-color: white;
+        margin: 0 0;
+    }
+    #boards__ul {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        margin: 0 2rem;
+    }
 }
