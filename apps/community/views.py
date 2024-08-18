@@ -338,6 +338,17 @@ def delete_board(request, board_id):
         return redirect("landing:login")
 
 
+def delete_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        board_id = post.board_id
+        if request.method == "POST":
+            post.delete()
+            return redirect("community:post_list", board_id=board_id)
+    else:
+        return redirect("landing:login")
+
+
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, id=post_id)

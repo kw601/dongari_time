@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "apps.community",
     "apps.chat",
     "apps.mypage",
+    "apps.schedule",
     "webpush",
 ]
 
