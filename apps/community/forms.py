@@ -3,9 +3,7 @@ from .models import Comment, Post, Board, Club
 
 
 class CommentForm(forms.ModelForm):
-    anonymous = forms.BooleanField(
-        required=False, initial=True, label="익명으로 댓글 작성"
-    )
+    anonymous = forms.BooleanField(required=False, initial=True, label="익명")
     parent_id = forms.ModelChoiceField(
         queryset=Comment.objects.all(), required=False, widget=forms.HiddenInput()
     )
@@ -16,6 +14,13 @@ class CommentForm(forms.ModelForm):
         labels = {
             "content": "",
             "anonymous": "",
+        }
+        widgets = {
+            "content": forms.TextInput(
+                attrs={
+                    "placeholder": "댓글을 입력하세요.",
+                }
+            ),
         }
 
 

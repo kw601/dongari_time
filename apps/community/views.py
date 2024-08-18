@@ -73,8 +73,7 @@ def post_list(request, board_id):
         )
         form = PostForm(initial={"anonymous": True})
         boards = Board.objects.filter(club_id=club_id)
-        posts_best = Post.objects.filter(club_id=club_id)
-
+        posts_best = Post.objects.filter(club_id=club_id, liked_cnt__gte=5)
         return render(
             request,
             "community/post_list.html",
@@ -97,7 +96,7 @@ def post_detail(request, board_id, post_id):
         comments = Comment.objects.filter(post_id=post_id)
         club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
-        posts_best = Post.objects.filter(club_id=club_id)
+        posts_best = Post.objects.filter(club_id=club_id, liked_cnt__gte=5)
 
         is_liked = request.user in post.liked_by.all()
 
@@ -270,7 +269,6 @@ def create_board(request):
     if request.user.is_authenticated:
         club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
-        print(f"{boards}")
         if request.method == "POST":
             form = BoardForm(request.POST)
             if form.is_valid():
@@ -313,7 +311,7 @@ def main(request):
                 posts  # 각 게시판의 게시글을 board_posts 딕셔너리에 저장
             )
 
-        posts_best = Post.objects.filter(club_id=club)
+        posts_best = Post.objects.filter(club_id=club_id, liked_cnt__gte=5)
 
         return render(
             request,

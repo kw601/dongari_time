@@ -12,6 +12,9 @@
 
 .footer_content {
     height: 120px;
+    width: 100%;
+    position :relative;
+    bottom: 0;
     background-color: #f9f9f9;
     font-family: "Pretendard", sans-serif;
     display: flex;

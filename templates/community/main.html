@@ -35,11 +35,9 @@
     <div class="best__container">
         <ul class="best__ul">
             {% for post in posts_best %}
-            {% if post.liked_cnt >= 5 %}
                 <li class="best__li">
                     <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
                 </li>
-                    {% endif %}
             {% endfor %}
         </ul>
     </div>

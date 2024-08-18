@@ -12,5 +12,6 @@ urlpatterns = [
     path("myscraps/", myscraps, name="myscraps"),
     path('manage-clubs/', views.manage_clubs, name='manage_clubs'),
     path('delete-club/', views.delete_club, name='delete_club'),
+    path('switch_club/<int:club_id>/', views.switch_club, name='switch_club'),
     
 ]
