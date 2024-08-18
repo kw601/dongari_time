@@ -1,5 +1,6 @@
 .header__container {
     display: flex;
+    
     height: 70px;
     background-color: #ffcf33;
     padding: 0 8rem;

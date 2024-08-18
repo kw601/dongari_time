@@ -48,7 +48,7 @@
         <div class="right__container__login">
             <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
         </div>
-</div>
+    </div>
 {% endif %}            
 {% else %}
 <div class="header__container">  
@@ -60,9 +60,6 @@
     <div class="center__container__logout">
         <div class="app__icon">여기에 로고</div>
         <div class="app__title">동아리타임</div>
-    </div>
-    <div class="right__container__logout">
-        <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
     </div>
 </div>
 {% endif %}
