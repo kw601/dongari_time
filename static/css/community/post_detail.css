@@ -301,6 +301,7 @@ a, a > div {
     gap: var(--gap-value);
     background-color: var(--color-yellow-4);
     width: 100%;
+    box-sizing: border-box;
 }
 .board__title {
     font-weight: 700;
@@ -319,16 +320,41 @@ a, a > div {
 }
 
 @media screen and (max-width: 767px) {
+    body {
+        padding-top: 30px;
+    }
     .detail__container {
         padding: 2rem;
         display: flex;
-        flex-direction: column;
         flex-wrap: wrap;
         gap: var(--gap-value);
         align-items: center;
         justify-content: center;
+        box-sizing: border-box;
     }
     .list__btn {
         width: 100%;
+    }
+    .board_name_box {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;    
+        height: 30px;
+        border-bottom: 1px solid #d6d6d6;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+    }
+    .board__name {
+        font-size: 1.5rem;
+        color: var(--color-yellow-1);
+    }
+    .detail__main {
+        width: 100%;
+    }
+    .content__container {
+        box-sizing: border-box;
     }
 }
