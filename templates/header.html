@@ -71,7 +71,7 @@
 <div class="board__header">
     <div class="board__container">
         {% for board in boards %}
-        <div id="main_board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
+        <div id="main_board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name|truncatechars:7 }}</a></div>
         {% endfor %}
     </div>
     <div id="button__container">

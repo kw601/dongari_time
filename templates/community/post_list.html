@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 <link rel="stylesheet" href="{% static 'css/community/post_list.css' %}" />
 <div id="post_list">
-    <div>
+    <div id="post_container">
         <div class="board-header">
             <h1 id="board__title">
                 <a href="{% url 'community:post_list' board.id %}">
@@ -23,13 +23,26 @@
             </div>
             {% endif %}
         </div>
-        <div class="search__bar">
+        <!-- <div class="list_search__bar">
             <form class="search" method="POST" action="{% url 'community:search' %}">
                 {% csrf_token %}
                 <input type="hidden" name="board_id" value="{{ board.id }}">
-                <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
-                <button class="search-btn" type="submit"> 검색 </button>
+                <input class="list_search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
+                <button class="list_search-btn" type="submit"> 검색 </button>
             </form>
+        </div> -->
+        <div class="search-container">
+            <div class="search__bar board-search__bar">
+                <form class="search" method="POST" action="{% url 'community:search' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="board_id" value="{{ board.id }}">
+                    <button class="search-btn" type="submit">
+                        <img src="/static/image/search_btn_icon.png" alt="검색버튼" id="search_btn_icon">
+                    </button>
+                    <input class="search-bar" type="search" placeholder="{{ board.board_name }}의 글을 검색하세요"
+                        name="searched">
+                </form>
+            </div>
         </div>
         <div id="board__container">
             <div id="new_post">
@@ -68,7 +81,7 @@
                 {% for post in posts %}
                 {% if post.pinned %}
                 <a href="{% url 'community:post_detail' board.id post.id %}">
-                    <li>
+                    <li class="post_pinned_container">
                         <h2 id="post__title">
                             <img src="../../static/image/pinned_icon.png" alt="고정"
                                 style="vertical-align: middle; width: 20px; height: 20px;" />
@@ -102,7 +115,7 @@
                 {% if not post.pinned %}
                 <a href="{% url 'community:post_detail' board.id post.id %}">
                     <li>
-                        <h2 id="post__title">{{ post.title }}</h2>
+                        <h2 id="post__title">{{ post.title|truncatewords:10 }}</h2>
                         <p id="post__content">{{ post.content|truncatewords:20 }}</p>
                         <div id="post__description">
                             <p id="post__created">{{ post.created_time|date:"Y/m/d" }}</p>
