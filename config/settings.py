@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     "apps.mypage",
     "webpush",
 ]
-
 AUTH_USER_MODEL = "landing.User"
 
 MIDDLEWARE = [
