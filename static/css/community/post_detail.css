@@ -298,7 +298,7 @@ a, a > div {
     align-items: center;
 }
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .detail__container {
         padding: 2rem;
         display: flex;
