@@ -23,6 +23,7 @@ body {
 
 .title__container {
     padding: 0 var(--padding-value);
+    margin-bottom: 2rem;
 }
 
 .page__title {
