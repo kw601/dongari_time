@@ -1,4 +1,4 @@
-.header__container{
+.header__container {
     display: flex;
     height: 70px;
     background-color: #ffcf33;
@@ -6,26 +6,32 @@
     justify-content: space-between;
     align-items: center;
 }
-.left__container__login{
+
+.left__container__login {
     height: 45px;
     width: 45px;
 }
+
 #prev_btn {
     height: 45px;
-    width: 45px; 
+    width: 45px;
     border: none;
     background-color: #ffcf33;
 }
-#arrow_back{
+
+#arrow_back {
     height: 45px;
-    width: 45px; 
+    width: 45px;
     filter: brightness(0) invert(1);
     transition: transform 0.3s ease, filter 0.3s ease;
 }
+
 #arrow_back:hover {
-    transform: translateY(-3px); /* 마우스 오버 시 이미지가 위로 5px 이동 */
+    transform: translateY(-3px);
+    /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
-#logout_btn{
+
+#logout_btn {
     width: 100px;
     height: 40px;
     border: 1px solid #ffffff;
@@ -37,7 +43,7 @@
     align-items: center;
 }
 
-#logout_btn:hover{
+#logout_btn:hover {
     background-color: #ffffff;
 }
 
@@ -51,16 +57,18 @@
     transition: color 0.3s ease;
     margin-top: 0;
 }
-.center__container__login{
+
+.center__container__login {
     display: flex;
 }
-.app__title{
+
+.app__title {
     color: #ffffff;
     font-weight: bold;
     font-size: 1.5rem;
 }
 
-.main_header__container{
+.main_header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,65 +77,81 @@
     padding: 0 8rem;
 }
 
-.main_header__container a{
+
+.main_header__container a {
     text-decoration: none;
 }
-.main_left__container__session{
+
+.main_left__container__session {
     display: flex;
 }
-.main_right__container__session{
+
+.main_right__container__session {
     display: flex;
 }
-.main_app__small_title{
+
+.main_app__small_title {
     color: black;
     font-weight: bold;
     font-size: 0.9rem;
 }
-.main_app__title{
+
+.main_app__title {
     color: #ffcf33;
     font-weight: bold;
     font-size: 1.5rem;
 }
-#main_mypage_btn{
+
+#main_mypage_btn {
     height: 35px;
-    width: 35px; 
+    width: 35px;
     border: none;
     background-color: #ffffff;
     margin: 0 1rem;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
-#main_mypage_btn a{
+
+#main_mypage_btn a {
     margin-top: 0;
 }
-#mypage_icon{
+
+#mypage_icon {
     height: 35px;
-    width: 35px; 
+    width: 35px;
     border: none;
     background-color: #ffffff;
 }
-#main_logout_btn{
+
+#main_logout_btn {
     height: 35px;
-    width: 35px; 
+    width: 35px;
     border: none;
     background-color: #ffffff;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
-#main_logout_btn a{
+
+#main_logout_btn a {
     margin-top: 0;
 }
-#logout_icon{
+
+#logout_icon {
     height: 35px;
-    width: 35px; 
+    width: 35px;
     border: none;
     background-color: #ffffff;
 }
+
 #main_mypage_btn:hover {
-    transform: translateY(-3px); /* 마우스 오버 시 이미지가 위로 5px 이동 */
+    transform: translateY(-3px);
+    /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
+
 #main_logout_btn:hover {
-    transform: translateY(-3px); /* 마우스 오버 시 이미지가 위로 5px 이동 */
+    transform: translateY(-3px);
+    /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
-.search__bar{
+
+.search__bar {
     background-color: #ffcf33;
     display: flex;
     align-items: center;
@@ -136,33 +160,42 @@
     justify-content: flex-start;
     padding: 0 0.5rem;
 }
-.search-bar{
+
+.search-bar {
     border: none;
     width: 20rem;
     height: 1.5rem;
     outline: none;
     background-color: #ffcf33;
+    font-size: 1rem;
+    /* 글씨 크기 조정 */
 }
-.search-bar::placeholder{
+
+.search-bar::placeholder {
     color: #ffffff;
 }
-.search{
+
+.search {
     display: flex;
     align-items: center;
 }
-.search-btn{
+
+.search-btn {
     height: 25px;
     border: none;
     background-color: #ffcf33;
     transition: transform 0.3s ease, filter 0.3s ease;
-    padding: 0 0.5rem;
+    padding: 0 .5rem;
 }
-.search-btn:hover{
-    transform: translateY(-3px); /* 마우스 오버 시 이미지가 위로 5px 이동 */
+
+.search-btn:hover {
+    transform: translateY(-3px);
+    /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
-#search_btn_icon{
+
+#search_btn_icon {
     height: 25px;
-    width: 25px; 
+    width: 25px;
     border: none;
 }
 
@@ -176,38 +209,51 @@
 
 .board__container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); /* 게시판 아이템 배치 */
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    /* 게시판 아이템 배치 */
     grid-auto-flow: column;
-    grid-template-rows: repeat(5, auto); /* 최대 4개의 행 */
+    grid-template-rows: repeat(5, auto);
+    /* 최대 4개의 행 */
     gap: 0 1rem;
-    overflow-x: auto; /* 가로 스크롤 활성화 */
-    max-width: 70%; /* 최대 너비 설정 */
+    overflow-x: auto;
+    /* 가로 스크롤 활성화 */
+    max-width: 70%;
+    /* 최대 너비 설정 */
     padding: 0rem 1rem;
     height: 13rem;
 }
 
 #main_board__name {
-    background-color: #ffecad; /* 임의 배경색 */
+    background-color: #ffecad;
+    /* 임의 배경색 */
     border-radius: 10px;
     padding: 0.7rem;
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    /* 최소 너비 설정 */
     justify-content: flex-start;
     min-width: 150px; /* 최소 너비 설정 */
 }
+
 #main_board__name a {
     text-decoration: none;
     color: black;
     margin-top: 0;
 }
+
 #button__container {
-    flex-shrink: 0; /* 버튼 컨테이너 크기 고정 */
+    flex-shrink: 0;
+    /* 버튼 컨테이너 크기 고정 */
     margin: 5rem;
 }
-#button__container a{
+
+#button__container a {
     text-decoration: none;
 }
+
 #main_btn {
     background-color: #ffcf33;
     color: #fff;
@@ -221,15 +267,18 @@
 #main_btn:hover {
     background-color: #ffd700;
 }
-#icon__box{
+
+#icon__box {
     width: 40px;
     height: 40px;
 }
-#plus{
+
+#plus {
     width: 40px;
     height: 40px;
 }
-#add-btn{
+
+#add-btn {
     text-decoration: none;
     margin-top: 1rem;
     color: black;
@@ -238,13 +287,15 @@
 
 /* 기본 스크롤바 스타일 */
 .board__container::-webkit-scrollbar {
-    height: 8px; /* 기본 높이 */
+    height: 8px;
+    /* 기본 높이 */
 }
 
 .board__container::-webkit-scrollbar-thumb {
     background-color: #ffcf33;
     border-radius: 10px;
-    transition: height 0.2s ease; /* 클릭 시 부드러운 전환 */
+    transition: height 0.2s ease;
+    /* 클릭 시 부드러운 전환 */
 }
 
 .board__container::-webkit-scrollbar-track {
