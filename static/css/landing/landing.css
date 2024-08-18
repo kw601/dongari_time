@@ -55,18 +55,26 @@
 #signup_btn {
     background-color: var(--color-yellow-1);
 }
+
 #login_btn {
     background-color: white;
 }
 
-#signup_btn > a, #login_btn > a{
+#signup_btn, #login_btn{
     text-align: center;
     text-decoration: none;
     color: black;
     font-size: 1rem;
     font-weight: 400;
     font-family: "Pretendard", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+#signup_btn:hover, #login_btn:hover{
+    transform: translateY(-3px);
+    transition: .5s;
 }
 
 .main__img__container {

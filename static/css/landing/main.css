@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 :root {
     --padding-lr: 8rem;
     --color-line: #C2C2C2;
@@ -8,6 +10,10 @@
     --gap-value: 20px;
     --padding-value: 8rem;
 }
+body, a {
+    font-family: "Pretendard", sans-serif;
+}
+
 .main__container {
     height: 100vh;
     display: flex;
@@ -21,6 +27,9 @@
 
 .description {
     text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .select__container {
@@ -30,11 +39,17 @@
 }
 
 #admin_btn, #auth_btn, #select_btn {
-    border: 2px solid var(--color-yellow-1);
-    background-color: var(--color-yellow-1);
+    border: 2px solid #ffcf33;
+    background-color: #FFFFFF;
     border-radius: 1.2rem;
     width: 7rem;
     height: 3.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#admin_btn:hover, #auth_btn:hover, #select_btn:hover {
+    transform: translateY(-3px);
+    background-color: #ffcf33;
 }
 
 #admin_btn > a, #auth_btn > a, #select_btn > a{
