@@ -1,0 +1,48 @@
+#club-list {
+    list-style-type: none;
+    padding: 0 8rem;
+    margin: 2rem 0;
+}
+
+#club-list li {
+    background-color: #F7F7F7;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#club-list li .club-name {
+    font-weight: bold;
+}
+
+#club-list li .button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.manage_clubs__btn {
+    background-color: var(--color-yellow-1);
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.manage_clubs__btn:hover {
+    background-color: var(--color-yellow-2);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
