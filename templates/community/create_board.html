@@ -2,13 +2,19 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/community/create_board.css' %}" />
+<div class="c_b_frame">    
+    <div class="c_b_title">
+        <h1 class="c_b_h1">새 게시판 생성</h1>
+    </div>
+    <div class="c_b_line">
 
-<h1 class="c_b_h1">새 게시판 생성</h1>
-<div class="c_b_container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn-primary">게시판 만들기</button>
-    </form>
+    </div>
+    <div class="c_b_container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-primary">게시판 만들기</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

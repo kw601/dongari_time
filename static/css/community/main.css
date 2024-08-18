@@ -1,8 +1,10 @@
+
 #main__container {
     width: 100%;
     height: auto;
     min-height: 100%;
     padding-bottom: 120px;
+    font-family: "Pretendard", sans-serif;
 }
 
 #boards__container {
@@ -27,7 +29,9 @@
     flex-direction: column;
     align-items: center;
 }
-
+#board__name a{
+    font-family: "Pretendard", sans-serif;
+}
 #boards__ul li h2 {
     padding: 10px;
 }
@@ -38,6 +42,7 @@
     font-weight: bold;
     font-size: 1.2rem;
     margin: 5px;
+    font-family: "Pretendard", sans-serif;
 }
 
 #posts__ul {

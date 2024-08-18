@@ -1,12 +1,18 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+body {
+    font-family: "Pretendard", sans-serif;
+}
+
 .header__container {
     display: flex;
-    
     height: 70px;
     background-color: #ffcf33;
     padding: 0 8rem;
     justify-content: space-between;
     align-items: center;
+    font-family: "Pretendard", sans-serif;
 }
+
 
 .left__container__login {
     height: 45px;
@@ -62,7 +68,6 @@
 .center__container__login {
     display: flex;
 }
-
 .app__title {
     color: #ffffff;
     font-weight: bold;
@@ -76,6 +81,7 @@
     height: 70px;
     background-color: #ffffff;
     padding: 0 8rem;
+    font-family: "Pretendard", sans-serif;
 }
 
 
@@ -160,6 +166,7 @@
     border-radius: 20px;
     justify-content: flex-start;
     padding: 0 0.5rem;
+    font-family: "Pretendard", sans-serif;
 }
 
 .search-bar {
@@ -206,6 +213,7 @@
     justify-content: space-between;
     padding: 0 8rem;
     background-color: #ffecad;
+    font-family: "Pretendard", sans-serif;
 }
 
 .board__container {
@@ -222,6 +230,7 @@
     /* 최대 너비 설정 */
     padding: 0rem 1rem;
     height: 13rem;
+    font-family: "Pretendard", sans-serif;
 }
 
 #main_board__name {
@@ -381,5 +390,16 @@
     #button__container {
         flex-shrink: 0; /* 버튼 컨테이너 크기 고정 */
         margin: 0 0;
+    }
+    .header__container {
+        display: flex;
+        height: 70px;
+        background-color: #ffcf33;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+    }
+    .app__icon{
+        display: none;
     }
 }

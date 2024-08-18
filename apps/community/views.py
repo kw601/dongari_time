@@ -333,7 +333,6 @@ def delete_board(request, board_id):
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
-        return render(request, "community/delete_board.html", {"board": board})
     else:
         return redirect("landing:login")
 
