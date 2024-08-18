@@ -210,6 +210,10 @@ a {
         padding: 0 4rem;
     }
 
+    .page__title {
+        font-size: 20px;
+    }
+
     .title__container {
         padding: 0;
     }
@@ -248,7 +252,7 @@ a {
     }
 
     .page__title {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .icon__container {

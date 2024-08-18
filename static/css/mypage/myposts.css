@@ -36,3 +36,62 @@ a {
     font-size: 0.9em;
     color: #666;
 }
+
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+    :root {
+        --padding-value: 4rem;
+    }
+
+    
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --padding-value: 2rem;
+    }
+
+    .manage_clubs__body {
+        padding: 0 4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --padding-value: 1rem;
+    }
+
+    .manage_clubs__body {
+        padding: 0 8rem;
+    }
+
+    .posts_body {
+        padding: 0;
+    }
+
+    .post-title {
+        font-size: 16px;
+    }
+
+    .post-date {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage_clubs__body {
+        padding: 0 4rem;
+    }
+
+    .posts_body {
+        padding: 0;
+    }
+
+    .post-title {
+        font-size: 13px;
+    }
+
+    .post-date {
+        font-size: 9px;
+    }
+}
