@@ -27,7 +27,8 @@ urlpatterns = [
         toggle_pinned,
         name="toggle_pinned",
     ),
-    path('post/<int:post_id>/delete/', delete_post, name='delete_post'),
-    path('comment/<int:comment_id>/delete/', delete_comment, name='delete_comment'),
-    path('search', search, name='search')
+    path("post/<int:post_id>/delete/", delete_post, name="delete_post"),
+    path("comment/<int:comment_id>/delete/", delete_comment, name="delete_comment"),
+    path("search", search, name="search"),
+    path("<int:post_id>/delete_post/", delete_post, name="delete_post"),
 ]

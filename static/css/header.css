@@ -13,6 +13,7 @@ body {
     font-family: "Pretendard", sans-serif;
 }
 
+
 .left__container__login {
     height: 45px;
     width: 45px;
@@ -67,7 +68,6 @@ body {
 .center__container__login {
     display: flex;
 }
-
 .app__title {
     color: #ffffff;
     font-weight: bold;
