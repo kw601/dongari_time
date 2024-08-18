@@ -163,6 +163,7 @@ def club_auth(request):  # 동아리 인증 페이지
                     request.session["club_id"] = (
                         club.pk
                     )  # 세션에 동아리 고유번호 저장
+                    request.session["club_name"] = club.club_name # 세션에 동아리 이름 저장
                     return redirect("community:main")  # 메인 페이지로 이동
                 else:
                     messages.error(

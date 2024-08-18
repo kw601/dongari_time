@@ -9,56 +9,107 @@
     --padding-value: 8rem;
 }
 
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Pretendard", sans-serif;
 }
 
-.mypage__container {
+.mypage__body, .manage_clubs__body {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 var(--padding-value);
+}
+
+.title__container {
     padding: 0 var(--padding-value);
 }
 
 .page__title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.page__title__hr {
+    color: #A7A7A7;
 }
 
 .decoration__box {
     background-color: var(--color-yellow-4);
     border-radius: 10px;
-    padding: 20px;
+    /* padding: 20px; */
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+    margin: 2rem 8rem 2rem 8rem;
+    justify-content: center;
+    flex-direction: column;
+    /* margin: 1rem;*/
 }
 
 .icon__container {
     width: 40px;
     height: 40px;
-    background-image: url('path_to_your_emoji_image.png');
+    display: flex;
     background-size: contain;
-    margin-right: 15px;
+    /* margin-right: 15px; */
+    align-items: center;
+    justify-content: center;
+    font-size: -webkit-xxx-large;
+    padding: 2rem;
+    /* margin: 2rem;*/
 }
 
 .icon__container__text {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.content__container__1 {
+    margin: 0 8rem;
+}
+
+.content__container__2 {
+    margin: 0 6rem;
 }
 
 .content__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--gap-value);
+    gap: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content__container__text {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /*gap: 2rem;*/
+    margin-bottom: 2rem;
+}
+
+.func__description__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .function__container {
     background-color: var(--color-yellow-3);
+    display: flex;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    /*transition: background-color 0.3s;*/
+    /* transition: background-color 0.3s; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .function__container:hover {
@@ -67,16 +118,33 @@ body {
 
 .func__title {
     font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 900;
+    margin: 15px;
 }
 
 .func__description {
     font-size: 14px;
+    font-weight: 600;;
     color: #555;
 }
 
-/*a {
+.func__description__1 {
+    padding-left: 1.5rem;
+}
+
+.func__description__3 {
+    padding-right: 1rem;
+}
+
+.func__description__4 {
+    padding-left: 1.5rem;
+}
+
+.func__description__6 {
+    padding-right: 1rem;
+}
+
+a {
     text-decoration: none;
     color: inherit;
-}*/
+}

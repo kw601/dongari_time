@@ -3,9 +3,7 @@ from .models import Comment, Post, Board, Club
 
 
 class CommentForm(forms.ModelForm):
-    anonymous = forms.BooleanField(
-        required=False, initial=True, label="익명으로 댓글 작성"
-    )
+    anonymous = forms.BooleanField(required=False, initial=True, label="익명")
     parent_id = forms.ModelChoiceField(
         queryset=Comment.objects.all(), required=False, widget=forms.HiddenInput()
     )
@@ -16,6 +14,13 @@ class CommentForm(forms.ModelForm):
         labels = {
             "content": "",
             "anonymous": "",
+        }
+        widgets = {
+            "content": forms.TextInput(
+                attrs={
+                    "placeholder": "댓글을 입력하세요.",
+                }
+            ),
         }
 
 
@@ -48,6 +53,9 @@ class ClubForm(forms.ModelForm):
     club_name = forms.CharField(
         label="동아리명", widget=forms.TextInput(attrs={"class": "createClub-input"})
     )
+    # club_intro = forms.CharField(
+    #     label="동아리 소개", widget=forms.TextInput(attrs={"class": "createClub-input"})
+    # )
     club_num = forms.CharField(
         label="동아리 인증 번호",
         widget=forms.TextInput(attrs={"class": "createClub-input"}),
@@ -57,6 +65,7 @@ class ClubForm(forms.ModelForm):
         model = Club
         fields = [
             "club_name",
+            # "club_intro",
             "club_num",
         ]
 

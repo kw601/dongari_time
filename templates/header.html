@@ -3,58 +3,92 @@
     <link rel="stylesheet" href="{% static 'css/header.css' %}" />
 </head>
 <header>
-    <div class="header__container">
-        {% if user.is_authenticated %}
-            {% if request.session.club_id %}
-                <div class="main__header">
-                    <div class="left__container__session">
-                        <div class="app__icon">여기에 로고</div>
-                        <div class="app__title">동아리타임</div>
-                        <div class="app__title">{{ club_name }}</div>
+
+{% if user.is_authenticated %}
+    {% if request.session.club_id %}
+    <div class="main_header__container">
+        <a href="{% url 'community:main' %}">
+            <div class="main_left__container__session">
+                    <div class="main_app__icon">여기에 로고</div>
+                    <div class="main_title">
+                        <div class="main_app__small_title">동아리타임</div>
+                        <div class="main_app__title">{{ request.session.club_name }}</div>
                     </div>
-                    <div class="right__container__session">
-                        <div class="search__bar">
-                            <form class="search" method="POST" action="{% url 'community:search' %}">
-                                {% csrf_token %}        
-                                <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
-                                <button class="search-btn" type="submit"> 검색 </button>
-                            </form>
-                        </div>
-                        <button id="mypage_btn"><a href="{% url 'mypage:main' %}">마이페이지</a></button>
-                        <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
-                    </div>
-                </div>
-                <div class="borad__header">
-                    <div class="board__container">
-                        {% for board in boards %}
-                        <div id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% else %}            
-                <div class="left__container__login">
-                    <button id="prev_btn" onclick="prev()">←</button>
-                </div>
-                <div class="center__container__login">
-                    <div class="app__icon">여기에 로고</div>
-                    <div class="app__title">동아리타임</div>
-                </div>
-                <div class="right__container__login">
-                    <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
-                </div>
-            {% endif %}
-                    
-        {% else %}
-            <div class="left__container__logout">
-                <button id="prev_btn" onclick="prev()">←</button>
             </div>
-            <div class="center__container__logout">
-                <div class="app__icon">여기에 로고</div>
-                <div class="app__title">동아리타임</div>
+        </a>
+        <div class="main_right__container__session">
+            <div class="search__bar">
+                <form class="search" method="POST" action="{% url 'community:search' %}">
+                    {% csrf_token %}       
+                    <button class="search-btn" type="submit"> 
+                        <img src="/static/image/search_btn_icon.png" alt="검색버튼" id="search_btn_icon">
+                    </button> 
+                    <input class="search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
+                </form>
             </div>
-            <div class="right__container__logout"></div>
-        {% endif %}
+            <button id="main_mypage_btn"><a href="{% url 'mypage:main' %}">
+                <img src="/static/image/mypage__icon.png" alt="마이페이지" id="mypage_icon">
+            </a></button>
+            <button id="main_logout_btn"><a href="{% url 'landing:logout' %}">
+                <img src="/static/image/logout__icon.png" alt="로그아웃" id="logout_icon">
+            </a></button>
+        </div>
     </div>
+    {% else %}    
+    <div class="header__container">        
+        <div class="left__container__login">
+            <button id="prev_btn" onclick="prev()">
+                <img src="/static/image/arrow_back.png" alt="뒤로 가기" id="arrow_back">
+            </button>
+        </div>
+        <div class="center__container__login">
+            <div class="app__icon">여기에 로고</div>
+            <div class="app__title">동아리타임</div>
+        </div>
+        <div class="right__container__login">
+            <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
+        </div>
+</div>
+{% endif %}            
+{% else %}
+<div class="header__container">  
+    <div class="left__container__logout">
+        <button id="prev_btn" onclick="prev()">
+            <img src="/static/image/arrow_back.png" alt="뒤로 가기">
+        </button>
+    </div>
+    <div class="center__container__logout">
+        <div class="app__icon">여기에 로고</div>
+        <div class="app__title">동아리타임</div>
+    </div>
+    <div class="right__container__logout">
+        <button id="logout_btn"><a href="{% url 'landing:logout' %}">로그아웃</a></button>
+    </div>
+</div>
+{% endif %}
+{% if user.is_authenticated %}
+{% if request.session.club_id %}
+<div class="board__header">
+    <div class="board__container">
+        {% for board in boards %}
+        <div id="main_board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
+        {% endfor %}
+    </div>
+    <div id="button__container">
+        <a href="{% url 'community:create_board' %}">
+            <button id="main_btn">
+                        <div id="select__box">
+                            <div id="icon__box">
+                                <img src="/static/image/plus.png" alt="게시판 추가" id="plus">
+                            </div>
+                        </div>
+            </button>
+            <div id="add-btn">게시판 추가</div>
+        </a>
+    </div>
+</div>
+    {% endif %}
+{% endif %}
 </header>
 <script>
     const prev = () => {
