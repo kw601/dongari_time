@@ -13,7 +13,7 @@
 }
 html {
     font-family: "Pretendard", sans-serif;
-    scrollbar-gutter: stable
+    scrollbar-gutter: stable;
 }
 #disappear {
     position: fixed;
@@ -163,6 +163,7 @@ html {
     justify-content: center;
     gap: var(--gap-value);
     margin: var(--padding-value);
+    scrollbar-gutter: stable;
 }
 #main__content {
     transition: opacity 1s ease;
