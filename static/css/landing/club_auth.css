@@ -1,41 +1,46 @@
-body {
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
 
 #auth-container{
     display: flex;
     flex-direction: column;
-    width: 805px;
     padding: 20px;
-    background-color: #fff;
+    align-items: center;
+    width: 100%;
+    height: 700px;
+    box-sizing: border-box;
 }
-h3 {
+#auth-container form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#auth-container h3 {
     font-size: 32px;
-    padding: 14px 0px 14px 0px;
+    width: 100%;
+    max-width: 805px;
+    padding: 1rem 0rem;
     font-weight: bold;
     text-align: left;
     color: #333;
-    border-bottom:1px solid #000000;
+    border-bottom:1px solid #A7A7A7;
 }
+
 .auth-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 60px 0px 60px;
-    width: 685px;
-    height: 250px;
-    justify-content: center;
+    margin: 40px 20px 20px 20px;
+    width: 100%;
+    max-width: 685px;
+    box-sizing: border-box;
 }
 
 #message-container{
     display: flex;
-    width: 805px;
+    max-width: 805px;
     padding: 20px 60px;
-    width: 687px;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     color: red;
@@ -43,3 +48,29 @@ h3 {
 
 
 
+@media (max-width: 767px){
+    #auth-container{
+        padding: 0px;
+    }
+    #auth-container form{
+        width: 100%;
+    }
+    #auth-container h3 {
+        font-size: 24px;
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    .auth-form{
+        padding: 0;
+        width: 100%;
+    }
+
+    #message-container{
+        font-size: 15px;
+        width: 100%;
+        color: red;
+    }
+}

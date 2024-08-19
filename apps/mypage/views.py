@@ -65,20 +65,20 @@ def delete_club(request):
     if request.user.is_authenticated:
         club_id = request.POST.get("club_id")
         current_club_id = request.session.get('club_id')
-        
+
         if club_id == current_club_id:
             return JsonResponse({
                 'success': False,
                 'message': '현재 접속한 동아리의 삭제는 불가능합니다. 다른 동아리로 이동 후 삭제해주세요.'
             })
-        
+
         if club_id:
             try:
                 Auth_Club.objects.filter(user_id=request.user, club_id=club_id).delete()
                 return JsonResponse({'success': True})
             except Exception as e:
                 return JsonResponse({'success': False, 'message': str(e)})
-        
+
         return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
     else:
         return redirect("landing:login")
@@ -95,3 +95,8 @@ def switch_club(request, club_id):
             return redirect("mypage:manage_clubs")
     else:
         return redirect("landing:login")
+
+def get_status(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'is_notifications': request.user.is_notifications})
+    return JsonResponse({'is_notifications': False}, status=401)

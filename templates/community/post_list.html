@@ -15,22 +15,26 @@
                 </a>
             </h1>
             {% if user.is_authenticated and user.is_admin %}
-            <div id="delete">
-                <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" onclick="return fn_del_qna();">게시판 삭제</button>
-                </form>
+            <div id="delete-box">
+                {% if messages %}
+                <ul class="messages" style="display: flex; align-items: center;">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}
+                        style="{% if 'error' in message.tags %}color: red;{% endif %}">
+                        {{ message }}
+                        </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <div id="delete">
+                    <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" onclick="return fn_del_qna();">게시판 삭제</button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
-        <!-- <div class="list_search__bar">
-            <form class="search" method="POST" action="{% url 'community:search' %}">
-                {% csrf_token %}
-                <input type="hidden" name="board_id" value="{{ board.id }}">
-                <input class="list_search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
-                <button class="list_search-btn" type="submit"> 검색 </button>
-            </form>
-        </div> -->
         <div class="search-container">
             <div class="search__bar board-search__bar">
                 <form class="search" method="POST" action="{% url 'community:search' %}">
@@ -45,9 +49,7 @@
             </div>
         </div>
         <div id="board__container">
-            <div id="new_post">
-                <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
-            </div>
+            <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
             <div id="post-form-container" style="display: none;">
                 <form id="post-form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -140,18 +142,52 @@
             </ul>
         </div>
     </div>
-    <div class="best__container">
-        <ul class="best__ul">
-            {% for post in posts_best %}
-            {% if post.liked_cnt >= 5 %}
-            <li class="best__li">
-                <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">
-                        {{ post.title }}</a>
-                </div>
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
+    <div class="side__container">
+        <div class="best__container">
+            <div class="board__title">공간이 너무 남아~</div>
+            <ul class="best__ul">
+                {% for post in posts_best %}
+                <li class="best__li">
+                    <div class="best__name">
+                        <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                            <div>{{ post.title }}</div>
+                            <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="best__container">
+            <div class="board__title">공간 채우기 박스</div>
+            <ul class="best__ul">
+                {% for post in posts_best %}
+                <li class="best__li">
+                    <div class="best__name">
+                        <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                            <div>{{ post.title }}</div>
+                            <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="best__container">
+            <div class="board__title">베스트 게시글</div>
+            <ul class="best__ul">
+                {% for post in posts_best %}
+                <li class="best__li">
+                    <div class="best__name">
+                        <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
+                            <div>{{ post.title }}</div>
+                            <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -159,7 +195,7 @@
 <script>
     function fn_del_qna() {
         var res = confirm('게시판을 정말로 삭제하시겠습니까?');
-        if(res){
+        if (res) {
             // "확인"을 누른 경우에만 삭제 요청을 진행
             alert("성공적으로 삭제되었습니다.");
         } else {

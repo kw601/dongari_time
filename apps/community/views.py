@@ -3,6 +3,7 @@ from django.conf import settings
 from .models import Board, Post, Comment, Club
 from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
@@ -15,6 +16,7 @@ from webpush import send_user_notification
 def create_club(request):
     if request.user.is_authenticated:
         if request.method == "GET":
+            print(request.POST)
             form = ClubForm()
             return render(request, "community/create_club.html", {"form": form})
         if request.method == "POST":
@@ -219,19 +221,20 @@ def create_post(request, board_id):
                 # Auth_Club 모델에서 글을 작성하는 공지 게시판 동아리의 소속 동아리원들을 가져옴
                 club_members = Auth_Club.objects.filter(club_id=club_id)
                 for club_member in club_members:
-                    notification_users.add(club_member.user_id)
+                    if club_member.user_id.is_notifications:
+                        notification_users.add(club_member.user_id)
 
                 # 알림 보내기
                 payload = {
                     "head": f"{club.club_name} 동아리에 새로운 공지사항이 등록되었습니다.",
-                    "body": f"{post.title}",
+                    "body": f"{post.title}"
                 }
 
                 # 디버그용
                 print(notification_users)
 
                 for user in notification_users:
-                    if user != request.user:  # 자신에게는 알림을 보내지 않음
+                    if user != request.user:  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
                         send_user_notification(user=user, payload=payload, ttl=1000)
 
                 # 그룹 알림 필요할때 사용
@@ -330,11 +333,33 @@ def main(request):
 def delete_board(request, board_id):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, id=board_id)
+
+        # 필수 게시판 3개는 삭제 불가
+        restricted_boards = ["공지게시판", "질문게시판", "자유게시판"]
+
+        if board.board_name in restricted_boards:
+            messages.error(
+                request,
+                f"{board.board_name}은 삭제할 수 없습니다.",
+            )
+            return redirect("community:post_list", board_id=board_id)
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
     else:
         return redirect("landing:login")
+
+
+def delete_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        board_id = post.board_id
+        if request.method == "POST":
+            post.delete()
+            return redirect("community:post_list", board_id=board_id)
+    else:
+        return redirect("landing:login")
+
 
 def scrap_post(request, post_id):
     if request.user.is_authenticated:
@@ -426,9 +451,10 @@ def create_comment(request, board_id, post_id):
 
             # 알림을 보낼 사용자 목록
             notification_users = set()
-
-            # 게시글 작성자에게 알림 위해 목록에 추가
-            notification_users.add(post.user_id)
+            
+            if post.user_id.is_notifications: # 게시글 작성자가 알림 버튼 활성화라면
+                # 게시글 작성자에게 알림 위해 목록에 추가
+                notification_users.add(post.user_id)
 
             # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
             if comment.parent_id:
@@ -449,7 +475,7 @@ def create_comment(request, board_id, post_id):
             print(notification_users)
 
             for user in notification_users:
-                if user != request.user:  # 자신에게는 알림을 보내지 않음
+                if user != request.user:  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
                     send_user_notification(user=user, payload=payload, ttl=1000)
 
             # 그룹 알림 필요할때 사용
@@ -500,3 +526,29 @@ def search(request):
                 "community/search_list.html",
                 {"posts": posts, "searched": searched, "boards": boards, "posts_best":posts_best},
             )
+
+
+def load_more_boards(request):
+    start = int(request.GET.get("start", 0))
+    limit = int(request.GET.get("limit", 4))
+    club_id = request.session.get("club_id")
+
+    # 현재 세션에 저장된 club_id를 가지는 모든 게시판 가져오기
+    boards = Board.objects.filter(club_id=club_id)[start : start + limit]
+
+    # JSON 응답에 넣을 데이터 구성
+    boards_data = []
+    for board in boards:
+        posts = Post.objects.filter(board_id=board.id).values(
+            "id", "title", "created_time"
+        )
+        boards_data.append(
+            {"id": board.id, "name": board.board_name, "posts": list(posts)}
+        )
+
+    # 현재 클럽에 속한 전체 게시판 수 계산
+    total_boards_count = Board.objects.filter(club_id=club_id).count()
+
+    return JsonResponse(
+        {"boards": boards_data, "total_boards_count": total_boards_count}
+    )

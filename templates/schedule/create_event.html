@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Event to {{ club.name }}</title>
+</head>
+<body>
+    <h1>Add Event to {{ club.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Event</button>
+    </form>
+    <a href="{% url 'schedule:event_list'%}">Back to Event List</a>
+</body>
+</html>

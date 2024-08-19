@@ -1,59 +1,95 @@
-body {
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
 
 #login-container{
     display: flex;
     flex-direction: column;
-    width: 805px;
     padding: 20px;
-    background-color: #fff;
+    align-items: center;
+    width: 100%;
+    height: 700px;
+    box-sizing: border-box;
 }
-h3 {
+#login-container form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#login-container h3{
     font-size: 32px;
-    padding: 14px 0px 14px 0px;
+    width: 100%;
+    max-width: 805px;
+    padding: 1rem 0rem;
     font-weight: bold;
     text-align: left;
     color: #333;
-    border-bottom:1px solid #000000;
+    border-bottom:1px solid #A7A7A7;
 }
 
 .login-form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 60px 0px 60px;
-    width: 685px;
-    height: 250px;
-    justify-content: center;
+    margin:40px 20px 20px 20px;
+    width: 100%;
+    max-width: 685px;
+    box-sizing: border-box;
 }
-
 .find-container{
+    width: 60%;
+    padding: 30px;
     display: flex;
-    width: 805px;
+    flex-direction: row;
 }
 
 .find-form{
-    padding: 20px 60px;
-    width: 687px;
+    width: 80%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
-
+.find-form p{
+    justify-content: ceter;
+}
 .find-form a{
     font-size: 20px;
     text-decoration: none;
     color: #000000;
 }
 
+ul li.error {
+    color: red;
 
-#button-container{
-    padding: 20px;
-    width: 805px;
-    display: flex;
-    justify-content: space-around;
+}
+
+@media (max-width: 767px){
+    #login-container{
+        padding: 0px;
+    }
+    #login-container h3 {
+        font-size: 24px;
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+        text-align: center;
+    }
+    
+    .login-form{
+        padding: 0;
+        width: 100%;
+    }
+    
+    .find-container{
+        width: 100%;
+    }
+    
+    .find-form{
+        width: 100%;
+    }
+    
+    .find-form a{
+        font-size: 15px;
+        text-decoration: none;
+        color: #000000;
+    }
+    
+
 }

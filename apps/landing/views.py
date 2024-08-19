@@ -106,7 +106,9 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("landing:main")
+            return render(request, "mypage/main.html")
+        else:
+            print(form.errors)
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -115,13 +117,14 @@ def update(request):
     context = {"form": form, "boards": boards}
     return render(request, "users/update.html", context)
 
-
 # 비밀번호 변경
 def change_password(request):
+    context = {}
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
+            auth_logout(request)
             update_session_auth_hash(request, user)
             messages.success(request, "비밀번호가 성공적으로 변경되었습니다.")
             return redirect("landing:login")
@@ -151,8 +154,12 @@ def landing(request):
 def club_auth(request):  # 동아리 인증 페이지
     if request.user.is_authenticated:  # 로그인된 유저만 접속 가능
         if request.method == "GET":
-            return render(request, "landing/club_auth.html")
-
+            if request.session.get("club_id"):
+                club_id = request.session.get("club_id")
+                boards = Board.objects.filter(club_id=club_id)
+                return render(request, "landing/club_auth.html", {"boards":boards})
+            else:
+                return render(request, "landing/club_auth.html")
         if request.method == "POST":
 
             name = request.POST["auth_name"]  # 폼에서 클럽 이름 가져오기

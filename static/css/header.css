@@ -1,4 +1,5 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
 body {
     font-family: "Pretendard", sans-serif;
 }
@@ -12,7 +13,19 @@ body {
     align-items: center;
     font-family: "Pretendard", sans-serif;
 }
-
+.main_app__icon{
+    width: 40px;
+    height: 40px;
+}
+.app__icon{
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+}
+#club_logo{
+    width: 40px;
+    height: 40px;
+}
 .left__container__login {
     height: 45px;
     width: 45px;
@@ -69,6 +82,7 @@ body {
 }
 
 .app__title {
+    padding-top: 0.5rem;
     color: #ffffff;
     font-weight: bold;
     font-size: 1.5rem;
@@ -162,7 +176,7 @@ body {
     background-color: #ffcf33;
     display: flex;
     align-items: center;
-    width: 23rem;
+    width: 16rem;
     border-radius: 20px;
     justify-content: flex-start;
     padding: 0 0.5rem;
@@ -171,7 +185,7 @@ body {
 
 .search-bar {
     border: none;
-    width: 20rem;
+    width: 13rem;
     height: 1.5rem;
     outline: none;
     background-color: #ffcf33;
@@ -181,6 +195,11 @@ body {
 
 .search-bar::placeholder {
     color: #ffffff;
+    font-weight: bold;
+}
+
+.search-bar:focus::placeholder {
+    color: transparent;
 }
 
 .search {
@@ -245,7 +264,8 @@ body {
     min-width: 150px;
     /* 최소 너비 설정 */
     justify-content: flex-start;
-    min-width: 150px; /* 최소 너비 설정 */
+    min-width: 150px;
+    /* 최소 너비 설정 */
 }
 
 #main_board__name a {
@@ -262,6 +282,9 @@ body {
 
 #button__container a {
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+
 }
 
 #main_btn {
@@ -315,18 +338,22 @@ body {
 
 /* 스크롤바를 클릭했을 때 */
 .board__container::-webkit-scrollbar-thumb:active {
-    height: 12px; /* 클릭 시 높이를 늘려 두껍게 */
-    background-color: #ffb600; /* 클릭 시 색상 변화 (선택 사항) */
+    height: 12px;
+    /* 클릭 시 높이를 늘려 두껍게 */
+    background-color: #ffb600;
+    /* 클릭 시 색상 변화 (선택 사항) */
 }
+
 @media (max-width: 960px) {
-    .main_header__container{
+    .main_header__container {
         display: flex;
         align-items: center;
         height: 70px;
         background-color: #ffffff;
         justify-content: space-around;
         padding: 0 0;
-    }   
+    }
+
     .board__header {
         display: flex;
         align-items: center;
@@ -335,41 +362,56 @@ body {
         background-color: #ffecad;
     }
 }
+
 @media (max-width: 767px) {
-    .main_header__container{
+    .main_header__container {
         display: flex;
         align-items: center;
         height: 70px;
         background-color: #ffffff;
         justify-content: space-evenly;
         padding: 0 0;
-    }  
-    .search__bar{
+    }
+
+    .search__bar {
         background-color: #ffcf33;
         display: flex;
         align-items: center;
         width: 9rem;
         border-radius: 20px;
         justify-content: flex-start;
-    } 
-    .search-bar{
+    }
+
+    .search-bar {
         border: none;
         width: 6.5rem;
         height: 1.5rem;
         outline: none;
         background-color: #ffcf33;
     }
-    .main_app__icon{
+
+    .main_app__icon {
         display: none;
     }
-    #main_mypage_btn{
+
+    #main_mypage_btn {
         height: 35px;
-        width: 35px; 
+        width: 35px;
         border: none;
         margin: 0 0.5rem;
+        padding: 0 0;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
+    #main_logout_btn {
+        height: 35px;
+        width: 35px;
+        border: none;
+        padding: 0 0;
+        background-color: #ffffff;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
     .board__header {
         display: flex;
         align-items: center;
@@ -377,20 +419,28 @@ body {
         padding: 0 0.5rem;
         background-color: #ffecad;
     }
+
     .board__container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr)); /* 게시판 아이템 배치 */
+        grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+        /* 게시판 아이템 배치 */
         grid-auto-flow: column;
-        grid-template-rows: repeat(3, auto); /* 최대 4개의 행 */
-        overflow-x: auto; /* 가로 스크롤 활성화 */
-        max-width: 70%; /* 최대 너비 설정 */
+        grid-template-rows: repeat(3, auto);
+        /* 최대 4개의 행 */
+        overflow-x: auto;
+        /* 가로 스크롤 활성화 */
+        max-width: 70%;
+        /* 최대 너비 설정 */
         padding: 0rem 0rem;
         height: 10rem;
     }
+
     #button__container {
-        flex-shrink: 0; /* 버튼 컨테이너 크기 고정 */
+        flex-shrink: 0;
+        /* 버튼 컨테이너 크기 고정 */
         margin: 0 0;
     }
+
     .header__container {
         display: flex;
         height: 70px;
@@ -399,7 +449,17 @@ body {
         align-items: center;
         padding: 0 1rem;
     }
-    .app__icon{
+    .app__title {
+        padding-top: 0;
+        margin-right: 2.5rem;
+    }
+    
+    .app__icon {
         display: none;
     }
+
+    .search-bar::placeholder {
+        color: transparent;
+    }
+
 }

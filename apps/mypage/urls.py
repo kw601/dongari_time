@@ -13,5 +13,5 @@ urlpatterns = [
     path('manage-clubs/', views.manage_clubs, name='manage_clubs'),
     path('delete-club/', views.delete_club, name='delete_club'),
     path('switch_club/<int:club_id>/', views.switch_club, name='switch_club'),
-    
+    path('webpush/get_status/', views.get_status, name='get_status'),
 ]

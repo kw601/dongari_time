@@ -7,10 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
     <link rel="stylesheet" href="{% static 'css/landing/landing.css' %}" />
+    <link rel="icon" href="/static/image/logo_background.PNG">
 </head>
 
 <body>
-    <div class="landing__container">
+    <div class="first__container"><p>소통은 쉽게, 활동은 즐겁게</p></div>
+    <div id="disappear"></div>
+    <div class="second__icon"><img src="../../static/image/logo_background.PNG" alt=""></div>
+    
+    <div id="main__content" class="landing__container">
         <div class="introducion">
             <div class="title">동아리타임</div>
             <div class="description">
@@ -18,6 +23,7 @@
                 <p>단체 방의 혼잡함에서 벗어나 누리는 자유</p>
             </div>
         </div>
+        
         <div class="select__container">
             <a id="signup_btn" href="{% url 'landing:signup' %}">회원가입</a>
             <a id="login_btn" href="{% url 'landing:login' %}">로그인</a>
@@ -144,6 +150,24 @@
                 </div>
             </div>
        </div> 
+
+       <script>
+        window.addEventListener('load', function() {
+            const disappear = document.getElementById('disappear');
+    
+            // 스크롤 금지
+            document.body.style.overflow = 'hidden';
+    
+            // 4초 후 #disappear 요소를 숨기고 스크롤 허용
+            setTimeout(function() {
+                disappear.style.opacity = '0';
+                disappear.style.display = 'none';
+    
+                document.body.style.overflow = 'auto';
+            }, 4000);
+        });
+    </script>
+    
 </body>
 
 </html>
