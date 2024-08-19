@@ -40,21 +40,21 @@
                     <label for="id_email">이메일</label>
                     {{ form.email }}  
                 </div>
-                <div class="button-container_parent">
-                    <div class="button-container">
-                        <button type="submit" class="button">수정하기</button>
-                    </div>
-                    <div class="button-container">
-                        {% if user.is_authenticated and user.id %}
-                        <form action="{% url 'landing:delete' user.id %}" method ='POST'>
-                            {% csrf_token %}
-                            <input id="button" type="submit" value='회원탈퇴'>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </form>
+    <div class="button-container_parent">
+        <div class="button-container">
+            <button type="submit" class="button">수정하기</button>
+        </div>
+        <div class="button-container">
+            {% if user.is_authenticated and user.id %}
+            <form action="{% url 'landing:delete' user.id %}" method ='POST'>
+                {% csrf_token %}
+                <input id="button" type="submit" value='회원탈퇴'>
+            </form>
+        </div>
+    </div>
 </div>
 
 
