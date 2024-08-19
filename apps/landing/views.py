@@ -154,8 +154,12 @@ def landing(request):
 def club_auth(request):  # 동아리 인증 페이지
     if request.user.is_authenticated:  # 로그인된 유저만 접속 가능
         if request.method == "GET":
-            return render(request, "landing/club_auth.html")
-
+            if request.session.get("club_id"):
+                club_id = request.session.get("club_id")
+                boards = Board.objects.filter(club_id=club_id)
+                return render(request, "landing/club_auth.html", {"boards":boards})
+            else:
+                return render(request, "landing/club_auth.html")
         if request.method == "POST":
 
             name = request.POST["auth_name"]  # 폼에서 클럽 이름 가져오기
