@@ -38,7 +38,6 @@ def create_club(request):
 
                 return redirect("community:main")
             else:
-                print("Form Errors:", form.errors)
                 return render(request, "community/create_club.html", {"form": form})
     else:
         return redirect("landing:login")

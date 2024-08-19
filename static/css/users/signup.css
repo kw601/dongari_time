@@ -74,18 +74,19 @@
 .button {
     width: 200px;
     height: 70px;
-    background-color: #FFCF33; /* Yellow button */
+    border: 2px solid #ffcf33;
+    background-color: #FFFFFF;
     color: #000000;
     font-size: 25px;
     font-weight: bold;
-    border: none;
-    border-radius: 20px;
+    border-radius: 1.2rem;
     cursor: pointer;
     text-decoration: none;
 }
 
 .button:hover {
-    background-color: #f7b324;
+    transform: translateY(-3px);
+    background-color: #ffcf33;
 }
 .message-container{
     display: flex;

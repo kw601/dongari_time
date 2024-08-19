@@ -30,15 +30,6 @@
                     <p><a href='{% url "landing:signup" %}'>회원가입</a></p>
                 </div>
             </div>
-            <div class="message-container">
-                {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
             <div class="button-container">
                 <button type="submit" class="button">로그인</button>
             </div>
