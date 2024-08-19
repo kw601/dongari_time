@@ -6,25 +6,23 @@ body {
 }
 
 #post_list {
-    padding: 0px 8rem;
+    padding: 4rem 8rem;
     font-family: "Pretendard", sans-serif;
 }
 
 #board__title {
     padding: .8rem .5rem;
     margin-top: .5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: black;
     background-color: white;
     text-decoration: none;
     font-family: "Pretendard", sans-serif;
 }
 
 #board__title a {
-    color: black;
-    /* 게시판 제목 색상 */
     text-decoration: none;
+    color: black;
+    font-weight: 800;
+    font-size: 1.8rem;
 }
 
 .board-header {
@@ -469,6 +467,70 @@ body {
     background-color: #FFCF33;
 }
 
+#show-post-form {
+    width: 100%;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #ffecad;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: .5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+}
+
+#show-post-form:hover {
+    transform: translateY(-3px);
+    background-color: #FFCF33;
+}
+
+.side__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-value);
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.best__container {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-value);
+    background-color: var(--color-yellow-4);
+    width: 100%;
+    box-sizing: border-box;
+}
+.board__title {
+    font-weight: 700;
+    font-size: 1.3rem;
+}
+.best__ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.best__name > a{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.time__container {
+    font-size: .7rem;
+    color: #A7A7A7;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 @media (max-width: 767px) {
     #post_list {
         padding: 0 2rem;
