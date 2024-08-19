@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
 <link rel="stylesheet" href="{% static 'css/community/main.css' %}" />
 <div id="main__container">
+    <a href="{% url 'schedule:event_list'%}">이벤트 리스트</a>
     <div id="boards__container">
         <ul id="boards__ul">
-            {% for board in boards %}
+            {% for board in boards|slice:":4" %}
             <li id="boards__li">
                 <h2 id="board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></h2>
                 <ul id="posts__ul">
-                {% with board_posts|get_item:board.id as posts %}
+                    {% with board_posts|get_item:board.id as posts %}
                     {% for post in posts %}
                     <a href="{% url 'community:post_detail' board.id post.id %}">
                         <li id="posts__li">
@@ -26,20 +27,14 @@
                         </li>
                     </a>
                     {% endfor %}
-                {% endwith %}
+                    {% endwith %}
                 </ul>
             </li>
             {% endfor %}
         </ul>
-    </div>
-    <div class="best__container">
-        <ul class="best__ul">
-            {% for post in posts_best %}
-                <li class="best__li">
-                    <div class="best__name"><a href="{% url 'community:post_detail' post.board_id.id post.id %}">{{ post.title }}</a></div>
-                </li>
-            {% endfor %}
-        </ul>
+        <button id="load-more" class="btn btn-primary">게시판 더보기</button>
     </div>
 </div>
+<script src="{% static 'js/community/main.js' %}"></script>
+
 {% endblock %}
