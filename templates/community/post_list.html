@@ -35,15 +35,7 @@
                 {% endif %}
             </div>
         </div>
-        <!-- <div class="list_search__bar">
-            <form class="search" method="POST" action="{% url 'community:search' %}">
-                {% csrf_token %}
-                <input type="hidden" name="board_id" value="{{ board.id }}">
-                <input class="list_search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
-                <button class="list_search-btn" type="submit"> 검색 </button>
-            </form>
-        </div> -->
-        <div class="search-container">
+                <div class="search-container">
             <div class="search__bar board-search__bar">
                 <form class="search" method="POST" action="{% url 'community:search' %}">
                     {% csrf_token %}
@@ -56,6 +48,14 @@
                 </form>
             </div>
         </div>
+        <!-- <div class="list_search__bar">
+            <form class="search" method="POST" action="{% url 'community:search' %}">
+                {% csrf_token %}
+                <input type="hidden" name="board_id" value="{{ board.id }}">
+                <input class="list_search-bar" type="search" placeholder="게시판의 글을 검색하세요" name="searched">
+                <button class="list_search-btn" type="submit"> 검색 </button>
+            </form>
+        </div> -->
         <div id="board__container">
             <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
             <div id="post-form-container" style="display: none;">

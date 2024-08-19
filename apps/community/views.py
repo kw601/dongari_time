@@ -228,7 +228,7 @@ def create_post(request, board_id):
                 # 알림 보내기
                 payload = {
                     "head": f"{club.club_name} 동아리에 새로운 공지사항이 등록되었습니다.",
-                    "body": f"{post.title}",
+                    "body": f"{post.title}"
                 }
 
                 # 디버그용
