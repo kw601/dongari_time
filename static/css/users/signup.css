@@ -90,6 +90,8 @@
 .message-container{
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width:100%;
     padding: 20px 60px;
     color:red;

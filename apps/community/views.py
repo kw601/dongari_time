@@ -15,6 +15,7 @@ from webpush import send_user_notification
 def create_club(request):
     if request.user.is_authenticated:
         if request.method == "GET":
+            print(request.POST)
             form = ClubForm()
             return render(request, "community/create_club.html", {"form": form})
         if request.method == "POST":
@@ -36,6 +37,7 @@ def create_club(request):
 
                 return redirect("community:main")
             else:
+                print("Form Errors:", form.errors)
                 return render(request, "community/create_club.html", {"form": form})
     else:
         return redirect("landing:login")
