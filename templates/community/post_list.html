@@ -15,13 +15,25 @@
                 </a>
             </h1>
             {% if user.is_authenticated and user.is_admin %}
-            <div id="delete">
-                <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">게시판 삭제</button>
-                </form>
+            <div id="delete-box">
+                {% if messages %}
+                <ul class="messages" style="display: flex; align-items: center;">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}
+                        style="{% if 'error' in message.tags %}color: red;{% endif %}">
+                        {{ message }}
+                        </li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <div id="delete">
+                    <form method="post" action="{% url 'community:delete_board' board.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">게시판 삭제</button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
         <!-- <div class="list_search__bar">
             <form class="search" method="POST" action="{% url 'community:search' %}">
@@ -45,9 +57,7 @@
             </div>
         </div>
         <div id="board__container">
-            <div id="new_post">
-                <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
-            </div>
+            <button id="show-post-form" class="btn btn-primary">게시글 작성</button>
             <div id="post-form-container" style="display: none;">
                 <form id="post-form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
