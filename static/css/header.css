@@ -386,6 +386,15 @@ body {
         width: 35px; 
         border: none;
         margin: 0 0.5rem;
+        padding: 0 0;
+        background-color: #ffffff;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    #main_logout_btn {
+        height: 35px;
+        width: 35px;
+        border: none;
+        padding: 0 0;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
@@ -420,6 +429,7 @@ body {
     }
     .app__title {
         padding-top: 0;
+        margin-right: 2.5rem;
     }
     
     .app__icon{
