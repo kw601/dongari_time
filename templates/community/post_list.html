@@ -207,7 +207,7 @@
                 <li class="best__li">
                     <div class="best__name">
                         <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
-                            <div>{{ post.title }}</div>
+                            <div>{{ post.title|truncatechars:7 }}</div>
                             <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
                         </a>
                     </div>
