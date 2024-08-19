@@ -95,12 +95,17 @@
     flex-direction: column;
     width:100%;
     padding: 20px 60px;
-    color:red;
+    color:blue;
 }
 .message-container p{
-    color: blue;
+    color: red;
     margin-bottom: 5px;
 }
+
+li{
+    text-align: center;
+}
+
 @media (max-width: 767px){
     
     #signup-container {
@@ -146,7 +151,7 @@
 
     }
     .message-container p{
-        color: blue;
+        color: red;
         margin-bottom: 5px;
     }
 
