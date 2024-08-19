@@ -4,12 +4,20 @@
     flex-direction: column;
     padding: 20px;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
-
+#signup-container form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #signup-container h3 {
     font-size: 32px;
-    width: 805px;
-    padding: 14px 0px 14px 0px;
+    width: 100%;
+    max-width: 805px;
+    padding: 1rem 0rem;
     font-weight: bold;
     text-align: left;
     color: #333;
@@ -20,38 +28,40 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 60px 0px 60px;
-    width: 685px;
-    height: 700px;
-    justify-content: center;
+    margin: 40px 20px 20px 20px;
+    width: 100%;
+    max-width: 685px;
+    box-sizing: border-box;
 
 }
 
 .form-group {
-    width: 685px;
-    height: 70px;
+    width: 100%;
+    height: 90px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding:10px 0px 10px 0px;
+    padding:10px 10px;
+    box-sizing: border-box;
 }
 
 .form-group label {
-    width: 685px;
+    width: 100%;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
-    display: block;
     color: #333;
 }
 
 .form-group input {
+    width: 100%;
     height: 50px;
-    padding: 10px 10px;
+    padding: 10px;
     font-size: 14px;
     border: currentColor;
     border-radius: 5px;
-    background-color: #FEF9DF; /* Light yellow input fields */
+    background-color: #FEF9DF;
+    box-sizing: border-box; /* Light yellow input fields */
 }
 
 .button-container{
@@ -64,86 +74,75 @@
 .button {
     width: 200px;
     height: 70px;
-    background-color: #FFCF33; /* Yellow button */
+    border: 2px solid #ffcf33;
+    background-color: #FFFFFF;
     color: #000000;
     font-size: 25px;
     font-weight: bold;
-    border: none;
-    border-radius: 20px;
+    border-radius: 1.2rem;
     cursor: pointer;
     text-decoration: none;
 }
 
 .button:hover {
-    background-color: #f7b324;
+    transform: translateY(-3px);
+    background-color: #ffcf33;
+}
+.message-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+    padding: 20px 60px;
+    color:red;
+}
+.message-container p{
+    color: blue;
+    margin-bottom: 5px;
 }
 @media (max-width: 767px){
     
     #signup-container {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
+
         padding: 0px;
     }
 
     #signup-container h3 {
-        width: 95%;
-        font-size: 2rem;
-        margin: 1rem 2rem;
-        font-weight: bold;
-        text-align: left;
-        color: #333;
-        border-bottom:1px solid #c2c2c2;
+        font-size: 24px;
+        width: 100%;
+        padding: 1rem;
+        margin: 0;
+        text-align: center;
     }
 
     .signup-form{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0px 60px 0px 60px;
-        height: 100%;
-        align-items: center;
+        padding: 0;
+        width: 100%;
 
+    }
+
+    #signup-container form{
+        width: 100%;
     }
 
     .form-group {
         width: 100%;
-        height: 70px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        padding:10px 0px 10px 0px;
+        padding: 10px 10px;
     }
 
     .form-group label {
-        width: 93%;
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 5px;
-        display: block;
-        color: #333;
+        width: 100%;
+        font-size: 18px;
     }
 
     .form-group input {
-        width: 90%;
-        height: 50px;
-        padding: 15px;
-        font-size: 14px;
-        border: currentColor;
-        border-radius: 5px;
-        background-color: #FEF9DF; /* Light yellow input fields */
+        width: 100%;
     }
 
     .message-container{
-        display: flex;
-        flex-direction: column;
         width:100%;
         padding: 20px 60px;
-        width: 687px;
-        justify-content: space-around;
-        text-decoration: none;
-        text-align: center;
 
     }
     .message-container p{
@@ -152,22 +151,12 @@
     }
 
     .button-container{
-        padding: 20px 60px;
-        display: flex;
-        justify-content: space-around;
-        text-decoration: none;
+        padding: 10px 0;
+        justify-content: center;
     }
     .button {
-        width: 200px;
-        height: 70px;
-        background-color: #FFCF33; /* Yellow button */
-        color: #000000;
-        font-size: 25px;
-        font-weight: bold;
-        border: none;
-        border-radius: 20px;
-        cursor: pointer;
-        text-decoration: none;
+        width: 100%;
+        max-width: 200px;
     }
 
     .button:hover {

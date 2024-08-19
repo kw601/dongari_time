@@ -1,5 +1,4 @@
 {% load static %}
-{% load webpush_notifications %}
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,7 +9,6 @@
   <link rel="stylesheet" href="{% static 'css/reset.css' %}" />
   <script src="https://kit.fontawesome.com/ff7a5a86fb.js" crossorigin="anonymous"></script>
   <title>동아리타임!</title>
-  {% webpush_header %}
   {% block extra_head %}{% endblock extra_head %}
   {% block head %}{% endblock head %}
 </head>
@@ -20,6 +18,7 @@
   {% include 'header.html'%}
   {% block content %}{% endblock%}
   {% include 'footer.html'%}
+
 </body>
 
 </html>
