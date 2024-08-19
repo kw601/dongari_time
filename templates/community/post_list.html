@@ -144,36 +144,6 @@
     </div>
     <div class="side__container">
         <div class="best__container">
-            <div class="board__title">공간이 너무 남아~</div>
-            <ul class="best__ul">
-                {% for post in posts_best %}
-                <li class="best__li">
-                    <div class="best__name">
-                        <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
-                            <div>{{ post.title }}</div>
-                            <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
-                        </a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="best__container">
-            <div class="board__title">공간 채우기 박스</div>
-            <ul class="best__ul">
-                {% for post in posts_best %}
-                <li class="best__li">
-                    <div class="best__name">
-                        <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
-                            <div>{{ post.title }}</div>
-                            <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
-                        </a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="best__container">
             <div class="board__title">베스트 게시글</div>
             <ul class="best__ul">
                 {% for post in posts_best %}
