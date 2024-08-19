@@ -23,7 +23,7 @@
             <span class="club-name">{{ auth_club.club_id.club_name }}</span>
             <div class="button-container">
                 <a href="{% url 'mypage:switch_club' auth_club.club_id.id %}" class="manage_clubs__btn">이동</a>
-                <button class="manage_clubs__btn" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
+                <button class="delete-club manage_clubs__btn" data-club-id="{{ auth_club.club_id.id }}">삭제</button>
             </div>
         </li>
         {% endfor %}
