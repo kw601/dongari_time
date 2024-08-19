@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const newPostDiv = document.getElementById('new_post');
+    const newPostDiv = document.getElementById('show-post-form');
     const showFormButton = document.getElementById('show-post-form');
     const formContainer = document.getElementById('post-form-container');
     const cancelButton = document.getElementById('cancel-post');

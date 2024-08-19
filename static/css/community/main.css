@@ -1,67 +1,124 @@
+
 #main__container {
     width: 100%;
     height: auto;
     min-height: 100%;
     padding-bottom: 120px;
+    font-family: "Pretendard", sans-serif;
 }
+
 #boards__container {
     background-color: white;
     margin: 1rem 130px;
 }
+
 #boards__ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 #boards__li {
     margin-top: 10px;
-    border: 1px solid #ffecad;
+    border: 2px solid #ffecad;
     border-radius: 10px;
 }
+
 #board__name {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+#board__name a{
+    font-family: "Pretendard", sans-serif;
+}
 #boards__ul li h2 {
     padding: 10px;
 }
+
 #boards__ul li h2 a {
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 1.2rem;
-    margin-bottom: 10px;
+    margin: 5px;
+    font-family: "Pretendard", sans-serif;
 }
-#posts__ul{
+
+#posts__ul {
     display: flex;
     flex-direction: column;
     padding: 0px 3rem;
 }
-#posts__ul a{
-    border: 1px solid #ffecad;
+
+#posts__ul a {
+    border: 2px solid #ffecad;
     padding: 5px 5px;
     margin-bottom: 15px;
     border-radius: 10px;
     text-decoration: none;
     transition: 0.3s ease;
-    box-shadow: 0 1px 5px rgba(255, 255, 0, 0.3);
+    box-shadow: 0 1px 5px #ffecad;
 }
-#posts__ul a:hover{
-    background-color: #FBFFDB;
+
+#posts__ul a:hover {
+    background-color: #ffe285;
+
 }
-#posts__li{
+
+#posts__li {
     display: flex;
     justify-content: space-between;
 }
-#post__name{
+
+#post__name {
     color: black;
     font-weight: 600;
     font-size: 1rem;
 }
-#post__date{
+
+#post__date {
     color: black;
     font-weight: 600;
     font-size: 0.8rem;
+}
+
+#load-more {
+    width: 100%;
+    border: 2px solid #e0e0e0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #F7F7F7;
+    /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: .5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+}
+
+#load-more:hover {
+    transform: translateY(-3px);
+    background-color: #FFCF33;
+}
+
+@media (max-width: 767px) {
+    #boards__container {
+        background-color: white;
+        margin: 0 0;
+    }
+
+    #boards__ul {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        margin: 0 2rem;
+    }
 }

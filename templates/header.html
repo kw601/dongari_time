@@ -51,15 +51,17 @@
     </div>
 {% endif %}            
 {% else %}
-<div class="header__container">  
-    <div class="left__container__logout">
+<div class="header__container">        
+    <div class="left__container__login">
         <button id="prev_btn" onclick="prev()">
-            <img src="/static/image/arrow_back.png" alt="뒤로 가기">
+            <img src="/static/image/arrow_back.png" alt="뒤로 가기" id="arrow_back">
         </button>
     </div>
-    <div class="center__container__logout">
+    <div class="center__container__login">
         <div class="app__icon">여기에 로고</div>
         <div class="app__title">동아리타임</div>
+    </div>
+    <div class="right__container__login">
     </div>
 </div>
 {% endif %}
@@ -68,7 +70,7 @@
 <div class="board__header">
     <div class="board__container">
         {% for board in boards %}
-        <div id="main_board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name }}</a></div>
+        <div id="main_board__name"><a href="{% url 'community:post_list' board.id %}">{{ board.board_name|truncatechars:7 }}</a></div>
         {% endfor %}
     </div>
     <div id="button__container">

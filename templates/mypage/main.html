@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block content %}
+{% webpush_button %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
 
@@ -18,17 +19,17 @@
     <div class="decoration__box">
         <div class="icon__container">😆</div>
         <div class="icon__container__text">
-            <p>아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄거예요!</p>
+            <p id="icon__container__text">아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄 거예요!</p>
         </div>
     </div>
     <div class="content__container__1">
         <div class="content__container">
             <a href="{% url 'landing:update' %}" class="function__container">
-                <h2 class="func__title">닉네임 변경 🫧</h2>
+                <h2 class="func__title">회원정보 수정 🫧</h2>
             </a>
-            <div class="function__container">
+            <a href="{% url 'landing:change_password' %}" class="function__container">
                 <h2 class="func__title">비밀번호 변경 🔐</h2>
-            </div>
+            </a>
             <a href="{% url 'mypage:manage_clubs' %}" class="function__container">
                 <h2 class="func__title">내 동아리 관리 🤝</h2>
             </a>
@@ -37,7 +38,7 @@
     <div class="content__container__2">
         <div class="content__container__text">
             <div class="func__description__container">
-                <p class="func__description func__description__1">당신의 동아리타임 닉네임을 바꿔볼까요?</p>
+                <p class="func__description func__description__1">간편하게 회원정보를 수정해요!</p>
             </div>
             <div class="func__description__container">
                 <p class="func__description func__description__2">쉿 비밀번호는 최대한 어렵게!</p>
@@ -72,31 +73,23 @@
                 <p class="func__description func__description__6">스크랩한 게시글을 모아봤어요!</p>
             </div>
         </div>
-    <div class="content__container">
-        <a href="{% url 'landing:update' %}" class="function__container">
-            <h2 class="func__title">회원정보 수정</h2>
-            <p class="func__description">당신의 동아리타임 닉네임을 바꿔볼까요?</p>
-        </a>
-        <a href="{% url 'landing:change_password' %}" class="function__container">
-            <h2 class="func__title">비밀번호 변경</h2>
-            <p class="func__description">첫 비밀번호는 최대한 어렵게!</p>
-        </a>
-        <a href="{% url 'mypage:manage_clubs' %}" class="function__container">
-            <h2 class="func__title">내 동아리 관리</h2>
-            <p class="func__description">당신이 속한 동아리의 목록을 보고 삭제도 할 수 있어요!</p>
-        </a>
-        <a href="{% url 'mypage:myposts' %}" class="function__container">
-            <h2 class="func__title">내가 쓴 글</h2>
-            <p class="func__description">어떤 게시글을 올렸는지 궁금한가요?</p>
-        </a>
-        <a href="{% url 'mypage:mycomments' %}" class="function__container">
-            <h2 class="func__title">내 댓글</h2>
-            <p class="func__description">그동안 당신은 어떤 댓글을 남겼을까요?</p>
-        </a>
-        <a href="{% url 'mypage:myscraps' %}" class="function__container">
-            <h2 class="func__title">스크랩</h2>
-            <p class="func__description">스크랩한 게시글을 모아봤어요!</p>
-        </a>
     </div>
 </div>
+
+<script>
+    function updateText() {
+        const pTag = document.getElementById('icon__container__text');
+        if (window.innerWidth <= 767) {
+            pTag.textContent = '동아리타임 마이페이지에 온 걸 환영해요!';
+        } else {
+            pTag.textContent = '아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄 거예요!';
+        }
+    }
+
+    // 페이지 로드 시 실행
+    updateText();
+
+    // 창 크기 변경 시 실행
+    window.addEventListener('resize', updateText);
+</script>
 {% endblock %}

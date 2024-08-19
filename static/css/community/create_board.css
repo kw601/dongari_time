@@ -1,18 +1,40 @@
+.c_b_frame{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.c_b_title{
+    font-family: "Pretendard", sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 8rem;
+}
+.c_b_h1{
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 3rem;
+    margin-bottom: 1rem
+}
+.c_b_line{
+    width: 80%;
+    border-bottom: 1px solid #c2c2c2;
+}
 .c_b_container {
     max-width: 600px;
-    margin: 50px auto;
+    margin: 50px 5rem;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    font-family: "Pretendard", sans-serif;
 }
-
-/* 제목 정렬 및 스타일 */
-.c_b_h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
+#id_board_name{
+    margin: 1rem 0;
+    font-family: "Pretendard", sans-serif;
 }
 
 /* 라벨과 입력 필드 정렬 */
@@ -35,19 +57,26 @@ input[type="text"], textarea, select {
     box-sizing: border-box;
     font-size: 16px;
 }
+input[type="text"]:focus, textarea:focus, select:focus{
+    outline: 1px solid #ffd95c;
+}
 
 /* 버튼 스타일 */
 .btn-primary {
+    font-family: "Pretendard", sans-serif;
     width: 100%;
     padding: 10px;
-    background-color: #C5DFF8;
-    border: none;
-    border-radius: 4px;
-    color: white;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    color: black;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .btn-primary:hover {
-    background-color: #A0BFE0;
+    background-color: #ffd700;
+    color: #ffffff;
+    border: 1px solid #ccc;
 }
