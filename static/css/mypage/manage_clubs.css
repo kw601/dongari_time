@@ -18,6 +18,14 @@
     font-weight: bold;
 }
 
+.club-name {
+    display: inline-block;
+    max-width: 20rem; /* 원하는 최대 너비 */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 #club-list li .button-container {
     display: flex;
     gap: 10px;
@@ -67,7 +75,9 @@ a {
 }
 
 @media (max-width: 768px) {
-    
+    .club-name {
+        max-width: 9rem;
+    }
 }
 
 @media (max-width: 570px) {
@@ -81,6 +91,7 @@ a {
 
     .club-name {
         font-size: 12px;
+        max-width: 9rem;
     }
 
     .club-list li {
@@ -90,5 +101,12 @@ a {
     .manage_clubs__btn {
         padding: 0.2rem 0.7rem;
         font-size: 12px;
+    }
+}
+
+@media (max-width: 470px) {
+    .club-name {
+        font-size: 12px;
+        max-width: 4rem;
     }
 }
