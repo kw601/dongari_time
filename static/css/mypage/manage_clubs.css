@@ -46,3 +46,49 @@ a {
     align-items: center;
     justify-content: center;
 }
+
+/* 반응형 스타일 */
+@media (max-width: 1200px) {
+    
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --padding-value: 2rem;
+    }
+
+    .title__container {
+        padding: 0;
+    }
+
+    #club-list {
+        padding: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    
+}
+
+@media (max-width: 570px) {
+    .manage_clubs__body {
+        padding: 0 6rem;
+    }
+
+    .page__title {
+        font-size: 16px;
+    }
+
+    .club-name {
+        font-size: 12px;
+    }
+
+    .club-list li {
+        padding: 0.7 1rem;
+    }
+
+    .manage_clubs__btn {
+        padding: 0.2rem 0.7rem;
+        font-size: 12px;
+    }
+}

@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+{% webpush_button %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
 {% webpush_header %}
@@ -27,7 +28,7 @@
     <div class="decoration__box">
         <div class="icon__container">😆</div>
         <div class="icon__container__text">
-            <p>아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄 거예요!</p>
+            <p id="icon__container__text">아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄 거예요!</p>
         </div>
     </div>
     <div class="content__container__1">
@@ -46,7 +47,7 @@
     <div class="content__container__2">
         <div class="content__container__text">
             <div class="func__description__container">
-                <p class="func__description func__description__1">당신의 동아리타임 닉네임을 바꿔볼까요?</p>
+                <p class="func__description func__description__1">간편하게 회원정보를 수정해요!</p>
             </div>
             <div class="func__description__container">
                 <p class="func__description func__description__2">쉿 비밀번호는 최대한 어렵게!</p>
@@ -84,5 +85,21 @@
     </div>
 </div>
 
+<script>
+    function updateText() {
+        const pTag = document.getElementById('icon__container__text');
+        if (window.innerWidth <= 767) {
+            pTag.textContent = '동아리타임 마이페이지에 온 걸 환영해요!';
+        } else {
+            pTag.textContent = '아래의 기능들이 당신의 동아리타임을 더 풍부하게 도와줄 거예요!';
+        }
+    }
+
+    // 페이지 로드 시 실행
+    updateText();
+
+    // 창 크기 변경 시 실행
+    window.addEventListener('resize', updateText);
+</script>
 
 {% endblock %}
