@@ -181,6 +181,10 @@ body {
 
 .search-bar::placeholder {
     color: #ffffff;
+    font-weight: bold;
+}
+.search-bar:focus::placeholder{
+    color: transparent;
 }
 
 .search {
@@ -262,6 +266,9 @@ body {
 
 #button__container a {
     text-decoration: none;
+    display:flex;
+    flex-direction: column;
+
 }
 
 #main_btn {
@@ -402,4 +409,8 @@ body {
     .app__icon{
         display: none;
     }
+    .search-bar::placeholder {
+        color:transparent;
+    }
+    
 }
