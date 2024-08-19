@@ -162,6 +162,7 @@ li{
     .button {
         width: 100%;
         max-width: 200px;
+        font-size: 18px;
     }
 
     .button:hover {
