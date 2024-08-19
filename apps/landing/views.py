@@ -106,7 +106,9 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("landing:main")
+            return render(request, "mypage/main.html")
+        else:
+            print(form.errors)
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -115,13 +117,14 @@ def update(request):
     context = {"form": form, "boards": boards}
     return render(request, "users/update.html", context)
 
-
 # 비밀번호 변경
 def change_password(request):
+    context = {}
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
+            auth_logout(request)
             update_session_auth_hash(request, user)
             messages.success(request, "비밀번호가 성공적으로 변경되었습니다.")
             return redirect("landing:login")

@@ -1,17 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/users/find_username.css' %}">
-    <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
-    <title>아이디찾기</title>
-</head>
-<body>
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/find_username.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
+
     <div id="findusername-container">
         <h3>아이디 찾기</h3>
         <form method="post" action="{% url 'landing:find_username' %}">
@@ -27,11 +21,15 @@
                 </div>
             </div>
             <div class="button-container">
-                <button type="submit" class="button" a href = "{% url 'landing:find_username_result'%}">아이디 찾기</button>
+                <button type="submit" class="button">아이디 찾기</button>
             </div> 
             <div class ="message-container">
-                {% if username %}
-                    <p>사용자의 아이디는: {{ username }} 입니다.</p>
+                {% if form.errors %}
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ errors|striptags }}</li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </div>
         </form>

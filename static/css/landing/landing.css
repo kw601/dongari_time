@@ -11,7 +11,97 @@
     --padding-value: 8rem;
 
 }
+html {
+    font-family: "Pretendard", sans-serif;
+    scrollbar-gutter: stable
+}
+#disappear {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 999;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(
+        0 0, 
+        0 100%, 
+        25% 100%, 
+        25% 35%,  
+        75% 35%,  
+        75% 65%,  
+        25% 65%, 
+        25% 100%, 
+        100% 100%, 
+        100% 0
+    );
+    animation: changeClipPath .5s 2s ease forwards;
+}
+.first__container {
+    position: absolute;
+    width: 50vw;
+    height: 30vh;
+    left: 25vw;
+    top: 35vh;
+    background-color: var(--color-yellow-1);
+    clip-path: inset(0 0 0 0);
+    animation: disappear 2s ease forwards;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.first__container > p {
+    font-family: "Pretendard", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    padding-right: 3rem;
+    padding-bottom: 2rem;
+}
 
+@keyframes disappear {
+    0% {
+        clip-path: inset(0 0 0 0);
+    }
+    100% {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes changeClipPath {
+    0% {
+        clip-path: polygon(
+        0 0, 
+        0 100%, 
+        25% 100%, 
+        25% 35%,  
+        75% 35%,  
+        75% 65%,  
+        25% 65%, 
+        25% 100%, 
+        100% 100%, 
+        100% 0
+    );
+    }
+    100% {
+        clip-path: polygon(
+            0 0, 
+            0 100%, 
+            0 100%, 
+            0 0, 
+            100% 0, 
+            100% 100%, 
+            0 100%, 
+            0 100%, 
+            100% 100%, 
+            100% 0);
+    }
+}
 .landing__container {
     display: flex;
     flex-direction: column;
@@ -20,7 +110,9 @@
     gap: var(--gap-value);
     margin: var(--padding-value);
 }
-
+#main__content {
+    transition: opacity 1s ease;
+}
 .introducion {
     display: flex;
     flex-direction: column;
@@ -87,6 +179,7 @@
 .main__img__container > img {
     object-fit: contain;
     overflow: hidden;
+    width: 80%;
 }
 
 /* 반응형 필요한 부분 */
@@ -209,6 +302,11 @@
 
 
 @media (max-width: 767px) {
+    .first__container, .second__container {
+        top: 20vh;
+        width: 70%;
+        height: 20%;
+    }
     .landing__container {
         margin: 3rem;
     }

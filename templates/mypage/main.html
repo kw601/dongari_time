@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load webpush_notifications %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
@@ -9,12 +10,20 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 <link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
-
+{% webpush_header %}
 <div class="mypage__body">
     <div class="title__container">
         <h1 class="page__title">마이페이지</h1>
-        <hr class="page__title_hr">
+        <div class="webpush_btn">
+            <div id="alert">
+                <img src="/static/image/landing_service_4.png" alt="알림버튼" id="alert_icon">
+            </div>  
+            : {% webpush_button %}
+        </div>
+        
+        
     </div>
+    <hr class="page__title_hr">
     <div class="decoration__box">
         <div class="icon__container">😆</div>
         <div class="icon__container__text">
@@ -91,4 +100,5 @@
     // 창 크기 변경 시 실행
     window.addEventListener('resize', updateText);
 </script>
+
 {% endblock %}

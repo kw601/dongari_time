@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <div class="landing__container">
+    <div class="first__container"><p>소통은 쉽게, 활동은 즐겁게</p></div>
+    <div id="disappear"></div>
+    <div id="main__content" class="landing__container">
         <div class="introducion">
             <div class="title">동아리타임</div>
             <div class="description">
@@ -145,6 +147,24 @@
                 </div>
             </div>
        </div> 
+
+       <script>
+        window.addEventListener('load', function() {
+            const disappear = document.getElementById('disappear');
+    
+            // 스크롤 금지
+            document.body.style.overflow = 'hidden';
+    
+            // 4초 후 #disappear 요소를 숨기고 스크롤 허용
+            setTimeout(function() {
+                disappear.style.opacity = '0';
+                disappear.style.display = 'none';
+    
+                document.body.style.overflow = 'auto';
+            }, 4000);
+        });
+    </script>
+    
 </body>
 
 </html>
