@@ -118,6 +118,7 @@ def update(request):
 
 # 비밀번호 변경
 def change_password(request):
+    context = {}
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
