@@ -100,10 +100,39 @@
                             {% else %}
                             <p id="post__user">{{ post.user_id.nickname }}</p>
                             {% endif %}
-                            <div id="post__stats">
+                            <!-- <div id="post__stats">
                                 <p>댓글 수: {{ post.comment_set.count }}</p>
                                 <p>좋아요 수: {{ post.liked_by.count }}</p>
                                 <p>스크랩 수: {{ post.scraped_by.count }}</p>
+                            </div> -->
+                            <!-- 좋댓구 이미지변환, 0이면 출력 X -->
+                            <div class="state__container">
+                                {% if post.liked_by.count %}
+                                <div class="state__content">
+                                    <div class="like__container">
+                                        <img src="/../../static/image/like__icon.png" alt="좋아요">
+                                    </div>
+                                    <span id="like__description" class="like__description">
+                                        {{ post.liked_by.count }}</span>
+                                </div>
+                                {% endif %}
+                                {% if post.comment_set.count %}
+                                <div class="state__content">
+                                    <div class="comment__container">
+                                        <img src="/../../static/image/comment__icon.png" alt="댓글">
+                                    </div>
+                                    <span class="comment__description">{{ post.comment_set.count }}</span>
+                                </div>
+                                {% endif %}
+                                {% if post.scraped_by.count %}
+                                <div class="state__content">
+                                    <div class="scrap__container">
+                                        <img src="/../../static/image/scrap__icon.png" alt="스크랩">
+                                    </div>
+                                    <span id="scrap__description" class="scrap__description">
+                                        {{ post.scraped_by.count }}</span>
+                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </li>
@@ -129,12 +158,40 @@
                             {% else %}
                             <p id="post__user">{{ post.user_id.nickname }}</p>
                             {% endif %}
-                            <div id="post__stats">
+                            <!-- <div id="post__stats">
                                 <p>댓글 수: {{ post.comment_set.count }}</p>
                                 <p>좋아요 수: {{ post.liked_by.count }}</p>
                                 <p>스크랩 수: {{ post.scraped_by.count }}</p>
+                            </div> -->
+                            <!-- 좋댓구 이미지변환, 0이면 출력 X -->
+                            <div class="state__container">
+                                {% if post.liked_by.count %}
+                                <div class="state__content">
+                                    <div class="like__container">
+                                        <img src="/../../static/image/like__icon.png" alt="좋아요">
+                                    </div>
+                                    <span id="like__description" class="like__description">
+                                        {{ post.liked_by.count }}</span>
+                                </div>
+                                {% endif %}
+                                {% if post.comment_set.count %}
+                                <div class="state__content">
+                                    <div class="comment__container">
+                                        <img src="/../../static/image/comment__icon.png" alt="댓글">
+                                    </div>
+                                    <span class="comment__description">{{ post.comment_set.count }}</span>
+                                </div>
+                                {% endif %}
+                                {% if post.scraped_by.count %}
+                                <div class="state__content">
+                                    <div class="scrap__container">
+                                        <img src="/../../static/image/scrap__icon.png" alt="스크랩">
+                                    </div>
+                                    <span id="scrap__description" class="scrap__description">
+                                        {{ post.scraped_by.count }}</span>
+                                </div>
+                                {% endif %}
                             </div>
-                        </div>
                     </li>
                 </a>
                 {% endif %}
