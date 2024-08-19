@@ -10,7 +10,11 @@
 </head>
 
 <body>
-    <div class="landing__container">
+    <div id="disappear">
+        <div class="first__container"></div>
+        <div class="second__container"></div>
+    </div>
+    <div id="main__content" class="landing__container">
         <div class="introducion">
             <div class="title">동아리타임</div>
             <div class="description">
@@ -145,6 +149,38 @@
                 </div>
             </div>
        </div> 
+       <!-- <script>
+        window.addEventListener('load', function() {
+            const disappear = document.getElementById('disappear');
+            const mainContent = document.getElementById('main-content');
+            const firstContainer = document.querySelector('.first__container');
+            const secondContainer = document.querySelector('.second__container');
+    
+            // 애니메이션 시작
+            firstContainer.classList.add('disappear');
+            
+            // second__container의 위치와 크기를 기준으로 clip-path 설정
+            const rect = secondContainer.getBoundingClientRect();
+            const top = rect.top + window.scrollY;
+            const left = rect.left + window.scrollX;
+            const right = window.innerWidth - (rect.left + rect.width);
+            const bottom = window.innerHeight - (rect.top + rect.height);
+    
+            disappear.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px)`;
+    
+            // 첫 번째 컨테이너가 사라진 후 메인 컨텐츠를 보이게 함
+            // setTimeout(() => {
+            //     disappear.style.opacity = '0';
+            //     mainContent.style.opacity = '1';
+            // }, 1000);
+    
+            // // 1.5초 후 `#disappear` 요소를 숨김
+            // setTimeout(() => {
+            //     disappear.style.display = 'none';
+            // }, 1500);
+        });
+    </script> -->
+    
 </body>
 
 </html>
