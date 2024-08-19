@@ -235,7 +235,7 @@ def create_post(request, board_id):
                 print(notification_users)
 
                 for user in notification_users:
-                    if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
+                    if user != request.user:  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
                         send_user_notification(user=user, payload=payload, ttl=1000)
 
                 # 그룹 알림 필요할때 사용
@@ -476,7 +476,7 @@ def create_comment(request, board_id, post_id):
             print(notification_users)
 
             for user in notification_users:
-                if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
+                if user != request.user:  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
                     send_user_notification(user=user, payload=payload, ttl=1000)
 
             # 그룹 알림 필요할때 사용

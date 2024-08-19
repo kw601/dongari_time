@@ -40,6 +40,7 @@ button {
     height: 25px;
 }
 #alert_icon{
+    padding-top: 1px;
     width: 25px;
     height: 25px;
 }
@@ -215,6 +216,7 @@ a {
     .content__container__2 {
         margin: 0 2rem;
     }
+    
 }
 
 @media (max-width: 1024px) {
@@ -248,6 +250,10 @@ a {
 
     .func__description {
         font-size: 11px;
+    }
+    .page__title_hr {
+        margin: 0 0;
+        color: #A7A7A7;
     }
 }
 
@@ -340,5 +346,9 @@ a {
 
     .content__container__1 {
         margin: 0 4rem;
+    }
+    .page__title_hr {
+        margin: 0 4rem;
+        color: #A7A7A7;
     }
 }

@@ -12,8 +12,19 @@ body {
     align-items: center;
     font-family: "Pretendard", sans-serif;
 }
-
-
+.main_app__icon{
+    width: 40px;
+    height: 40px;
+}
+.app__icon{
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1);
+}
+#club_logo{
+    width: 40px;
+    height: 40px;
+}
 .left__container__login {
     height: 45px;
     width: 45px;
@@ -69,6 +80,7 @@ body {
     display: flex;
 }
 .app__title {
+    padding-top: 0.5rem;
     color: #ffffff;
     font-weight: bold;
     font-size: 1.5rem;
@@ -406,6 +418,10 @@ body {
         align-items: center;
         padding: 0 1rem;
     }
+    .app__title {
+        padding-top: 0;
+    }
+    
     .app__icon{
         display: none;
     }
