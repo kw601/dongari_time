@@ -95,3 +95,8 @@ def switch_club(request, club_id):
             return redirect("mypage:manage_clubs")
     else:
         return redirect("landing:login")
+
+def get_status(request):
+    if request.user.is_authenticated:
+        return JsonResponse({'is_notifications': request.user.is_notifications})
+    return JsonResponse({'is_notifications': False}, status=401)
