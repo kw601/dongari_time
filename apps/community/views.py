@@ -222,7 +222,8 @@ def create_post(request, board_id):
                 # Auth_Club 모델에서 글을 작성하는 공지 게시판 동아리의 소속 동아리원들을 가져옴
                 club_members = Auth_Club.objects.filter(club_id=club_id)
                 for club_member in club_members:
-                    notification_users.add(club_member.user_id)
+                    if club_member.user_id.is_notifications:
+                        notification_users.add(club_member.user_id)
 
                 # 알림 보내기
                 payload = {
@@ -234,7 +235,7 @@ def create_post(request, board_id):
                 print(notification_users)
 
                 for user in notification_users:
-                    if user != request.user:  # 자신에게는 알림을 보내지 않음
+                    if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
                         send_user_notification(user=user, payload=payload, ttl=1000)
 
                 # 그룹 알림 필요할때 사용
@@ -451,9 +452,10 @@ def create_comment(request, board_id, post_id):
 
             # 알림을 보낼 사용자 목록
             notification_users = set()
-
-            # 게시글 작성자에게 알림 위해 목록에 추가
-            notification_users.add(post.user_id)
+            
+            if post.user_id.is_notifications: # 게시글 작성자가 알림 버튼 활성화라면
+                # 게시글 작성자에게 알림 위해 목록에 추가
+                notification_users.add(post.user_id)
 
             # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
             if comment.parent_id:
@@ -474,7 +476,7 @@ def create_comment(request, board_id, post_id):
             print(notification_users)
 
             for user in notification_users:
-                if user != request.user:  # 자신에게는 알림을 보내지 않음
+                if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
                     send_user_notification(user=user, payload=payload, ttl=1000)
 
             # 그룹 알림 필요할때 사용
