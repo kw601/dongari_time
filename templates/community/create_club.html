@@ -1,16 +1,10 @@
+{% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-    <link rel="stylesheet" href="{% static 'css/community/create_club.css' %}">
-    <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
-    <title>동아리생성</title>
-</head>
-<body>
+
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/community/create_club.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
     <div id="createclub-container">
         <h3>동아리 생성</h3>
         <form method="post" action="{% url 'community:create_club' %}" enctype="multipart/form-data">
@@ -30,6 +24,5 @@
             </div>
         </form>
     </div>
-</body>
-</html>
+
 {% endblock content %}
