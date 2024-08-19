@@ -87,6 +87,14 @@ a {
         padding: 0 6rem;
     }
 
+    .title__container {
+        padding: 0;
+    }
+
+    .decoration__box {
+        margin: 2rem 0rem;
+    }
+
     .posts_body {
         padding: 0;
     }
@@ -97,5 +105,19 @@ a {
 
     .post-date {
         font-size: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage_clubs__body {
+        padding: 0 4rem;
+    }
+    
+    .title__container {
+        padding: 0;
+    }
+
+    .decoration__box {
+        margin: 2rem 0rem;
     }
 }
