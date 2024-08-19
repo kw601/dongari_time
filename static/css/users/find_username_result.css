@@ -45,6 +45,10 @@
     text-align: center;
     color:#0033ff;
 }
+.button-container a{
+    font-size: 20px;
+    color: black;
+}
 
 @media (max-width: 767px){
 
@@ -76,5 +80,9 @@
         font-size: 15px;
         text-align: center;
         color:#0800ff;
+    }
+    .button-container a{
+        font-size: 20px;
+        color: blue;
     }
 }
