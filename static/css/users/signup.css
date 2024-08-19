@@ -87,6 +87,17 @@
 .button:hover {
     background-color: #f7b324;
 }
+.message-container{
+    display: flex;
+    justify-content: center;
+    width:100%;
+    padding: 20px 60px;
+    color:red;
+}
+.message-container p{
+    color: blue;
+    margin-bottom: 5px;
+}
 @media (max-width: 767px){
     
     #signup-container {
@@ -127,14 +138,8 @@
     }
 
     .message-container{
-        display: flex;
-        flex-direction: column;
         width:100%;
         padding: 20px 60px;
-        width: 687px;
-        justify-content: space-around;
-        text-decoration: none;
-        text-align: center;
 
     }
     .message-container p{
