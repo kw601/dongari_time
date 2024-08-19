@@ -20,6 +20,21 @@
     text-align: center;
 }
 
+.logo {
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.logo img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+}
+
 #admin_btn, #auth_btn {
     border: 2px solid var(--color-yellow-1);
     background-color: var(--color-yellow-1);
