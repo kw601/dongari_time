@@ -163,8 +163,27 @@
     
                 document.body.style.overflow = 'auto';
             }, 4000);
+    
+            const elements = document.querySelectorAll('.description__left, .description__right');
+            const windowHeight = window.innerHeight;
+    
+            function checkVisibility() {
+                for (let i = 0; i < elements.length; i++) {
+                    const element = elements[i];
+                    const positionFromTop = elements[i].getBoundingClientRect().top;
+    
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('is-visible');
+                    }
+                }
+            }
+    
+            // 스크롤 이벤트 리스너 추가
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility(); // 페이지 로드시 초기 가시성 검사
         });
     </script>
+    
     
 </body>
 
