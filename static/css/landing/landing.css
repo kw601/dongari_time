@@ -13,6 +13,7 @@
 }
 html {
     font-family: "Pretendard", sans-serif;
+    scrollbar-gutter: stable
 }
 #disappear {
     position: fixed;
@@ -21,28 +22,77 @@ html {
     width: 100vw;
     height: 100vh;
     background-color: #fff;
-    z-index: 1000;
+    z-index: 999;
     opacity: 1;
     transition: opacity 1s ease;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
-
+    clip-path: polygon(
+        0 0, 
+        0 100%, 
+        25% 100%, 
+        25% 35%,  
+        75% 35%,  
+        75% 65%,  
+        25% 65%, 
+        25% 100%, 
+        100% 100%, 
+        100% 0
+    );
+    animation: changeClipPath 2s 2s ease forwards;
 }
-
-.first__container, .second__container {
+.first__container {
     position: absolute;
-    top: auto;
-    left: auto;
-    width: 50rem;
-    height: 20rem;
-    background-color: #FFCF33;
+    width: 50vw;
+    height: 30vh;
+    left: 25vw;
+    top: 35vh;
+    background-color: var(--color-yellow-1);
+    animation: disappear 2s ease forwards;
 }
 
+@keyframes disappear {
+    0% {
+        transform: scaleX(1);
+        transform-origin: right;
+    }
+    100% {
+        transform: scaleX(0);
+        transform-origin: right;
+    }
+}
 
-
+@keyframes changeClipPath {
+    0% {
+        clip-path: polygon(
+        0 0, 
+        0 100%, 
+        25% 100%, 
+        25% 35%,  
+        75% 35%,  
+        75% 65%,  
+        25% 65%, 
+        25% 100%, 
+        100% 100%, 
+        100% 0
+    );
+    }
+    100% {
+        clip-path: polygon(
+            0 0, 
+            0 100%, 
+            0 100%, 
+            0 0, 
+            100% 0, 
+            100% 100%, 
+            0 100%, 
+            0 100%, 
+            100% 100%, 
+            100% 0);
+    }
+}
 .landing__container {
     display: flex;
     flex-direction: column;
@@ -120,6 +170,7 @@ html {
 .main__img__container > img {
     object-fit: contain;
     overflow: hidden;
+    width: 80%;
 }
 
 /* 반응형 필요한 부분 */
