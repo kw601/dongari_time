@@ -22,7 +22,7 @@ html {
     width: 100vw;
     height: 100vh;
     background-color: #fff;
-    z-index: 999;
+    z-index: 990;
     opacity: 1;
     display: flex;
     flex-direction: row;
@@ -40,7 +40,7 @@ html {
         100% 100%, 
         100% 0
     );
-    animation: changeClipPath .5s 2s ease forwards;
+    animation: changeClipPath .5s 3s ease forwards;
 }
 .first__container {
     position: absolute;
@@ -48,9 +48,11 @@ html {
     height: 30vh;
     left: 25vw;
     top: 35vh;
+    z-index: 999;
     background-color: var(--color-yellow-1);
     clip-path: inset(0 0 0 0);
     animation: disappear 2s ease forwards;
+    animation-delay: 1s;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -58,12 +60,37 @@ html {
 .first__container > p {
     font-family: "Pretendard", sans-serif;
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: 900;
     color: white;
     padding-right: 3rem;
     padding-bottom: 2rem;
 }
-
+.second__icon {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    /* width: 50vw;
+    height: 30vh;
+    left: 25vw;
+    top: 35vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: white;
+    animation: removebackground .3s ease forwards, moveicon 1.5s ease forwards;
+    animation-delay: 3s;
+}
+.second__icon img {
+    object-fit: contain;
+    overflow: hidden;
+    width: 10%;
+    /* width: 30%; */
+    border-radius: 100%;
+    z-index: 900;
+}
 @keyframes disappear {
     0% {
         clip-path: inset(0 0 0 0);
@@ -102,6 +129,28 @@ html {
             100% 0);
     }
 }
+
+@keyframes removebackground {
+    0% {
+        background-color: white;
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+@keyframes moveicon {
+    0% {
+        top: 0;
+        left: 0;
+
+    }
+    100% {
+        top: -35vh;
+        left: -15vw;
+    }
+}
+
 .landing__container {
     display: flex;
     flex-direction: column;
@@ -125,6 +174,7 @@ html {
     font-family: "Pretendard", sans-serif;
     font-size: 3rem;
     font-weight: 900;
+    z-index: 950;
 }
 
 .description p {
@@ -302,10 +352,42 @@ html {
 
 
 @media (max-width: 767px) {
-    .first__container, .second__container {
-        top: 20vh;
-        width: 70%;
-        height: 20%;
+    .first__container {
+        width: 80vw;
+        height: 10vh;
+        left: 10vw;
+        top: 50vh;
+        transform: translateY(-50%);
+    }
+    #disappear {
+        clip-path: polygon(
+            0 0, 
+            0 100%, 
+            15% 100%, 
+            15% 35%,  
+            85% 35%,  
+            85% 65%,  
+            15% 65%, 
+            15% 100%, 
+            100% 100%, 
+            100% 0
+        );
+    }
+    @keyframes moveicon {
+        0% {
+            top: 0;
+            left: 0;
+    
+        }
+        100% {
+            top: -44vh;
+            left: -24vw;
+        }
+    }
+    .first__container > p {
+        font-size: 1.3rem;
+        padding-right: 1.5rem;
+        padding-bottom: 1rem;
     }
     .landing__container {
         margin: 3rem;
