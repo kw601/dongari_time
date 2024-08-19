@@ -21,14 +21,6 @@
         <div class = "update-form">
             <div class="update-form-container">
                 <div class="form-group">
-                    <label for="id_username">아이디</label>
-                    {{ form.username }}  
-                </div>
-                <div class="form-group">
-                    <label for="id_name">이름</label>
-                    {{ form.name }}  
-                </div>
-                <div class="form-group">
                     <label for="id_nickname">닉네임</label>
                     {{ form.nickname }}  
                 </div>
@@ -40,13 +32,13 @@
                     <label for="id_email">이메일</label>
                     {{ form.email }}  
                 </div>
+                <div class="button-container">
+                    <button type="submit" class="button">수정하기</button>
+                </div>
             </div>
         </div>
     </form>
     <div class="button-container_parent">
-        <div class="button-container">
-            <button type="submit" class="button">수정하기</button>
-        </div>
         <div class="button-container">
             {% if user.is_authenticated and user.id %}
             <form action="{% url 'landing:delete' user.id %}" method ='POST'>
