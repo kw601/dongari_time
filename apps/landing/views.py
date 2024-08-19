@@ -123,6 +123,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
+            auth_logout(request)
             update_session_auth_hash(request, user)
             messages.success(request, "비밀번호가 성공적으로 변경되었습니다.")
             return redirect("landing:login")
