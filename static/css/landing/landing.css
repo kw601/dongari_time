@@ -68,13 +68,9 @@ html {
 .second__icon {
     position: absolute;
     width: 100vw;
-    height: 100vh;
-    top: 0;
+    height: 300px;
+    top: calc(50vh - 150px);
     left: 0;
-    /* width: 50vw;
-    height: 30vh;
-    left: 25vw;
-    top: 35vh; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,11 +82,18 @@ html {
 .second__icon img {
     object-fit: contain;
     overflow: hidden;
-    width: 10%;
-    /* width: 30%; */
+    width: 6rem;
     border-radius: 100%;
     z-index: 900;
+    animation: wiggle 1s ease-in-out infinite;
+    transition: transform 0.3s ease;
 }
+
+.second__icon img:hover {
+    transition: transform 0.3s;
+    transform: scale(1.2);
+}
+
 @keyframes disappear {
     0% {
         clip-path: inset(0 0 0 0);
@@ -141,16 +144,18 @@ html {
 
 @keyframes moveicon {
     0% {
-        top: 0;
-        left: 0;
-
     }
     100% {
-        top: -35vh;
-        left: -15vw;
+        height: 6rem;
+        top: 8vh;
+        left: -13vw;
     }
 }
 
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+}
 .landing__container {
     display: flex;
     flex-direction: column;
@@ -373,15 +378,34 @@ html {
             100% 0
         );
     }
+    .second__icon {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        /* width: 50vw;
+        height: 30vh;
+        left: 25vw;
+        top: 35vh; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: white;
+        animation: removebackground .3s ease forwards, moveicon 1.5s ease forwards;
+        animation-delay: 3s;
+    }
+    .second__icon img {
+        width: 4rem;
+    }
     @keyframes moveicon {
         0% {
-            top: 0;
-            left: 0;
-    
         }
         100% {
-            top: -44vh;
-            left: -24vw;
+            height: 4rem;
+            top: 2vh;
+            left: -27vw;
         }
     }
     .first__container > p {
