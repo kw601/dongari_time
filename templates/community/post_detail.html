@@ -23,6 +23,12 @@
                         {% else %}
                         <div>익명</div>
                         {% endif %}
+                        {% if user == post.user_id or user.is_admin %}
+                            <form action="{% url 'community:delete_post' post.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="delete__btn" type="submit" onclick="return confirm('정말로 이 게시글을 삭제하시겠습니까?')">삭제</button>
+                            </form>
+                        {% endif%}
                     </div>
                     <div class="time__container">{{ post.created_time|date:"Y/m/d h:i" }}</div>
                 </div>

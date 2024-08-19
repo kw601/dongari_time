@@ -31,4 +31,5 @@ urlpatterns = [
     path("comment/<int:comment_id>/delete/", delete_comment, name="delete_comment"),
     path("search", search, name="search"),
     path("load-more-boards/", load_more_boards, name="load_more_boards"),
+    path("<int:post_id>/delete_post/", delete_post, name="delete_post"),
 ]

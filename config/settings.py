@@ -45,9 +45,9 @@ INSTALLED_APPS = [
     "apps.community",
     "apps.chat",
     "apps.mypage",
+    "apps.schedule",
     "webpush",
 ]
-
 AUTH_USER_MODEL = "landing.User"
 
 MIDDLEWARE = [

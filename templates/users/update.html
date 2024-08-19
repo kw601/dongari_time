@@ -1,76 +1,79 @@
+{% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
 {% block content %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/update.css' %}">
-        <link rel="stylesheet" href="{% static 'css/users/signup.css' %}">
-        <title>회원정보 수정</title>
-    </head>
-    <body>
-        <div id="update-container">
-            <div id="update-top">
-                {% if user.is_authenticated and user.id %}
-                <form action="{% url 'landing:delete' user.id %}" method ='POST'>
-                    {% csrf_token %}
-                    <input type="submit" value='회원탈퇴'>
-                </form>
-            </div>
-                <h3>회원정보 수정</h3>
-            <form method="post" action="{% url 'landing:update' %}">
-                {% csrf_token %}
-                <div class = "update-form">
-                    <div class="form-group">
-                        <label for="id_username">아이디</label>
-                        {{ form.username }}  
-                    </div>
-                    <div class="form-group">
-                        <label for="id_name">이름</label>
-                        {{ form.name }}  
-                    </div>
-                    <div class="form-group">
-                        <label for="id_nickname">닉네임</label>
-                        {{ form.nickname }}  
-                    </div>
-                    <div class="form-group">
-                        <label for="id_phone_num">전화번호</label>
-                        {{ form.phone_num }}  
-                    </div>
-                    <div class="form-group">
-                        <label for="id_email">이메일</label>
-                        {{ form.email }}  
-                    </div>
+<link rel="stylesheet" href="{% static 'css/reset.css' %}">
+<link rel="stylesheet" href="{% static 'css/mypage/mypage.css' %}">
+<link rel="stylesheet" href="{% static 'css/users/update.css' %}">
+
+<div class="manage_clubs__body">
+    <div class="title__container">
+        <h1 class="page__title">회원정보 수정 🫧</h1>
+        <hr class="page__title_hr">
+    </div>
+    <form method="post" action="{% url 'landing:update' %}">
+        {% csrf_token %}
+        <div class = "update-form">
+            <div class="update-form-container">
+                <div class="form-group">
+                    <label for="id_username">아이디</label>
+                    {{ form.username }}  
                 </div>
+                <div class="form-group">
+                    <label for="id_name">이름</label>
+                    {{ form.name }}  
+                </div>
+                <div class="form-group">
+                    <label for="id_nickname">닉네임</label>
+                    {{ form.nickname }}  
+                </div>
+                <div class="form-group">
+                    <label for="id_phone_num">전화번호</label>
+                    {{ form.phone_num }}  
+                </div>
+                <div class="form-group">
+                    <label for="id_email">이메일</label>
+                    {{ form.email }}  
+                </div>
+                <div class="button-container_parent">
                     <div class="button-container">
                         <button type="submit" class="button">수정하기</button>
                     </div>
-    
-            </form>
+                    <div class="button-container">
+                        {% if user.is_authenticated and user.id %}
+                        <form action="{% url 'landing:delete' user.id %}" method ='POST'>
+                            {% csrf_token %}
+                            <input id="button" type="submit" value='회원탈퇴'>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <script>
-            document.getElementById('id_phone_num').addEventListener('input', function(e) {
-                var value = e.target.value.replace(/[^0-9]/g, '');
-                var formattedValue = '';
-                if (value.length > 3 && value.length <= 7) {
-                    formattedValue = value.substr(0, 3) + '-' + value.substr(3);
-                } else if (value.length > 7) {
-                    formattedValue = value.substr(0, 3) + '-' + value.substr(3, 4) + '-' + value.substr(7);
-                } else {
-                    formattedValue = value;
-                }
-                e.target.value = formattedValue;
-            });
-        </script>
-        {% else %}
-        <p>로그인이 필요합니다.</p>
-        {% endif %}
-    </div>
+    </form>
+</div>
+
+
+<script>
+    document.getElementById('id_phone_num').addEventListener('input', function(e) {
+        var value = e.target.value.replace(/[^0-9]/g, '');
+        var formattedValue = '';
+        if (value.length > 3 && value.length <= 7) {
+            formattedValue = value.substr(0, 3) + '-' + value.substr(3);
+        } else if (value.length > 7) {
+            formattedValue = value.substr(0, 3) + '-' + value.substr(3, 4) + '-' + value.substr(7);
+        } else {
+            formattedValue = value;
+        }
+        e.target.value = formattedValue;
+    });
+</script>
+{% else %}
+<p>로그인이 필요합니다.</p>
+{% endif %}
+</div>
 {% endblock content %}
-    </body>
-    </html>
-
-

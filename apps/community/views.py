@@ -344,7 +344,17 @@ def delete_board(request, board_id):
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
-        return render(request, "community/delete_board.html", {"board": board})
+    else:
+        return redirect("landing:login")
+
+
+def delete_post(request, post_id):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, id=post_id)
+        board_id = post.board_id
+        if request.method == "POST":
+            post.delete()
+            return redirect("community:post_list", board_id=board_id)
     else:
         return redirect("landing:login")
 
@@ -487,12 +497,12 @@ def toggle_pinned(request, board_id, post_id):
     else:
         return redirect("landing:login")
 
-
 def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]  # 검색한 단어
         club_id = request.session.get("club_id")
         boards = Board.objects.filter(club_id=club_id)
+        posts_best = Post.objects.filter(club_id=club_id, liked_cnt__gte=5)
         if request.POST.get("board_id"):  # 게시판 내부일 때
             board_id = request.POST.get("board_id")
             board = Board.objects.get(id=board_id)  # 게시판 정보
@@ -502,7 +512,7 @@ def search(request):
             return render(
                 request,
                 "community/post_list.html",
-                {"posts": posts, "board": board, "boards": boards},
+                {"posts": posts, "board": board, "boards": boards, "posts_best":posts_best},
             )
         else:  # 메인 화면일 때(헤더바에서 검색했을 때)
             posts = Post.objects.filter(
@@ -511,7 +521,7 @@ def search(request):
             return render(
                 request,
                 "community/search_list.html",
-                {"posts": posts, "searched": searched, "boards": boards},
+                {"posts": posts, "searched": searched, "boards": boards, "posts_best":posts_best},
             )
 
 
