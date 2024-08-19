@@ -24,7 +24,6 @@ html {
     background-color: #fff;
     z-index: 999;
     opacity: 1;
-    transition: opacity 1s ease;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,7 +40,7 @@ html {
         100% 100%, 
         100% 0
     );
-    animation: changeClipPath 2s 2s ease forwards;
+    animation: changeClipPath .5s 2s ease forwards;
 }
 .first__container {
     position: absolute;
@@ -50,17 +49,27 @@ html {
     left: 25vw;
     top: 35vh;
     background-color: var(--color-yellow-1);
+    clip-path: inset(0 0 0 0);
     animation: disappear 2s ease forwards;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.first__container > p {
+    font-family: "Pretendard", sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: white;
+    padding-right: 3rem;
+    padding-bottom: 2rem;
 }
 
 @keyframes disappear {
     0% {
-        transform: scaleX(1);
-        transform-origin: right;
+        clip-path: inset(0 0 0 0);
     }
     100% {
-        transform: scaleX(0);
-        transform-origin: right;
+        clip-path: inset(0 0 0 100%);
     }
 }
 
