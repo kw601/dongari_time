@@ -106,7 +106,9 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect("landing:main")
+            return render(request, "mypage/main.html")
+        else:
+            print(form.errors)
     else:
         form = CustomUserChangeForm(instance=request.user)
 
@@ -114,7 +116,6 @@ def update(request):
     boards = Board.objects.filter(club_id=club_id)
     context = {"form": form, "boards": boards}
     return render(request, "users/update.html", context)
-
 
 # 비밀번호 변경
 def change_password(request):
