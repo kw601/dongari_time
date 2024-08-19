@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
+from django.urls import reverse
 from .models import Board, Post, Comment, Club
 from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
@@ -126,9 +127,14 @@ def post_detail(request, board_id, post_id):
                         notification_users.add(child_comment.user_id)
 
                 # 알림 보내기
+                # 알림 url 생성
+                comment_url = request.build_absolute_uri(
+                    reverse("community:post_detail", args=[board_id, post_id])
+                )
                 payload = {
                     "head": f'"{post.title}"에 새로운 댓글이 달렸습니다.',
                     "body": f"{comment.content[:10]}",
+                    "url": comment_url,  # paload에 url 추가
                 }
 
                 # 디버그용
@@ -136,6 +142,7 @@ def post_detail(request, board_id, post_id):
 
                 for user in notification_users:
                     if user != request.user:  # 자신에게는 알림을 보내지 않음
+                        print("post detail에서 알림")
                         send_user_notification(user=user, payload=payload, ttl=1000)
 
                 # 그룹 알림 필요할때 사용
@@ -221,20 +228,26 @@ def create_post(request, board_id):
                 # Auth_Club 모델에서 글을 작성하는 공지 게시판 동아리의 소속 동아리원들을 가져옴
                 club_members = Auth_Club.objects.filter(club_id=club_id)
                 for club_member in club_members:
-                    if club_member.user_id.is_notifications:
-                        notification_users.add(club_member.user_id)
+                    notification_users.add(club_member.user_id)
 
                 # 알림 보내기
+                # create_post로 인해 만들어진 post의 절대 url 생성
+                post_url = request.build_absolute_uri(
+                    reverse("community:post_detail", args=[board.id, post.id])
+                )
                 payload = {
                     "head": f"{club.club_name} 동아리에 새로운 공지사항이 등록되었습니다.",
                     "body": f"{post.title}",
+                    "url": post_url,  # paload에 url 추가
                 }
 
                 # 디버그용
                 print(notification_users)
 
                 for user in notification_users:
-                    if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
+                    if (
+                        user != request.user
+                    ):  # 자신에게는 알림을 보내지 않음, 알림 버튼 활성화인 유저한테만 보냄
                         send_user_notification(user=user, payload=payload, ttl=1000)
 
                 # 그룹 알림 필요할때 사용
@@ -451,10 +464,9 @@ def create_comment(request, board_id, post_id):
 
             # 알림을 보낼 사용자 목록
             notification_users = set()
-            
-            if post.user_id.is_notifications: # 게시글 작성자가 알림 버튼 활성화라면
-                # 게시글 작성자에게 알림 위해 목록에 추가
-                notification_users.add(post.user_id)
+
+            # 게시글 작성자에게 알림 위해 목록에 추가
+            notification_users.add(post.user_id)
 
             # 부모 댓글이 있는 경우, 부모 댓글 작성자에게 알림
             if comment.parent_id:
@@ -465,17 +477,26 @@ def create_comment(request, board_id, post_id):
                 for child_comment in child_comments:
                     notification_users.add(child_comment.user_id)
 
+            # debug
+            print("create_comment에서 알림")
             # 알림 보내기
+            # 알림 url 생성
+            comment_url = request.build_absolute_uri(
+                reverse("community:post_detail", args=[board_id, post_id])
+            )
             payload = {
                 "head": f'"{post.title}"에 새로운 댓글이 달렸습니다.',
                 "body": f"{comment.content[:10]}",
+                "url": comment_url,  # paload에 url 추가
             }
 
             # 디버그용
             print(notification_users)
 
             for user in notification_users:
-                if user != request.user and user.is_notifications:  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
+                if (
+                    user != request.user
+                ):  # 자신에게는 알림을 보내지 않음, 알림 활성화인 유저한테만 보냄
                     send_user_notification(user=user, payload=payload, ttl=1000)
 
             # 그룹 알림 필요할때 사용
@@ -500,6 +521,7 @@ def toggle_pinned(request, board_id, post_id):
     else:
         return redirect("landing:login")
 
+
 def search(request):
     if request.method == "POST":
         searched = request.POST["searched"]  # 검색한 단어
@@ -515,7 +537,12 @@ def search(request):
             return render(
                 request,
                 "community/post_list.html",
-                {"posts": posts, "board": board, "boards": boards, "posts_best":posts_best},
+                {
+                    "posts": posts,
+                    "board": board,
+                    "boards": boards,
+                    "posts_best": posts_best,
+                },
             )
         else:  # 메인 화면일 때(헤더바에서 검색했을 때)
             posts = Post.objects.filter(
@@ -524,7 +551,12 @@ def search(request):
             return render(
                 request,
                 "community/search_list.html",
-                {"posts": posts, "searched": searched, "boards": boards, "posts_best":posts_best},
+                {
+                    "posts": posts,
+                    "searched": searched,
+                    "boards": boards,
+                    "posts_best": posts_best,
+                },
             )
 
 
