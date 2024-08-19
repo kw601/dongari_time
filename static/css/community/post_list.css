@@ -35,13 +35,20 @@ body {
     margin-bottom: 0.5rem;
 }
 
+
+#delete-box {
+    display: flex;
+    gap: .5rem;
+    margin-top: .5rem;
+    font-family: "Pretendard", sans-serif;
+
 #delete {
     margin-top: 10px;
     font-family: "Pretendard", sans-serif;
 }
 
 #delete button {
-    background-color: #FFCF33;
+    background-color: #ffecad;
     border: none;
     border-radius: .5rem;
     padding: .5rem 1.6rem;
@@ -282,7 +289,8 @@ body {
     background-color: #F7F7F7;
     padding: 1rem;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 
 #form-button {
@@ -394,7 +402,7 @@ body {
     border: 1px solid #E0E0E0;
     border-radius: 0.5rem;
     padding: 1rem;
-    background-color: #F7F7F7;
+    /* background-color: #F7F7F7; */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out, background-color 0.3s ease;
     cursor: pointer;
@@ -434,6 +442,31 @@ body {
     align-items: center;
 }
 
+#show-post-form {
+    width: 100%;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background-color: #ffecad;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: .5rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+}
+
+#show-post-form:hover {
+    transform: translateY(-3px);
+    background-color: #FFCF33;
+}
+
 @media (max-width: 767px) {
     #post_list {
         padding: 0 2rem;
@@ -443,5 +476,17 @@ body {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .board-search__bar {
+        width: 100%;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .search-bar {
+        width: 100%;
     }
 }

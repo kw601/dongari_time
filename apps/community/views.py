@@ -3,6 +3,7 @@ from django.conf import settings
 from .models import Board, Post, Comment, Club
 from apps.mypage.models import Scrap
 from apps.landing.models import User, Auth_Club
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CommentForm, PostForm, BoardForm, ClubForm
 from django.http import JsonResponse
@@ -330,6 +331,16 @@ def main(request):
 def delete_board(request, board_id):
     if request.user.is_authenticated:
         board = get_object_or_404(Board, id=board_id)
+
+        # 필수 게시판 3개는 삭제 불가
+        restricted_boards = ["공지게시판", "질문게시판", "자유게시판"]
+
+        if board.board_name in restricted_boards:
+            messages.error(
+                request,
+                f"{board.board_name}은 삭제할 수 없습니다.",
+            )
+            return redirect("community:post_list", board_id=board_id)
         if request.method == "POST":
             board.delete()
             return redirect("community:main")
@@ -512,3 +523,29 @@ def search(request):
                 "community/search_list.html",
                 {"posts": posts, "searched": searched, "boards": boards, "posts_best":posts_best},
             )
+
+
+def load_more_boards(request):
+    start = int(request.GET.get("start", 0))
+    limit = int(request.GET.get("limit", 4))
+    club_id = request.session.get("club_id")
+
+    # 현재 세션에 저장된 club_id를 가지는 모든 게시판 가져오기
+    boards = Board.objects.filter(club_id=club_id)[start : start + limit]
+
+    # JSON 응답에 넣을 데이터 구성
+    boards_data = []
+    for board in boards:
+        posts = Post.objects.filter(board_id=board.id).values(
+            "id", "title", "created_time"
+        )
+        boards_data.append(
+            {"id": board.id, "name": board.board_name, "posts": list(posts)}
+        )
+
+    # 현재 클럽에 속한 전체 게시판 수 계산
+    total_boards_count = Board.objects.filter(club_id=club_id).count()
+
+    return JsonResponse(
+        {"boards": boards_data, "total_boards_count": total_boards_count}
+    )
