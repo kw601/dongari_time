@@ -2,8 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ club.name }} - Calendar</title>
+    <title>{{ club.club_name }} - Calendar</title>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <link rel="icon" href="/static/image/logo_background.PNG">
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.11.3/locales-all.min.js'></script>
     <style>
@@ -43,9 +44,8 @@
     </style>
 </head>
 <body>
-    <h1>{{ club.name }} - Calendar</h1>
+    <h1>{{ club.club_name }} - Calendar</h1>
     <div id='calendar'></div>
-    <button id="addEventBtn">Add Event</button>
 
     <!-- Modal for Adding Event -->
     <div id="eventModal" class="modal">
@@ -53,12 +53,15 @@
             <span class="close close-add">&times;</span>
             <h2>Add Event</h2>
             <form id="eventForm">
+                {% csrf_token %}
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required><br><br>
+                <label for="description">description:</label>
+                <input type="text" id="description" name="description" required><br><br>
                 <label for="start">Start Date and Time:</label>
-                <input type="datetime-local" id="start" name="start" required><br><br>
+                <input type="datetime-local" id="start" name="start_time" required><br><br>
                 <label for="end">End Date and Time:</label>
-                <input type="datetime-local" id="end" name="end" required><br><br>
+                <input type="datetime-local" id="end" name="end_time" required><br><br>
                 <button type="submit">Add Event</button>
             </form>
         </div>
@@ -70,127 +73,183 @@
             <span class="close close-edit">&times;</span>
             <h2>Edit Event</h2>
             <form id="editEventForm">
+                {% csrf_token %}
                 <input type="hidden" id="editEventId">
                 <label for="editTitle">Title:</label>
                 <input type="text" id="editTitle" name="title" required><br><br>
+                <label for="editDescription">Description:</label>
+                <input type="text" id="editDescription" name="description" required><br><br>
                 <label for="editStart">Start Date and Time:</label>
-                <input type="datetime-local" id="editStart" name="start" required><br><br>
+                <input type="datetime-local" id="editStart" name="start_time" required><br><br>
                 <label for="editEnd">End Date and Time:</label>
-                <input type="datetime-local" id="editEnd" name="end" required><br><br>
+                <input type="datetime-local" id="editEnd" name="end_time" required><br><br>
                 <button type="submit">Save Changes</button>
                 <button type="button" id="deleteEventBtn">Delete Event</button>
             </form>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var selectedDate;
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'ko',
-                events: [
-                    {% for event in events %}
-                    {
-                        id: '{{ event.id }}',
-                        title: '{{ event.title }}',
-                        start: '{{ event.start_time|date:"Y-m-d" }}T{{ event.start_time|date:"H:i:s" }}',
-                        end: '{{ event.end_time|date:"Y-m-d" }}T{{ event.end_time|date:"H:i:s" }}'
-                    },
-                    {% endfor %}
-                ],
-                dateClick: function(info) {
-                    selectedDate = info.dateStr;
-                    document.getElementById('start').value = selectedDate + 'T09:00'; // Default start time
-                    document.getElementById('end').value = selectedDate + 'T10:00';   // Default end time
-                    document.getElementById('eventModal').style.display = 'block';
-                },
-                eventClick: function(info) {
-                    var event = info.event;
-                    document.getElementById('editEventId').value = event.id;
-                    document.getElementById('editTitle').value = event.title;
-                    document.getElementById('editStart').value = event.start.toISOString().slice(0, 16);
-                    document.getElementById('editEnd').value = event.end ? event.end.toISOString().slice(0, 16) : '';
-                    document.getElementById('editEventModal').style.display = 'block';
-                }
-            });
-
-            calendar.render();
-
-            // Modal handling for adding events
-            var addEventModal = document.getElementById("eventModal");
-            var addEventClose = document.getElementsByClassName("close-add")[0];
-            var addEventForm = document.getElementById("eventForm");
-
-            addEventClose.onclick = function() {
-                addEventModal.style.display = "none";
+<script>    
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'ko',
+        events: [
+            {% for event in events %}
+            {
+                id: '{{ event.id }}',
+                title: '{{ event.title }}',
+                description: '{{ event.description }}',
+                start: '{{ event.start_time|date:"Y-m-d" }}T{{ event.start_time|date:"H:i:s" }}',
+                end: '{{ event.end_time|date:"Y-m-d" }}T{{ event.end_time|date:"H:i:s" }}'
+            },
+            {% endfor %}
+        ],
+        dateClick: function(info) {
+            document.getElementById('start').value = info.dateStr + 'T09:00';
+            document.getElementById('end').value = info.dateStr + 'T10:00';
+            document.getElementById('eventModal').style.display = 'block';
+        },
+        eventClick: function(info) {
+            var event = info.event;
+    
+            // Get HTML elements
+            var editEventId = document.getElementById('editEventId');
+            var editTitle = document.getElementById('editTitle');
+            var editDescription = document.getElementById('editDescription');
+            var editStart = document.getElementById('editStart');
+            var editEnd = document.getElementById('editEnd');
+            
+            // Check if elements exist
+            if (editEventId && editTitle && editDescription && editStart && editEnd) {
+                editEventId.value = event.id;
+                editTitle.value = event.title;
+                editDescription.value = event.extendedProps.description;
+                editStart.value = event.start.toISOString().slice(0, 16);
+                editEnd.value = event.end ? event.end.toISOString().slice(0, 16) : '';
+                document.getElementById('editEventModal').style.display = 'block';
+            } else {
+                console.error('One or more elements are missing in the DOM');
             }
+        }
 
-            window.onclick = function(event) {
-                if (event.target == addEventModal) {
-                    addEventModal.style.display = "none";
-                }
-            }
+    });
 
-            addEventForm.onsubmit = function(event) {
-                event.preventDefault();
+    calendar.render();
 
-                var title = document.getElementById("title").value;
-                var start = document.getElementById("start").value;
-                var end = document.getElementById("end").value;
+    // Event form submission
+    var addEventForm = document.getElementById("eventForm");
+    addEventForm.onsubmit = function(event) {
+        event.preventDefault();
 
+        var formData = new FormData(addEventForm);
+
+        fetch("{% url 'schedule:event_create' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "X-Requested-With": "XMLHttpRequest"  // AJAX 요청임을 명시
+            },
+            body: formData
+        }).then(response => {
+            return response.json();  // JSON 파싱
+        }).then(data => {
+            if (data.success) {
                 calendar.addEvent({
-                    title: title,
-                    start: start,
-                    end: end
+                    id: data.event.id,
+                    title: data.event.title,
+                    description: data.event.description,
+                    start: data.event.start,
+                    end: data.event.end
                 });
-
-                addEventModal.style.display = "none";
+                document.getElementById('eventModal').style.display = "none";
                 addEventForm.reset();
+            } else {
+                console.error('Failed to create event:', data.errors);
+                // Display form errors
             }
-
-            // Modal handling for editing events
-            var editEventModal = document.getElementById("editEventModal");
-            var editEventClose = document.getElementsByClassName("close-edit")[0];
-            var editEventForm = document.getElementById("editEventForm");
-            var deleteEventBtn = document.getElementById("deleteEventBtn");
-
-            editEventClose.onclick = function() {
-                editEventModal.style.display = "none";
-            }
-
-            window.onclick = function(event) {
-                if (event.target == editEventModal) {
-                    editEventModal.style.display = "none";
-                }
-            }
-
-            editEventForm.onsubmit = function(event) {
-                event.preventDefault();
-
-                var id = document.getElementById("editEventId").value;
-                var title = document.getElementById("editTitle").value;
-                var start = document.getElementById("editStart").value;
-                var end = document.getElementById("editEnd").value;
-
-                var eventToUpdate = calendar.getEventById(id);
-                eventToUpdate.setProp('title', title);
-                eventToUpdate.setStart(start);
-                eventToUpdate.setEnd(end);
-
-                editEventModal.style.display = "none";
-            }
-
-            deleteEventBtn.onclick = function() {
-                var id = document.getElementById("editEventId").value;
-                var eventToDelete = calendar.getEventById(id);
-                eventToDelete.remove();
-
-                editEventModal.style.display = "none";
-            }
+        }).catch(error => {
+            console.error('Error:', error);
         });
-    </script>
+    };
+
+   
+    // Edit Event form submission
+    var editEventForm = document.getElementById("editEventForm");
+    editEventForm.onsubmit = function(event) {
+        event.preventDefault();
+        var formData = new FormData(editEventForm);
+        var eventId = document.getElementById('editEventId').value;
+
+        fetch("{% url 'schedule:event_update' %}", {  // Add URL for the update view
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: formData
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  var event = calendar.getEventById(eventId);
+                  event.setProp('title', data.event.title);
+                  event.setExtendedProp('description', data.event.description);
+                  event.setStart(data.event.start);
+                  event.setEnd(data.event.end);
+                  document.getElementById('editEventModal').style.display = "none";
+              } else {
+                  console.error('Failed to update event:', data.errors);
+                  // Display form errors
+              }
+          }).catch(error => console.error('Error:', error));
+    };
+
+    // Delete Event
+    var deleteEventBtn = document.getElementById('deleteEventBtn');
+    deleteEventBtn.onclick = function() {
+        var eventId = document.getElementById('editEventId').value;
+
+        fetch("{% url 'schedule:event_delete' %}", {  // Add URL for the delete view
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "X-Requested-With": "XMLHttpRequest"
+            },
+            body: JSON.stringify({ id: eventId })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  var event = calendar.getEventById(eventId);
+                  event.remove();
+                  document.getElementById('editEventModal').style.display = "none";
+              } else {
+                  console.error('Failed to delete event:', data.errors);
+                  // Display form errors
+              }
+          }).catch(error => console.error('Error:', error));
+    };
+
+    // Close modals
+    var addEventModal = document.getElementById("eventModal");
+    var addEventClose = document.getElementsByClassName("close-add")[0];
+    addEventClose.onclick = function() {
+        addEventModal.style.display = "none";
+    };
+
+    var editEventModal = document.getElementById("editEventModal");
+    var editEventClose = document.getElementsByClassName("close-edit")[0];
+    editEventClose.onclick = function() {
+        editEventModal.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        if (event.target == addEventModal) {
+            addEventModal.style.display = "none";
+        } else if (event.target == editEventModal) {
+            editEventModal.style.display = "none";
+        }
+    };
+});
+</script>    
 </body>
 </html>
