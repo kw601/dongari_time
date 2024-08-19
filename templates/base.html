@@ -12,10 +12,10 @@
   <title>동아리타임!</title>
   {% webpush_header %}
   {% block extra_head %}{% endblock extra_head %}
+  {% block head %}{% endblock head %}
 </head>
 
 <body>
-  {% webpush_button %}
   {% include 'header.html'%}
   {% block content %}{% endblock%}
   {% include 'footer.html'%}
