@@ -51,33 +51,27 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = get_user_model()
         fields = [
-            "username",
-            "name",
             "nickname",
             "phone_num",
             "email",
         ]
+    def clean_nickname(self):
+        nickname = self.cleaned_data.get('nickname')
+        if User.objects.filter(nickname=nickname).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('이미 사용 중인 닉네임입니다.')
+        return nickname
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("이미 사용 중인 이메일입니다.")
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('이미 사용 중인 이메일입니다.')
         return email
 
-    # 중복된 닉네임 확인
-    def clean_nickname(self):
-        nickname = self.cleaned_data.get('nickname')
-        if User.objects.filter(nickname=nickname).exists():
-            raise forms.ValidationError("이미 사용 중인 닉네임입니다.")
-        return nickname
-
-    # 중복된 아이디(유저네임) 확인
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if User.objects.filter(username=username).exists():
-            raise forms.ValidationError("이미 사용 중인 아이디입니다.")
-        return username
-    
+    def clean_phone_num(self):
+        phone_num = self.cleaned_data.get('phone_num')
+        if User.objects.filter(phone_num=phone_num).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError('이미 사용 중인 전화번호입니다.')
+        return phone_num
     
 #아이디찾기
 from django import forms
