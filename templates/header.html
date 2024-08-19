@@ -9,10 +9,12 @@
     <div class="main_header__container">
         <a href="{% url 'community:main' %}">
             <div class="main_left__container__session">
-                    <div class="main_app__icon">여기에 로고</div>
+                    <div class="main_app__icon">
+                        <img src="/static/image/logo.png" alt="로고" id="club_logo">
+                    </div>
                     <div class="main_title">
                         <div class="main_app__small_title">동아리타임</div>
-                        <div class="main_app__title">{{ request.session.club_name }}</div>
+                        <div class="main_app__title">{{ request.session.club_name|truncatechars:7 }}</div>
                     </div>
             </div>
         </a>
@@ -42,7 +44,9 @@
             </button>
         </div>
         <div class="center__container__login">
-            <div class="app__icon">여기에 로고</div>
+            <div class="app__icon">
+                <img src="/static/image/logo.png" alt="로고" id="club_logo">
+            </div>
             <div class="app__title">동아리타임</div>
         </div>
         <div class="right__container__login">
@@ -58,7 +62,9 @@
         </button>
     </div>
     <div class="center__container__login">
-        <div class="app__icon">여기에 로고</div>
+        <div class="app__icon">
+            <img src="/static/image/logo.png" alt="로고" id="club_logo">
+        </div>
         <div class="app__title">동아리타임</div>
     </div>
     <div class="right__container__login">
