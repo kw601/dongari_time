@@ -18,6 +18,22 @@
 
 .form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group input[type="text"], 
+.form-group input[type="password"], 
+.form-group input[type="email"], 
+.form-group input[type="url"], 
+.form-group input[type="search"], 
+.form-group input[type="tel"], 
+.form-group input[type="number"], 
+.form-group input[type="datetime-local"], 
+.form-group select, 
+.form-group textarea {
+    width: 100%; /* form-group div의 너비에 맞추기 위해 100% 설정 */
+    box-sizing: border-box; /* 패딩과 테두리 포함 */
 }
 
 .form-group label {
@@ -36,7 +52,7 @@
 
 .button-container_parent {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .button-container {
@@ -96,8 +112,12 @@
 }
 
 @media (max-width: 570px) {
+    .title__container {
+        padding: 0;
+    }
+
     .button-container {
-        margin-top: 0rem;
+        margin-top: 1rem;
         margin-left: 10px;
     }
 
@@ -113,5 +133,11 @@
 
     .form-group label {
         font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .manage_clubs__body {
+        padding: 0 4rem;
     }
 }

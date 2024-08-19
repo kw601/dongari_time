@@ -353,6 +353,10 @@ a {
         margin: 2rem 2.5rem;
     }
 
+    .page__title_hr {
+        padding: 0;
+    }
+
     .content__container__1 {
         margin: 0 2.5rem;
     }
