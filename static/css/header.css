@@ -454,7 +454,7 @@ body {
         height: 35px;
         width: 35px;
         border: none;
-        margin: 0 0.2rem;
+        margin: 0 0.1rem;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
