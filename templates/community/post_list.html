@@ -14,7 +14,10 @@
                     {{ board.board_name }}
                 </a>
             </h1>
-            {% if user.is_authenticated and user.is_admin %}
+            {% if user.is_authenticated and board.board_name == "자유게시판" %}
+            {% elif user.is_authenticated and board.board_name == "공지게시판" %}
+            {% elif user.is_authenticated and board.board_name == "질문게시판" %}
+            {% else %}
             <div id="delete-box">
                 {% if messages %}
                 <ul class="messages" style="display: flex; align-items: center;">

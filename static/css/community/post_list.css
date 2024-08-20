@@ -56,8 +56,8 @@ body {
     border: none;
     border-radius: .5rem;
     padding: .5rem 1.6rem;
-    color: black;
-    font-weight: 600;
+    color: #f24e1e;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: .5rem;
@@ -446,7 +446,7 @@ body {
     grid-template-columns: 3fr 1fr;
     grid-template-rows: auto;
     gap: var(--gap-value);
-    align-items: center;
+    align-items: start;
 }
 
 #show-post-form {

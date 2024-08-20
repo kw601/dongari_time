@@ -106,7 +106,7 @@ a>div {
     grid-template-columns: 3fr 1fr;
     grid-template-rows: auto;
     gap: var(--gap-value);
-    align-items: center;
+    align-items: start;
 }
 
 .side__container {
