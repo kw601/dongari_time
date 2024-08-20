@@ -458,6 +458,22 @@ a>div {
     align-items: center;
 }
 
+
+.img__container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.p_d_image {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
 @media screen and (max-width: 767px) {
     body {
         padding-top: 30px;
@@ -507,12 +523,14 @@ a>div {
     .side__container {
         display: none;
     }
+
     .p_d_comment_form {
         width: 100%;
         grid-template-columns: 8fr 2fr 0 1.5fr;
         overflow: hidden;
         box-sizing: border-box;
     }
+
     .submit__button {
         padding: 0;
         margin: 0;
