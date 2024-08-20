@@ -12,13 +12,7 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 body {
-    body {
-        font-family: "Pretendard", sans-serif;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+    font-family: "Pretendard", sans-serif;
 }
 
 .mypage__body {
