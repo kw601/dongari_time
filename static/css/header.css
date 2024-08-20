@@ -418,7 +418,7 @@ body {
         height: 35px;
         width: 35px;
         border: none;
-        margin: 0 0.5rem;
+        margin: 0 0.2rem;
         padding: 0 0;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
@@ -427,7 +427,7 @@ body {
         height: 35px;
         width: 35px;
         border: none;
-        margin: 0 0.5rem;
+        margin: 0 0.2rem;
         padding: 0 0;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
@@ -436,7 +436,7 @@ body {
         height: 35px;
         width: 35px;
         border: none;
-        padding: 0 0;
+        margin: 0 0.2rem;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
@@ -490,5 +490,14 @@ body {
     .search-bar::placeholder {
         color: transparent;
     }
-
+    .main_app__title {
+        color: #ffcf33;
+        font-weight: bold;
+        font-size: 1.3rem;
+    }
+    .main_app__small_title {
+        color: black;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
 }
