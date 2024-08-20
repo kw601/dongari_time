@@ -31,12 +31,12 @@ html {
     clip-path: polygon(
         0 0, 
         0 100%, 
-        25% 100%, 
-        25% 35%,  
-        75% 35%,  
-        75% 65%,  
-        25% 65%, 
-        25% 100%, 
+        20% 100%, 
+        20% 35%,  
+        80% 35%,  
+        80% 65%,  
+        20% 65%, 
+        20% 100%, 
         100% 100%, 
         100% 0
     );
@@ -44,9 +44,9 @@ html {
 }
 .first__container {
     position: absolute;
-    width: 50vw;
+    width: 60vw;
     height: 30vh;
-    left: 25vw;
+    left: 20vw;
     top: 35vh;
     z-index: 999;
     background-color: var(--color-yellow-1);
@@ -59,7 +59,7 @@ html {
 }
 .first__container > p {
     font-family: "Pretendard", sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 900;
     color: white;
     padding-right: 3rem;
@@ -68,29 +68,32 @@ html {
 .second__icon {
     position: absolute;
     width: 100vw;
-    height: 100vh;
-    top: 0;
+    height: 500px;
+    top: calc(50vh - 250px);
     left: 0;
-    /* width: 50vw;
-    height: 30vh;
-    left: 25vw;
-    top: 35vh; */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background-color: white;
-    animation: removebackground .3s ease forwards, moveicon 1.5s ease forwards;
+    animation: removebackground .001s forwards, moveicon 1.5s ease forwards;
     animation-delay: 3s;
 }
 .second__icon img {
     object-fit: contain;
     overflow: hidden;
-    width: 10%;
-    /* width: 30%; */
+    width: 6rem;
     border-radius: 100%;
     z-index: 900;
+    animation: wiggle 1s ease-in-out infinite;
+    transition: transform 0.3s ease;
 }
+
+.second__icon img:hover {
+    transition: transform 0.3s;
+    transform: scale(1.2);
+}
+
 @keyframes disappear {
     0% {
         clip-path: inset(0 0 0 0);
@@ -105,12 +108,12 @@ html {
         clip-path: polygon(
         0 0, 
         0 100%, 
-        25% 100%, 
-        25% 35%,  
-        75% 35%,  
-        75% 65%,  
-        25% 65%, 
-        25% 100%, 
+        20% 100%, 
+        20% 35%,  
+        80% 35%,  
+        80% 65%,  
+        20% 65%, 
+        20% 100%, 
         100% 100%, 
         100% 0
     );
@@ -141,16 +144,18 @@ html {
 
 @keyframes moveicon {
     0% {
-        top: 0;
-        left: 0;
-
     }
     100% {
-        top: -35vh;
-        left: -15vw;
+        height: 6rem;
+        top: 8vh;
+        left: -11vw;
     }
 }
 
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+}
 .landing__container {
     display: flex;
     flex-direction: column;
@@ -224,6 +229,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 90px;
 }
 
 .main__img__container > img {
@@ -234,9 +240,10 @@ html {
 
 /* 반응형 필요한 부분 */
 .function__container {
+    padding-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-value);
+    gap: 60px;
     width: 100%;
 }
 
@@ -244,13 +251,25 @@ html {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.description__left.is-visible, .description__right.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .function__description {
     display: flex;
     flex-direction: column;
     gap: var(--gap-value);
+
+    
 }
+
 
 .function__icon {
 }
@@ -292,7 +311,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-top: var(--gap-value);    
+    padding-top: 50px;    
 }
 .service__title {
     text-align: center;
@@ -351,6 +370,33 @@ html {
 }
 
 
+.services:hover {
+    transition: transform 0.5s;
+    transform: scale(1.03) translateY(-10px);
+    background-color: var(--color-yellow-4);
+}
+@media (max-width: 1145px) {
+    @keyframes moveicon {
+        0% {
+        }
+        100% {
+            height: 6rem;
+            top: 8vh;
+            left: -14vw;
+        }
+    }
+}
+@media (max-width: 903px) {
+    @keyframes moveicon {
+        0% {
+        }
+        100% {
+            height: 6rem;
+            top: 8vh;
+            left: -17vw;
+        }
+    }
+}
 @media (max-width: 767px) {
     .first__container {
         width: 80vw;
@@ -373,15 +419,34 @@ html {
             100% 0
         );
     }
+    .second__icon {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        /* width: 50vw;
+        height: 30vh;
+        left: 25vw;
+        top: 35vh; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background-color: white;
+        animation: removebackground .3s ease forwards, moveicon 1.5s ease forwards;
+        animation-delay: 3s;
+    }
+    .second__icon img {
+        width: 4rem;
+    }
     @keyframes moveicon {
         0% {
-            top: 0;
-            left: 0;
-    
         }
         100% {
-            top: -44vh;
-            left: -24vw;
+            height: 4rem;
+            top: 2vh;
+            left: -19vw;
         }
     }
     .first__container > p {
@@ -394,7 +459,6 @@ html {
     }
     .function__container {
         display: flex;
-        gap: var(--gap-value);
     }
     .main__img__container, .function__img__right, .function__img__left {
         width: 100%;
@@ -455,5 +519,19 @@ html {
     font-size: 0.9rem;
     height: 50px;
 }
-
+}
+@media (max-width: 625px) {
+    @keyframes moveicon {
+        0% {
+        }
+        100% {
+            height: 4rem;
+            top: 2vh;
+            left: -25vw;
+        }
+    }
+    .function__container {
+        padding-top: 0;
+        margin-top: 0;
+    }
 }

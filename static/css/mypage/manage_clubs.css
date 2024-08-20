@@ -82,7 +82,7 @@ a {
 
 @media (max-width: 570px) {
     .manage_clubs__body {
-        padding: 0 6rem;
+        padding: 0 3.5rem;
     }
 
     .page__title {
@@ -105,6 +105,10 @@ a {
 }
 
 @media (max-width: 470px) {
+    .page__title_hr {
+        padding: 0;
+    }
+    
     .club-name {
         font-size: 12px;
         max-width: 4rem;
