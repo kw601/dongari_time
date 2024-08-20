@@ -1,4 +1,3 @@
-
 #main__container {
     width: 100%;
     height: auto;
@@ -30,9 +29,11 @@
     flex-direction: column;
     align-items: center;
 }
-#board__name a{
+
+#board__name a {
     font-family: "Pretendard", sans-serif;
 }
+
 #boards__ul li h2 {
     padding: 10px;
 }
@@ -102,6 +103,7 @@
     font-weight: 600;
     text-decoration: none;
     display: block;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #load-more:hover {

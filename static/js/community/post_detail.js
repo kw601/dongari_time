@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const scrapBtn = document.getElementById('scrap-btn');
     const likeBtn = document.getElementById('like-btn');
     const scrapCount = document.getElementById('scrap-count');
@@ -6,7 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const likeDescription = document.getElementById('like__description');
     const scrapDescription = document.getElementById('scrap__description');
 
-    scrapBtn.addEventListener('click', function() {
+    // 댓글 익명 여부 체크박스
+    const commentAnonymousCheckbox = document.getElementById('id_anonymous');
+
+    // 댓글 익명 여부 체크박스를 기본적으로 체크 해제 상태로 설정
+    commentAnonymousCheckbox.checked = false;
+
+    scrapBtn.addEventListener('click', function () {
         const postId = this.dataset.postId;
         fetch(`/community/post/${postId}/scrap/`, {
             method: 'POST',
@@ -15,17 +21,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => response.json())
-        .then(data => {
-            scrapDescription.textContent = data.scrap_count;
-            if (data.is_scraped) {
-                scrapBtn.textContent = '스크랩 취소';
-            } else {
-                scrapBtn.textContent = '스크랩';
-            }
-        })
-        .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                scrapDescription.textContent = data.scrap_count;
+                if (data.is_scraped) {
+                    scrapBtn.textContent = '스크랩 취소';
+                } else {
+                    scrapBtn.textContent = '스크랩';
+                }
+            })
+            .catch(error => console.error('Error:', error));
     });
+
     function updateScrapButtonState() {
         if (data.is_scraped) {
             scrapBtn.textContent = '스크랩 취소';
@@ -35,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     updateLikeButtonState();
 
-    likeBtn.addEventListener('click', function() {
+    likeBtn.addEventListener('click', function () {
         const postId = this.dataset.postId;
         fetch(`/community/post/${postId}/like/`, {
             method: 'POST',
@@ -44,17 +51,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-
-            // likeCount.textContent = data.likes;
-            likeDescription.textContent = data.likes;
-            this.dataset.isLiked = data.is_liked.toString();
-            updateLikeButtonState();
-            
-        })
-        .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                likeDescription.textContent = data.likes;
+                this.dataset.isLiked = data.is_liked.toString();
+                updateLikeButtonState();
+            })
+            .catch(error => console.error('Error:', error));
     });
 
     function updateLikeButtonState() {

@@ -18,12 +18,10 @@
             <div id="alert">
                 <img src="/static/image/landing_service_4.png" alt="알림버튼" id="alert_icon">
             </div>  
-            : {% webpush_button %}
+            {% webpush_button %}
         </div>
-        
-        
+        <hr class="page__title_hr"> 
     </div>
-    <hr class="page__title_hr">
     <div class="decoration__box">
         <div class="icon__container">😆</div>
         <div class="icon__container__text">
@@ -33,13 +31,13 @@
     <div class="content__container__1">
         <div class="content__container">
             <a href="{% url 'landing:update' %}" class="function__container">
-                <h2 class="func__title">회원정보 수정 🫧</h2>
+                <h3 class="func__title">회원정보 수정 🫧</h3>
             </a>
             <a href="{% url 'landing:change_password' %}" class="function__container">
                 <h2 class="func__title">비밀번호 변경 🔐</h2>
             </a>
             <a href="{% url 'mypage:manage_clubs' %}" class="function__container">
-                <h2 class="func__title">내 동아리 관리 🤝</h2>
+                <h2 class="func__title">동아리 관리 🤝</h2>
             </a>
         </div>
     </div>

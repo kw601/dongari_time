@@ -62,26 +62,34 @@ def manage_clubs(request):
         return redirect("landing:login")
 
 def delete_club(request):
-    if request.user.is_authenticated:
-        club_id = request.POST.get("club_id")
-        current_club_id = request.session.get('club_id')
+    if not request.user.is_authenticated:
+        return JsonResponse({'success': False, 'message': '로그인이 필요합니다.'}, status=401)
 
-        if club_id == current_club_id:
-            return JsonResponse({
-                'success': False,
-                'message': '현재 접속한 동아리의 삭제는 불가능합니다. 다른 동아리로 이동 후 삭제해주세요.'
-            })
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'message': '잘못된 요청 방식입니다.'}, status=400)
 
-        if club_id:
-            try:
-                Auth_Club.objects.filter(user_id=request.user, club_id=club_id).delete()
-                return JsonResponse({'success': True})
-            except Exception as e:
-                return JsonResponse({'success': False, 'message': str(e)})
+    club_id = request.POST.get("club_id")
+    current_club_id = request.session.get('club_id')
 
-        return JsonResponse({'success': False, 'message': '잘못된 요청입니다.'})
-    else:
-        return redirect("landing:login")
+    if not club_id:
+        return JsonResponse({'success': False, 'message': '동아리 ID가 제공되지 않았습니다.'}, status=400)
+
+    if str(club_id) == str(current_club_id):
+        return JsonResponse({
+            'success': False,
+            'message': '현재 접속한 동아리의 삭제는 불가능합니다. 다른 동아리로 이동 후 삭제해주세요.',
+            'error_code': 'CURRENT_CLUB'
+        }, status=403)
+
+    try:
+        auth_club = Auth_Club.objects.filter(user_id=request.user, club_id=club_id).first()
+        if not auth_club:
+            return JsonResponse({'success': False, 'message': '해당 동아리를 찾을 수 없습니다.'}, status=404)
+        
+        auth_club.delete()
+        return JsonResponse({'success': True, 'message': '동아리가 성공적으로 삭제되었습니다.'})
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': f'삭제 중 오류가 발생했습니다: {str(e)}'}, status=500)
 
 def switch_club(request, club_id):
     if request.user.is_authenticated:

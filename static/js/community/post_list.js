@@ -55,11 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
             <div id="post__description">
                 <p id="post__created">${data.created_time}</p>
                 <p id="post__user">${data.board_name === '공지게시판' ? data.user_name : data.user}</p>
-                <div id="post__stats">
-                <p>댓글 수: ${data.comments_count}</p>
-                <p>좋아요 수: ${data.likes_count}</p>
-                <p>스크랩 수: ${data.scraps_count}</p>
-                </div>
             </div>
             </li>
                 `;

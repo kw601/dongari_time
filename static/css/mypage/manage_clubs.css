@@ -1,3 +1,9 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+html {
+    font-family: "Pretendard", sans-serif;
+    /* scrollbar-gutter: stable; */
+}
+
 #club-list {
     list-style-type: none;
     padding: 0 8rem;
@@ -82,7 +88,7 @@ a {
 
 @media (max-width: 570px) {
     .manage_clubs__body {
-        padding: 0 6rem;
+        padding: 0 3.5rem;
     }
 
     .page__title {
@@ -105,6 +111,10 @@ a {
 }
 
 @media (max-width: 470px) {
+    .page__title_hr {
+        padding: 0;
+    }
+    
     .club-name {
         font-size: 12px;
         max-width: 4rem;

@@ -15,11 +15,19 @@ body {
     font-family: "Pretendard", sans-serif;
 }
 
-.mypage__body, .manage_clubs__body {
+.mypage__body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--padding-value);
 }
+.manage_clubs__body {
+    height: 500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--padding-value);
+    margin-bottom: 13rem;
+}
+
 button {
     background-color: var(--color-yellow-1);
     border: 2px solid var(--color-yellow-1);
@@ -57,12 +65,9 @@ button {
 .title__container {
     padding: 0 var(--padding-value);
     margin-bottom: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 .webpush_btn{
-    margin-top: 2rem;
+    margin: 1rem 0;
     display: flex;
 }
 #webpush-message{
@@ -76,7 +81,7 @@ button {
 }
 
 .page__title_hr {
-    margin: 0 var(--padding-value);
+    padding: 0 var(--padding-value);
     color: #A7A7A7;
 }
 
@@ -263,7 +268,7 @@ a {
     }
 
     .mypage__body {
-        padding: 0 8rem;
+        padding: 0 6rem;
     }
 
     .page__title {
@@ -323,9 +328,9 @@ a {
         padding: 0;
     }
 
-    /*.title__container {
+    .title__container {
         padding: 0 6rem;
-    }*/
+    }
 
     .page__title {
         font-size: 16px;
@@ -344,11 +349,33 @@ a {
         margin: 2rem 4rem;
     }
 
+    .content__container {
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
+
     .content__container__1 {
         margin: 0 4rem;
     }
+}
+
+@media (max-width: 480px) {
+    .title__container {
+        padding: 0 3rem;
+    }
+    .decoration__box {
+        margin: 2rem 2.5rem;
+    }
+
     .page__title_hr {
-        margin: 0 4rem;
-        color: #A7A7A7;
+        padding: 0;
+    }
+
+    .content__container__1 {
+        margin: 0 2.5rem;
+    }
+
+    .func__title {
+        font-size: 10px;
     }
 }

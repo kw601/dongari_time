@@ -1,68 +1,41 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>{{ club.club_name }} - Calendar</title>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
     <link rel="icon" href="/static/image/logo_background.PNG">
+    <link rel="stylesheet" href="{% static 'css/schedule/event_list.css' %}" />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@5.11.3/locales-all.min.js'></script>
-    <style>
-        /* Basic styling for the modals */
-        .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            overflow: auto; 
-            background-color: rgb(0,0,0); 
-            background-color: rgba(0,0,0,0.4); 
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto; 
-            padding: 20px; 
-            border: 1px solid #888; 
-            width: 80%; 
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
+
 </head>
 <body>
-    <h1>{{ club.club_name }} - Calendar</h1>
+    <div class="calender_title">
+        <h1>{{ club.club_name }} - Calendar</h1>
+        <a href="{% url 'community:main' %}">
+            <button id="main_btn">메인으로</button>
+        </a>
+    </div>
     <div id='calendar'></div>
 
     <!-- Modal for Adding Event -->
     <div id="eventModal" class="modal">
         <div class="modal-content">
             <span class="close close-add">&times;</span>
-            <h2>Add Event</h2>
+            <h2>일정 추가</h2>
             <form id="eventForm">
                 {% csrf_token %}
-                <label for="title">Title:</label>
+                <label for="title">제목:</label>
                 <input type="text" id="title" name="title" required><br><br>
-                <label for="description">description:</label>
+                <label for="description">내용:</label>
                 <input type="text" id="description" name="description" required><br><br>
-                <label for="start">Start Date and Time:</label>
+                <label for="start">시작 시각:</label>
                 <input type="datetime-local" id="start" name="start_time" required><br><br>
-                <label for="end">End Date and Time:</label>
+                <label for="end">종료 시각:</label>
                 <input type="datetime-local" id="end" name="end_time" required><br><br>
-                <button type="submit">Add Event</button>
+                <button type="submit">저장</button>
             </form>
         </div>
     </div>
@@ -71,20 +44,19 @@
     <div id="editEventModal" class="modal">
         <div class="modal-content">
             <span class="close close-edit">&times;</span>
-            <h2>Edit Event</h2>
+            <h2>일정 상세</h2>
             <form id="editEventForm">
                 {% csrf_token %}
                 <input type="hidden" id="editEventId">
-                <label for="editTitle">Title:</label>
+                <label for="editTitle">제목:</label>
                 <input type="text" id="editTitle" name="title" required><br><br>
-                <label for="editDescription">Description:</label>
+                <label for="editDescription">내용:</label>
                 <input type="text" id="editDescription" name="description" required><br><br>
-                <label for="editStart">Start Date and Time:</label>
+                <label for="editStart">시작 시각:</label>
                 <input type="datetime-local" id="editStart" name="start_time" required><br><br>
-                <label for="editEnd">End Date and Time:</label>
+                <label for="editEnd">종료 시각:</label>
                 <input type="datetime-local" id="editEnd" name="end_time" required><br><br>
-                <button type="submit">Save Changes</button>
-                <button type="button" id="deleteEventBtn">Delete Event</button>
+                <button type="button" id="deleteEventBtn">일정 삭제</button>
             </form>
         </div>
     </div>
