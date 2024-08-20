@@ -445,9 +445,13 @@ a>div {
 }
 
 .p_d_image {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
     display: block;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
 
 @media screen and (max-width: 767px) {
