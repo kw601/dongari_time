@@ -31,6 +31,9 @@
             <button id="main_mypage_btn"><a href="{% url 'mypage:main' %}">
                 <img src="/static/image/mypage__icon.png" alt="마이페이지" id="mypage_icon">
             </a></button>
+            <button id="main_calender_btn"><a href="{% url 'schedule:event_list'%}">
+                <img src="/static/image/calender.png" alt="캘린더" id="calender_icon">
+            </a></button>
             <button id="main_logout_btn"><a href="{% url 'landing:logout' %}">
                 <img src="/static/image/logout__icon.png" alt="로그아웃" id="logout_icon">
             </a></button>

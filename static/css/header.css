@@ -143,7 +143,7 @@ body {
     width: 35px;
     border: none;
     background-color: #ffffff;
-    margin: 0 1rem;
+    margin: 0 0.8rem;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
@@ -157,11 +157,28 @@ body {
     border: none;
     background-color: #ffffff;
 }
-
+#main_calender_btn{
+    height: 35px;
+    width: 35px;
+    border: none;
+    background-color: #ffffff;
+    margin: 0 0.8rem;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+#main_calender_btn{
+    margin-top: 0;
+}
+#calender_icon{
+    height: 35px;
+    width: 35px;
+    border: none;
+    background-color: #ffffff;
+}
 #main_logout_btn {
     height: 35px;
     width: 35px;
     border: none;
+    margin: 0 1rem;
     background-color: #ffffff;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -181,7 +198,10 @@ body {
     transform: translateY(-3px);
     /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
-
+#main_calender_btn:hover {
+    transform: translateY(-3px);
+    /* 마우스 오버 시 이미지가 위로 5px 이동 */
+}
 #main_logout_btn:hover {
     transform: translateY(-3px);
     /* 마우스 오버 시 이미지가 위로 5px 이동 */
@@ -421,6 +441,15 @@ body {
         transition: transform 0.3s ease, filter 0.3s ease;
     }
 
+    #main_calender_btn {
+        height: 35px;
+        width: 35px;
+        border: none;
+        margin: 0 0.5rem;
+        padding: 0 0;
+        background-color: #ffffff;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
     #main_logout_btn {
         height: 35px;
         width: 35px;
