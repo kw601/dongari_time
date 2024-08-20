@@ -21,7 +21,7 @@ body {
     padding: 0 var(--padding-value);
 }
 .manage_clubs__body {
-    height: 450px;
+    height: 500px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--padding-value);
