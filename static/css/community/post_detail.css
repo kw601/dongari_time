@@ -198,6 +198,8 @@ a>div {
     border-collapse: collapse;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+
 }
 
 .p_d_comment_form>div {
@@ -504,5 +506,15 @@ a>div {
 
     .side__container {
         display: none;
+    }
+    .p_d_comment_form {
+        width: 100%;
+        grid-template-columns: 8fr 2fr 0 1.5fr;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+    .submit__button {
+        padding: 0;
+        margin: 0;
     }
 }
