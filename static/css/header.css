@@ -196,6 +196,7 @@ body {
     justify-content: flex-start;
     padding: 0 0.5rem;
     font-family: "Pretendard", sans-serif;
+    transition: 1s ease;
 }
 
 .search-bar {
@@ -405,6 +406,8 @@ body {
         height: 1.5rem;
         outline: none;
         background-color: #ffcf33;
+        transition: width 1s ease;
+
     }
 
     .main_app__icon {
@@ -480,5 +483,11 @@ body {
     .search-bar::placeholder {
         color: transparent;
     }
-
+    .search__bar {
+        transition: width 0.5s ease;
+        z-index: 999;
+    }
+    .search-bar:focus, .search-bar:focus ~ .search__bar {
+        width: 13rem;
+    }
 }
