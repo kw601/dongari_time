@@ -319,6 +319,17 @@ a, a > div {
     align-items: center;
 }
 
+.img__container {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.p_d_image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 @media screen and (max-width: 767px) {
     body {
         padding-top: 30px;
