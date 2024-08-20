@@ -12,6 +12,9 @@
     --padding-value: 8rem;
 }
 
+html {
+    font-family: "Pretendard", sans-serif;
+}
 body {
     font-family: "Pretendard", sans-serif;
     min-height: 100vh;
