@@ -36,7 +36,7 @@
                 <h2 class="content__title">{{ post.title }}</h2>
                 <p class="p_d_p">{{ post.content }}</p>
                 {% if post.image %}
-                <div class="img__container"><img src="{{ post.image.surl }}" alt="Post Image" class="p_d_image"></div>
+                <div class="img__container"><img src="{{ post.image.url }}" alt="Post Image" class="p_d_image"></div>
                 {% endif %}
                 <div class="state__container">
                     <div class="state__content">
@@ -161,6 +161,18 @@
         </div>
     </div>
     <div class="side__container">
+        <div class="profile__container">
+            <div class="board__title">내 정보</div>
+            <ul class="best__ul">
+                <div class="profile_content"><span class="profile-bold-text">닉네임</span> {{ user.nickname }}</div>
+                <div class="profile_content"><span class="profile-bold-text">접속 동아리</span>
+                    {{ request.session.club_name }}</div>
+                <div class="mypage__container">
+                    <a href="{% url 'mypage:main' %}">
+                        <button id="mypage__btn">마이페이지</button>
+                    </a>
+            </ul>
+        </div>
         <div class="best__container">
             <div class="board__title">베스트 게시글</div>
             <ul class="best__ul">
@@ -168,7 +180,7 @@
                 <li class="best__li">
                     <div class="best__name">
                         <a href="{% url 'community:post_detail' post.board_id.id post.id %}">
-                            <div>{{ post.title }}</div>
+                            <div>{{ post.title|truncatechars:7 }}</div>
                             <div class="time__container">{{ post.created_time|date:"Y/m/d" }}</div>
                         </a>
                     </div>
