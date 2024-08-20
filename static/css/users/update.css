@@ -1,5 +1,11 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+html {
+    font-family: "Pretendard", sans-serif;
+    /* scrollbar-gutter: stable; */
+}
 .manage_clubs__body {
     max-width: 1200px;
+    height: 450px;
     margin: 0 auto;
     padding: 0 var(--padding-value);
 }

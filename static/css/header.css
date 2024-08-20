@@ -13,19 +13,23 @@ body {
     align-items: center;
     font-family: "Pretendard", sans-serif;
 }
-.main_app__icon{
+
+.main_app__icon {
     width: 40px;
     height: 40px;
 }
-.app__icon{
+
+.app__icon {
     width: 40px;
     height: 40px;
     filter: brightness(0) invert(1);
 }
-#club_logo{
+
+#club_logo {
     width: 40px;
     height: 40px;
 }
+
 .left__container__login {
     height: 45px;
     width: 45px;
@@ -96,6 +100,17 @@ body {
     background-color: #ffffff;
     padding: 0 8rem;
     font-family: "Pretendard", sans-serif;
+    /* fixed */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    /* 그라데이션 */
+    /* background: linear-gradient(to bottom, rgb(255, 255, 255) 70%, rgba(255, 255, 255, 0.8) 85%, rgba(255, 255, 255, 0) 100%); */
+    /* 그림자 */
+    border-bottom: 1px solid #d6d6d6;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -196,16 +211,17 @@ body {
     background-color: #ffcf33;
     display: flex;
     align-items: center;
-    width: 16rem;
+    width: 18rem;
     border-radius: 20px;
     justify-content: flex-start;
     padding: 0 0.5rem;
     font-family: "Pretendard", sans-serif;
+    transition: 1s ease;
 }
 
 .search-bar {
     border: none;
-    width: 13rem;
+    width: 15rem;
     height: 1.5rem;
     outline: none;
     background-color: #ffcf33;
@@ -251,6 +267,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 8rem;
+    /* fixed */
+    margin-top: 70px;
     background-color: #ffecad;
     font-family: "Pretendard", sans-serif;
 }
@@ -408,6 +426,8 @@ body {
         height: 1.5rem;
         outline: none;
         background-color: #ffcf33;
+        transition: width 1s ease;
+
     }
 
     .main_app__icon {
@@ -423,6 +443,7 @@ body {
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
+
     #main_calender_btn {
         height: 35px;
         width: 35px;
@@ -479,11 +500,12 @@ body {
         align-items: center;
         padding: 0 1rem;
     }
+
     .app__title {
         padding-top: 0;
         margin-right: 2.5rem;
     }
-    
+
     .app__icon {
         display: none;
     }
@@ -491,6 +513,7 @@ body {
     .search-bar::placeholder {
         color: transparent;
     }
+
     .main_app__title {
         color: #ffcf33;
         font-weight: bold;
