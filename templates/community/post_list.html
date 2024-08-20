@@ -32,8 +32,8 @@
                         <button type="submit" class="btn btn-danger" onclick="return fn_del_qna();">게시판 삭제</button>
                     </form>
                 </div>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
         <div class="search-container">
             <div class="search__bar board-search__bar">
@@ -101,10 +101,10 @@
                             <p id="post__user">{{ post.user_id.nickname }}</p>
                             {% endif %}
                             <!-- <div id="post__stats">
-                                <p>댓글 수: {{ post.comment_set.count }}</p>
-                                <p>좋아요 수: {{ post.liked_by.count }}</p>
-                                <p>스크랩 수: {{ post.scraped_by.count }}</p>
-                            </div> -->
+                                    <p>댓글 수: {{ post.comment_set.count }}</p>
+                                    <p>좋아요 수: {{ post.liked_by.count }}</p>
+                                    <p>스크랩 수: {{ post.scraped_by.count }}</p>
+                                </div> -->
                             <!-- 좋댓구 이미지변환, 0이면 출력 X -->
                             <div class="state__container">
                                 {% if post.liked_by.count %}
@@ -159,10 +159,10 @@
                             <p id="post__user">{{ post.user_id.nickname }}</p>
                             {% endif %}
                             <!-- <div id="post__stats">
-                                <p>댓글 수: {{ post.comment_set.count }}</p>
-                                <p>좋아요 수: {{ post.liked_by.count }}</p>
-                                <p>스크랩 수: {{ post.scraped_by.count }}</p>
-                            </div> -->
+                                    <p>댓글 수: {{ post.comment_set.count }}</p>
+                                    <p>좋아요 수: {{ post.liked_by.count }}</p>
+                                    <p>스크랩 수: {{ post.scraped_by.count }}</p>
+                                </div> -->
                             <!-- 좋댓구 이미지변환, 0이면 출력 X -->
                             <div class="state__container">
                                 {% if post.liked_by.count %}
@@ -200,6 +200,18 @@
         </div>
     </div>
     <div class="side__container">
+        <div class="profile__container">
+            <div class="board__title">내 정보</div>
+            <ul class="best__ul">
+                <div class="profile_content"><span class="profile-bold-text">닉네임</span> {{ user.nickname }}</div>
+                <div class="profile_content"><span class="profile-bold-text">접속 동아리</span>
+                    {{ request.session.club_name }}</div>
+                <div class="mypage__container">
+                    <a href="{% url 'mypage:main' %}">
+                        <button id="mypage__btn">마이페이지</button>
+                    </a>
+            </ul>
+        </div>
         <div class="best__container">
             <div class="board__title">베스트 게시글</div>
             <ul class="best__ul">
@@ -224,7 +236,6 @@
         var res = confirm('게시판을 정말로 삭제하시겠습니까?');
         if (res) {
             // "확인"을 누른 경우에만 삭제 요청을 진행
-            alert("성공적으로 삭제되었습니다.");
         } else {
             // "취소"를 누른 경우, 아무 동작도 하지 않음
             return false;  // 폼 제출을 중단
