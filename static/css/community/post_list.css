@@ -1,8 +1,15 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
 
 body {
-    font-family: "Pretendard", sans-serif;
+    /* font-family: "Pretendard", sans-serif; */
+    font-family: "goorm-sans-bold", sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -61,6 +68,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: .5rem;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #delete button:hover {
@@ -128,6 +136,7 @@ body {
     /* 글씨 크기 조정 */
     border-radius: 5px;
     /* 모서리 둥글게 설정 */
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #new_post,
@@ -327,6 +336,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-right: 0.5rem;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #post-form .btn-success:hover,
@@ -386,6 +396,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #post-form input[type="file"]::-webkit-file-upload-button {
@@ -492,6 +503,7 @@ body {
     font-weight: 600;
     text-decoration: none;
     display: block;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 #show-post-form:hover {
@@ -553,6 +565,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: .5rem;
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 .board__title {
@@ -575,8 +588,13 @@ body {
     justify-content: center;
 }
 
+.profile_content {
+    color: rgb(0, 207, 0);
+}
+
 .profile-bold-text {
     font-weight: bold;
+    color: black;
 }
 
 .best__name>a {
