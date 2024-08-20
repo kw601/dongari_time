@@ -26,6 +26,7 @@ body {
     margin: 0 auto;
     padding: 0 var(--padding-value);
 }
+
 button {
     background-color: var(--color-yellow-1);
     border: 2px solid var(--color-yellow-1);
