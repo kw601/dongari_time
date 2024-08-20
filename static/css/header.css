@@ -437,6 +437,7 @@ body {
         width: 35px;
         border: none;
         margin: 0 0.2rem;
+        padding: 0 0;
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
