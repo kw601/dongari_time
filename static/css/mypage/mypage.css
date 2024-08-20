@@ -12,7 +12,13 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 body {
-    font-family: "Pretendard", sans-serif;
+    body {
+        font-family: "Pretendard", sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }
 
 .mypage__body {
@@ -21,7 +27,7 @@ body {
     padding: 0 var(--padding-value);
 }
 .manage_clubs__body {
-    height: 450px;
+    height: 500px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--padding-value);
