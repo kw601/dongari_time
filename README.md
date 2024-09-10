@@ -1,6 +1,7 @@
 <div>
   <img src="/static/image/page1.png" width="75%"/>
 </div>
+
 # 📰 동아리타임
 
 ##### 🏆 피로그래밍 21기 최종 프로젝트 작품
