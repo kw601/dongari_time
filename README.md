@@ -1,5 +1,5 @@
 <div>
-  <img src="/static/image/page1.png" width="75%"/>
+  <img src="/static/image/page1.png" width="100%"/>
 </div>
 # 📰 동아리타임
 ##### 🏆 피로그래밍 21기 최종 프로젝트 작품
@@ -19,7 +19,7 @@
 
 > 동아리 부원들이 효과적이고 쉽게 소통하고 교류할 수 있는 웹서비스
 <div>
-  <img src="/static/image/page2.png" width="75%"/>
+  <img src="/static/image/page2.png" width="100%"/>
 </div>
 ## ✨ 동아리타임의 배포 사이트
 ##### 🏆 [사이트](https://dongaritime.com/)
@@ -40,8 +40,8 @@
 - 로그인 및 회원가입 버튼을 누르수 있다
   
 <div>
-  <img src="/static/image/page3.png" width="75%"/>
-  <img src="/static/image/page4.png" width="75%"/>
+  <img src="/static/image/page3.png" width="100%"/>
+  <img src="/static/image/page4.png" width="100%"/>
 </div>
 
 
@@ -49,33 +49,31 @@
 - 유저 회원가입/로그인
 - 로그인을 하면 동아리 생성/인증/선택 페이지로 넘어간다.
 <div>
-  <img src="/static/image/page5.png" width="20%"/>
-  <img src="/static/image/page6.png" width="20%"/>
-</div>
-<div>
-  <img src="/static/image/page7.png" width="20%"/>
+  <img src="/static/image/page5.png" width="100%"/>
+  <img src="/static/image/page6.png" width="100%"/>
+  <img src="/static/image/page7.png" width="100%"/>
 </div>
 
 ### 동아리 생성 & 동아리 인증 & 동아리 선택
 - 동아리를 생성하여 인증 코드를 생성하면 다른 사람이 해당 인증 코드를 통해 인증할 수 있다.
 - 가입되어 있는 동아리 페이지를 선택하여 해당 동아리 메인 페이지로 이동한다.
 <div>
-  <img src="/static/image/page8-1.png" width="75%"/>
+  <img src="/static/image/page8-1.png" width="100%"/>
 </div>
 <div>
-  <img src="/static/image/page8-2.png" width="75%"/>
+  <img src="/static/image/page8-2.png" width="100%"/>
 </div>
 <div>
-  <img src="/static/image/page8.png" width="20%"/>
-  <img src="/static/image/page9.png" width="20%"/>
-  <img src="/static/image/page10.png" width="20%"/>
+  <img src="/static/image/page8.png" width="50%"/>
+  <img src="/static/image/page9.png" width="50%"/>
+  <img src="/static/image/page10.png" width="50%"/>
 </div>
 
 ### 메인페이지
 - 공지, 자유, 질문 게시판은 수정할 수 없고 게시판을 생성하거나 게시글 검색, 게시판 추가를 할 수 있다.
 
 <div>
-  <img src="/static/image/page11.png" width="75%"/>
+  <img src="/static/image/page11.png" width="100%"/>
 </div>
 
 ### 마이페이지
@@ -83,25 +81,25 @@
 - 내가 작성한 게시글, 내가 남긴 댓글, 스크랩한 게시글을 관리할 수 있다.
 - 웹 알림 기능을 활성화하여 내 게시글에 댓글을 남기거나 대댓글이 달렸을 때 알림을 받을 수 있다.
 <div>
-  <img src="/static/image/page12-1.png" width="75%"/>
+  <img src="/static/image/page12-1.png" width="100%"/>
 </div>
 <div>
-  <img src="/static/image/page12.png" width="75%"/>
+  <img src="/static/image/page12.png" width="100%"/>
 </div>
 
 ### 내가 쓴 글
 <div>
-  <img src="/static/image/page16.png" width="75%"/>
+  <img src="/static/image/page16.png" width="100%"/>
 </div>
 
 ### 내 댓글
 <div>
-  <img src="/static/image/page17.png" width="75%"/>
+  <img src="/static/image/page17.png" width="100%"/>
 </div>
 
 ### 스크랩
 <div>
-  <img src="/static/image/page17.png" width="75%"/>
+  <img src="/static/image/page17.png" width="100%"/>
 </div>
 
 ### 게시글 리스트(게시판)
@@ -109,26 +107,26 @@
 - 해당 게시판에 작성된 글을 보거나 베스트 게시글을 볼 수 있다.
 
 <div>
-  <img src="/static/image/page13.png" width="75%"/>
-  <img src="/static/image/page14.png" width="75%"/>
+  <img src="/static/image/page13.png" width="100%"/>
+  <img src="/static/image/page14.png" width="100%"/>
 </div>
 
 ### 게시글 작성
 - Ajax를 이용한 게시글 작성으로 실시간으로 업로드가 가능하다.
 
 <div>
-  <img src="/static/image/page19.png" width="75%"/>
+  <img src="/static/image/page19.png" width="100%"/>
 </div>
 
 ### 캘린더
 - 동아리에 예정된 행사나 일정을 관리할 수 있다.
 - 동아리원 모두가 생성 및 삭제할 수 있어 자유로운 일정관리가 가능하다.
 <div>
-  <img src="/static/image/page15-1.png" width="75%"/>
+  <img src="/static/image/page15-1.png" width="100%"/>
 </div>
 
 <div>
-  <img src="/static/image/page15.png" width="75%"/>
+  <img src="/static/image/page15.png" width="100%"/>
 </div>
 
   
@@ -225,15 +223,15 @@ yarl==1.9.4
 ## 💫 시스템 아키텍처
 
 <div>
-  <img src="/static/image/page20.png" width="75%"/>
+  <img src="/static/image/page20.png" width="100%"/>
 </div>
 <div>
-  <img src="/static/image/page21.png" width="75%"/>
+  <img src="/static/image/page21.png" width="100%"/>
 </div>
 
 ## ✨ ERD
 <div>
-  <img src="/static/image/page22.png" width="75%"/>
+  <img src="/static/image/page22.png" width="100%"/>
 </div>
 
 
@@ -242,14 +240,14 @@ yarl==1.9.4
 ### [💭 요구사항 정의 및 기능 명세](https://docs.google.com/spreadsheets/d/13E_o6jg15vNdrxVI8MzjdztVEvZe9d7lCpmCMvcBMrY/edit?gid=0#gid=02)
 
 <div>
-  <img src="/static/image/page23.png" width="75%"/>
+  <img src="/static/image/page23.png" width="100%"/>
 </div>
 
 
 ### [🎨 화면 설계서](https://www.figma.com/design/rMTPVxIOu3Bx5OrPlzKjL8/%EB%8F%99%EC%95%84%EB%A6%AC%ED%83%80%EC%9E%84?node-id=211-61&node-type=canvas&t=aDmi6rF6sV0gPk1q-0)
 
 <div>
-  <img src="/static/image/page24.png" width="75%"/>
+  <img src="/static/image/page24.png" width="100%"/>
 </div>
 
 
