@@ -257,8 +257,8 @@ yarl==1.9.4
 
 | **[나경원](https://github.com/kw601)** | **[강민석](https://github.com/min-soku)** | **[하동현](https://github.com/zkwlr)** | **[한라현](https://github.com/Rahyuni)** | **[황다예](https://github.com/imyyye)**
 | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-<img src="/static/image/nkw.jpeg" width="300"> | <img src="/static/image/kms.png" width="300"> | <img src="/static/image/hdh.png" width="300"> | <img src="/static/image/hrh.jpg.png" width="300"> |
-<img src="/static//image/hdy.jpg" width="300"> |
+<img src="/static/image/nkw.jpeg" width="200"> | <img src="/static/image/kms.png" width="200"> | <img src="/static/image/hdh.png" width="200"> | <img src="/static/image/hrh.jpg.png" width="200"> |
+<img src="/static//image/hdy.jpg" width="200"> |
 | Leader & Backend & Frontend | Backend & Frontend | Backend & Frontend | Frontend & Backend | Frontend & Backend |
 
 
