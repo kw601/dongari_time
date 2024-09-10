@@ -74,9 +74,9 @@
   <img src="/static/image/page8-2.png" width="75%"/>
 </div>
 <div>
-  <img src="/static/image/page8.png" width="33%"/>
-  <img src="/static/image/page9.png" width="33%"/>
-  <img src="/static/image/page10.png" width="33%"/>
+  <img src="/static/image/page8.png" width="30%"/>
+  <img src="/static/image/page9.png" width="30%"/>
+  <img src="/static/image/page10.png" width="30%"/>
 </div>
 
 ### 메인페이지
