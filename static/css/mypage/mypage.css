@@ -15,11 +15,19 @@ body {
     font-family: "Pretendard", sans-serif;
 }
 
-.mypage__body, .manage_clubs__body {
+.mypage__body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--padding-value);
 }
+.manage_clubs__body {
+    height: 500px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--padding-value);
+    margin-bottom: 13rem;
+}
+
 button {
     background-color: var(--color-yellow-1);
     border: 2px solid var(--color-yellow-1);

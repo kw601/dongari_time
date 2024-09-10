@@ -46,6 +46,10 @@
     transition: 0.3s ease;
 }
 /* Basic styling for the modals */
+html {
+    font-family: "Pretendard", sans-serif;
+    /* scrollbar-gutter: stable; */
+}
 .modal {
     font-family: "Pretendard", sans-serif;
     display: none; 

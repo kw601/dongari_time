@@ -139,6 +139,9 @@ def change_password(request):
                         )
                     else:
                         messages.error(request, error)
+            club_id = request.session.get("club_id")
+            boards = Board.objects.filter(club_id=club_id)
+            context = {"form": form, "boards": boards}            
     else:
         form = PasswordChangeForm(request.user)
         club_id = request.session.get("club_id")

@@ -1,5 +1,12 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
+@font-face {
+    font-family: 'goorm-sans-bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/goorm-sans-bold.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
     font-family: "Pretendard", sans-serif;
 }
@@ -13,19 +20,23 @@ body {
     align-items: center;
     font-family: "Pretendard", sans-serif;
 }
-.main_app__icon{
+
+.main_app__icon {
     width: 40px;
     height: 40px;
 }
-.app__icon{
+
+.app__icon {
     width: 40px;
     height: 40px;
     filter: brightness(0) invert(1);
 }
-#club_logo{
+
+#club_logo {
     width: 40px;
     height: 40px;
 }
+
 .left__container__login {
     height: 45px;
     width: 45px;
@@ -96,6 +107,17 @@ body {
     background-color: #ffffff;
     padding: 0 8rem;
     font-family: "Pretendard", sans-serif;
+    /* fixed */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    /* 그라데이션 */
+    /* background: linear-gradient(to bottom, rgb(255, 255, 255) 70%, rgba(255, 255, 255, 0.8) 85%, rgba(255, 255, 255, 0) 100%); */
+    /* 그림자 */
+    border-bottom: 1px solid #d6d6d6;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -142,7 +164,8 @@ body {
     border: none;
     background-color: #ffffff;
 }
-#main_calender_btn{
+
+#main_calender_btn {
     height: 35px;
     width: 35px;
     border: none;
@@ -150,15 +173,18 @@ body {
     margin: 0 0.8rem;
     transition: transform 0.3s ease, filter 0.3s ease;
 }
-#main_calender_btn{
+
+#main_calender_btn {
     margin-top: 0;
 }
-#calender_icon{
+
+#calender_icon {
     height: 35px;
     width: 35px;
     border: none;
     background-color: #ffffff;
 }
+
 #main_logout_btn {
     height: 35px;
     width: 35px;
@@ -183,10 +209,12 @@ body {
     transform: translateY(-3px);
     /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
+
 #main_calender_btn:hover {
     transform: translateY(-3px);
     /* 마우스 오버 시 이미지가 위로 5px 이동 */
 }
+
 #main_logout_btn:hover {
     transform: translateY(-3px);
     /* 마우스 오버 시 이미지가 위로 5px 이동 */
@@ -196,21 +224,22 @@ body {
     background-color: #ffcf33;
     display: flex;
     align-items: center;
-    width: 16rem;
+    width: 18rem;
     border-radius: 20px;
     justify-content: flex-start;
     padding: 0 0.5rem;
     font-family: "Pretendard", sans-serif;
+    transition: 1s ease;
 }
 
 .search-bar {
     border: none;
-    width: 13rem;
+    width: 15rem;
     height: 1.5rem;
     outline: none;
     background-color: #ffcf33;
     font-size: 1rem;
-    /* 글씨 크기 조정 */
+    font-family: "goorm-sans-bold", sans-serif;
 }
 
 .search-bar::placeholder {
@@ -251,6 +280,8 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 8rem;
+    /* fixed */
+    margin-top: 70px;
     background-color: #ffecad;
     font-family: "Pretendard", sans-serif;
 }
@@ -408,6 +439,8 @@ body {
         height: 1.5rem;
         outline: none;
         background-color: #ffcf33;
+        transition: width 1s ease;
+
     }
 
     .main_app__icon {
@@ -423,6 +456,7 @@ body {
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
+
     #main_calender_btn {
         height: 35px;
         width: 35px;
@@ -432,6 +466,7 @@ body {
         background-color: #ffffff;
         transition: transform 0.3s ease, filter 0.3s ease;
     }
+
     #main_logout_btn {
         height: 35px;
         width: 35px;
@@ -479,10 +514,11 @@ body {
         align-items: center;
         padding: 0 1rem;
     }
+
     .app__title {
         padding-top: 0;
     }
-    
+
     .app__icon {
         display: none;
     }
@@ -490,6 +526,7 @@ body {
     .search-bar::placeholder {
         color: transparent;
     }
+
     .main_app__title {
         color: #ffcf33;
         font-weight: bold;

@@ -270,5 +270,3 @@ yarl==1.9.4
 | <img src="/static/image/nkw.jpeg" width="150"> | <img src="/static/image/kms.png" width="150"> | <img src="/static/image/hdh.png" width="150"> | <img src="/static/image/hrh.jpg.png" width="150"> | <img src="/static//image/hdy.jpg" width="150"> |
 | Leader & Frontend & Backend | Frontend & Backend | Frontend & Backend | Frontend & Backend | Frontend & Backend |
 
-
-
